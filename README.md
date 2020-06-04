@@ -1,7 +1,11 @@
-# kw-intern/
-## Repo for Kitware work products
+# kw-intern
 
-## Folders:
+This is to capture some of my work during my intership at Kitware.
 
-  - pf_install:
-    files for installation of ParFlow on Ubuntu systems (18.04 and 20.04) and files to build a docker image of ParFlow on Ubuntu.
+## Parflow
+
+The parflow directory tries to capture the various products that I build around parflow.
+
+## Explortation
+
+The exploration directory capture my notes when working with other tools than parflow which was providing me with some background for good and bad definition usage of input deck.
