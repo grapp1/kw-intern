@@ -20,8 +20,8 @@ cd $ROOT/parflow/dependencies/cmake
 curl -L https://cmake.org/files/v3.17/cmake-3.17.2-Linux-x86_64.tar.gz | tar --strip-components=1 -xzv
 
 cd $ROOT/parflow/dependencies/hypre-src
-curl -L https://github.com/hypre-space/hypre/archive/v2.17.0.tar.gz | tar --strip-components=1 -xzv
-cd src
+git clone https://github.com/hypre-space/hypre.git --branch master --single-branch
+cd hypre/src
 ./configure --prefix=$HYPRE_DIR --with-MPI
 make install
 

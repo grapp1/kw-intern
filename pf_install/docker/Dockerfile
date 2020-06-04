@@ -17,13 +17,11 @@ FROM ${BASE_IMAGE}
 COPY ./pf_install_packages.sh .
 RUN ./pf_install_packages.sh
 
-RUN groupadd user && \
-    useradd -g user -d /home/user user && \
-    mkdir /home/user && chown -R user:user /home/user
+RUN groupadd -g 1000 user && \
+    useradd -u 1000 -g user -m -N -s /bin/bash user
 
 USER user
 WORKDIR /home/user/
 
 COPY ./pf_install.sh .
 RUN ./pf_install.sh
-
