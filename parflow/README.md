@@ -24,7 +24,7 @@ cd $ROOT/parflow
 docker build                          \
   --build-arg BASE_IMAGE=ubuntu:18.04 \
   -f ./docker/development/Dockerfile  \
-  -t ubuntu-18-hypre-2.19-parflow-3.6
+  -t ubuntu-18-hypre-2.19-parflow-3.6 .
 ```
 
 __Ubuntu 20.04__ Hypre-2.19.0 + Parflow-3.6.0
@@ -36,7 +36,7 @@ docker build                          \
   --build-arg HYPRE_VERSION=v2.19.0   \
   --build-arg PARFLOW_VERSION=v3.6.0  \
   -f ./docker/development/Dockerfile  \
-  -t ubuntu-18-hypre-2.19-parflow-3.6
+  -t ubuntu-20-hypre-2.19-parflow-3.6 .
 ```
 
 __Ubuntu 20.04__ with Parflow and Hypre on __master__
@@ -48,7 +48,7 @@ docker build                          \
   --build-arg HYPRE_VERSION=master    \
   --build-arg PARFLOW_VERSION=master  \
   -f ./docker/development/Dockerfile  \
-  -t ubuntu-18-hypre-master-parflow-master
+  -t ubuntu-20-hypre-master-parflow-master .
 ```
 
 ## Installing ParFlow on macOS
