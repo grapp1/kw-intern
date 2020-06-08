@@ -1,0 +1,414 @@
+FileVersion: 4
+
+# -----------------------------------------------------------------------------
+# Templates
+# -----------------------------------------------------------------------------
+
+Templates:
+  lake:
+    Patch:
+      z-upper:
+        BCPressure:
+          Type: FluxConst
+  river:
+    Patch:
+      z-upper:
+        BCPressure:
+          Type: OverlandFlow
+  well:
+    InputType: Vertical
+    Type: Flux
+    Y: 0.5
+    Cycle: constant
+    alltime:
+      Saturation.water.Value: 1.0
+    Method: Standard
+  firstTime:
+    ICPressure:
+      Type: HydroStaticPatch
+      Geom:
+        domain:
+          ICPressure:
+            Value: 30.0
+            RefGeom: domain
+            RefPatch: z-lower
+  nextTime:
+    ICPressure:
+      Type: PFBFile
+    Geom:
+      domain:
+        ICPressure:
+          FileName: $fname_ic
+
+# -----------------------------------------------------------------------------
+# Parallel Execution
+# -----------------------------------------------------------------------------
+
+Process.Topology:
+  P: 1
+  Q: 1
+  R: 1
+
+# -----------------------------------------------------------------------------
+# Computational Grid
+# sandtank actual demensions are 30cm by 15cm
+# -----------------------------------------------------------------------------
+
+ComputationalGrid:
+  Lower:
+    X: 0.0
+    Y: 0.0
+    Z: 0.0
+  DX: 1.0
+  DY: 1.0
+  DZ: 1.0
+  NX: 100
+  NY: 1
+  NZ: 50
+
+# -----------------------------------------------------------------------------
+# Domain Geometry Input
+# -----------------------------------------------------------------------------
+
+Domain.GeomName: domain
+
+# -----------------------------------------------------------------------------
+# GeomInputs
+# -----------------------------------------------------------------------------
+
+GeomInput:
+  solidinput:
+    InputType: SolidFile
+    GeomNames: domain
+    FileName: SandTank.pfsol
+
+  indi_input:
+    InputType: IndicatorField
+    GeomNames: s1 s2 s3 s4
+    FileName: SandTank_Indicator.pfb
+    Values:
+      s1: 1
+      s2: 2
+      s3: 3
+      s4: 4
+
+# -----------------------------------------------------------------------------
+# Geometry
+# -----------------------------------------------------------------------------
+
+Geom:
+  Perm:
+    TensorByGeom:
+      Names: domain
+  domain:
+    Lower:
+      X: 0.0
+      Y: 0.0
+      Z: 0.0
+    Upper:
+      X: 100.0
+      Y: 1.0
+      Z: 50.0
+    Patches: z-upper z-lower x-lower x-upper y-lower y-upper
+    Perm:
+      TensorValX: 1.0d0
+      TensorValY: 1.0d0
+      TensorValZ: 1.0d0
+  s1:
+    Perm:
+      Type: Constant
+      Value: ${k_1}
+  s2:
+    Perm:
+      Type: Constant
+      Value: ${k_2}
+  s3:
+    Perm:
+      Type: Constant
+      Value: ${k_3}
+  s4:
+    Perm:
+      Type: Constant
+      Value: ${k_4}
+
+
+# -----------------------------------------------------------------------------
+# Specific Storage
+# -----------------------------------------------------------------------------
+
+SpecificStorage:
+  Type: Constant
+  GeomNames: domain
+  domain:
+    SpecificStorage:
+      Value: 1.0e-5
+
+# -----------------------------------------------------------------------------
+# Phases
+# -----------------------------------------------------------------------------
+
+Phase:
+  water:
+    Density:
+      Type: Constant
+      Value: 1.0
+    Viscosity:
+      Type: Constant
+      Value: 1.0
+
+# -----------------------------------------------------------------------------
+# Contaminants
+# -----------------------------------------------------------------------------
+
+Contaminants:
+  Names: ""
+
+# -----------------------------------------------------------------------------
+# Gravity
+# -----------------------------------------------------------------------------
+
+Gravity: 1.0
+
+# -----------------------------------------------------------------------------
+# Timing (time units is set by units of permeability)
+# -----------------------------------------------------------------------------
+
+TimingInfo:
+  BaseUnit: 1.0
+  DumpInterval: -1
+  StartCount: $StartNumber
+  StartTime: 0.0
+  StopTime: $RunLength
+
+TimeStep:
+  Type: Constant
+  Value: 1.0
+
+# -----------------------------------------------------------------------------
+# Geometry domains
+# -----------------------------------------------------------------------------
+
+Geom:
+  domain:
+    # Porosity
+    Porosity:
+      Type: Constant
+      Value: 0.4
+    # Relative Permeability
+    RelPerm:
+      Alpha: 2.0
+      N: 3.0
+    # Saturation
+    Saturation:
+      Alpha: 2.0
+      N: 3.0
+      SRes: 0.2
+      SSat: 1.0
+  s1:
+    Porosity:
+      Type: Constant
+      Value: 0.4
+  s2:
+    Porosity:
+      Type: Constant
+      Value: 0.25
+  s3:
+    Porosity:
+      Type: Constant
+      Value: 0.3
+  s4:
+    Porosity:
+      Type: Constant
+      Value: 0.35
+
+# -----------------------------------------------------------------------------
+# Domain
+# -----------------------------------------------------------------------------
+
+Domain:
+  GeomName: domain
+
+# ----------------------------------------------------------------------------
+# Phase
+# ----------------------------------------------------------------------------
+
+Phase:
+  RelPerm:
+    Type: VanGenuchten
+    GeomNames: domain
+  Saturation:
+    Type: VanGenuchten
+    GeomNames: domain
+  water:
+    Mobility:
+      Type: Constant
+      Value: 1.0
+
+
+# -----------------------------------------------------------------------------
+# Wells
+# -----------------------------------------------------------------------------
+
+Wells:
+  w1:
+    $: {{ Templates.well }}
+    X: 11.5
+    ZUpper: 15.9
+    ZLower: 15.1
+    Action: $well_1_action
+    alltime:
+      Flux.water.Value: $well_1_value
+  w2:
+    $: {{ Templates.well }}
+    X: 23.5
+    ZUpper: 1.9
+    ZLower: 1.1
+    Action: $well_2_action
+    alltime:
+      Flux.water.Value: $well_2_value
+  w3:
+    $: {{ Templates.well }}
+    X: 26.5
+    ZUpper: 15.9
+    ZLower: 15.1
+    Action: $well_3_action
+    alltime:
+      Flux.water.Value: $well_3_value
+
+## ... more wells ...
+
+# -----------------------------------------------------------------------------
+# Time Cycles
+# -----------------------------------------------------------------------------
+
+Cycle:
+  Names: constant
+  constant:
+    Names: "alltime"
+    alltime:
+      Length: 1
+    Repeat: -1
+
+# -----------------------------------------------------------------------------
+# Boundary Conditions
+# -----------------------------------------------------------------------------
+
+BCPressure:
+  PatchNames: {{ Geom.domain.Patches }}
+
+Patch:
+  x-lower:
+    BCPressure:
+      Type: DirEquilRefPatch
+      Cycle: constant
+      RefGeom: domain
+      RefPatch: z-lower
+      alltime.Value: $hleft
+  y-lower:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  z-lower:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  x-upper:
+    BCPressure:
+      Type: DirEquilRefPatch
+      Cycle: constant
+      RefGeom: domain
+      RefPatch: z-lower
+      alltime:
+        Value: $hright
+  y-upper:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  z-upper:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+
+# -----------------------------------------------------------------------------
+# Topo slopes in x-direction
+# -----------------------------------------------------------------------------
+
+TopoSlopesX:
+  Type: Constant
+  Geom:
+    domain:
+      Value: 0.0
+
+# -----------------------------------------------------------------------------
+# Topo slopes in y-direction
+# -----------------------------------------------------------------------------
+
+TopoSlopesY:
+  Type: Constant
+  Geom:
+    domain:
+      Value: 0.05
+
+# -----------------------------------------------------------------------------
+# Mannings coefficient
+# -----------------------------------------------------------------------------
+
+Mannings:
+  Type: Constant
+  Geom:
+    domain:
+      Value: 5.e-6
+
+# -----------------------------------------------------------------------------
+# Phase sources:
+# -----------------------------------------------------------------------------
+
+PhaseSources:
+  water:
+    Type: Constant
+    Geom:
+      domain:
+        Value: 0.0
+
+# -----------------------------------------------------------------------------
+# Exact solution specification for error calculations
+# -----------------------------------------------------------------------------
+
+KnownSolution: NoKnownSolution
+
+# -----------------------------------------------------------------------------
+# Set solver parameters
+# -----------------------------------------------------------------------------
+
+OverlandFlowDiffusive: 0
+
+Solver: Richards
+  MaxIter: 2500000
+  Nonlinear:
+    MaxIter: 100
+    ResidualTol: 1e-5
+    EtaValue: 0.01
+    UseJacobian: False
+    UseJacobian: True
+    DerivativeEpsilon: 1e-8
+    StepTol: 1e-20
+    Globalization: LineSearch
+  Linear:
+    KrylovDimension: 100
+    MaxRestarts: 5
+    Preconditioner: PFMG
+  PrintSubsurf: False
+  Drop: 1E-20
+  AbsTol: 1E-7
+  WritePfbMannings: True
+  WritePfbSlopes: True
+  PrintMask: True
+  PrintVelocities: True
