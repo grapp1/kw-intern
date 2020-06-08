@@ -1,5 +1,7 @@
 .DS_Store
 *.pyc
+.ipynb*
+
 
 # Editor directories and files
 .idea
