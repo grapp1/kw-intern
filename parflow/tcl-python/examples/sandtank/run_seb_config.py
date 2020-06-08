@@ -10,8 +10,16 @@ run = pf.Run('sandtank')
 # Load dictionary as YAML
 # -----------------------------------------------------------------------------
 
-config = pf.YAMLFile('./run_seb_config.yaml')
-run.set(config)
+options = pf.Options()
+options.loadFromYAML('./config.yaml')
+
+options.well_1_value = 10
+options.well_2_value = 0
+options.well_3_value = 5
+options.well_4_value = 1
+
+config = pf.ConfigYAML('./run_seb_config.yaml')
+run.set(config, options)
 
 # -----------------------------------------------------------------------------
 # Lake / River
