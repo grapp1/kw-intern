@@ -1,0 +1,442 @@
+FileVersion: 4
+
+# -----------------------------------------------------------------------------
+# Parallel Execution
+# -----------------------------------------------------------------------------
+
+Process:
+  Topology:
+    P: 1
+    Q: 1
+    R: 1
+
+# -----------------------------------------------------------------------------
+# Computational Grid
+# sandtank actual demensions are 30cm by 15cm
+# -----------------------------------------------------------------------------
+
+ComputationalGrid:
+  Lower:
+    X: 0.0
+    Y: 0.0
+    Z: 0.0
+  DX: 1.0
+  DY: 1.0
+  DZ: 1.0
+  NX: 100
+  NY: 1
+  NZ: 50
+
+# -----------------------------------------------------------------------------
+# Domain Geometry Input
+# -----------------------------------------------------------------------------
+
+Domain.GeomName: domain
+
+# -----------------------------------------------------------------------------
+# GeomInputs
+# -----------------------------------------------------------------------------
+
+GeomInput:
+  box_input:
+    InputType: Box
+    GeomNames: domain
+
+  indi_input:
+    InputType: IndicatorField
+    GeomNames: s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 g1 g2 g3 g4 g5 g6 g7 g8
+    FileName: IndicatorFile_Gleeson.50z.pfb
+    Values:
+      s1: 1
+      s2: 2
+      s3: 3
+      s4: 4
+      s5: 5
+      s6: 6
+      s7: 7
+      s8: 8
+      s9: 9
+      s10: 10
+      s11: 11
+      s12: 12
+      s13: 13
+      g1: 21
+      g2: 22
+      g3: 23
+      g4: 24
+      g5: 25
+      g6: 26
+      g7: 27
+      g8: 28
+
+# -----------------------------------------------------------------------------
+# Geometry
+# -----------------------------------------------------------------------------
+
+Geom:
+  Perm:
+    TensorByGeom:
+      Names: domain
+  domain:
+    Lower:
+      X: 0.0
+      Y: 0.0
+      Z: 0.0
+    Upper:
+      X: 41000.0
+      Y: 41000.0
+      Z: 100.0
+    Patches: z-upper z-lower x-lower x-upper y-lower y-upper
+    Perm:
+      TensorValX: 1.0d0
+      TensorValY: 1.0d0
+      TensorValZ: 1.0d0
+
+# -----------------------------------------------------------------------------
+# Permeability
+# -----------------------------------------------------------------------------
+
+  s1:
+    Perm:
+      Type: Constant
+      Value: 0.269022595
+  s2:
+    Perm:
+      Type: Constant
+      Value: 0.043630356
+  s3:
+    Perm:
+      Type: Constant
+      Value: 0.015841225
+  s4:
+    Perm:
+      Type: Constant
+      Value: 0.007582087
+
+# -----------------------------------------------------------------------------
+# Geometry
+# -----------------------------------------------------------------------------
+
+Geom:
+  domain:
+    # Porosity
+    Porosity:
+      Type: Constant
+      Value: 0.4
+    # Relative Permeability
+    RelPerm:
+      Alpha: 2.0
+      N: 3.0
+    # Saturation
+    Saturation:
+      Alpha: 2.0
+      N: 3.0
+      SRes: 0.2
+      SSat: 1.0
+  s1:
+    Porosity:
+      Type: Constant
+      Value: 0.375
+    RelPerm:
+      Alpha: 3.548
+      N: 4.162
+    Saturation:
+      Alpha: 3.548
+      N: 4.162
+      SRes: 0.000001
+      SSat: 1.0
+  s2:
+    Porosity:
+      Type: Constant
+      Value: 0.39
+    RelPerm:
+      Alpha: 3.467
+      N: 2.738
+    Saturation:
+      Alpha: 3.467
+      N: 2.738
+      SRes: 0.000001
+      SSat: 1.0
+  s3:
+    Porosity:
+      Type: Constant
+      Value: 0.387
+    RelPerm:
+      Alpha: 2.692
+      N: 2.445
+    Saturation:
+      Alpha: 2.692
+      N: 2.445
+      SRes: 0.000001
+      SSat: 1.0
+  s4:
+    Porosity:
+      Type: Constant
+      Value: 0.439
+    RelPerm:
+      Alpha: 0.501
+      N: 2.659
+    Saturation:
+      Alpha: 0.501
+      N: 2.659
+      SRes: 0.000001
+      SSat: 1.0
+
+#...etc. for s5 through s9
+
+
+# -----------------------------------------------------------------------------
+# Specific Storage
+# -----------------------------------------------------------------------------
+
+SpecificStorage:
+  Type: Constant
+  GeomNames: domain
+  domain:
+    SpecificStorage:
+      Value: 1.0e-5
+
+# -----------------------------------------------------------------------------
+# Phases
+# -----------------------------------------------------------------------------
+
+Phase:
+  water:
+    Density:
+      Type: Constant
+      Value: 1.0
+    Viscosity:
+      Type: Constant
+      Value: 1.0
+    Mobility:
+      Type: Constant
+      Value: 1.0
+  RelPerm:
+    Type: VanGenuchten
+    GeomNames: domain s1 s2 s3 s4 s5 s6 s7 s8 s9
+  Saturation:
+    Type: VanGenuchten
+    GeomNames: domain s1 s2 s3 s4 s5 s6 s7 s8 s9
+
+# -----------------------------------------------------------------------------
+# Phase sources:
+# -----------------------------------------------------------------------------
+
+PhaseSources:
+  water:
+    Type: Constant
+    Geom:
+      domain:
+        Value: 0.0
+
+# -----------------------------------------------------------------------------
+# Contaminants
+# -----------------------------------------------------------------------------
+
+Contaminants:
+  Names: ""
+
+# -----------------------------------------------------------------------------
+# Gravity
+# -----------------------------------------------------------------------------
+
+Gravity: 1.0
+
+# -----------------------------------------------------------------------------
+# Timing (time units is set by units of permeability)
+# -----------------------------------------------------------------------------
+
+TimingInfo:
+  BaseUnit: 1.0
+  DumpInterval: 1.0
+  StartCount: 0.0
+  StartTime: 0.0
+  StopTime: 24.0
+
+TimeStep:
+  Type: Constant
+  Value: 1.0
+
+# -----------------------------------------------------------------------------
+# Domain
+# -----------------------------------------------------------------------------
+
+Domain:
+  GeomName: domain
+
+# ----------------------------------------------------------------------------
+# Phase
+# ----------------------------------------------------------------------------
+
+Phase:
+  RelPerm:
+    Type: VanGenuchten
+    GeomNames: domain
+  Saturation:
+    Type: VanGenuchten
+    GeomNames: domain
+  water:
+    Mobility:
+      Type: Constant
+      Value: 1.0
+
+# -----------------------------------------------------------------------------
+# Time Cycles
+# -----------------------------------------------------------------------------
+
+Cycle:
+  Names: constant
+  constant:
+    Names: alltime
+    alltime:
+      Length: 1
+    Repeat: -1
+
+# -----------------------------------------------------------------------------
+# Boundary Conditions
+# -----------------------------------------------------------------------------
+
+BCPressure:
+  PatchNames: {{ Geom.domain.Patches }}
+
+Patch:
+  x-lower:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  y-lower:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  z-lower:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  x-upper:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  y-upper:
+    BCPressure:
+      Type: FluxConst
+      Cycle: constant
+      alltime:
+        Value: 0.0
+  z-upper:
+    BCPressure:
+      Type: OverlandFlow
+      Cycle: constant
+      alltime:
+        Value: 0.0
+
+# -----------------------------------------------------------------------------
+# Topo slopes in x-direction
+# -----------------------------------------------------------------------------
+
+TopoSlopesX:
+  Type: PFBFile
+  GeomNames: domain
+  FileName: LW.slopex.pfb
+
+# -----------------------------------------------------------------------------
+# Topo slopes in y-direction
+# -----------------------------------------------------------------------------
+
+TopoSlopesY:
+  Type: PFBFile
+  GeomNames: domain
+  FileName: LW.slopey.pfb
+
+# -----------------------------------------------------------------------------
+# Mannings coefficient
+# -----------------------------------------------------------------------------
+
+Mannings:
+  Type: Constant
+  GeomNames: domain
+  Geom:
+    domain:
+      Value: 5.e-6
+
+# -----------------------------------------------------------------------------
+# Exact solution specification for error calculations
+# -----------------------------------------------------------------------------
+
+KnownSolution: NoKnownSolution
+
+# -----------------------------------------------------------------------------
+# Set solver parameters (including CLM)
+# -----------------------------------------------------------------------------
+
+OverlandFlowDiffusive: 0
+
+Solver: Richards
+  TerrainFollowingGrid: True
+  MaxIter: 25000
+  Nonlinear:
+    MaxIter: 100
+    ResidualTol: 1e-5
+    EtaValue: 0.01
+    UseJacobian: False
+    UseJacobian: True
+    DerivativeEpsilon: 1e-16
+    StepTol: 1e-30
+    Globalization: LineSearch
+    VariableDz: False
+  Linear:
+    KrylovDimension: 70
+    MaxRestarts: 2
+    Preconditioner: PFMG
+      PCMatrixType: FullJacobian
+  Drop: 1E-20
+  AbsTol: 1E-7
+
+# CLM Settings
+  LSM:
+    CLM:
+      CLMFileDir: clm_output/
+      Print1dOut: False
+      DailyRST: True
+      SingleFile: True
+      CLMDumpInterval: 1
+      MetForcing: 3D
+      MetFileName: NLDAS
+      MetFilePath: ../NLDAS/
+      MetFileNT: 24
+      IstepStart: 1
+      EvapBeta: Linear
+      VegWaterStress: Saturation
+      ResSat: 0.1
+      WiltingPoint: 0.12
+      FieldCapacity: 0.98
+      IrrigationType: none
+
+# Outputs
+  WriteSiloSubsurfData: True
+  WriteSiloPressure: True
+  WriteSiloSaturation: True
+  WriteSiloSlopes: True
+  WriteSiloCLM: True
+  WriteCLMBinary: False
+  WriteSiloMannings: True
+  PrintCLM: True
+  BinaryOutDir: False
+
+
+# -----------------------------------------------------------------------------
+# Initial Conditions
+# -----------------------------------------------------------------------------
+
+ICPressure:
+  Type: PFBFile
+    domain:
+      RefPatch: z-upper
+      FileName: press.init.pfb
