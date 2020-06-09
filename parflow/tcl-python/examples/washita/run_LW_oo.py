@@ -3,10 +3,14 @@
 
 import parflow as pf
 import pftools
+import shutil
+
+## copy files from adjacent directory
+shutil.copy("../parflow_input/LW.slopex.pfb", ".")
+shutil.copy("../parflow_input/LW.slopey.pfb", ".")
+
 
 run = pf.Run('LW')
-
-## include commands to copy files from adjacent directory
 
 run.setProcessTopology(P=1, Q=1, R=1) # 1, 1, 1
 
