@@ -40,20 +40,19 @@ def yaml_read(yamlfile):
 def kv_to_pfidb(pf_keys, pf_vals, outfile):
 
     # setting up empty .pfidb file
-    file1 = open(outfile,"w")
+    with open(outfile, "w") as file1:
     
-    # first line - total number of unique key/value combinations
-    file1.write(str(len(pf_keys))+" \n")
+        # first line - total number of unique key/value combinations
+        file1.write(str(len(pf_keys))+" \n")
     
-    # adding key/value pairs to file
-    for i in range(len(pf_keys)):
-        file1.write(str(len(pf_keys[i]))+" \n")
-        file1.write(pf_keys[i]+" \n")
-        file1.write(str(len(pf_vals[i]))+" \n")
-        file1.write(pf_vals[i]+" \n")
+        # adding key/value pairs to file
+        for i in range(len(pf_keys)):
+            file1.write(str(len(pf_keys[i]))+" \n")
+            file1.write(pf_keys[i]+" \n")
+            file1.write(str(len(pf_vals[i]))+" \n")
+            file1.write(pf_vals[i]+" \n")
     
-    file1.close() 
-    return(file1)
+        return(file1)
     
 
 yamlfile = "run_LW_config_gr.yaml"
