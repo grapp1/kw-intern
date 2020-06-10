@@ -4,10 +4,8 @@
 
 import yaml
 
-yamlfile = "run_LW_config_gr.yaml"
-outfile = "LW_test.pfidb"
-
-def yaml_to_pfidb(yamlfile, outfile):
+# function to read the yaml file and convert it to lists of keys and values
+def yaml_read(yamlfile):
     
     ## defining traverse function to determine the list of unique key paths
     def traverse(dic, path=None):
@@ -21,8 +19,6 @@ def yaml_to_pfidb(yamlfile, outfile):
                      yield b
         else: 
             yield path,dic
-            
-    
     
     ## reading yaml file
     with open(yamlfile) as file:
@@ -38,9 +34,11 @@ def yaml_to_pfidb(yamlfile, outfile):
             pf_keys.append('.'.join(x[0]))
             pf_vals.append(str(x[1]))
     
-        print(pf_keys) # to check if you want
-        print(pf_vals)
-        
+        return(pf_keys, pf_vals)
+
+# function to convert key and value lists to .pfidb file
+def kv_to_pfidb(pf_keys, pf_vals, outfile):
+
     # setting up empty .pfidb file
     file1 = open(outfile,"w")
     
@@ -55,8 +53,13 @@ def yaml_to_pfidb(yamlfile, outfile):
         file1.write(pf_vals[i]+" \n")
     
     file1.close() 
+    return(file1)
     
 
-# execute function
-yaml_to_pfidb(yamlfile, outfile)
+yamlfile = "run_LW_config_gr.yaml"
+outfile = "LW_test.pfidb"
+
+# execute functions
+pf_keys, pf_vals = yaml_read(yamlfile)
+kv_to_pfidb(pf_keys, pf_vals, outfile)
     
