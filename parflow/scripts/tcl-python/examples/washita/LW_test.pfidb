@@ -513,8 +513,8 @@ Cycle.constant.Repeat
 -1 
 21 
 BCPressure.PatchNames 
-25 
-Geom['domain']['Patches'] 
+47 
+z-upper z-lower x-lower x-upper y-lower y-upper 
 29 
 Patch.x-lower.BCPressure.Type 
 9 

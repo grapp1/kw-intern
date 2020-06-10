@@ -108,7 +108,7 @@ Geom:
       X: 41000.0
       Y: 41000.0
       Z: 100.0
-    Patches: z-upper z-lower x-lower x-upper y-lower y-upper
+    Patches: &patches 'z-upper z-lower x-lower x-upper y-lower y-upper'
     Perm:
       TensorValX: 1.0d0
       TensorValY: 1.0d0
@@ -286,7 +286,7 @@ Cycle:
 # -----------------------------------------------------------------------------
 
 BCPressure:
-  PatchNames: Geom['domain']['Patches'] # can we dynamically reference this?
+  PatchNames: *patches
 
 
 Patch:
