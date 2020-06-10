@@ -4,7 +4,7 @@
 
 import yaml
 
-yamlfile = "run_LW_config_pt.yaml"
+yamlfile = "run_LW_config_gr.yaml"
 outfile = "LW_test.pfidb"
 
 def yaml_to_pfidb(yamlfile, outfile):
@@ -38,8 +38,8 @@ def yaml_to_pfidb(yamlfile, outfile):
             pf_keys.append('.'.join(x[0]))
             pf_vals.append(str(x[1]))
     
-        # print(pf_keys) to check if you want
-        # print(pf_vals)
+        print(pf_keys) # to check if you want
+        print(pf_vals)
         
     # setting up empty .pfidb file
     file1 = open(outfile,"w")
@@ -48,7 +48,7 @@ def yaml_to_pfidb(yamlfile, outfile):
     file1.write(str(len(pf_keys))+" \n")
     
     # adding key/value pairs to file
-    for i in range(1, len(pf_keys)):
+    for i in range(len(pf_keys)):
         file1.write(str(len(pf_keys[i]))+" \n")
         file1.write(pf_keys[i]+" \n")
         file1.write(str(len(pf_vals[i]))+" \n")
@@ -57,5 +57,6 @@ def yaml_to_pfidb(yamlfile, outfile):
     file1.close() 
     
 
+# execute function
 yaml_to_pfidb(yamlfile, outfile)
     

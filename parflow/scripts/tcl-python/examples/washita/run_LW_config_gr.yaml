@@ -46,37 +46,59 @@ GeomInput:
     InputType: IndicatorField
     GeomNames: s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 g1 g2 g3 g4 g5 g6 g7 g8
     FileName: IndicatorFile_Gleeson.50z.pfb
-    Values:
-      s1: 1
-      s2: 2
-      s3: 3
-      s4: 4
-      s5: 5
-      s6: 6
-      s7: 7
-      s8: 8
-      s9: 9
-      s10: 10
-      s11: 11
-      s12: 12
-      s13: 13
-      g1: 21
-      g2: 22
-      g3: 23
-      g4: 24
-      g5: 25
-      g6: 26
-      g7: 27
-      g8: 28
+
+# There's gotta be a way to make this more compact
+  s1:
+    Value: 1
+  s2:
+    Value: 2
+  s3:
+    Value: 3
+  s4:
+    Value: 4
+  s5:
+    Value: 5
+  s6:
+    Value: 6
+  s7:
+    Value: 7
+  s8:
+    Value: 8
+  s9:
+    Value: 9
+  s10:
+    Value: 10
+  s11:
+    Value: 11
+  s12:
+    Value: 12
+  s13:
+    Value: 13
+  g1:
+    Value: 21
+  g2:
+    Value: 22
+  g3:
+    Value: 23
+  g4:
+    Value: 24
+  g5:
+    Value: 25
+  g6:
+    Value: 26
+  g7:
+    Value: 27
+  g8:
+    Value: 28
 
 # -----------------------------------------------------------------------------
-# Geometry
+# Geometry and Properties
 # -----------------------------------------------------------------------------
+
+Perm:
+  TensorType: TensorByGeom
 
 Geom:
-  Perm:
-    TensorByGeom:
-      Names: domain
   domain:
     Lower:
       X: 0.0
@@ -91,34 +113,8 @@ Geom:
       TensorValX: 1.0d0
       TensorValY: 1.0d0
       TensorValZ: 1.0d0
-
-# -----------------------------------------------------------------------------
-# Permeability
-# -----------------------------------------------------------------------------
-
-  s1:
-    Perm:
-      Type: Constant
-      Value: 0.269022595
-  s2:
-    Perm:
-      Type: Constant
-      Value: 0.043630356
-  s3:
-    Perm:
-      Type: Constant
-      Value: 0.015841225
-  s4:
-    Perm:
-      Type: Constant
-      Value: 0.007582087
-
-# -----------------------------------------------------------------------------
-# Geometry
-# -----------------------------------------------------------------------------
-
-Geom:
-  domain:
+    SpecificStorage:
+      Value: 1.0e-5
     # Porosity
     Porosity:
       Type: Constant
@@ -134,6 +130,9 @@ Geom:
       SRes: 0.2
       SSat: 1.0
   s1:
+    Perm:
+      Type: Constant
+      Value: 0.269022595
     Porosity:
       Type: Constant
       Value: 0.375
@@ -146,6 +145,9 @@ Geom:
       SRes: 0.000001
       SSat: 1.0
   s2:
+    Perm:
+      Type: Constant
+      Value: 0.043630356
     Porosity:
       Type: Constant
       Value: 0.39
@@ -158,6 +160,9 @@ Geom:
       SRes: 0.000001
       SSat: 1.0
   s3:
+    Perm:
+      Type: Constant
+      Value: 0.015841225
     Porosity:
       Type: Constant
       Value: 0.387
@@ -170,6 +175,9 @@ Geom:
       SRes: 0.000001
       SSat: 1.0
   s4:
+    Perm:
+      Type: Constant
+      Value: 0.007582087
     Porosity:
       Type: Constant
       Value: 0.439
@@ -192,9 +200,6 @@ Geom:
 SpecificStorage:
   Type: Constant
   GeomNames: domain
-  domain:
-    SpecificStorage:
-      Value: 1.0e-5
 
 # -----------------------------------------------------------------------------
 # Phases
@@ -264,22 +269,6 @@ TimeStep:
 Domain:
   GeomName: domain
 
-# ----------------------------------------------------------------------------
-# Phase
-# ----------------------------------------------------------------------------
-
-Phase:
-  RelPerm:
-    Type: VanGenuchten
-    GeomNames: domain
-  Saturation:
-    Type: VanGenuchten
-    GeomNames: domain
-  water:
-    Mobility:
-      Type: Constant
-      Value: 1.0
-
 # -----------------------------------------------------------------------------
 # Time Cycles
 # -----------------------------------------------------------------------------
@@ -297,7 +286,8 @@ Cycle:
 # -----------------------------------------------------------------------------
 
 BCPressure:
-  PatchNames: Geom['domain']['Patches']
+  PatchNames: Geom['domain']['Patches'] # can we dynamically reference this?
+
 
 Patch:
   x-lower:
