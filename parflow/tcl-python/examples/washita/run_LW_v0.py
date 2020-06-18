@@ -97,13 +97,13 @@ Geom['Perm'] = {}
 Geom['Perm']['Names'] = perm_names
 
 for i in range(len(perm_names)):
-    Geom[perm_names[i]] = {}
+    if perm_names[i] in Geom:
+        pass
+    else:
+        Geom[perm_names[i]] = {}
     Geom[perm_names[i]]['Perm'] = {}
     Geom[perm_names[i]]['Perm']['Type'] = 'Constant'
     Geom[perm_names[i]]['Perm']['Value'] = perm_vals[i]
-    
-
-print(Geom)
 
 Perm = {}
 Perm['TensorType'] = 'TensorByGeom'
@@ -221,34 +221,48 @@ Cycle['constant']['Repeat'] = -1
 #-----------------------------------------------------------------------------
 
 BCPressure = {}
-BCPressure['PatchNames'] = {zip(Geom['domain']['Patches'])}
+BCPressure['PatchNames'] = Geom['domain'].get('Patches')
 
-# Patch = {}
-# Patch['x-lower']
+Patch = {}
+for key in BCPressure['PatchNames']:
+    Patch[key]['BCPressure'] = {}
+    if key == 'z-upper':
+        Patch[key]['BCPressure']['Type'] = 'OverlandFlow'
+    else:
+        Patch[key]['BCPressure']['Type'] = 'FluxConst'
+    Patch[key]['BCPressure']['Cycle'] = 'constant'
+    Patch[key]['BCPressure']['alltime'] = {}
+    Patch[key]['BCPressure']['alltime']['Value'] = 0.0
 
-# pfset Patch.x-lower.BCPressure.Type		      FluxConst
-# pfset Patch.x-lower.BCPressure.Cycle		      "constant"
-# pfset Patch.x-lower.BCPressure.alltime.Value	      0.0
+#-----------------------------------------------------------------------------
+# Topo slopes in x-direction
+#-----------------------------------------------------------------------------
+    
+TopoSlopesX = {}
+TopoSlopesX['Type'] = 'PFBFile'
+TopoSlopesX['GeomNames'] = 'domain'
+TopoSlopesX['FileName'] = 'LW.slopex.pfb'
 
-# pfset Patch.y-lower.BCPressure.Type		      FluxConst
-# pfset Patch.y-lower.BCPressure.Cycle		      "constant"
-# pfset Patch.y-lower.BCPressure.alltime.Value	      0.0
+#-----------------------------------------------------------------------------
+# Topo slopes in y-direction
+#-----------------------------------------------------------------------------
 
-# pfset Patch.z-lower.BCPressure.Type		      FluxConst
-# pfset Patch.z-lower.BCPressure.Cycle		      "constant"
-# pfset Patch.z-lower.BCPressure.alltime.Value	      0.0
+TopoSlopesY = {}
+TopoSlopesY['Type'] = 'PFBFile'
+TopoSlopesY['GeomNames'] = 'domain'
+TopoSlopesY['FileName'] = 'LW.slopey.pfb'
 
-# pfset Patch.x-upper.BCPressure.Type		      FluxConst
-# pfset Patch.x-upper.BCPressure.Cycle		      "constant"
-# pfset Patch.x-upper.BCPressure.alltime.Value	      0.0
+#-----------------------------------------------------------------------------
+# Mannings coefficient
+#-----------------------------------------------------------------------------
 
-# pfset Patch.y-upper.BCPressure.Type		      FluxConst
-# pfset Patch.y-upper.BCPressure.Cycle		      "constant"
-# pfset Patch.y-upper.BCPressure.alltime.Value	      0.0
+Mannings = {}
+Mannings['Type'] = 'constant'
+Mannings['GeomNames'] = 'domain'
+Mannings['Geom'] = {}
+Mannings['Geom']['domain'] = {}
+Mannings['Geom']['domain']['Value'] = 5.52e-6
 
-# pfset Patch.z-upper.BCPressure.Type		      OverlandFlow
-# pfset Patch.z-upper.BCPressure.Cycle		      "constant"
-# pfset Patch.z-upper.BCPressure.alltime.Value	      0.0
 
     
     
