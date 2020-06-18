@@ -69,7 +69,7 @@ Geom['domain']['Upper']['X'] = 41000.0
 Geom['domain']['Upper']['Y'] = 41000.0
 Geom['domain']['Upper']['Z'] = 100.0
 
-Geom['domain']['Patches'] = ['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper']
+Geom['domain']['Patches'] = dict.fromkeys(['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper'])
 
 #-----------------------------------------------------------------------------
 # Indicator Geometry Input
@@ -113,6 +113,145 @@ Geom['domain']['Perm']['TensorValX'] = 1.0
 Geom['domain']['Perm']['TensorValY'] = 1.0
 Geom['domain']['Perm']['TensorValZ'] = 1.0
 
+#-----------------------------------------------------------------------------
+# Specific Storage
+#-----------------------------------------------------------------------------
+
+SpecificStorage = {}
+SpecificStorage['Type'] = 'Constant'
+SpecificStorage['GeomNames'] = 'domain'
+Geom['domain']['SpecificStorage'] = {}
+Geom['domain']['SpecificStorage']['Value'] = 1.0e-5
+
+#-----------------------------------------------------------------------------
+# Phases
+#-----------------------------------------------------------------------------
+
+Phase = {}
+Phase['Names'] = 'water'
+Phase['water'] = {}
+Phase['water']['Density'] = {}
+Phase['water']['Density']['Type'] = 'Constant'
+Phase['water']['Density']['Value'] = 1.0
+Phase['water']['Viscosity'] = {}
+Phase['water']['Viscosity']['Type'] = 'Constant'
+Phase['water']['Viscosity']['Value'] = 1.0
+
+#-----------------------------------------------------------------------------
+# Contaminants
+#-----------------------------------------------------------------------------
+Contaminants = {}
+Contaminants['Names'] = {''}
+
+#-----------------------------------------------------------------------------
+# Gravity
+#-----------------------------------------------------------------------------
+Gravity = {1.0}
+
+#-----------------------------------------------------------------------------
+# Timing (time units is set by units of permeability)
+#-----------------------------------------------------------------------------
+
+TimingInfo = {}
+TimingInfo['BaseUnit'] = 1.0
+TimingInfo['StartCount'] = 0.0
+TimingInfo['StartTime'] = 0.0
+TimingInfo['StopTime'] = 24.0
+TimingInfo['DumpInterval'] = 1.0
+
+TimeStep = {}
+TimeStep['Type'] = 'Constant'
+TimeStep['Value'] = 1.0
+
+#-----------------------------------------------------------------------------
+# Porosity
+#-----------------------------------------------------------------------------
+
+porosity_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
+porosity_vals = [0.4, 0.375, 0.39, 0.387, 0.439, 0.489, 0.399, 0.384, 0.482, 0.442]
+
+Geom['Porosity'] = {}
+Geom['Porosity']['Names'] = porosity_names
+
+for i in range(len(porosity_names)):
+    if porosity_names[i] in Geom:
+        pass
+    else:
+        Geom[porosity_names[i]] = {}
+    Geom[porosity_names[i]]['Porosity'] = {}
+    Geom[porosity_names[i]]['Porosity']['Type'] = 'Constant'
+    Geom[porosity_names[i]]['Porosity']['Value'] = porosity_vals[i]
+    
+#-----------------------------------------------------------------------------
+# Domain
+#-----------------------------------------------------------------------------
+
+Domain = {}
+Domain['GeomName'] = 'domain'
+
+#----------------------------------------------------------------------------
+# Mobility
+#----------------------------------------------------------------------------
+
+Phase['water']['Mobility'] = {}
+Phase['water']['Mobility']['Type'] = 'Constant'
+Phase['water']['Mobility']['Value'] = 1.0
+
+#-----------------------------------------------------------------------------
+# Wells
+#-----------------------------------------------------------------------------
+
+Wells = {}
+Wells['Names'] = ''
+
+#-----------------------------------------------------------------------------
+# Time Cycles
+#-----------------------------------------------------------------------------
+
+Cycle = {}
+Cycle['Names'] = 'constant'
+Cycle['constant'] = {}
+Cycle['constant']['Names'] = 'alltime'
+Cycle['constant']['alltime'] = {}
+Cycle['constant']['alltime']['Length'] = 1
+Cycle['constant']['Repeat'] = -1
+
+#-----------------------------------------------------------------------------
+# Boundary Conditions
+#-----------------------------------------------------------------------------
+
+BCPressure = {}
+BCPressure['PatchNames'] = {zip(Geom['domain']['Patches'])}
+
+# Patch = {}
+# Patch['x-lower']
+
+# pfset Patch.x-lower.BCPressure.Type		      FluxConst
+# pfset Patch.x-lower.BCPressure.Cycle		      "constant"
+# pfset Patch.x-lower.BCPressure.alltime.Value	      0.0
+
+# pfset Patch.y-lower.BCPressure.Type		      FluxConst
+# pfset Patch.y-lower.BCPressure.Cycle		      "constant"
+# pfset Patch.y-lower.BCPressure.alltime.Value	      0.0
+
+# pfset Patch.z-lower.BCPressure.Type		      FluxConst
+# pfset Patch.z-lower.BCPressure.Cycle		      "constant"
+# pfset Patch.z-lower.BCPressure.alltime.Value	      0.0
+
+# pfset Patch.x-upper.BCPressure.Type		      FluxConst
+# pfset Patch.x-upper.BCPressure.Cycle		      "constant"
+# pfset Patch.x-upper.BCPressure.alltime.Value	      0.0
+
+# pfset Patch.y-upper.BCPressure.Type		      FluxConst
+# pfset Patch.y-upper.BCPressure.Cycle		      "constant"
+# pfset Patch.y-upper.BCPressure.alltime.Value	      0.0
+
+# pfset Patch.z-upper.BCPressure.Type		      OverlandFlow
+# pfset Patch.z-upper.BCPressure.Cycle		      "constant"
+# pfset Patch.z-upper.BCPressure.alltime.Value	      0.0
+
+    
+    
 
 
 
