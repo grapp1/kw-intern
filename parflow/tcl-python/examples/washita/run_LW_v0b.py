@@ -73,9 +73,9 @@ ind_vals.extend(list(range(21,29)))
 GeomInput.indi_input.InputType = 'IndicatorField'
 GeomInput.indi_input.GeomNames = field
 Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
-
-for i in range(len(field)):
-    GeomInput[field[i]].Value = ind_vals[i]
+    
+for name, val in zip(field, ind_vals):
+    GeomInput[name].Value = val
     
 #-----------------------------------------------------------------------------
 # Permeability (values in m/hr)
@@ -85,10 +85,10 @@ perm_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 'g2', 'g3
 perm_vals = [0.2, 0.269, 0.0436, 0.0158, 0.0075, 0.0182, 0.005, 0.0054, 0.0047, 0.0034, 0.025, 0.059, 0.2, 0.68]
 
 Geom.Perm.Names = perm_names
-
-for i in range(len(perm_names)):
-    Geom[perm_names[i]].Perm.Type = 'Constant'
-    Geom[perm_names[i]].Perm.Value = perm_vals[i]
+    
+for name, val in zip(perm_names, perm_vals):
+    Geom[name].Perm.Type = 'Constant'
+    Geom[name].Perm.Value = val
 
 Perm = DotMap()
 Perm.TensorType = 'TensorByGeom'
@@ -154,9 +154,9 @@ porosity_vals = [0.4, 0.375, 0.39, 0.387, 0.439, 0.489, 0.399, 0.384, 0.482, 0.4
 
 Geom.Porosity.Names = porosity_names
 
-for i in range(len(porosity_names)):
-    Geom[porosity_names[i]].Porosity.Type = 'Constant'
-    Geom[porosity_names[i]].Porosity.Value = porosity_vals[i]
+for name, val in zip(porosity_names, porosity_vals):
+    Geom[name].Porosity.Type = 'Constant'
+    Geom[name].Porosity.Value = val
     
 #-----------------------------------------------------------------------------
 # Domain
