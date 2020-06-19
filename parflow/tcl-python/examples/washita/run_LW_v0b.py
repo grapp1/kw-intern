@@ -1,9 +1,11 @@
+# run_LW_v0b.py
 # first version of script to convert the LW_Test tcl script to Python
-# need to include pfset function for variables
+# v0b: using dot notation for dictionary assignment (similar to existing TCL)
 
 #import parflow as pf
 #import pftools
 #import shutil
+from dotmap import DotMap
 
 # copy files from adjacent directory
 #shutil.copy("../parflow_input/LW.slopex.pfb", ".")
@@ -16,60 +18,50 @@
 # Set Processor topology
 #-----------------------------------------------------------------------------
 
-ProcessTopology = {}
-ProcessTopology['P'] = 1
-ProcessTopology['Q'] = 1
-ProcessTopology['R'] = 1
+Process = DotMap()
+Process.Topology.P = 1
+Process.Topology.Q = 1
+Process.Topology.R = 1
 
 #-----------------------------------------------------------------------------
 # Computational Grid
 #-----------------------------------------------------------------------------
 
-ComputationalGrid = {}
+ComputationalGrid = DotMap()
 
-ComputationalGrid['Lower'] = {}
-ComputationalGrid['Lower']['X'] = 0.0
-ComputationalGrid['Lower']['Y'] = 0.0
-ComputationalGrid['Lower']['Z'] = 0.0
+ComputationalGrid.Lower.X = 0.0
+ComputationalGrid.Lower.Y = 0.0
+ComputationalGrid.Lower.Z = 0.0
 
-ComputationalGrid['DX'] = 1000.0
-ComputationalGrid['DY'] = 1000.0
-ComputationalGrid['DZ'] = 2.0
+ComputationalGrid.DX = 1000.0
+ComputationalGrid.DY = 1000.0
+ComputationalGrid.DZ = 2.0
 
-ComputationalGrid['NX'] = 41
-ComputationalGrid['NY'] = 41
-ComputationalGrid['NZ'] = 50
-
-#-----------------------------------------------------------------------------
-# Names of the GeomInputs
-#-----------------------------------------------------------------------------
-GeomInput = {}
-GeomInput['box_input'] = {}
-GeomInput['indi_input'] = {}
+ComputationalGrid.NX = 41
+ComputationalGrid.NY = 41
+ComputationalGrid.NZ = 50
 
 #-----------------------------------------------------------------------------
 # Domain Geometry Input
 #-----------------------------------------------------------------------------
-GeomInput['box_input']['InputType'] = 'Box'
-GeomInput['box_input']['GeomNames'] = 'domain'
+GeomInput = DotMap()
+GeomInput.box_input.InputType = 'Box'
+GeomInput.box_input.GeomName = 'domain'
 
 #-----------------------------------------------------------------------------
 # Domain Geometry
 #-----------------------------------------------------------------------------
-Geom = {}
-Geom['domain'] = {}
+Geom = DotMap()
 
-Geom['domain']['Lower'] = {}
-Geom['domain']['Lower']['X'] = 0.0
-Geom['domain']['Lower']['Y'] = 0.0
-Geom['domain']['Lower']['Z'] = 0.0
+Geom.domain.Lower.X = 0.0
+Geom.domain.Lower.Y = 0.0
+Geom.domain.Lower.Z = 0.0
 
-Geom['domain']['Upper'] = {}
-Geom['domain']['Upper']['X'] = 41000.0
-Geom['domain']['Upper']['Y'] = 41000.0
-Geom['domain']['Upper']['Z'] = 100.0
+Geom.domain.Upper.X = 41000.0
+Geom.domain.Upper.Y = 41000.0
+Geom.domain.Upper.Z = 100.0
 
-Geom['domain']['Patches'] = dict.fromkeys(['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper'])
+Geom.domain.Patches = dict.fromkeys(['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper'])
 
 #-----------------------------------------------------------------------------
 # Indicator Geometry Input
@@ -78,13 +70,12 @@ field = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's1
 ind_vals = list(range(1,14))
 ind_vals.extend(list(range(21,29)))
 
-GeomInput['indi_input']['InputType'] = 'IndicatorField'
-GeomInput['indi_input']['GeomNames'] = field
-GeomInput['indi_input']['FileName'] = 'IndicatorFile_Gleeson.50z.pfb'
+GeomInput.indi_input.InputType = 'IndicatorField'
+GeomInput.indi_input.GeomNames = field
+Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
 
 for i in range(len(field)):
-    GeomInput[field[i]] = {}
-    GeomInput[field[i]]['Value'] = ind_vals[i]
+    GeomInput.(r'%s' field[i]).Value = ind_vals[i]
     
 #-----------------------------------------------------------------------------
 # Permeability (values in m/hr)
@@ -93,8 +84,7 @@ for i in range(len(field)):
 perm_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 'g2', 'g3', 'g6', 'g8']
 perm_vals = [0.2, 0.269, 0.0436, 0.0158, 0.0075, 0.0182, 0.005, 0.0054, 0.0047, 0.0034, 0.025, 0.059, 0.2, 0.68]
 
-Geom['Perm'] = {}
-Geom['Perm']['Names'] = perm_names
+Geom.Perm.Names = perm_names
 
 for i in range(len(perm_names)):
     if perm_names[i] in Geom:

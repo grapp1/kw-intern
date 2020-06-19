@@ -180,31 +180,105 @@ constant.Repeat = -1
 run.setBCPressure(PatchNames = get(domain.setPatches))
 
 for name in PatchNames:
-    Patch[key]['BCPressure'] = {}
-    if key == 'z-upper':
-        Patch[key]['BCPressure']['Type'] = 'OverlandFlow'
+    if name == 'z-upper':
+        name.BCPressure(Type = 'OverlandFlow')
     else:
-        Patch[key]['BCPressure']['Type'] = 'FluxConst'
-    Patch[key]['BCPressure']['Cycle'] = 'constant'
-    Patch[key]['BCPressure']['alltime'] = {}
-    Patch[key]['BCPressure']['alltime']['Value'] = 0.0
+        name.BCPressure(Type = 'FluxConst')
+    name.BCPressure(Cycle = 'constant',
+                    CycleName = 'alltime',
+                    Value = 0.0)
 
 #-----------------------------------------------------------------------------
 # Topo slopes in x-direction
 #-----------------------------------------------------------------------------
     
-
+run.setTopoSlopesX(Type = 'PFBFile',
+                   GeomNames = 'domain',
+                   'FileName' = 'LW.slopex.pfb')
 
 #-----------------------------------------------------------------------------
 # Topo slopes in y-direction
 #-----------------------------------------------------------------------------
 
-
+run.setTopoSlopesY(Type = 'PFBFile',
+                   GeomNames = 'domain',
+                   'FileName' = 'LW.slopey.pfb')
 
 #-----------------------------------------------------------------------------
 # Mannings coefficient
 #-----------------------------------------------------------------------------
 
+domain.setMannings(Type = 'Constant',
+                   Value = 5.52e-6)
+
+#-----------------------------------------------------------------------------
+# Phase sources:
+#-----------------------------------------------------------------------------
+
+water.domain.setPhaseSource(Type = 'Constant',
+                            Value = 0.0)
+
+#----------------------------------------------------------------
+# CLM Settings:
+# ---------------------------------------------------------------
+
+CLM = run.setLSM('CLM')
+
+CLM.set(CLMFileDir = "clm_output/",
+        Print1dOut = False,
+        DailyRST = True,
+        SingleFile = True,
+        CLMDumpInterval = 1,
+        MetForcing = 3D,
+        MetFileName = 'NLDAS',
+        MetFilePath = '../NLDAS/',
+        MetFileNT = 24,
+        IstepStart = 1,
+        EvapBeta = 'Linear',
+        VegWaterStress = 'Saturation'
+        ResSat = 0.1,
+        WiltingPoint = 0.12,
+        FieldCapacity = 0.98,
+        IrrigationType = None)
+
+#---------------------------------------------------------
+# Initial conditions: water pressure
+#---------------------------------------------------------
+
+run.setICPressure(Type = 'PFBFile')
+domain.ICPressure(RefPatch = 'z-upper',
+                  FileName = 'press.init.pfb')
+
+#----------------------------------------------------------------
+# Outputs
+# ---------------------------------------------------------------
+
+run.write(SiloSubsurfData = True)
+run.WriteSiloSubsurfData()
+pfset Solver.WriteSiloPressure
+pfset Solver.WriteSiloSaturation
+pfset Solver.WriteSiloSlopes
+pfset Solver.WriteSiloCLM
+pfset Solver.WriteSiloMannings
+pfset Solver.PrintCLM
+
+#-----------------------------------------------------------------------------
+# Distribute, run, undistribute
+#-----------------------------------------------------------------------------
+
+run.getComputationalGrid()
+  .setDimensions(X=41, Y=41, Z=1)
+run.dist(slopex, slopey)
+
+run.getComputationalGrid()
+  .setDimensions(X=41, Y=41, Z=50)
+run.dist(indicator, ipressure)
+
+run.run()
+
+run.undist(slopex, slopey, indicator)
+
+print('ParFlow run complete')
 
 
     
