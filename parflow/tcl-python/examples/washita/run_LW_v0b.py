@@ -75,7 +75,7 @@ GeomInput.indi_input.GeomNames = field
 Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
 
 for i in range(len(field)):
-    GeomInput.(r'%s' field[i]).Value = ind_vals[i]
+    GeomInput[field[i]].Value = ind_vals[i]
     
 #-----------------------------------------------------------------------------
 # Permeability (values in m/hr)
@@ -87,71 +87,63 @@ perm_vals = [0.2, 0.269, 0.0436, 0.0158, 0.0075, 0.0182, 0.005, 0.0054, 0.0047, 
 Geom.Perm.Names = perm_names
 
 for i in range(len(perm_names)):
-    if perm_names[i] in Geom:
-        pass
-    else:
-        Geom[perm_names[i]] = {}
-    Geom[perm_names[i]]['Perm'] = {}
-    Geom[perm_names[i]]['Perm']['Type'] = 'Constant'
-    Geom[perm_names[i]]['Perm']['Value'] = perm_vals[i]
+    Geom[perm_names[i]].Perm.Type = 'Constant'
+    Geom[perm_names[i]].Perm.Value = perm_vals[i]
 
-Perm = {}
-Perm['TensorType'] = 'TensorByGeom'
-Geom['Perm']['TensorByGeom'] = {}
-Geom['Perm']['TensorByGeom']['Names'] = 'domain'
-Geom['domain']['Perm']['TensorValX'] = 1.0
-Geom['domain']['Perm']['TensorValY'] = 1.0
-Geom['domain']['Perm']['TensorValZ'] = 1.0
+Perm = DotMap()
+Perm.TensorType = 'TensorByGeom'
+Geom.Perm.TensorByGeom.Names = 'domain'
+Geom.domain.Perm.TensorValX = 1.0
+Geom.domain.Perm.TensorValY = 1.0
+Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
 #-----------------------------------------------------------------------------
 
-SpecificStorage = {}
-SpecificStorage['Type'] = 'Constant'
-SpecificStorage['GeomNames'] = 'domain'
-Geom['domain']['SpecificStorage'] = {}
-Geom['domain']['SpecificStorage']['Value'] = 1.0e-5
+SpecificStorage = DotMap()
+SpecificStorage.Type = 'Constant'
+SpecificStorage.GeomNames = 'domain'
+Geom.domain.SpecificStorage.Value = 1.0e-5
 
 #-----------------------------------------------------------------------------
 # Phases
 #-----------------------------------------------------------------------------
 
-Phase = {}
-Phase['Names'] = 'water'
-Phase['water'] = {}
-Phase['water']['Density'] = {}
-Phase['water']['Density']['Type'] = 'Constant'
-Phase['water']['Density']['Value'] = 1.0
-Phase['water']['Viscosity'] = {}
-Phase['water']['Viscosity']['Type'] = 'Constant'
-Phase['water']['Viscosity']['Value'] = 1.0
+Phase = DotMap()
+Phase.Names = 'water'
+Phase.water.Density.Type = 'Constant'
+Phase.water.Density.Value = 1.0
+Phase.water.Viscosity.Type = 'Constant'
+Phase.water.Viscosity.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Contaminants
 #-----------------------------------------------------------------------------
-Contaminants = {}
-Contaminants['Names'] = {''}
+
+Contaminants = DotMap()
+Contaminants.Names = ''
 
 #-----------------------------------------------------------------------------
 # Gravity
 #-----------------------------------------------------------------------------
-Gravity = {1.0}
+
+Gravity = 1.0
 
 #-----------------------------------------------------------------------------
 # Timing (time units is set by units of permeability)
 #-----------------------------------------------------------------------------
 
-TimingInfo = {}
-TimingInfo['BaseUnit'] = 1.0
-TimingInfo['StartCount'] = 0.0
-TimingInfo['StartTime'] = 0.0
-TimingInfo['StopTime'] = 24.0
-TimingInfo['DumpInterval'] = 1.0
+TimingInfo = DotMap()
+TimingInfo.BaseUnit = 1.0
+TimingInfo.StartCount = 0.0
+TimingInfo.StartTime = 0.0
+TimingInfo.StopTime = 24.0
+TimingInfo.DumpInterval = 1.0
 
-TimeStep = {}
-TimeStep['Type'] = 'Constant'
-TimeStep['Value'] = 1.0
+TimeStep = DotMap()
+TimeStep.Type = 'Constant'
+TimeStep.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Porosity
@@ -160,98 +152,85 @@ TimeStep['Value'] = 1.0
 porosity_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
 porosity_vals = [0.4, 0.375, 0.39, 0.387, 0.439, 0.489, 0.399, 0.384, 0.482, 0.442]
 
-Geom['Porosity'] = {}
-Geom['Porosity']['Names'] = porosity_names
+Geom.Porosity.Names = porosity_names
 
 for i in range(len(porosity_names)):
-    if porosity_names[i] in Geom:
-        pass
-    else:
-        Geom[porosity_names[i]] = {}
-    Geom[porosity_names[i]]['Porosity'] = {}
-    Geom[porosity_names[i]]['Porosity']['Type'] = 'Constant'
-    Geom[porosity_names[i]]['Porosity']['Value'] = porosity_vals[i]
+    Geom[porosity_names[i]].Porosity.Type = 'Constant'
+    Geom[porosity_names[i]].Porosity.Value = porosity_vals[i]
     
 #-----------------------------------------------------------------------------
 # Domain
 #-----------------------------------------------------------------------------
 
-Domain = {}
-Domain['GeomName'] = 'domain'
+Domain = DotMap()
+Domain.GeomName = 'domain'
 
 #----------------------------------------------------------------------------
 # Mobility
 #----------------------------------------------------------------------------
 
-Phase['water']['Mobility'] = {}
-Phase['water']['Mobility']['Type'] = 'Constant'
-Phase['water']['Mobility']['Value'] = 1.0
+Phase.water.Mobility.Type = 'Constant'
+Phase.water.Mobility.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
 
-Wells = {}
-Wells['Names'] = ''
+Wells = DotMap()
+Wells.Names = ''
 
 #-----------------------------------------------------------------------------
 # Time Cycles
 #-----------------------------------------------------------------------------
 
-Cycle = {}
-Cycle['Names'] = 'constant'
-Cycle['constant'] = {}
-Cycle['constant']['Names'] = 'alltime'
-Cycle['constant']['alltime'] = {}
-Cycle['constant']['alltime']['Length'] = 1
-Cycle['constant']['Repeat'] = -1
+Cycle = DotMap()
+Cycle.Names = 'constant'
+Cycle.constant.Names = 'alltime'
+Cycle.constant.alltime.Length = 1
+Cycle.constant.Repeat = -1
 
 #-----------------------------------------------------------------------------
 # Boundary Conditions
 #-----------------------------------------------------------------------------
 
-BCPressure = {}
-BCPressure['PatchNames'] = Geom['domain'].get('Patches')
+BCPressure = DotMap()
+BCPressure.PatchNames = Geom.domain.get('Patches')
 
-Patch = {}
-for key in BCPressure['PatchNames']:
-    Patch[key]['BCPressure'] = {}
+Patch = DotMap()
+for key in BCPressure.PatchNames:
     if key == 'z-upper':
-        Patch[key]['BCPressure']['Type'] = 'OverlandFlow'
+        Patch[key].BCPressure.Type = 'OverlandFlow'
     else:
-        Patch[key]['BCPressure']['Type'] = 'FluxConst'
-    Patch[key]['BCPressure']['Cycle'] = 'constant'
-    Patch[key]['BCPressure']['alltime'] = {}
-    Patch[key]['BCPressure']['alltime']['Value'] = 0.0
+        Patch[key].BCPressure.Type = 'FluxConst'
+    Patch[key].BCPressure.Cycle = 'constant'
+    Patch[key].BCPressure.alltime.Value = 0.0
 
 #-----------------------------------------------------------------------------
 # Topo slopes in x-direction
 #-----------------------------------------------------------------------------
     
-TopoSlopesX = {}
-TopoSlopesX['Type'] = 'PFBFile'
-TopoSlopesX['GeomNames'] = 'domain'
-TopoSlopesX['FileName'] = 'LW.slopex.pfb'
+TopoSlopesX = DotMap()
+TopoSlopesX.Type = 'PFBFile'
+TopoSlopesX.GeomNames = 'domain'
+TopoSlopesX.FileName = 'LW.slopex.pfb'
 
 #-----------------------------------------------------------------------------
 # Topo slopes in y-direction
 #-----------------------------------------------------------------------------
 
-TopoSlopesY = {}
-TopoSlopesY['Type'] = 'PFBFile'
-TopoSlopesY['GeomNames'] = 'domain'
-TopoSlopesY['FileName'] = 'LW.slopey.pfb'
+TopoSlopesY = DotMap()
+TopoSlopesY.Type = 'PFBFile'
+TopoSlopesY.GeomNames = 'domain'
+TopoSlopesY.FileName = 'LW.slopey.pfb'
 
 #-----------------------------------------------------------------------------
 # Mannings coefficient
 #-----------------------------------------------------------------------------
 
-Mannings = {}
-Mannings['Type'] = 'constant'
-Mannings['GeomNames'] = 'domain'
-Mannings['Geom'] = {}
-Mannings['Geom']['domain'] = {}
-Mannings['Geom']['domain']['Value'] = 5.52e-6
+Mannings = DotMap()
+Mannings.Type = 'constant'
+Mannings.GeomNames = 'domain'
+Mannings.Geom.domain.Value = 5.52e-6
 
 
     
