@@ -1,17 +1,13 @@
-# run_LW_v1.py
-# second version of script to convert the LW_Test tcl script to Python
-# v1: making key assignments more pythonic
+# run_sandtank_v1.py
+# version of script to convert the sandtank run.tcl script to Python
+# similar to run_LW_v1.py
 
 #import parflow as pf
 #import pftools
 #import shutil
 
-# copy files from adjacent directory
-#shutil.copy("../parflow_input/LW.slopex.pfb", ".")
-#shutil.copy("../parflow_input/LW.slopey.pfb", ".")
-
-
-run = pf.Run('sandtank')
+runname = 'sandtank'
+run = pf.Run(runname)
 
 #-----------------------------------------------------------------------------
 # Set Processor topology
@@ -231,6 +227,28 @@ domain.setMannings(Type = 'Constant',
 water.domain.setPhaseSource(Type = 'Constant',
                             Value = 0.0)
 
+# -----------------------------------------------------------------------------
+# Exact solution specification for error calculations
+# -----------------------------------------------------------------------------
+
+set.KnownSolution = NoKnownSolution
+
+# -----------------------------------------------------------------------------
+# Set solver parameters
+# -----------------------------------------------------------------------------
+
+run.setOverlandFlowDiffusive(0)
+solver = run.setSolver('Richards')
+solver.setMaxIter(2500000)
+
+solver.Nonlinear(MaxIter = 100,
+                ...)
+
+solver.setOutput(PfbMannings = True,
+    PfbSlopes = True,
+    Mask = True,
+    Velocities = True)
+
 #---------------------------------------------------------
 # Initial conditions: water pressure
 #---------------------------------------------------------
@@ -241,39 +259,34 @@ if config['reset'] == 1:
                       Value = 30.0)
 else:
     run.setICPressure(Type = 'PFBFile')
-    fname_ic =
+    fname_ic = f"{runname}.out.press.{config['StartNumber']:05d}.pfb"
     domain.ICPressure(RefPatch = 'z-upper',
-                      FileName = 'press.init.pfb')
-
-
-  set fname_ic [format "./$runname.out.press.%05d.pfb" $StartNumber]
-  puts "Initial Conditions: $fname_ic"
-  pfset ICPressure.Type                           PFBFile
-  pfset ICPressure.GeomNames                      domain
-  pfset Geom.domain.ICPressure.FileName           $fname_ic
-  pfdist $fname_ic
-}
-
-run.setICPressure(Type = 'PFBFile')
-domain.ICPressure(RefPatch = 'z-upper',
-                  FileName = 'press.init.pfb')
+                      FileName = fname_ic)
+    run.dist(fname_ic)
 
 #----------------------------------------------------------------
-# Outputs
+# Writing EcoSLIM file - this should be hidden as a function, but shown here for
+# completeness
 # ---------------------------------------------------------------
 
-run.write(SiloSubsurfData = True)
-run.WriteSiloSubsurfData()
-pfset Solver.WriteSiloPressure
-pfset Solver.WriteSiloSaturation
-pfset Solver.WriteSiloSlopes
-pfset Solver.WriteSiloCLM
-pfset Solver.WriteSiloMannings
-pfset Solver.PrintCLM
+print(f'Writing EcoSLIM input file with {runname}')
 
-#-----------------------------------------------------------------------------
-# Distribute, run, undistribute
-#-----------------------------------------------------------------------------
+# works if you already have the slimin.txt file
+with open('slimin.txt', 'r') as file:
+    data = file.readlines()
+
+data[1] = f'"./{runname}"\n'
+
+if config['reset'] == 1:
+    data[6] = '0      !no particles per cell at start of simulation\n'
+else:
+    data[6] = '-1     !read particle restart file'
+
+data[12] = f'''{config['StartNumber'] + 1}    ! Parflow t1: ParFlow file number to start from (initial condition is pft1-1)\n'''
+data[13] = f'''{config['StartNumber'] + config['RunLength']}    ! Parflow t2: ParFlow file number to stop at\n'''
+
+with open('slimin.txt', 'r+') as file:
+    file.write(''.join(data))
 
 # -----------------------------------------------------------------------------
 # Run and Unload the n ParFlow output files
@@ -285,4 +298,4 @@ run.run()
 
 run.undist(slopex, slopey, indicator)
 
-print('ParFlow run complete')
+print(f'{runname} is done')

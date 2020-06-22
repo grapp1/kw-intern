@@ -3,6 +3,7 @@
 .ipynb*
 *.xlsx
 *.Rhistory
+slimin_1.txt
 
 # Editor directories and files
 .idea

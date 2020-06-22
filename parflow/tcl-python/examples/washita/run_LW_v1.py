@@ -36,7 +36,7 @@ run.getComputationalGrid()
 run.addGeomInput(
   pf.Box('box_input',
          name = 'domain')
-  
+
 domain.setLower(X=0, Y=0, Z=0)
 domain.setUpper(X=41000.0, Y=41000.0, Z=100.0)
 domain.setPatches('x-lower', 'x-upper', 'y-lower' 'y-upper', 'z-lower', 'z-upper')
@@ -71,7 +71,7 @@ run.addGeomInput(
     )
 )
 
-    
+
 #-----------------------------------------------------------------------------
 # Properties
 #-----------------------------------------------------------------------------
@@ -151,7 +151,7 @@ run.setTimingInfo(BaseUnit = 1.0,
                DumpInterval = 1.0)
 
 run.ConstantTimeStep(1.0)
-    
+
 #-----------------------------------------------------------------------------
 # Domain
 #-----------------------------------------------------------------------------
@@ -191,7 +191,7 @@ for name in PatchNames:
 #-----------------------------------------------------------------------------
 # Topo slopes in x-direction
 #-----------------------------------------------------------------------------
-    
+
 run.setTopoSlopesX(Type = 'PFBFile',
                    GeomNames = 'domain',
                    'FileName' = 'LW.slopex.pfb')
@@ -255,12 +255,12 @@ domain.ICPressure(RefPatch = 'z-upper',
 
 run.write(SiloSubsurfData = True)
 run.WriteSiloSubsurfData()
-pfset Solver.WriteSiloPressure
-pfset Solver.WriteSiloSaturation
-pfset Solver.WriteSiloSlopes
-pfset Solver.WriteSiloCLM
-pfset Solver.WriteSiloMannings
-pfset Solver.PrintCLM
+run.WriteSiloPressure()
+run.WriteSiloSaturation()
+run.WriteSiloSlopes()
+run.WriteSiloCLM()
+run.WriteSiloMannings()
+run.PrintCLM()
 
 #-----------------------------------------------------------------------------
 # Distribute, run, undistribute
@@ -279,10 +279,3 @@ run.run()
 run.undist(slopex, slopey, indicator)
 
 print('ParFlow run complete')
-
-
-    
-    
-
-
-
