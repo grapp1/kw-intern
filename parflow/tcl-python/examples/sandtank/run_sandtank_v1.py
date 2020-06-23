@@ -285,7 +285,7 @@ else:
 data[12] = f'''{config['StartNumber'] + 1}    ! Parflow t1: ParFlow file number to start from (initial condition is pft1-1)\n'''
 data[13] = f'''{config['StartNumber'] + config['RunLength']}    ! Parflow t2: ParFlow file number to stop at\n'''
 
-with open('slimin.txt', 'r+') as file:
+with open('slimin.txt', 'w') as file:
     file.write(''.join(data))
 
 # -----------------------------------------------------------------------------

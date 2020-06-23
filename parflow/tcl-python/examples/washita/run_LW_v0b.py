@@ -11,57 +11,53 @@ from dotmap import DotMap
 #shutil.copy("../parflow_input/LW.slopex.pfb", ".")
 #shutil.copy("../parflow_input/LW.slopey.pfb", ".")
 
-
+LW = DotMap()
 #run = pf.Run('LW')
 
 #-----------------------------------------------------------------------------
 # Set Processor topology
 #-----------------------------------------------------------------------------
 
-Process = DotMap()
-Process.Topology.P = 1
-Process.Topology.Q = 1
-Process.Topology.R = 1
+LW.Process.Topology.P = 1
+LW.Process.Topology.Q = 1
+LW.Process.Topology.R = 1
 
 #-----------------------------------------------------------------------------
 # Computational Grid
 #-----------------------------------------------------------------------------
 
-ComputationalGrid = DotMap()
+LW.ComputationalGrid.Lower.X = 0.0
+LW.ComputationalGrid.Lower.Y = 0.0
+LW.ComputationalGrid.Lower.Z = 0.0
 
-ComputationalGrid.Lower.X = 0.0
-ComputationalGrid.Lower.Y = 0.0
-ComputationalGrid.Lower.Z = 0.0
+LW.ComputationalGrid.DX = 1000.0
+LW.ComputationalGrid.DY = 1000.0
+LW.ComputationalGrid.DZ = 2.0
 
-ComputationalGrid.DX = 1000.0
-ComputationalGrid.DY = 1000.0
-ComputationalGrid.DZ = 2.0
-
-ComputationalGrid.NX = 41
-ComputationalGrid.NY = 41
-ComputationalGrid.NZ = 50
+LW.ComputationalGrid.NX = 41
+LW.ComputationalGrid.NY = 41
+LW.ComputationalGrid.NZ = 50
 
 #-----------------------------------------------------------------------------
 # Domain Geometry Input
 #-----------------------------------------------------------------------------
-GeomInput = DotMap()
-GeomInput.box_input.InputType = 'Box'
-GeomInput.box_input.GeomName = 'domain'
+
+LW.GeomInput.box_input.InputType = 'Box'
+LW.GeomInput.box_input.GeomName = 'domain'
 
 #-----------------------------------------------------------------------------
 # Domain Geometry
 #-----------------------------------------------------------------------------
-Geom = DotMap()
 
-Geom.domain.Lower.X = 0.0
-Geom.domain.Lower.Y = 0.0
-Geom.domain.Lower.Z = 0.0
+LW.Geom.domain.Lower.X = 0.0
+LW.Geom.domain.Lower.Y = 0.0
+LW.Geom.domain.Lower.Z = 0.0
 
-Geom.domain.Upper.X = 41000.0
-Geom.domain.Upper.Y = 41000.0
-Geom.domain.Upper.Z = 100.0
+LW.Geom.domain.Upper.X = 41000.0
+LW.Geom.domain.Upper.Y = 41000.0
+LW.Geom.domain.Upper.Z = 100.0
 
-Geom.domain.Patches = dict.fromkeys(['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper'])
+LW.Geom.domain.Patches = dict.fromkeys(['x-lower', 'x-upper', 'y-lower', 'y-upper', 'z-lower', 'z-upper'])
 
 #-----------------------------------------------------------------------------
 # Indicator Geometry Input
@@ -70,12 +66,12 @@ field = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's1
 ind_vals = list(range(1,14))
 ind_vals.extend(list(range(21,29)))
 
-GeomInput.indi_input.InputType = 'IndicatorField'
-GeomInput.indi_input.GeomNames = field
-Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
+LW.GeomInput.indi_input.InputType = 'IndicatorField'
+LW.GeomInput.indi_input.GeomNames = field
+LW.Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
     
 for name, val in zip(field, ind_vals):
-    GeomInput[name].Value = val
+    LW.GeomInput[name].Value = val
     
 #-----------------------------------------------------------------------------
 # Permeability (values in m/hr)
@@ -84,66 +80,61 @@ for name, val in zip(field, ind_vals):
 perm_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 'g2', 'g3', 'g6', 'g8']
 perm_vals = [0.2, 0.269, 0.0436, 0.0158, 0.0075, 0.0182, 0.005, 0.0054, 0.0047, 0.0034, 0.025, 0.059, 0.2, 0.68]
 
-Geom.Perm.Names = perm_names
+LW.Geom.Perm.Names = perm_names
     
 for name, val in zip(perm_names, perm_vals):
-    Geom[name].Perm.Type = 'Constant'
-    Geom[name].Perm.Value = val
+    LW.Geom[name].Perm.Type = 'Constant'
+    LW.Geom[name].Perm.Value = val
 
-Perm = DotMap()
-Perm.TensorType = 'TensorByGeom'
-Geom.Perm.TensorByGeom.Names = 'domain'
-Geom.domain.Perm.TensorValX = 1.0
-Geom.domain.Perm.TensorValY = 1.0
-Geom.domain.Perm.TensorValZ = 1.0
+LW.Perm.TensorType = 'TensorByGeom'
+LW.Geom.Perm.TensorByGeom.Names = 'domain'
+LW.Geom.domain.Perm.TensorValX = 1.0
+LW.Geom.domain.Perm.TensorValY = 1.0
+LW.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
 #-----------------------------------------------------------------------------
 
-SpecificStorage = DotMap()
-SpecificStorage.Type = 'Constant'
-SpecificStorage.GeomNames = 'domain'
-Geom.domain.SpecificStorage.Value = 1.0e-5
+LW.SpecificStorage.Type = 'Constant'
+LW.SpecificStorage.GeomNames = 'domain'
+LW.Geom.domain.SpecificStorage.Value = 1.0e-5
 
 #-----------------------------------------------------------------------------
 # Phases
 #-----------------------------------------------------------------------------
 
 Phase = DotMap()
-Phase.Names = 'water'
-Phase.water.Density.Type = 'Constant'
-Phase.water.Density.Value = 1.0
-Phase.water.Viscosity.Type = 'Constant'
-Phase.water.Viscosity.Value = 1.0
+LW.Phase.Names = 'water'
+LW.Phase.water.Density.Type = 'Constant'
+LW.Phase.water.Density.Value = 1.0
+LW.Phase.water.Viscosity.Type = 'Constant'
+LW.Phase.water.Viscosity.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Contaminants
 #-----------------------------------------------------------------------------
 
-Contaminants = DotMap()
-Contaminants.Names = ''
+LW.Contaminants.Names = ''
 
 #-----------------------------------------------------------------------------
 # Gravity
 #-----------------------------------------------------------------------------
 
-Gravity = 1.0
+LW.Gravity = 1.0
 
 #-----------------------------------------------------------------------------
 # Timing (time units is set by units of permeability)
 #-----------------------------------------------------------------------------
 
-TimingInfo = DotMap()
-TimingInfo.BaseUnit = 1.0
-TimingInfo.StartCount = 0.0
-TimingInfo.StartTime = 0.0
-TimingInfo.StopTime = 24.0
-TimingInfo.DumpInterval = 1.0
+LW.TimingInfo.BaseUnit = 1.0
+LW.TimingInfo.StartCount = 0.0
+LW.TimingInfo.StartTime = 0.0
+LW.TimingInfo.StopTime = 24.0
+LW.TimingInfo.DumpInterval = 1.0
 
-TimeStep = DotMap()
-TimeStep.Type = 'Constant'
-TimeStep.Value = 1.0
+LW.TimeStep.Type = 'Constant'
+LW.TimeStep.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Porosity
@@ -152,87 +143,79 @@ TimeStep.Value = 1.0
 porosity_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9']
 porosity_vals = [0.4, 0.375, 0.39, 0.387, 0.439, 0.489, 0.399, 0.384, 0.482, 0.442]
 
-Geom.Porosity.Names = porosity_names
+LW.Geom.Porosity.Names = porosity_names
 
 for name, val in zip(porosity_names, porosity_vals):
-    Geom[name].Porosity.Type = 'Constant'
-    Geom[name].Porosity.Value = val
+    LW.Geom[name].Porosity.Type = 'Constant'
+    LW.Geom[name].Porosity.Value = val
     
 #-----------------------------------------------------------------------------
 # Domain
 #-----------------------------------------------------------------------------
 
-Domain = DotMap()
-Domain.GeomName = 'domain'
+LW.Domain.GeomName = 'domain'
 
 #----------------------------------------------------------------------------
 # Mobility
 #----------------------------------------------------------------------------
 
-Phase.water.Mobility.Type = 'Constant'
-Phase.water.Mobility.Value = 1.0
+LW.Phase.water.Mobility.Type = 'Constant'
+LW.Phase.water.Mobility.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
 
-Wells = DotMap()
-Wells.Names = ''
+LW.Wells.Names = ''
 
 #-----------------------------------------------------------------------------
 # Time Cycles
 #-----------------------------------------------------------------------------
 
-Cycle = DotMap()
-Cycle.Names = 'constant'
-Cycle.constant.Names = 'alltime'
-Cycle.constant.alltime.Length = 1
-Cycle.constant.Repeat = -1
+LW.Cycle.Names = 'constant'
+LW.Cycle.constant.Names = 'alltime'
+LW.Cycle.constant.alltime.Length = 1
+LW.Cycle.constant.Repeat = -1
 
 #-----------------------------------------------------------------------------
 # Boundary Conditions
 #-----------------------------------------------------------------------------
 
-BCPressure = DotMap()
-BCPressure.PatchNames = Geom.domain.get('Patches')
+LW.BCPressure.PatchNames = Geom.domain.get('Patches')
 
-Patch = DotMap()
-for key in BCPressure.PatchNames:
+for key in LW.BCPressure.PatchNames:
     if key == 'z-upper':
-        Patch[key].BCPressure.Type = 'OverlandFlow'
+        LW.Patch[key].BCPressure.Type = 'OverlandFlow'
     else:
-        Patch[key].BCPressure.Type = 'FluxConst'
-    Patch[key].BCPressure.Cycle = 'constant'
-    Patch[key].BCPressure.alltime.Value = 0.0
+        LW.Patch[key].BCPressure.Type = 'FluxConst'
+    LW.Patch[key].BCPressure.Cycle = 'constant'
+    LW.Patch[key].BCPressure.alltime.Value = 0.0
 
 #-----------------------------------------------------------------------------
 # Topo slopes in x-direction
 #-----------------------------------------------------------------------------
-    
-TopoSlopesX = DotMap()
-TopoSlopesX.Type = 'PFBFile'
-TopoSlopesX.GeomNames = 'domain'
-TopoSlopesX.FileName = 'LW.slopex.pfb'
+
+LW.TopoSlopesX.Type = 'PFBFile'
+LW.TopoSlopesX.GeomNames = 'domain'
+LW.TopoSlopesX.FileName = 'LW.slopex.pfb'
 
 #-----------------------------------------------------------------------------
 # Topo slopes in y-direction
 #-----------------------------------------------------------------------------
 
-TopoSlopesY = DotMap()
-TopoSlopesY.Type = 'PFBFile'
-TopoSlopesY.GeomNames = 'domain'
-TopoSlopesY.FileName = 'LW.slopey.pfb'
+LW.TopoSlopesY.Type = 'PFBFile'
+LW.TopoSlopesY.GeomNames = 'domain'
+LW.TopoSlopesY.FileName = 'LW.slopey.pfb'
 
 #-----------------------------------------------------------------------------
 # Mannings coefficient
 #-----------------------------------------------------------------------------
 
-Mannings = DotMap()
-Mannings.Type = 'constant'
-Mannings.GeomNames = 'domain'
-Mannings.Geom.domain.Value = 5.52e-6
+LW.Mannings.Type = 'constant'
+LW.Mannings.GeomNames = 'domain'
+LW.Mannings.Geom.domain.Value = 5.52e-6
 
-
+# ...
     
     
 

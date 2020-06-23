@@ -1,6 +1,6 @@
 # run_LW_v1.py
 # second version of script to convert the LW_Test tcl script to Python
-# v1: making key assignments more pythonic
+# v1: making key assignments more pythonic adn object-oriented
 
 #import parflow as pf
 #import pftools
@@ -35,12 +35,14 @@ run.getComputationalGrid()
 
 run.addGeomInput(
   pf.Box('box_input',
-         name = 'domain')
+         name='domain')
 
 domain.setLower(X=0, Y=0, Z=0)
 domain.setUpper(X=41000.0, Y=41000.0, Z=100.0)
 domain.setPatches('x-lower', 'x-upper', 'y-lower' 'y-upper', 'z-lower', 'z-upper')
 
+
+# version 1: more readable
 run.addGeomInput(
   pf.IndicatorField(
       'indi_input',
@@ -72,8 +74,28 @@ run.addGeomInput(
 )
 
 
+# version 2: condensed with loops
+run.addGeomInput(
+  pf.IndicatorField(
+      'indi_input',
+      FileName = 'IndicatorFile_Gleeson.50z.pfb'
+      GeomNames = {f's{i}': i for i in range(1, 14)}
+GeomNames.update({f'g{i}': i + 20 for i in range(1, 9)})
+    )
+)
+
+
+# version 3: example of function that would allow user to read in a table
+# along with the pfb indicator file to establish all geologic properties in domain.
+
+run.addGeomInput(
+  pf.ConstantIndicator(ind_file = 'IndicatorFile_Gleeson.50z.pfb',
+                       param_file = 'LW_params.csv')
+)
+
+
 #-----------------------------------------------------------------------------
-# Properties
+# Properties (not necessary with version 3 above)
 #-----------------------------------------------------------------------------
 
 # Option 1: setting properties line-by-line
@@ -120,13 +142,10 @@ run.getGeo('s2').yamlSet('''
 
 
 #-----------------------------------------------------------------------------
-# Phases
+# Phases - setting default values for water
 #-----------------------------------------------------------------------------
 
-water = run.Phase('water')
-water.setConstant(Density = 1.0,
-                  Viscosity = 1.0,
-                  Mobility = 1.0)
+run.Phase('water', default = True)
 
 #-----------------------------------------------------------------------------
 # Contaminants
@@ -189,20 +208,13 @@ for name in PatchNames:
                     Value = 0.0)
 
 #-----------------------------------------------------------------------------
-# Topo slopes in x-direction
+# Topo slopes
 #-----------------------------------------------------------------------------
-
-run.setTopoSlopesX(Type = 'PFBFile',
+    
+run.setTopoSlopes(Type = 'PFBFile',
                    GeomNames = 'domain',
-                   'FileName' = 'LW.slopex.pfb')
-
-#-----------------------------------------------------------------------------
-# Topo slopes in y-direction
-#-----------------------------------------------------------------------------
-
-run.setTopoSlopesY(Type = 'PFBFile',
-                   GeomNames = 'domain',
-                   'FileName' = 'LW.slopey.pfb')
+                   'FileName_X' = 'LW.slopex.pfb',
+                   'FileName_Y' = 'LW.slopey.pfb')
 
 #-----------------------------------------------------------------------------
 # Mannings coefficient
@@ -210,13 +222,6 @@ run.setTopoSlopesY(Type = 'PFBFile',
 
 domain.setMannings(Type = 'Constant',
                    Value = 5.52e-6)
-
-#-----------------------------------------------------------------------------
-# Phase sources:
-#-----------------------------------------------------------------------------
-
-water.domain.setPhaseSource(Type = 'Constant',
-                            Value = 0.0)
 
 #----------------------------------------------------------------
 # CLM Settings:
