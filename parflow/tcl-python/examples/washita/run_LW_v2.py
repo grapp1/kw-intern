@@ -45,7 +45,7 @@ domain.setPatches('x-lower', 'x-upper', 'y-lower' 'y-upper', 'z-lower', 'z-upper
 
 run.addGeomInput(
   pf.ConstantIndicator(ind_file = 'IndicatorFile_Gleeson.50z.pfb',
-                       param_file = 'LW_params.yaml')
+                       param_file = 'LW_params.txt')
 )
 
 #-----------------------------------------------------------------------------
@@ -118,17 +118,10 @@ for name in PatchNames:
 # Topo slopes in x-direction
 #-----------------------------------------------------------------------------
     
-run.setTopoSlopesX(Type = 'PFBFile',
+run.setTopoSlopes(Type = 'PFBFile',
                    GeomNames = 'domain',
-                   'FileName' = 'LW.slopex.pfb')
-
-#-----------------------------------------------------------------------------
-# Topo slopes in y-direction
-#-----------------------------------------------------------------------------
-
-run.setTopoSlopesY(Type = 'PFBFile',
-                   GeomNames = 'domain',
-                   'FileName' = 'LW.slopey.pfb')
+                   'FileName_X' = 'LW.slopex.pfb',
+                   'FileName_Y' = 'LW.slopey.pfb')
 
 #-----------------------------------------------------------------------------
 # Mannings coefficient
@@ -136,13 +129,6 @@ run.setTopoSlopesY(Type = 'PFBFile',
 
 domain.setMannings(Type = 'Constant',
                    Value = 5.52e-6)
-
-#-----------------------------------------------------------------------------
-# Phase sources:
-#-----------------------------------------------------------------------------
-
-water.domain.setPhaseSource(Type = 'Constant',
-                            Value = 0.0)
 
 #----------------------------------------------------------------
 # CLM Settings:
@@ -181,12 +167,12 @@ domain.ICPressure(RefPatch = 'z-upper',
 
 run.write(SiloSubsurfData = True)
 run.WriteSiloSubsurfData()
-pfset Solver.WriteSiloPressure
-pfset Solver.WriteSiloSaturation
-pfset Solver.WriteSiloSlopes
-pfset Solver.WriteSiloCLM
-pfset Solver.WriteSiloMannings
-pfset Solver.PrintCLM
+run.WriteSiloPressure()
+run.WriteSiloSaturation()
+run.WriteSiloSlopes()
+run.WriteSiloCLM()
+run.WriteSiloMannings()
+run.PrintCLM()
 
 #-----------------------------------------------------------------------------
 # Distribute, run, undistribute
