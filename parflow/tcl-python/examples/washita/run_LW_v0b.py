@@ -69,10 +69,10 @@ ind_vals.extend(list(range(21,29)))
 LW.GeomInput.indi_input.InputType = 'IndicatorField'
 LW.GeomInput.indi_input.GeomNames = field
 LW.Geom.indi_input.FileName = 'IndicatorFile_Gleeson.50z.pfb'
-    
+
 for name, val in zip(field, ind_vals):
     LW.GeomInput[name].Value = val
-    
+
 #-----------------------------------------------------------------------------
 # Permeability (values in m/hr)
 #-----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ perm_names = ['domain','s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 'g2', 'g3
 perm_vals = [0.2, 0.269, 0.0436, 0.0158, 0.0075, 0.0182, 0.005, 0.0054, 0.0047, 0.0034, 0.025, 0.059, 0.2, 0.68]
 
 LW.Geom.Perm.Names = perm_names
-    
+
 for name, val in zip(perm_names, perm_vals):
     LW.Geom[name].Perm.Type = 'Constant'
     LW.Geom[name].Perm.Value = val
@@ -148,7 +148,7 @@ LW.Geom.Porosity.Names = porosity_names
 for name, val in zip(porosity_names, porosity_vals):
     LW.Geom[name].Porosity.Type = 'Constant'
     LW.Geom[name].Porosity.Value = val
-    
+
 #-----------------------------------------------------------------------------
 # Domain
 #-----------------------------------------------------------------------------
@@ -181,7 +181,7 @@ LW.Cycle.constant.Repeat = -1
 # Boundary Conditions
 #-----------------------------------------------------------------------------
 
-LW.BCPressure.PatchNames = Geom.domain.get('Patches')
+LW.BCPressure.PatchNames = LW.Geom.domain.get('Patches')
 
 for key in LW.BCPressure.PatchNames:
     if key == 'z-upper':
@@ -215,9 +215,11 @@ LW.Mannings.Type = 'constant'
 LW.Mannings.GeomNames = 'domain'
 LW.Mannings.Geom.domain.Value = 5.52e-6
 
+print(LW.Mannings.Type)
+
 # ...
-    
-    
+
+
 
 
 
