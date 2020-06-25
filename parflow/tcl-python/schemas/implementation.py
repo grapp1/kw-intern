@@ -27,9 +27,11 @@
 
 
 # schema_v3
-from schema_v3 import parflow, Process, Topology
+from schema_v3 import parflow
+
 
 test3 = parflow()
+print(test3.Process.__doc__)
 print(test3.Process.Topology.R) # autocompletes - prints default value
 test3.Process.Topology.R = 4
 print(test3.Process.Topology.R)
