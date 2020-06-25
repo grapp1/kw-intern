@@ -1,4 +1,4 @@
-# schema_v2.py: traditional dictionary structure
+# schema_v2.py: traditional dictionary structure, importing yaml
 
 import yaml
 
@@ -12,26 +12,18 @@ class parflow:
             self.pf = yaml.load(file, Loader=yaml.FullLoader)
 
 
-class PFDict(dict):
-  def __init__(self, d):
-    super().__init__(d)
-    self.convert_children()
+# to add autocompletion
+class PFDict:
+  def __init__(self, d=None):
+    if d is None:
+      d = {}
+    for k, v in d.items():
+      if isinstance(v, (list, tuple)):
+        v = [PFDict(x) if isinstance(x, dict) else x for x in v]
+      elif isinstance(v, dict):
+        v = PFDict(v)
+      setattr(self, k, v)
 
-  def convert_children(self):
-    def convert_recursive(child):
-      for key, value in child.items():
-        if isinstance(value, dict):
-          child[key] = PFDict(value)
-          convert_recursive(child[key])
-
-    convert_recursive(self)
-
-  def __getattr__(self, item):
-    if item in self.d:
-      return self.d[item]
-
-  def __dir__(self):
-    return self.d.keys()
 
 
 

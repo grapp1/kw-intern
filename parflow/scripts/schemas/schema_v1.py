@@ -1,4 +1,4 @@
-# schema_v1.py
+# schema_v1.py: initial building with DotMap (does not work with autocomplete)
 
 from dotmap import DotMap
 
@@ -21,15 +21,4 @@ class parflow(DotMap):
         self.Process.Topology.Q = 1
         self.Process.Topology.R = 1
 
-    # def setComputationalGridDefinition(self):
-    #     self.ComputationalGrid.Lower.X = 0.0
-    #     self.ComputationalGrid.Lower.Y = 0.0
-    #     self.ComputationalGrid.Lower.Z = 0.0
-    #
-    #     self.ComputationalGrid.NX = 1
-    #     self.ComputationalGrid.NY = 1
-    #     self.ComputationalGrid.NZ = 1
-    #
-    #     self.ComputationalGrid.DX = 1
-    #     self.ComputationalGrid.DY = 1
-    #     self.ComputationalGrid.DZ = 1
+
