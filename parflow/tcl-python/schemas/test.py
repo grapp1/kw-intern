@@ -54,14 +54,14 @@ class ValueObject:
         self.value = defaultValue
 
     def isValid(self):
-        return self.domain.validate(self.value)
+        return self.domain.validate
 
     def getValidationError(self):
         return self.domain.errorMessage(self.value)
 
     def setValue(self, value: int) -> bool:
         '''Update value'''
-        if self.domain.validate(value):
+        if self.domain.validate:
             self.value = value
         else:
             print('error')
