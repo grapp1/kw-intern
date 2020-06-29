@@ -31,12 +31,19 @@ class Topology:
         self.__dict__[name] = value
         
     def validate(self, v):
-        if isinstance(v, int):
-            # Make sure it is in the int range
-            if v > domain.maxValue:
-                raise Exception(str(v) + ' is greater than max int: ' + str(domain.maxValue))
-            elif v < domain.minValue:
-                raise Exception(str(v) + ' is smaller than the min int: ' + str(domain.minValue))
+        if domain.type == 'IntRange':
+            if isinstance(v, int):
+                # Make sure it is in the int range
+                if v > domain.maxValue:
+                    raise Exception(str(v) + ' is greater than max int: ' + str(domain.maxValue))
+                elif v < domain.minValue:
+                    raise Exception(str(v) + ' is smaller than the min int: ' + str(domain.minValue))
+        elif domain.type == 'SetString':
+            if isinstance(v, str):
+                pass
+        elif domain.type == 'AnyString':
+            if isinstance(v, str):
+                pass
     #
     # def validate(self):
     #     for key, req in self._requirements.items():
