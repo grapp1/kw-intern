@@ -30,6 +30,9 @@ class Process:
         self.Topology = Topology()
 
 class Topology:
+    """This section describes how processors are
+    assigned in order to solve the domain in parallel.
+    """
     def __init__(self):
         self.P = 1
         self.Q = 1
@@ -43,7 +46,7 @@ class Topology:
                         'maxValue': 1000,
                     }
                 },
-                'help': 'helptextP'
+                'help': '{Type: integer} P allocates the number of processors to the grid cells in x.'
             },
             'Q': {
                 'domain': {
@@ -53,7 +56,7 @@ class Topology:
                         'maxValue': 1000,
                     }
                 },
-                'help': 'helptextQ'
+                'help': '{Type: integer} Q allocates the number of processors to the grid cells in y.'
             },
             'R': {
                 'domain': {
@@ -63,7 +66,9 @@ class Topology:
                         'maxValue': 1000,
                     }
                 },
-                'help': 'helptextR'
+                'help': '{Type: integer} R allocates the number of processors to the grid cells in z. Please note R '
+                        'should always be 1 if you are running with Solver Richards unless you are running a totally '
+                        'saturated domain (solver IMPES).'
             }
         }
 
@@ -73,10 +78,17 @@ class Topology:
             Validation.validate(value, domain)
         self.__dict__[name] = value
 
-    def help(self, key):
-        print(self._details[key]['help'])
+    def help(self, key = None):
+        if key is not None:
+            if hasattr(self, '_details'):
+                print(self._details[key]['help'])
+        else:
+            print(self.__doc__)
 
 class GeomInput:
+    """GeomInput defines all 'geometrical' information needed by ParFlow. For example, the domain, lithology or
+    hydrostratigraphic units, faults, initial plume shapes, and so on, are considered geometries.
+    """
     def __init__(self):
         self.Names = ''
         self._details = {
@@ -84,12 +96,10 @@ class GeomInput:
                 'domain': {
                     'type': 'AnyString'
                 },
-                'help': 'This is a list of the geometry input names which define the containers for all the '
-                        'geometries defined for this problem. '
+                'help': '{Type: string} This is a list of the geometry input names which define the containers for all '
+                        'the geometries defined for this problem. '
             }
         }
-
-
 
     def __setattr__(self, name, value):
         if hasattr(self, '_details'):
@@ -97,19 +107,21 @@ class GeomInput:
             Validation.validate(value, domain)
         self.__dict__[name] = value
 
-    def help(self, key):
-        print(self._details[key]['help'])
+    def help(self, key = None):
+        if key is not None:
+            if hasattr(self, '_details'):
+                print(self._details[key]['help'])
+        else:
+            print(self.__doc__)
 
 
-obj = Process().Topology
-obj.P = 4
-obj.Q = 400
-obj.help('P')
-obj2 = GeomInput()
-obj2.Names = 'box_input'
-obj2.help('Names')
-
-#print(obj._details.items())
-# print(obj.Q)
-# print(obj._requirements['P']['max'])
+Process.Topology = Process().Topology
+Process.Topology.help()
+Process.Topology.P = 4
+Process.Topology.Q = 400
+Process.Topology.help('P')
+GeomInput = GeomInput()
+GeomInput.Names = 'box_input'
+GeomInput.help()
+GeomInput.help('Names')
 
