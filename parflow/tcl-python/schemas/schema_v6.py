@@ -1,6 +1,25 @@
 # schema_v6.py - more working ideas for class definitions
 
-# part 1: testing writing of classes with documentation and validation
+# Validation class to define validation function
+class Validation:
+    def validate(self, key, val, domain):
+        if domain['type'] == 'IntRange':
+            if not isinstance(val, int):
+                raise Exception(f'{val} ({type(val)} must be an int')
+            else:
+            # Make sure it is in the int range
+                if val > domain['kwargs']['maxValue']:
+                    raise Exception(str(v) + ' is greater than max int: ' + str(domain['kwargs']['maxValue']))
+                elif val < domain['kwargs']['minValue']:
+                    raise Exception(str(v) + ' is smaller than the min int: ' + str(domain['kwargs']['minValue']))
+
+        elif domain.type == 'SetString':
+            if isinstance(v, str):
+                pass
+        elif domain.type == 'AnyString':
+            if isinstance(v, str):
+                pass
+
 
 class ValidationException(Exception):
     pass
@@ -13,7 +32,7 @@ class Topology:
     def __init__(self):
         self.P = 1
         self.Q = 1
-        self._requirements = {
+        self._details = {
             'P': {
                 'domain': {
                     'type': 'IntRange',
@@ -27,36 +46,13 @@ class Topology:
         }
 
     def __setattr__(self, name, value):
-        self.validate(value)
+        domain = self._details[name]['domain']
+        Validation.validate(name, value, domain)
         self.__dict__[name] = value
-        
-    def validate(self, v):
-        if domain.type == 'IntRange':
-            if isinstance(v, int):
-                # Make sure it is in the int range
-                if v > domain.maxValue:
-                    raise Exception(str(v) + ' is greater than max int: ' + str(domain.maxValue))
-                elif v < domain.minValue:
-                    raise Exception(str(v) + ' is smaller than the min int: ' + str(domain.minValue))
-        elif domain.type == 'SetString':
-            if isinstance(v, str):
-                pass
-        elif domain.type == 'AnyString':
-            if isinstance(v, str):
-                pass
-    #
-    # def validate(self):
-    #     for key, req in self._requirements.items():
-    #         val = getattr(self, key)
-    #         if isinstance(val, int):
-    #             # For integers, we check mins and maxes
-    #             if 'min' in req and val < req['min']:
-    #                 raise ValidationException(f'{val} is less than min: {req["min"]}')
-    #             elif 'max' in req and val > req['max']:
-    #                 raise ValidationException(f'{val} is greater than max: {req["max"]}')
+        print(self.__dict__[name])
 
     def help(self, key):
-        print(self._requirements[key]['help'])
+        print(self._details[key]['help'])
 
 
 obj = Process().Topology
@@ -64,7 +60,7 @@ obj.P = 4
 obj.Q = 400
 # obj.validate()
 obj.help('P')
-print(obj._requirements.keys())
+print(obj._details.items())
 # print(obj.Q)
 # print(obj._requirements['P']['max'])
 
