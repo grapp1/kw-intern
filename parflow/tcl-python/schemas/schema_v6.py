@@ -120,16 +120,33 @@ class GeomInput:
         else:
             print(self.__doc__)
 
+class Geom:
+    """This builds off of GeomInput
+    """
+    def __init__(self, lst):
+        for name in lst:
+            GeomInput.name = ''
 
-Process.Topology = Process().Topology
-Process.Topology.P = 4
-Process.Topology.Q = 400
-Process.Topology.help()
-Process.Topology.help('P')
+    def __setattr__(self, name, value):
+        if hasattr(self, '_details'):
+            domain = self._details[name]['domain']
+            Validation.validate(value, domain)
+            # breaking up the spaced out string entries into multiple values
+            if " " in value:
+                value = value.split()
+        self.__dict__[name] = value
+
+
+# Process.Topology = Process().Topology
+# Process.Topology.P = 4
+# Process.Topology.Q = 400
+# Process.Topology.help()
+# Process.Topology.help('P')
 
 GeomInput = GeomInput()
 GeomInput.Names = 'box_input indi_input'
 print(GeomInput.Names) # list with individual names
+#Geom(GeomInput.Names)
 GeomInput.help()
 GeomInput.help('Names')
 
