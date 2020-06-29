@@ -84,7 +84,8 @@ class GeomInput:
                 'domain': {
                     'type': 'AnyString'
                 },
-                'help': 'This is a list of the geometry input names which define the containers for all the geometries defined for this problem.'
+                'help': 'This is a list of the geometry input names which define the containers for all the '
+                        'geometries defined for this problem. '
             }
         }
 
