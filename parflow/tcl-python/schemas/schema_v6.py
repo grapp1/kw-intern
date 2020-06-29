@@ -6,7 +6,7 @@ class ValidationException(Exception):
 # Validation class to define validation function
 class Validation:
     @staticmethod
-    def validate(val, domain):
+    def validate(val, domain, verify=None):
         if domain['type'] == 'IntRange':
             if not isinstance(val, int):
                 raise ValidationException(f'{val} ({type(val)} must be an int')
@@ -18,8 +18,11 @@ class Validation:
                     raise ValidationException(str(val) + ' is smaller than the min int: ' + str(domain['kwargs']['minValue']))
 
         elif domain['type'] == 'SetString':
-            if isinstance(val, str):
-                pass
+            if not isinstance(val, str):
+                raise ValidationException(f'{val} ({type(val)} must be a string')
+            for entry in verify:
+                if val == entry:
+                    pass
 
         elif domain['type'] == 'AnyString':
             if not isinstance(val, str):
@@ -97,7 +100,7 @@ class GeomInput:
                     'type': 'AnyString'
                 },
                 'help': '{Type: string} This is a list of the geometry input names which define the containers for all '
-                        'the geometries defined for this problem. '
+                        'the geometries defined for this problem. Input names should be separated by spaces.'
             }
         }
 
@@ -105,6 +108,9 @@ class GeomInput:
         if hasattr(self, '_details'):
             domain = self._details[name]['domain']
             Validation.validate(value, domain)
+            # breaking up the spaced out string entries into multiple values
+            if " " in value:
+                value = value.split()
         self.__dict__[name] = value
 
     def help(self, key = None):
@@ -116,12 +122,14 @@ class GeomInput:
 
 
 Process.Topology = Process().Topology
-Process.Topology.help()
 Process.Topology.P = 4
 Process.Topology.Q = 400
+Process.Topology.help()
 Process.Topology.help('P')
+
 GeomInput = GeomInput()
-GeomInput.Names = 'box_input'
+GeomInput.Names = 'box_input indi_input'
+print(GeomInput.Names) # list with individual names
 GeomInput.help()
 GeomInput.help('Names')
 
