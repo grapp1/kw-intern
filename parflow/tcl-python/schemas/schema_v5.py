@@ -26,6 +26,18 @@ class Topology:
             }
         }
 
+    def __setattr__(self, name, value):
+        self.validate(value)
+        self.__dict__[name] = value
+
+    def validate(self, v):
+        if isinstance(v, int):
+            # Make sure it is in the int range
+            if v > domain.max_int:
+                raise Exception(str(v) + ' is greater than max int: ' + str(domain.max_int))
+            elif v < domain.min_int:
+                raise Exception(str(v) + ' is smaller than the min int: ' + str(domain.min_int))
+
     def validate(self):
         for key, req in self._requirements.items():
             val = getattr(self, key)
