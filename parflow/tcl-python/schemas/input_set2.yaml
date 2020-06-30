@@ -11,9 +11,11 @@ FileVersion:
 # -----------------------------------------------------------------------------
 
 Process:
-    help: 'Process input options are: Topology'
-    instances:
-        Topology
+    __doc__: 'Process input options are: Topology'
+    Topology:
+        __doc__:
+        P:
+
 
 Topology:
     help: 'This section describes how processors are assigned in order to solve the domain in parallel.'
