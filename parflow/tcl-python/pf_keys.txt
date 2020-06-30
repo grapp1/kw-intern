@@ -1,0 +1,491 @@
+Patch.%s.BCPressure.Type	Ê					
+Patch.%s.BCPressure.Cycle	Ê					
+Patch.%s.BCPressure.%s.Value	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.RefGeom	Ê	Ê	Ê			
+Patch.%s.BCPressure.RefPatch	Ê	Ê	Ê			
+Patch.%s.BCPressure.%s.%s.IntValue	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.XLower	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.YLower	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.XUpper	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.YUpper	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.NumPoints	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.%d.Location	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.%d.Value	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.FileName	Ê	Ê	Ê	Ê		
+Patch.%s.BCPressure.%s.PredefinedFunction	Ê	Ê	Ê	Ê		
+%s.MaxIter	Ê	Ê	Ê	Ê		
+Geom.%s.Perm.Value	Ê	Ê	Ê	Ê		
+Geom.%s.Porosity.Value	Ê	Ê	Ê	Ê		
+GeomInput.%s.FileName	Ê	Ê	Ê	Ê		
+Geom.%s.Perm.FileName	Ê	Ê	Ê	Ê		
+Geom.%s.Porosity.FileName	Ê	Ê	Ê	Ê		
+Solver.Nonlinear.ResidualTol	Ê	Ê	Ê	Ê		
+Solver.Nonlinear.StepTol	Ê	Ê	Ê	Ê		
+Solver.Nonlinear.MaxIter	Ê	Ê	Ê	Ê		
+Solver.Linear.KrylovDimension	Ê	Ê	Ê	Ê		
+Solver.Linear.MaxRestarts						
+Solver.Nonlinear.PrintFlag						
+Solver.Nonlinear.EtaChoice						
+Solver.Nonlinear.UseJacobian						
+Solver.Nonlinear.DerivativeEpsilon						
+Solver.Nonlinear.Globalization						
+Solver.Linear.Preconditioner						
+%s.PCMatrixType						
+%s.%s						
+%s.Jacobian						
+%s.Smoother						
+%s.CoarseSolve						
+%s.MaxLevels						
+%s.MaxMinNX						
+%s.MaxMinNY						
+%s.MaxMinNZ						
+OverlandSpinupDampP1						
+OverlandSpinupDampP2						
+Solver.TerrainFollowingGrid.SlopeUpwindFormulation					
+%s.Preconditioner						
+%s.TwoNorm						
+%s.NumPreRelax						
+%s.NumPostRelax						
+%s.RAPType						
+%s.BoxSizePowerOf2						
+Geom.%s.Perm.LambdaX						
+Geom.%s.Perm.LambdaY						
+Geom.%s.Perm.LambdaZ						
+Geom.%s.Perm.GeomMean						
+Geom.%s.Perm.Sigma						
+Geom.%s.Perm.Seed						
+Geom.%s.Perm.MaxNPts						
+Geom.%s.Perm.MaxCpts						
+Geom.%s.Perm.LogNormal						
+Geom.%s.Perm.StratType						
+Geom.%s.Perm.LowCutoff						
+Geom.%s.Perm.HighCutoff						
+Geom.%s.Perm.MaxSearchRad						
+%s.PolyPC						
+%s.PolyDegree						
+Phase.%s.Viscosity.Value						
+Contaminants.%s.Degradation.Value						
+Geom.%s.FBx.FileName						
+Geom.%s.FBy.FileName						
+Geom.%s.FBz.FileName						
+InternalBC.%s.X						
+InternalBC.%s.Y						
+InternalBC.%s.Z						
+InternalBC.%s.Value						
+Patch.%s.BCSaturation.%s.Type						
+Patch.%s.BCSaturation.%s.Value						
+Patch.%s.BCSaturation.%s.XLower						
+Patch.%s.BCSaturation.%s.YLower						
+Patch.%s.BCSaturation.%s.XUpper						
+Patch.%s.BCSaturation.%s.YUpper						
+CapPressure.%s.Type						
+CapPressure.%s.GeomNames						
+Geom.%s.CapPressure.%s.Value						
+Geom.%s.dzScale.Value						
+Geom.%s.dzScale.FileName						
+Cell.%d.dzScale.Value						
+GeomInput.%s.InputType						
+GeomInput.%s.GeomNames						
+GeomInput.%s.Value						
+Geom.%s.FileName						
+Geom.%s.Patches						
+GeomInput.%s.GeomName						
+Geom.%s.Lower.X						
+Geom.%s.Lower.Y						
+Geom.%s.Lower.Z						
+Geom.%s.Upper.X						
+Geom.%s.Upper.Y						
+Geom.%s.Upper.Z						
+Geom.%s.HeatCapacity.Value						
+PhaseConcen.%s.%s.Type						
+PhaseConcen.%s.%s.GeomNames						
+PhaseConcen.%s.%s.Geom.%s.Value						
+PhaseConcen.%s.%s.FileName						
+Geom.%s.ICPressure.Value						
+Geom.%s.ICPressure.RefElevation						
+Geom.%s.ICPressure.RefGeom						
+Geom.%s.ICPressure.RefPatch						
+Geom.%s.ICPressure.FileName						
+ICSaturation.%s.Type						
+ICSaturation.%s.GeomNames						
+Geom.%s.ICSaturation.%s.Value						
+Mannings.Geom.%s.Value						
+Phase.%s.Density.Type						
+Phase.%s.Density.Value						
+Phase.%s.Density.ReferenceDensity						
+Phase.%s.Density.CompressibiltyConstant						
+Phase.%s.HeatCapacity.Type						
+Phase.%s.HeatCapacity.GeomNames						
+Phase.%s.Geom.%s.HeatCapacity.Value						
+Phase.%s.InternalEnergy.Type						
+Phase.%s.InternalEnergy.Value						
+Phase.%s.Mobility.Value						
+Phase.%s.Mobility.Exponent						
+Phase.%s.Mobility.IrreducibleSaturation						
+Geom.%s.RelPerm.Value						
+Phase.RelPerm.VanGenuchten.File						
+Geom.%s.RelPerm.Alpha						
+Geom.%s.RelPerm.N						
+Geom.%s.RelPerm.NumSamplePoints						
+Geom.%s.RelPerm.MinPressureHead						
+Geom.%s.RelPerm.InterpolationMethod						
+Geom.%s.RelPerm.Alpha.Filename						
+Geom.%s.RelPerm.N.Filename						
+Geom.%s.RelPerm.A						
+Geom.%s.RelPerm.gamma						
+Geom.%s.RelPerm.Degree						
+Geom.%s.RelPerm.Coeff.%d						
+PhaseSources.%s.Type						
+PhaseSources.%s.GeomNames						
+PhaseSources.%s.Geom.%s.Value						
+PhaseSources.%s.PredefinedFunction						
+PhaseSources.Geom.%s.Value						
+Phase.%s.Viscosity.Type						
+Geom.%s.Porosity.Type						
+Geom.%s.%s.Retardation.Type						
+Geom.%s.%s.Retardation.Rate						
+Geom.%s.Saturation.Value						
+Phase.Saturation.VanGenuchten.File						
+Geom.%s.Saturation.Alpha						
+Geom.%s.Saturation.N						
+Geom.%s.Saturation.SRes						
+Geom.%s.Saturation.SSat						
+Geom.%s.Saturation.Alpha.Filename						
+Geom.%s.Saturation.N.Filename						
+Geom.%s.Saturation.SRes.Filename						
+Geom.%s.Saturation.SSat.Filename						
+Geom.%s.Saturation.A						
+Geom.%s.Saturation.gamma						
+Geom.%s.Saturation.Degree						
+Geom.%s.Saturation.Coeff.%d						
+Geom.%s.Saturation.FileName						
+Geom.%s.SpecificStorage.Value						
+Geom.%s.ThermalConductivity.Value						
+Phase.ThermalConductivity.Function1.File						
+Geom.%s.ThermalConductivity.KDry						
+Geom.%s.ThermalConductivity.KWet						
+Geom.%s.ThermalConductivity.KDry.Filename						
+Geom.%s.ThermalConductivity.KWet.Filename						
+TopoSlopesX.Geom.%s.Value				
+TopoSlopesY.Geom.%s.Value						
+%s.Symmetric						
+NetCDF.ROMIOhints						
+%s.DiagScale						
+%s.Linear						
+%s.SadvectOrder						
+%s.AdvectOrder						
+%s.CFL						
+%s.RelTol						
+%s.AbsTol						
+%s.Drop						
+%s.PrintSubsurf						
+%s.PrintPressure						
+%s.PrintVelocities						
+%s.PrintSaturation						
+%s.PrintConcentration						
+%s.PrintWells						
+%s.WriteSiloSubsurfData						
+%s.WriteSiloPressure						
+%s.WriteSiloVelocities						
+%s.WriteSiloSaturation						
+%s.WriteSiloConcentration						
+%s.DiagSolver						
+%s.BetaPerm						
+%s.BetaFluid						
+%s.BetaPore						
+%s.BetaFracture						
+%s.CompCompress						
+%s.NonlinearSolver						
+%s.LSM						
+%s.CLM.CLMDumpInterval						
+%s.CLM.Print1dOut						
+%s.CLM.ForceVegetation						
+%s.CLM.BinaryOutDir						
+%s.CLM.CLMFileDir						
+%s.TerrainFollowingGrid						
+%s.CLM.SingleFile						
+%s.CLM.RootZoneNZ						
+%s.CLM.SoiLayer						
+%s.CLM.ReuseCount						
+%s.CLM.WriteLogs						
+%s.CLM.WriteLastRST						
+%s.CLM.DailyRST						
+%s.CLM.EvapBeta						
+%s.CLM.ResSat						
+%s.CLM.VegWaterStress						
+%s.CLM.WiltingPoint						
+%s.CLM.FieldCapacity						
+%s.WriteSiloCLM						
+%s.PrintCLM						
+%s.WriteCLMBinary						
+%s.CLM.MetFilePath						
+%s.CLM.MetFileSubdir						
+%s.CLM.MetFileName						
+%s.CLM.IstepStart						
+%s.CLM.FstepStart						
+%s.CLM.MetForcing						
+%s.CLM.MetFileNT						
+%s.CLM.IrrigationType						
+NetCDF.WriteCLM						
+%s.CLM.IrrigationCycle						
+%s.CLM.IrrigationRate						
+%s.CLM.IrrigationStartTime						
+%s.CLM.IrrigationStopTime						
+%s.CLM.IrrigationThreshold						
+%s.CLM.IrrigationThresholdType						
+%s.MaxConvergenceFailures						
+%s.DropTol						
+%s.PrintSubsurfData						
+%s.PrintSlopes						
+%s.PrintMannings						
+%s.PrintSpecificStorage						
+%s.PrintTop						
+%s.PrintDZMultiplier						
+%s.PrintMask						
+%s.PrintEvapTrans						
+%s.PrintEvapTransSum						
+%s.PrintOverlandSum						
+%s.PrintOverlandBCFlux						
+%s.PrintLSMSink						
+%s.WriteSiloEvapTrans						
+%s.WriteSiloEvapTransSum						
+%s.WriteSiloOverlandSum						
+%s.WriteSiloOverlandBCFlux						
+%s.WriteSiloDZMultiplier						
+NetCDF.WritePressure						
+NetCDF.WriteSaturation						
+NetCDF.WriteEvapTrans						
+NetCDF.WriteEvapTransSum						
+NetCDF.WriteOverlandSum						
+NetCDF.WriteOverlandBCFlux						
+NetCDF.WriteMannings						
+NetCDF.WriteSubsurface						
+NetCDF.WriteSlopes						
+NetCDF.WriteDZMultiplier						
+NetCDF.WriteMask						
+NetCDF.EvapTransFileTransient						
+NetCDF.EvapTrans.FileName						
+%s.WriteSiloMask						
+%s.WriteSiloSlopes						
+%s.WriteSiloMannings						
+%s.WriteSiloSpecificStorage						
+%s.WriteSiloTop						
+%s.WriteSiloPMPIOSubsurfData						
+%s.WriteSiloPMPIOPressure						
+%s.WriteSiloPMPIOVelocities						
+%s.WriteSiloPMPIOSaturation						
+%s.WriteSiloPMPIOEvapTrans						
+%s.WriteSiloPMPIOEvapTransSum						
+%s.WriteSiloPMPIOOverlandSum	Ê					
+%s.WriteSiloPMPIOOverlandBCFlux						
+%s.WriteSiloPMPIODZMultiplier						
+%s.WriteSiloPMPIOConcentration						
+%s.WriteSiloPMPIOMask						
+%s.WriteSiloPMPIOSlopes						
+%s.WriteSiloPMPIOMannings						
+%s.WriteSiloPMPIOSpecificStorage						
+%s.WriteSiloPMPIOTop						
+%s.Spinup						
+%s.EvapTransFile						
+%s.EvapTransFileTransient						
+%s.EvapTrans.FileLooping						
+%s.EvapTrans.FileName						
+Geom.%s.Perm.Type						
+Geom.%s.Perm.TensorValX						
+Geom.%s.Perm.TensorValY						
+Geom.%s.Perm.TensorValZ						
+Geom.%s.Perm.TensorFileX						
+Geom.%s.Perm.TensorFileY						
+Geom.%s.Perm.TensorFileZ						
+Cycle.%s.Names						
+Cycle.%s.Repeat						
+Cycle.%s.%s.Length						
+Geom.%s.Perm.NumLines						
+Geom.%s.Perm.RZeta						
+Geom.%s.Perm.KMax						
+Geom.%s.Perm.DelK						
+%s.Weight						
+Wells.%s.InputType						
+Wells.%s.Action						
+Wells.%s.Type						
+Wells.%s.X						
+Wells.%s.Y						
+Wells.%s.ZUpper						
+Wells.%s.ZLower						
+Wells.%s.Method						
+Wells.%s.Cycle						
+Wells.%s.%s.Pressure.Value						
+Wells.%s.%s.Flux.%s.Value						
+Wells.%s.%s.Saturation.%s.Value						
+Wells.%s.%s.Concentration.%s.%s.Value						
+Wells.%s.ExtractionType						
+Wells.%s.InjectionType						
+Wells.%s.ExtractionZUpper						
+Wells.%s.ExtractionZLower						
+Wells.%s.InjectionZUpper						
+Wells.%s.InjectionZLower						
+Wells.%s.ExtractionMethod						
+Wells.%s.InjectionMethod						
+Wells.%s.%s.Extraction.Pressure.Value						
+Wells.%s.%s.Extraction.Flux.%s.Value						
+Wells.%s.%s.Injection.Pressure.Value						
+Wells.%s.%s.Injection.Flux.%s.Value						
+NetCDF.NodeLevelIO						
+NetCDF.Chunking						
+SILO.CompressionOptions						
+SILO.Filetype						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+	Ê					
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê			
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê			
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê	Ê		
+	Ê	Ê	Ê			
+	Ê	Ê	Ê	Ê	Ê	
+	Ê	Ê	Ê	Ê	Ê	
+	Ê	Ê	Ê	Ê	Ê	
+	Ê	Ê	Ê	Ê	Ê	Ê
+	Ê	Ê	Ê	Ê	Ê	Ê
+						
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+						
+						
+						
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					
+	Ê					

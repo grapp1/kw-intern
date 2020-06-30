@@ -23,7 +23,7 @@ class PFDBObj:
         valueHandler = self._details[name]['valueHandler']
 
     # Run domain validation
-    validateValueWithException(value, domain)
+    # validateValueWithException(value, domain)
 
     # Decorate value if need be (i.e. Geom.names: 'a b c')
     self.__dict__[name] = decorateValue(value, self, valueHandler)

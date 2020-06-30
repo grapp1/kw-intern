@@ -1,67 +1,54 @@
-FileVersion: 4
+FileVersion:
+    help: '[Type: int] This gives the value of the input file version number that this file fits.'
+    default: 4
+    domain:
+        type: IntRangeDomain
+        kwargs:
+            minValue: 4
 
 # -----------------------------------------------------------------------------
 # Parallel Execution
 # -----------------------------------------------------------------------------
 
 Process:
-    helptext: 'Process input options are: Topology'
-    subkey: Topology
+    help: 'Process input options are: Topology'
+    instances:
+        Topology
 
 Topology:
-    helptext: 'This section describes how processors are assigned in order to solve the domain in parallel.'
+    help: 'This section describes how processors are assigned in order to solve the domain in parallel.'
     keys:
         P:
+            default: 1
             domain:
                 type: IntRangeDomain
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            helptext: '[Type: int] P allocates the number of processes to the grid-cells in x.'
+            help: '[Type: int] P allocates the number of processes to the grid-cells in x.'
         Q:
+            default: 1
             domain:
                 type: IntRangeDomain
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            helptext: '[Type: int] Q allocates the number of processes to the grid-cells in y.'
+            help: '[Type: int] Q allocates the number of processes to the grid-cells in y.'
         R:
+            default: 1
             domain:
                 type: IntRangeDomain
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            helptext: '[Type: int] R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+            help: '[Type: int] R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
 
-
-# -----------------------------------------------------------------------------
-# Computational Grid
-# sandtank actual demensions are 30cm by 15cm
-# -----------------------------------------------------------------------------
-
-ComputationalGrid:
-  Lower:
-    X: 0.0
-    Y: 0.0
-    Z: 0.0
-  DX: 1.0
-  DY: 1.0
-  DZ: 1.0
-  NX: 1
-  NY: 1
-  NZ: 1
-
-# -----------------------------------------------------------------------------
-# Domain Geometry Input
-# -----------------------------------------------------------------------------
-
-Domain.GeomName: domain
 
 # -----------------------------------------------------------------------------
 # GeomInputs
 # -----------------------------------------------------------------------------
 
 GeomInput:
-  box_input:
-    InputType: Box
-    GeomNames: domain
+    box_input:
+        InputType: Box
+        GeomNames: domain
