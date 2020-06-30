@@ -10,7 +10,7 @@ class ComputationalGrid(PFDBObj):
 
 class Process(PFDBObj):
     def __init__(self):
-        self.Topology = Topology()
+      self.Topology = Topology()
 
 class Topology(PFDBObj):
     """
@@ -21,7 +21,7 @@ class Topology(PFDBObj):
         self.P = 1
         self.Q = 1
         self.R = 1
-        self.registerDetails({
+        self._details = {
             'P': {
                 'domain': {
                     'type': 'IntRangeDomain',
@@ -54,7 +54,7 @@ class Topology(PFDBObj):
                         'should always be 1 if you are running with Solver Richards unless you are running a totally '
                         'saturated domain (solver IMPES).'
             }
-        })
+        }
 
 
 class GeomInput(PFDBObj):
@@ -64,7 +64,7 @@ class GeomInput(PFDBObj):
 
     def __init__(self):
         self.Names = ''
-        self.registerDetails({
+        self._details = {
             'Names': {
                 'domain': {
                     'type': 'AnyStringDomain'
@@ -72,7 +72,7 @@ class GeomInput(PFDBObj):
                 'help': '{Type: string} This is a list of the geometry input names which define the containers for all '
                         'the geometries defined for this problem. Input names should be separated by spaces.'
             }
-        })
+        }
 
     def setnames(self):
         print(self.Names)

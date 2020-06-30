@@ -9,21 +9,22 @@ class Run:
     self.ComputationalGrid = ComputationalGrid()
     self.GeomInput = GeomInput()
 
-  def validate(self):
+  def validate(self, indent=0):
+    strIndent = '  '*indent
     errorCount = 0
     print('-'*80)
     print('Validating Parflow input')
     print('-'*80)
     for key in ['Process', 'ComputationalGrid', 'GeomInput']:
-      print(f'{key}')
-      errorCount += self.__dict__[key].validate(indent=1)
+      print(f'{strIndent}{key}')
+      errorCount += self.__dict__[key].validate(indent + 1)
 
     print('-'*80)
     if errorCount:
-      print(f'{errorCount} issue(s) were found')
+      print(f'{strIndent}{errorCount} issue(s) were found')
       print('-'*80)
     else:
-      print('No error detected - SUCCESS')
+      print(f'No error detected - SUCCESS')
       print('-'*80)
 
     return errorCount

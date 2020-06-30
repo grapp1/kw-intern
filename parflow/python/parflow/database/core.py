@@ -10,16 +10,13 @@ class PFDBObj:
   def __init__(self):
     self._details = {}
 
-  def registerDetails(self, details):
-    self._details = details
-
   def __setattr__(self, name, value):
     '''
     Helper method that aims to streamline dot notation assignment
     '''
     domain = None
     valueHandler = None
-    if name in self._details:
+    if hasattr(self, '_details') and name in self._details:
       if 'domain' in self._details[name]:
         domain = self._details[name]['domain']
       if 'valueHandler' in self._details[name]:
@@ -45,6 +42,9 @@ class PFDBObj:
     errorCount = 0
     indentStr = '  '*indent
     for name in self.__dict__:
+      if name == '_details':
+        continue
+
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         print(f'{indentStr}{name}')
