@@ -31,14 +31,17 @@ AVAILABLE_DOMAINS = {
     'AnyStringDomain': AnyStringDomain()
 }
 
-
+# defining ParFlow database object to consolidate the defined __setattr__ and help functions
 class PFDBObj:
     def __setattr__(self, name, value):
         if hasattr(self, '_details'):
             domain = self._details[name]['domain']
             if domain['type'] in AVAILABLE_DOMAINS:
                 domainObj = AVAILABLE_DOMAINS[domain['type']]
-                domainObj.validate(value, **domain['kwargs'])
+                if 'kwargs' in domain:
+                    domainObj.validate(value, **domain['kwargs'])
+                else:
+                    domainObj.validate(value)
             # breaking up the spaced out string entries into multiple values
             if type(value) == str:
                 if " " in value:
@@ -52,19 +55,7 @@ class PFDBObj:
         else:
             print(self.__doc__)
 
-
-#
-#         elif domain['type'] == 'SetString':
-#             if not isinstance(val, str):
-#                 raise ValidationException(f'{val} ({type(val)} must be a string')
-#             for entry in verify:
-#                 if val == entry:
-#                     pass
-#
-#         elif domain['type'] == 'AnyString':
-#             if not isinstance(val, str):
-#                 raise ValidationException(f'{val} ({type(val)} must be a string')
-
+# Defining ParFlow keys
 class Process(PFDBObj):
     def __init__(self):
         self.Topology = Topology()
@@ -149,6 +140,8 @@ class GeomInput(PFDBObj):
 #                 value = value.split()
 #         self.__dict__[name] = value
 
+
+# testing
 
 Process.Topology = Process().Topology
 Process.Topology.P = 4
