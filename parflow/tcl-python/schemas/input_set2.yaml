@@ -5,15 +5,34 @@ FileVersion: 4
 # -----------------------------------------------------------------------------
 
 Process:
-  help: 'run.Process input options are: Topology'
-  Topology:
-    help: '[Type: int] This section describes how processors are assigned in order to solve the domain in parallel. P allocates
-the number of processes to the grid-cells in x. Q allocates the number of processes to the grid-cells in y.
-R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you
-are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
-    P: 1
-    Q: 1
-    R: 1
+    helptext: 'Process input options are: Topology'
+    subkey: Topology
+
+Topology:
+    helptext: 'This section describes how processors are assigned in order to solve the domain in parallel.'
+    keys:
+        P:
+            domain:
+                type: IntRangeDomain
+                kwargs:
+                    minValue: 1
+                    maxValue: 1000
+            helptext: '[Type: int] P allocates the number of processes to the grid-cells in x.'
+        Q:
+            domain:
+                type: IntRangeDomain
+                kwargs:
+                    minValue: 1
+                    maxValue: 1000
+            helptext: '[Type: int] Q allocates the number of processes to the grid-cells in y.'
+        R:
+            domain:
+                type: IntRangeDomain
+                kwargs:
+                    minValue: 1
+                    maxValue: 1000
+            helptext: '[Type: int] R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+
 
 # -----------------------------------------------------------------------------
 # Computational Grid

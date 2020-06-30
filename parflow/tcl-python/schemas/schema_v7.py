@@ -123,8 +123,12 @@ class GeomInput(PFDBObj):
             }
         }
 
+    def __getattr__(self, item):
+        return self[item]
+
     def setnames(self):
-        print(self.Names)
+        for k in self.Names:
+            self[k] = ''
 
 
 class Geom(PFDBObj):
@@ -146,6 +150,6 @@ GeomInput = GeomInput()
 GeomInput.Names = 'box_input indi_input'
 GeomInput.setnames()
 print(GeomInput.Names)  # list with individual names
-print(GeomInput.__dict__)
+print(GeomInput.box_input)
 GeomInput.help()
 GeomInput.help('Names')
