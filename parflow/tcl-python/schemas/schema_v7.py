@@ -123,22 +123,15 @@ class GeomInput(PFDBObj):
             }
         }
 
+    def setnames(self):
+        print(self.Names)
 
-# class Geom:
-#     """This builds off of GeomInput
-#     """
-#     def __init__(self, lst):
-#         for name in lst:
-#             GeomInput.name = ''
-#
-#     def __setattr__(self, name, value):
-#         if hasattr(self, '_details'):
-#             domain = self._details[name]['domain']
-#             Validation.validate(value, domain)
-#             # breaking up the spaced out string entries into multiple values
-#             if " " in value:
-#                 value = value.split()
-#         self.__dict__[name] = value
+
+class Geom(PFDBObj):
+    """This builds off of GeomInput
+    """
+    def __init__(self, name):
+        pass
 
 
 # testing
@@ -151,7 +144,8 @@ Process.Topology.help('P')
 
 GeomInput = GeomInput()
 GeomInput.Names = 'box_input indi_input'
+GeomInput.setnames()
 print(GeomInput.Names)  # list with individual names
-# Geom(GeomInput.Names)
+print(GeomInput.__dict__)
 GeomInput.help()
 GeomInput.help('Names')
