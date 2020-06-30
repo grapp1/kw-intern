@@ -10,6 +10,9 @@ class PFDBObj:
   def __init__(self):
     self._details = {}
 
+  def registerDetails(self, details):
+    self._details = details
+
   def __setattr__(self, name, value):
     '''
     Helper method that aims to streamline dot notation assignment

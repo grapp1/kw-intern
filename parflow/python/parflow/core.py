@@ -14,7 +14,7 @@ class Run:
     print('-'*80)
     print('Validating Parflow input')
     print('-'*80)
-    for key in []:
+    for key in ['Process', 'ComputationalGrid', 'GeomInput']:
       print(f'{key}')
       errorCount += self.__dict__[key].validate(indent=1)
 

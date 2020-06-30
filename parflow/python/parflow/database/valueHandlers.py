@@ -7,8 +7,6 @@ a possibly modified version of it while maybe affecting that container
 object along the way.
 '''
 
-from .generated import Geom
-
 # -----------------------------------------------------------------------------
 
 class ValueHandlerException(Exception):
@@ -21,6 +19,7 @@ class ValueHandlerException(Exception):
 
 class GeometryNameHandler:
   def decorate(self, value, container):
+    from .generated import Geom
     if isinstance(value, str):
       names = value.split(' ')
       valideNames = []
