@@ -1,0 +1,49 @@
+FileVersion: 4
+
+# -----------------------------------------------------------------------------
+# Parallel Execution
+# -----------------------------------------------------------------------------
+
+Process:
+  help: 'run.Process input options are: Topology'
+  Topology:
+    help: >
+      [Type: int] This section describes how processors are assigned in order to solve the domain in parallel. P allocates
+      the number of processes to the grid-cells in x. Q allocates the number of processes to the grid-cells in y.
+      R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you
+      are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+    P: 1
+    Q: 1
+    R: 1
+
+# -----------------------------------------------------------------------------
+# Computational Grid
+# sandtank actual demensions are 30cm by 15cm
+# -----------------------------------------------------------------------------
+
+ComputationalGrid:
+  Lower:
+    X: 0.0
+    Y: 0.0
+    Z: 0.0
+  DX: 1.0
+  DY: 1.0
+  DZ: 1.0
+  NX: 1
+  NY: 1
+  NZ: 1
+
+# -----------------------------------------------------------------------------
+# Domain Geometry Input
+# -----------------------------------------------------------------------------
+
+Domain.GeomName: domain
+
+# -----------------------------------------------------------------------------
+# GeomInputs
+# -----------------------------------------------------------------------------
+
+GeomInput:
+  box_input:
+    InputType: Box
+    GeomNames: domain

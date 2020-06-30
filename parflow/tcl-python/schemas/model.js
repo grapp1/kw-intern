@@ -1,5 +1,3 @@
-model.txt
-
 // ----------------------------------------------------------------------------
 // Color palettes
 // ----------------------------------------------------------------------------
@@ -44,9 +42,9 @@ module.exports = {
     scripts: [],
     defaultActiveView: 'Welcome',
     order: [
-            'Welcome', 
-            'ProcessTopologyDefinition', 
-            'ComputationalGridDefinition', 
+            'Welcome',
+            'ProcessTopologyDefinition',
+            'ComputationalGridDefinition',
             'GeometryInputDefinition',
             'TimingDefinition',
             'CycleDefinition',
@@ -59,12 +57,12 @@ module.exports = {
             'PorosityDefinition',
             'SpecificStorageDefinition',
             'dZMultipliersDefinition',
-            'ManningsDefinition', 
+            'ManningsDefinition',
             'TopographicalXSlopesDefinition',
             'TopographicalYSlopesDefinition',
             'RetardationDefinition',
             'MobilitiesDefinition',
-            'SolverDefinition', 
+            'SolverDefinition',
             'RelativePermeabilityDefinition',
             'PhaseSourceDefinition',
             'CapillaryPressuresDefinition',
@@ -1645,7 +1643,7 @@ module.exports = {
                   'SolverCore',
                   'SolverIMPES',
                   'SolverRichards',
-                  'RichardsLinear', 
+                  'RichardsLinear',
                   'RichardsNonLinear',
                   'RichardsNonLinearPreconditioner',
                   'EvaporationTransport',
