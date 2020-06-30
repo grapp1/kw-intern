@@ -47,7 +47,7 @@ class PFDBObj:
         print(f'{indentStr}{name}')
         obj.validate(indent=indent+1)
       elif name in self._details and 'domain' in self._details[name]:
-        errorCount += validateValueWithPrint(obj, )
+        errorCount += validateValueWithPrint(name, obj, self._details[name]['domain'], indent+1)
       else:
         print(f'{indentStr}{name} - Nothing to validate')
 
