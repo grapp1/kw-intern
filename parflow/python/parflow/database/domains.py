@@ -80,12 +80,21 @@ class AnyDoubleDomain:
 # Helper map with an instance of each domain type
 # -----------------------------------------------------------------------------
 
-AVAILABLE_DOMAINS = {
-  'IntRangeDomain': IntRangeDomain(),
-  'EnumDomain': EnumDomain(),
-  'AnyStringDomain': AnyStringDomain(),
-  'AnyDoubleDomain': AnyDoubleDomain(),
-}
+AVAILABLE_DOMAINS = {}
+
+def getDomain(className):
+  if className in AVAILABLE_DOMAINS:
+    return AVAILABLE_DOMAINS[className]
+
+  if hasattr(sys.modules[__name__], className):
+    klass = getattr(sys.modules[__name__], className)
+    instance = klass()
+    AVAILABLE_DOMAINS[className] = instance
+    return instance
+
+  print(f'Could not find domain: "{className}"')
+
+  return None
 
 class bgcolors:
   HEADER = '\033[95m'
@@ -103,9 +112,12 @@ class bgcolors:
 
 def validateValueWithErrors(value, domainDefinition=None):
   errors = []
-  if domainDefinition and domainDefinition['type'] in AVAILABLE_DOMAINS:
-    domainObj = AVAILABLE_DOMAINS[domainDefinition['type']]
-    errors = domainObj.validate(value, **domainDefinition)
+  if not domainDefinition:
+    return errors
+
+  domain = getDomain(domainDefinition['type'])
+  if domain:
+    errors = domain.validate(value, **domainDefinition)
 
   return errors
 
