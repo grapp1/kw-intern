@@ -7,6 +7,7 @@ be used to query the help and constraints associated to each keys.
 import os
 import yaml
 import json
+from datetime import datetime
 
 # -----------------------------------------------------------------------------
 
@@ -52,8 +53,9 @@ class PythonModule:
   def __init__(self, indent=2):
     self.content = [
       "r'''",
-      " --- DO NOT EDIT ---",
-      " > File automatically generated - any manual change will be lost",
+      "--- DO NOT EDIT ---",
+      "File automatically generated - any manual change will be lost",
+      f"Generated on {datetime.now().strftime('%Y/%m/%d - %H:%M:%S')}",
       "'''",
       "from .core import PFDBObj",
     ]
@@ -64,7 +66,7 @@ class PythonModule:
 
   def addSeparator(self):
     self.addLine()
-    self.addLine('-'*80)
+    self.addLine(f"# {'-'*78}")
     self.addLine()
 
   def addClass(self, className, classDefinition):
@@ -131,9 +133,6 @@ class PythonModule:
 
 def generateModuleFromDefinitions(definitions):
   generatedModule = PythonModule()
-  generatedModule.addLine("""
-
-  """)
 
   for yaml_file in definitions:
     with open(yaml_file) as file:
@@ -148,14 +147,17 @@ def generateModuleFromDefinitions(definitions):
 
 if __name__ == "__main__":
   coreDefinitions = ['core']
-  defPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'definitions')
+  basePath = os.path.dirname(os.path.abspath(__file__))
+  defPath = os.path.join(basePath, 'definitions')
   definitionFiles = [os.path.join(defPath, f'{module}.yaml') for module in coreDefinitions]
+  outputFilePath = os.path.join(basePath, 'generated.py')
 
   print('-'*80)
   print('Generate Parflow database module')
   print('-'*80)
-
   generatedModule = generateModuleFromDefinitions(definitionFiles)
   generatedModule.print()
-
   print('-'*80)
+  generatedModule.write(outputFilePath)
+  print('=> Done')
+

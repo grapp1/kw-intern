@@ -43,3 +43,17 @@ Process:
         type: IntRangeDomain
         minValue: 1
 
+# -----------------------------------------------------------------------------
+# GeomInput.*
+# -----------------------------------------------------------------------------
+
+GeomInput:
+  __doc__: >
+    Write something meaningful...
+
+  Names:
+    help: >
+      List of names to use for defining geometry regions
+    domain:
+      type: AnyStringDomain
+

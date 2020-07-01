@@ -7,6 +7,25 @@ from .domains import validateValueWithException, validateValueWithPrint
 from .valueHandlers import decorateValue
 
 class PFDBObj:
+  printLineError = False
+  exitOnError = False
+
+  @staticmethod
+  def enableLineError():
+    PFDBObj.printLineError = True
+
+  @staticmethod
+  def disableLineError():
+    PFDBObj.enableDomainExceptions = False
+
+  @staticmethod
+  def enableExitError():
+    PFDBObj.exitOnError = True
+
+  @staticmethod
+  def disableExitError():
+    PFDBObj.exitOnError = False
+
   def __init__(self):
     self._details = {}
 
@@ -23,7 +42,8 @@ class PFDBObj:
         valueHandler = self._details[name]['valueHandler']
 
     # Run domain validation
-    # validateValueWithException(value, domain)
+    if PFDBObj.printLineError:
+      validateValueWithException(value, domain, PFDBObj.exitOnError)
 
     # Decorate value if need be (i.e. Geom.names: 'a b c')
     self.__dict__[name] = decorateValue(value, self, valueHandler)
@@ -47,10 +67,13 @@ class PFDBObj:
 
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
-        print(f'{indentStr}{name}')
-        obj.validate(indent=indent+1)
-      elif name in self._details and 'domain' in self._details[name]:
-        errorCount += validateValueWithPrint(name, obj, self._details[name]['domain'], indent+1)
+        print(f'{indentStr}{name}:')
+        errorCount += obj.validate(indent=indent+1)
+      elif hasattr(self, '_details') and name in self._details and 'domain' in self._details[name]:
+        errorCount += validateValueWithPrint(name, obj, self._details[name]['domain'], indent)
+      elif name[0] == '_':
+        # skip internal variables
+        pass
       else:
         print(f'{indentStr}{name} - Nothing to validate')
 

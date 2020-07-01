@@ -1,85 +1,56 @@
 r'''
-This file is generated - DO NOT EDIT
+--- DO NOT EDIT ---
+File automatically generated - any manual change will be lost
+Generated on 2020/06/30 - 17:04:45
 '''
-
 from .core import PFDBObj
 
-
-class ComputationalGrid(PFDBObj):
-  pass
+# ------------------------------------------------------------------------------
 
 class Process(PFDBObj):
-    def __init__(self):
-      self.Topology = Topology()
+  '''
+  run.Process input options are: Topology
+  '''
+  def __init__(self):
+    self.Topology = Topology()
+
+# ------------------------------------------------------------------------------
 
 class Topology(PFDBObj):
-    """
-    This section describes how processors are
-    assigned in order to solve the domain in parallel.
-    """
-    def __init__(self):
-        self.P = 1
-        self.Q = 1
-        self.R = 1
-        self._details = {
-            'P': {
-                'domain': {
-                    'type': 'IntRangeDomain',
-                    'kwargs': {
-                        'minValue': 1,
-                        'maxValue': 1000,
-                    }
-                },
-                'help': '{Type: integer} P allocates the number of processors to the grid cells in x.'
-            },
-            'Q': {
-                'domain': {
-                    'type': 'IntRangeDomain',
-                    'kwargs': {
-                        'minValue': 1,
-                        'maxValue': 1000,
-                    }
-                },
-                'help': '{Type: integer} Q allocates the number of processors to the grid cells in y.'
-            },
-            'R': {
-                'domain': {
-                    'type': 'IntRangeDomain',
-                    'kwargs': {
-                        'minValue': 1,
-                        'maxValue': 1000,
-                    }
-                },
-                'help': '{Type: integer} R allocates the number of processors to the grid cells in z. Please note R '
-                        'should always be 1 if you are running with Solver Richards unless you are running a totally '
-                        'saturated domain (solver IMPES).'
-            }
+  '''
+  [Type: int] This section describes how processors are assigned in order to solve the domain in parallel.
+    - P allocates the number of processes to the grid-cells in x.
+    - Q allocates the number of processes to the grid-cells in y.
+    - R allocates the number of processes to the grid-cells in z.
+  Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+  '''
+  def __init__(self):
+    self.P = 1
+    self.Q = 1
+    self.R = 1
+    self._details = {
+      "P": {
+        "help": "[Type: int] P allocates the number of processes to the grid-cells in x.\n",
+        "default": 1,
+        "domain": {
+          "type": "IntRangeDomain",
+          "minValue": 1
         }
-
-
-class GeomInput(PFDBObj):
-    """GeomInput defines all 'geometrical' information needed by ParFlow. For example, the domain, lithology or
-    hydrostratigraphic units, faults, initial plume shapes, and so on, are considered geometries.
-    """
-
-    def __init__(self):
-        self.Names = ''
-        self._details = {
-            'Names': {
-                'domain': {
-                    'type': 'AnyStringDomain'
-                },
-                'help': '{Type: string} This is a list of the geometry input names which define the containers for all '
-                        'the geometries defined for this problem. Input names should be separated by spaces.'
-            }
+      },
+      "Q": {
+        "help": "[Type: int] Q allocates the number of processes to the grid-cells in y.\n",
+        "default": 1,
+        "domain": {
+          "type": "IntRangeDomain",
+          "minValue": 1
         }
-
-    def setnames(self):
-        print(self.Names)
-
-
-class Geom(PFDBObj):
-    """This builds off of GeomInput
-    """
-    def __init__(self, name):
-        pass
+      },
+      "R": {
+        "help": "[Type: int] R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).\n",
+        "default": 1,
+        "domain": {
+          "type": "IntRangeDomain",
+          "minValue": 1
+        }
+      }
+    }
