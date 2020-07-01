@@ -1,6 +1,95 @@
 # geom.yaml
 # Definitions of geometry-related keys in Parflow
 # includes GeomInput, Geom
+# GeomInput.%s.FileName
+# GeomInput.%s.GeomName
+# GeomInput.%s.GeomNames
+# GeomInput.%s.InputType
+# GeomInput.%s.Value
+# Geom.%s.%s.Retardation.Rate
+# Geom.%s.%s.Retardation.Type
+# Geom.%s.CapPressure.%s.Value
+# Geom.%s.FBx.FileName
+# Geom.%s.FBy.FileName
+# Geom.%s.FBz.FileName
+# Geom.%s.FileName
+# Geom.%s.HeatCapacity.Value
+# Geom.%s.ICPressure.FileName
+# Geom.%s.ICPressure.RefElevation
+# Geom.%s.ICPressure.RefGeom
+# Geom.%s.ICPressure.RefPatch
+# Geom.%s.ICPressure.Value
+# Geom.%s.ICSaturation.%s.Value
+# Geom.%s.Lower.X
+# Geom.%s.Lower.Y
+# Geom.%s.Lower.Z
+# Geom.%s.Patches
+# Geom.%s.Perm.DelK
+# Geom.%s.Perm.FileName
+# Geom.%s.Perm.GeomMean
+# Geom.%s.Perm.HighCutoff
+# Geom.%s.Perm.KMax
+# Geom.%s.Perm.LambdaX
+# Geom.%s.Perm.LambdaY
+# Geom.%s.Perm.LambdaZ
+# Geom.%s.Perm.LogNormal
+# Geom.%s.Perm.LowCutoff
+# Geom.%s.Perm.MaxCpts
+# Geom.%s.Perm.MaxNPts
+# Geom.%s.Perm.MaxSearchRad
+# Geom.%s.Perm.NumLines
+# Geom.%s.Perm.RZeta
+# Geom.%s.Perm.Seed
+# Geom.%s.Perm.Sigma
+# Geom.%s.Perm.StratType
+# Geom.%s.Perm.TensorFileX
+# Geom.%s.Perm.TensorFileY
+# Geom.%s.Perm.TensorFileZ
+# Geom.%s.Perm.TensorValX
+# Geom.%s.Perm.TensorValY
+# Geom.%s.Perm.TensorValZ
+# Geom.%s.Perm.Type
+# Geom.%s.Perm.Value
+# Geom.%s.Porosity.FileName
+# Geom.%s.Porosity.Type
+# Geom.%s.Porosity.Value
+# Geom.%s.RelPerm.A
+# Geom.%s.RelPerm.Alpha
+# Geom.%s.RelPerm.Alpha.Filename
+# Geom.%s.RelPerm.Coeff.%d
+# Geom.%s.RelPerm.Degree
+# Geom.%s.RelPerm.InterpolationMethod
+# Geom.%s.RelPerm.MinPressureHead
+# Geom.%s.RelPerm.N
+# Geom.%s.RelPerm.N.Filename
+# Geom.%s.RelPerm.NumSamplePoints
+# Geom.%s.RelPerm.Value
+# Geom.%s.RelPerm.gamma
+# Geom.%s.Saturation.A
+# Geom.%s.Saturation.Alpha
+# Geom.%s.Saturation.Alpha.Filename
+# Geom.%s.Saturation.Coeff.%d
+# Geom.%s.Saturation.Degree
+# Geom.%s.Saturation.FileName
+# Geom.%s.Saturation.N
+# Geom.%s.Saturation.N.Filename
+# Geom.%s.Saturation.SRes
+# Geom.%s.Saturation.SRes.Filename
+# Geom.%s.Saturation.SSat
+# Geom.%s.Saturation.SSat.Filename
+# Geom.%s.Saturation.Value
+# Geom.%s.Saturation.gamma
+# Geom.%s.SpecificStorage.Value
+# Geom.%s.ThermalConductivity.KDry
+# Geom.%s.ThermalConductivity.KDry.Filename
+# Geom.%s.ThermalConductivity.KWet
+# Geom.%s.ThermalConductivity.KWet.Filename
+# Geom.%s.ThermalConductivity.Value
+# Geom.%s.Upper.X
+# Geom.%s.Upper.Y
+# Geom.%s.Upper.Z
+# Geom.%s.dzScale.FileName
+# Geom.%s.dzScale.Value
 
 
 # -----------------------------------------------------------------------------
@@ -76,30 +165,75 @@ GeomInputItem:
 # -----------------------------------------------------------------------------
 # Geom.*
 # -----------------------------------------------------------------------------
+# nothing is assigned to the base "Geom." key, as all properties depend on the
+# user-defined geometry names. Therefore, all properties defined below are
+# within the GeomItem class.
 
 Geom:
   __doc__: >
-    Geometry instance
+    This maps the various properties to the user-defined geometric inputs.
 
-  Name:
-    help: Name of the geometry
 
-  # Lower/Upper for Box geom only
-  Perm:
-    help: X geometry
-    default: 0
-  Y:
-    help: Y geometry
-    default: 1
-  Z:
-    help: Z geometry
-    default: 2
-  X:
-    help: X geometry
-    default: 0
-  Y:
-    help: Y geometry
-    default: 1
-  Z:
-    help: Z geometry
-    default: 2
+GeomItem:
+  __doc__: >
+    User-defined geometric instance. GeomItem names are taken from either
+    GeomInput.Names or GeomItem.GeomNames.
+
+# Lower/Upper for Box geometry only
+  Lower:
+    __doc__: >
+      This section sets the lower coordinate locations for the
+      box geometry.
+
+    X:
+      help: >
+        [Type: double] This gives the lower X real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Y:
+      help: >
+        [Type: double] This gives the lower Y real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Z:
+      help: >
+        [Type: double] This gives the lower Z real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+  Upper:
+    __doc__: >
+      This section sets the lower coordinate locations for the
+      box geometry.
+
+    X:
+      help: >
+        [Type: double] This gives the upper X real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Y:
+      help: >
+        [Type: double] This gives the upper Y real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Z:
+      help: >
+        [Type: double] This gives the upper Z real space coordinate value of
+        the previously specified box geometry of name box_geom_name.
+      default: None
+      domain:
+        type: AnyDoubleDomain
