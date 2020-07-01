@@ -67,6 +67,15 @@ class AnyStringDomain:
     return errors
 
 
+class AnyDoubleDomain:
+  def validate(self, value, **kwargs):
+    errors = []
+    if isinstance(value, float):
+      return errors
+
+    errors.append(f'{value} must be a double')
+    return errors
+
 # -----------------------------------------------------------------------------
 # Helper map with an instance of each domain type
 # -----------------------------------------------------------------------------
@@ -74,7 +83,8 @@ class AnyStringDomain:
 AVAILABLE_DOMAINS = {
   'IntRangeDomain': IntRangeDomain(),
   'EnumDomain': EnumDomain(),
-  'AnyStringDomain': AnyStringDomain()
+  'AnyStringDomain': AnyStringDomain(),
+  'AnyDoubleDomain': AnyDoubleDomain(),
 }
 
 class bgcolors:
