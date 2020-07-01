@@ -120,7 +120,6 @@ GeomInputItem:
       [Type: string] This defines the type for the geometry input with the
       given input name. This key must be one of: SolidFile, IndicatorField,
       or Box.
-    default: none
     domain:
       type: EnumDomain
       enumList: ['SolidFile', 'IndicatorField', 'Box']
@@ -134,7 +133,6 @@ GeomInputItem:
       using GMS. The order of geometries in the SolidFile should match the
       names. For IndicatorField types you need to specify the value in the
       input field which matches the name using GeomInput.geom_input_name.Value.
-    default: none
     domain:
       type: AnyStringDomain
     valueHandler: GeometryNameHandler
@@ -145,7 +143,6 @@ GeomInputItem:
       [Type: string] For IndicatorField and SolidFile geometry inputs, this
       key specifies the input filename which contains the field or solid
       information.
-    default: none
     domain:
       type: AnyStringDomain
 
@@ -156,7 +153,6 @@ GeomInputItem:
       the mapping between values in the input file and the geometry names.
       The named geometry will be defined wherever the input file is equal
       to the specified value.
-    default: none
     domain:
       type: AnyIntDomain
 
@@ -187,7 +183,6 @@ GeomItem:
       help: >
         [Type: double] This gives the lower X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -195,7 +190,6 @@ GeomItem:
       help: >
         [Type: double] This gives the lower Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -203,7 +197,6 @@ GeomItem:
       help: >
         [Type: double] This gives the lower Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -216,7 +209,6 @@ GeomItem:
       help: >
         [Type: double] This gives the upper X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -224,7 +216,6 @@ GeomItem:
       help: >
         [Type: double] This gives the upper Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -232,6 +223,5 @@ GeomItem:
       help: >
         [Type: double] This gives the upper Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
-      default: None
       domain:
         type: AnyDoubleDomain

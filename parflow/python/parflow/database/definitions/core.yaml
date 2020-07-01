@@ -85,7 +85,6 @@ ComputationalGrid:
       help: >
         [Type: double] This assigns the lower z coordinate location for the
         computational grid.
-      default: None
       domain:
         type: AnyDoubleDomain
 
@@ -93,7 +92,6 @@ ComputationalGrid:
     help: >
       [Type: int] This assigns the number of grid cells in the x direction
       for the computational grid.
-    default: None
     domain:
       type: IntRangeDomain
       minValue: 1
@@ -102,7 +100,6 @@ ComputationalGrid:
     help: >
       [Type: int] This assigns the number of grid cells in the y direction
       for the computational grid.
-    default: None
     domain:
       type: IntRangeDomain
       minValue: 1
@@ -111,7 +108,6 @@ ComputationalGrid:
     help: >
       [Type: int] This assigns the number of grid cells in the z direction
       for the computational grid.
-    default: None
     domain:
       type: IntRangeDomain
       minValue: 1
@@ -121,7 +117,6 @@ ComputationalGrid:
       [Type: float] This defines the size of grid cells in the x direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    default: None
     domain:
       type: FloatRangeDomain
       minValue: 1.0
@@ -131,7 +126,6 @@ ComputationalGrid:
       [Type: float] This defines the size of grid cells in the y direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    default: None
     domain:
       type: FloatRangeDomain
       minValue: 1.0
@@ -141,7 +135,6 @@ ComputationalGrid:
       [Type: float] This defines the size of grid cells in the z direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    default: None
     domain:
       type: FloatRangeDomain
       minValue: 1.0
