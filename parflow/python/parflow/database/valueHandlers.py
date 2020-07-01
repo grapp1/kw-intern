@@ -19,14 +19,14 @@ class ValueHandlerException(Exception):
 
 class GeometryNameHandler:
   def decorate(self, value, container):
-    from .generated import Geom
+    from .generated import GeomInputItem
     if isinstance(value, str):
       names = value.split(' ')
       valideNames = []
       for name in names:
         if len(name):
           valideNames.append(name)
-          obj = Geom()
+          obj = GeomInputItem()
           obj.Name = name
           container.__dict__[name] = obj
 
@@ -37,7 +37,7 @@ class GeometryNameHandler:
       for name in value:
         if len(name):
           valideNames.append(name)
-          obj = Geom()
+          obj = GeomInputItem()
           obj.Name = name
           container.__dict__[name] = obj
 
