@@ -44,20 +44,175 @@ Process:
         minValue: 1
 
 # -----------------------------------------------------------------------------
+# ComputationalGrid
+# -----------------------------------------------------------------------------
+
+ComputationalGrid:
+  __doc__: >
+    The computational grid keys set the bottom left corner of the domain to a
+    specific point in space. If using a .pfsol file, the bottom left corner
+    location of the .pfsol file must be the points designated in the
+    computational grid. The user can also assign the x, y and z location to
+    correspond to a specific coordinate system (i.e. UTM). run.ComputationalGrid
+    input options are: Lower.[X, Y, Z], [NX, NY, NZ], [DX, DY, DZ]
+
+# None of these entries have defaults
+
+  Lower:
+    __doc__: >
+      [Type: double] This section sets the lower coordinate locations for the
+      computational grid (X, Y, Z).
+
+    X:
+      help: >
+        [Type: double] This assigns the lower x coordinate location for the
+        computational grid.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Y:
+      help: >
+        [Type: double] This assigns the lower y coordinate location for the
+        computational grid.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+    Z:
+      help: >
+        [Type: double] This assigns the lower z coordinate location for the
+        computational grid.
+      default: None
+      domain:
+        type: AnyDoubleDomain
+
+  NX:
+    help: >
+      [Type: int] This assigns the number of grid cells in the x direction
+      for the computational grid.
+    default: None
+    domain:
+      type: IntRangeDomain
+      minValue: 1
+
+  NY:
+    help: >
+      [Type: int] This assigns the number of grid cells in the y direction
+      for the computational grid.
+    default: None
+    domain:
+      type: IntRangeDomain
+      minValue: 1
+
+  NZ:
+    help: >
+      [Type: int] This assigns the number of grid cells in the z direction
+      for the computational grid.
+    default: None
+    domain:
+      type: IntRangeDomain
+      minValue: 1
+
+  DX:
+    help: >
+      [Type: float] This defines the size of grid cells in the x direction.
+      Units are L and are defined by the units of the hydraulic conductivity
+      used in the problem.
+    default: None
+    domain:
+      type: FloatRangeDomain
+      minValue: 1.0
+
+  DY:
+    help: >
+      [Type: float] This defines the size of grid cells in the y direction.
+      Units are L and are defined by the units of the hydraulic conductivity
+      used in the problem.
+    default: None
+    domain:
+      type: FloatRangeDomain
+      minValue: 1.0
+
+  DZ:
+    help: >
+      [Type: float] This defines the size of grid cells in the z direction.
+      Units are L and are defined by the units of the hydraulic conductivity
+      used in the problem.
+    default: None
+    domain:
+      type: FloatRangeDomain
+      minValue: 1.0
+
+
+# -----------------------------------------------------------------------------
 # GeomInput.*
 # -----------------------------------------------------------------------------
 
 GeomInput:
   __doc__: >
-    Write something meaningful...
+    Here we define all “geometrical” information needed by ParFlow. For example,
+    the domain (and patches on the domain where boundary conditions are to be
+    imposed), lithology or hydrostratigraphic units, faults, initial plume
+    shapes, and so on, are considered geometries.
 
   Names:
     help: >
-      List of names to use for defining geometry regions
+      [Type: string] List of names to use for defining geometry regions
     domain:
       type: AnyStringDomain
     valueHandler: GeometryNameHandler
 
+  <inputname>:
+    help: >
+      [Type: string] One of the user-defined names for defining a geometry region
+    domain:
+      type: AnyStringDomain
+
+    InputType:
+      help: >
+        [Type: string] This defines the type for the geometry input with the
+        given input name. This key must be one of: SolidFile, IndicatorField,
+        or Box.
+      default: none
+      domain:
+        type: EnumDomain
+        enumList: ['SolidFile', 'IndicatorField', 'Box']
+
+    GeomNames:
+      help: >
+        [Type: string] This is a list of the names of the geometries defined by
+        the geometry input. For a geometry input type of Box, the list should
+        contain a single geometry name. For the SolidFile geometry type this
+        should contain a list with the same number of gemetries as were defined
+        using GMS. The order of geometries in the SolidFile should match the
+        names. For IndicatorField types you need to specify the value in the
+        input field which matches the name using GeomInput.geom_input_name.Value.
+      default: none
+      domain:
+        type: AnyStringDomain
+      valueHandler: GeometryNameHandler
+
+# FileName is for solid files and indicator fields only
+    FileName: # note: this is capitalized incorrectly in the manual
+      help: >
+        [Type: string] For IndicatorField and SolidFile geometry inputs, this
+        key specifies the input filename which contains the field or solid
+        information.
+      default: none
+      domain:
+        type: AnyStringDomain
+
+# Value is for indicator field only
+    Value:
+      help: >
+        [Type: int] For IndicatorField geometry inputs, you need to specify
+        the mapping between values in the input file and the geometry names.
+        The named geometry will be defined whereever the input file is equal
+        to the specifed value.
+      default: none
+      domain:
+        type: AnyIntDomain
 
 Geom:
   __doc__: >
@@ -65,6 +220,17 @@ Geom:
 
   Name:
     help: Name of the geometry
+
+  # Lower/Upper for Box geom only
+  Perm:
+    help: X geometry
+    default: 0
+  Y:
+    help: Y geometry
+    default: 1
+  Z:
+    help: Z geometry
+    default: 2
   X:
     help: X geometry
     default: 0

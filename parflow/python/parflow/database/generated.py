@@ -1,7 +1,7 @@
 r'''
 --- DO NOT EDIT ---
 File automatically generated - any manual change will be lost
-Generated on 2020/06/30 - 19:21:43
+Generated on 2020/07/01 - 09:20:44
 '''
 from .core import PFDBObj
 

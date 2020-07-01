@@ -13,13 +13,7 @@ FileVersion:
 Process:
     __doc__: 'Process input options are: Topology'
     Topology:
-        __doc__:
-        P:
-
-
-Topology:
-    help: 'This section describes how processors are assigned in order to solve the domain in parallel.'
-    keys:
+        __doc__: 'This section describes how processors are assigned in order to solve the domain in parallel.'
         P:
             default: 1
             domain:
@@ -27,7 +21,8 @@ Topology:
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            help: '[Type: int] P allocates the number of processes to the grid-cells in x.'
+            __doc__: >
+            '[Type: int] P allocates the number of processes to the grid-cells in x.'
         Q:
             default: 1
             domain:
@@ -35,7 +30,8 @@ Topology:
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            help: '[Type: int] Q allocates the number of processes to the grid-cells in y.'
+            __doc__: >
+            '[Type: int] Q allocates the number of processes to the grid-cells in y.'
         R:
             default: 1
             domain:
@@ -43,7 +39,14 @@ Topology:
                 kwargs:
                     minValue: 1
                     maxValue: 1000
-            help: '[Type: int] R allocates the number of processes to the grid-cells in z. Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+            __doc__: >
+            '[Type: int] R allocates the number of processes to the grid-cells
+            in z. Please note R should always be 1 if you are running with
+            Solver Richards unless you are running a totally saturated domain
+            (solver IMPES).'
+
+
+
 
 
 # -----------------------------------------------------------------------------

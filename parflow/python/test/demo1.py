@@ -6,7 +6,7 @@ lw = Run('Little Washita')
 # Setup database keys
 # -----------------------------------------------------------------------------
 
-# lw.enableLineError()
+lw.enableLineError()
 # lw.enableExitError()
 
 lw.Process.Topology.Q = 1

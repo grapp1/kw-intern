@@ -1,0 +1,76 @@
+
+# -----------------------------------------------------------------------------
+# Process.Topology.*
+# -----------------------------------------------------------------------------
+
+Process:
+  __doc__: >
+    run.Process input options are: Topology
+
+  Topology:
+    __doc__: >
+      [Type: int] This section describes how processors are assigned in order
+      to solve the domain in parallel.
+        - P allocates the number of processes to the grid-cells in x.
+        - Q allocates the number of processes to the grid-cells in y.
+        - R allocates the number of processes to the grid-cells in z.
+      Please note R should always be 1 if you are running with Solver Richards
+      unless you are running a totally saturated domain (solver IMPES).'
+
+    P:
+      help: >
+        [Type: int] P allocates the number of processes to the grid-cells in x.
+      default: 1
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    Q:
+      help: >
+        [Type: int] Q allocates the number of processes to the grid-cells in y.
+      default: 1
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    R:
+      help: >
+        [Type: int] R allocates the number of processes to the grid-cells in z.
+        Please note R should always be 1 if you are running with Solver Richards
+        unless you are running a totally saturated domain (solver IMPES).
+      default: 1
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+# -----------------------------------------------------------------------------
+# GeomInput.*
+# -----------------------------------------------------------------------------
+
+GeomInput:
+  __doc__: >
+    Write something meaningful...
+
+  Names:
+    help: >
+      List of names to use for defining geometry regions
+    domain:
+      type: AnyStringDomain
+    valueHandler: GeometryNameHandler
+
+
+Geom:
+  __doc__: >
+    Geometry instance
+
+  Name:
+    help: Name of the geometry
+  X:
+    help: X geometry
+    default: 0
+  Y:
+    help: Y geometry
+    default: 1
+  Z:
+    help: Z geometry
+    default: 2
