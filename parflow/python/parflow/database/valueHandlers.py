@@ -7,6 +7,8 @@ a possibly modified version of it while maybe affecting that container
 object along the way.
 '''
 
+from . import generated
+
 # -----------------------------------------------------------------------------
 
 class ValueHandlerException(Exception):
@@ -17,16 +19,19 @@ class ValueHandlerException(Exception):
 
 # -----------------------------------------------------------------------------
 
-class GeometryNameHandler:
-  def decorate(self, value, container):
-    from .generated import GeomInputItem
+
+class ChildrenHandler:
+  def decorate(self, value, container, className=None, **kwargs):
+    print(className)
+    print(kwargs)
+    klass = getattr(generated, className)
     if isinstance(value, str):
       names = value.split(' ')
       valideNames = []
       for name in names:
         if len(name):
           valideNames.append(name)
-          obj = GeomInputItem()
+          obj = klass()
           obj.Name = name
           container.__dict__[name] = obj
 
@@ -37,7 +42,7 @@ class GeometryNameHandler:
       for name in value:
         if len(name):
           valideNames.append(name)
-          obj = GeomInputItem()
+          obj = klass()
           obj.Name = name
           container.__dict__[name] = obj
 
@@ -51,16 +56,21 @@ class GeometryNameHandler:
 # -----------------------------------------------------------------------------
 
 AVAILABLE_HANDLERS = {
-  'GeometryNameHandler': GeometryNameHandler(),
+    'ChildrenHandler': ChildrenHandler(),
 }
 
 # -----------------------------------------------------------------------------
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
 
-def decorateValue(value, container=None, handlerName=None):
-  if not handlerName or handlerName not in AVAILABLE_HANDLERS:
+def decorateValue(value, container=None, valueHandler=None):
+  if not valueHandler:
     return value
 
-  handler = AVAILABLE_HANDLERS[handlerName]
-  return handler.decorate(value, container)
+  handlerType = valueHandler['type']
+  if handlerType not in AVAILABLE_HANDLERS:
+    print(f'The valueHandler {handlerType} was not found')
+    return value
+
+  handler = AVAILABLE_HANDLERS[handlerType]
+  return handler.decorate(value, container, **valueHandler)

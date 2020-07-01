@@ -34,12 +34,19 @@ class PFDBObj:
     Helper method that aims to streamline dot notation assignment
     '''
     domain = None
-    valueHandler = None
-    if hasattr(self, '_details') and name in self._details:
-      if 'domain' in self._details[name]:
-        domain = self._details[name]['domain']
-      if 'valueHandler' in self._details[name]:
-        valueHandler = self._details[name]['valueHandler']
+    valueHandler = {}
+    if hasattr(self, '_details'):
+      if name in self._details:
+        if 'domain' in self._details[name]:
+          domain = self._details[name]['domain']
+        if 'valueHandler' in self._details[name]:
+          valueHandler = self._details[name]['valueHandler']
+      else:
+        print(f'Field {name} is not part of the expected schema {self.__class__}')
+        if PFDBObj.exitOnError:
+          raise ValueError(
+              f'Field "{name}" is not part of the expected schema {self.__class__}')
+
 
     # Run domain validation
     if PFDBObj.printLineError:
@@ -47,6 +54,7 @@ class PFDBObj:
 
     # Decorate value if need be (i.e. Geom.names: 'a b c')
     self.__dict__[name] = decorateValue(value, self, valueHandler)
+
 
   def help(self, key=None):
     '''

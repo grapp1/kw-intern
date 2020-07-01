@@ -108,7 +108,9 @@ GeomInput:
       [Type: string] List of names to use for defining geometry regions
     domain:
       type: AnyStringDomain
-    valueHandler: GeometryNameHandler
+    valueHandler:
+      type: ChildrenHandler
+      className: GeomInputItem
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
@@ -137,7 +139,9 @@ GeomInputItem:
       input field which matches the name using GeomInput.geom_input_name.Value.
     domain:
       type: AnyStringDomain
-    valueHandler: GeometryNameHandler
+    valueHandler:
+      type: ChildrenHandler
+      className: GeomItem
 
 #FileName is for solid files and indicator fields only
   FileName: # note: this is capitalized incorrectly in the manual
