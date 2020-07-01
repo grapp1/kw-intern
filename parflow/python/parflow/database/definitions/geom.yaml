@@ -180,7 +180,6 @@ Geom:
         [Type: string] This key specifies all of the geometries to which a
         permeability field will be assigned. These geometries must cover the
         entire computational domain.
-      default: none
       domain:
         type: AnyStringDomain
 
@@ -193,7 +192,6 @@ Geom:
           This key specifies all of the geometries to which permeability tensor
           entries will be assigned. These geometries must cover the entire
           computational domain.
-        default: none
         domain:
           type: AnyStringDomain
 
