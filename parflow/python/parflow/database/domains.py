@@ -54,9 +54,10 @@ class EnumDomain:
 class AnyStringDomain:
   def validate(self, value, **kwargs):
     errors = []
-    if not isinstance(value, str):
-      errors.append(f'{value} ({type(value)} must be a string')
+    if isinstance(value, list) or isinstance(value, str):
+      return errors
 
+    errors.append(f'{value} ({type(value)} must be a string')
     return errors
 
 

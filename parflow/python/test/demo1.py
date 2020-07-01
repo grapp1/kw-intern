@@ -12,6 +12,10 @@ lw = Run('Little Washita')
 lw.Process.Topology.Q = 1
 lw.Process.Topology.P = -1.5
 
+lw.GeomInput.Names = "domain s1 s2"
+# lw.GeomInput.Names = ['domain', 's1', 's2']
+lw.GeomInput.s1.X = 10
+
 # -----------------------------------------------------------------------------
 # Validation process
 # -----------------------------------------------------------------------------

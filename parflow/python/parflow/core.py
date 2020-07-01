@@ -1,13 +1,14 @@
 from .database.core import PFDBObj
-from .database.generated import Process
+from .database.generated import Process, GeomInput
 
 class Run(PFDBObj):
   def __init__(self, name):
     self.name = name
 
     # Attach all root keys required by the database
-    self.__dbKeys = ['Process']
+    self.__dbKeys = ['Process', 'GeomInput']
     self.Process = Process()
+    self.GeomInput = GeomInput()
     # self.ComputationalGrid = ComputationalGrid()
     # self.GeomInput = GeomInput()
 

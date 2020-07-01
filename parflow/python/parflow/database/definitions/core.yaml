@@ -56,4 +56,21 @@ GeomInput:
       List of names to use for defining geometry regions
     domain:
       type: AnyStringDomain
+    valueHandler: GeometryNameHandler
 
+
+Geom:
+  __doc__: >
+    Geometry instance
+
+  Name:
+    help: Name of the geometry
+  X:
+    help: X geometry
+    default: 0
+  Y:
+    help: Y geometry
+    default: 1
+  Z:
+    help: Z geometry
+    default: 2

@@ -1,7 +1,7 @@
 r'''
 --- DO NOT EDIT ---
 File automatically generated - any manual change will be lost
-Generated on 2020/06/30 - 17:04:45
+Generated on 2020/06/30 - 19:21:43
 '''
 from .core import PFDBObj
 
@@ -52,5 +52,52 @@ class Topology(PFDBObj):
           "type": "IntRangeDomain",
           "minValue": 1
         }
+      }
+    }
+
+# ------------------------------------------------------------------------------
+
+class GeomInput(PFDBObj):
+  '''
+  Write something meaningful...
+  '''
+  def __init__(self):
+    self.Names = None
+    self._details = {
+      "Names": {
+        "help": "List of names to use for defining geometry regions\n",
+        "domain": {
+          "type": "AnyStringDomain"
+        },
+        "valueHandler": "GeometryNameHandler"
+      }
+    }
+
+# ------------------------------------------------------------------------------
+
+class Geom(PFDBObj):
+  '''
+  Geometry instance
+  '''
+  def __init__(self):
+    self.Name = None
+    self.X = 0
+    self.Y = 1
+    self.Z = 2
+    self._details = {
+      "Name": {
+        "help": "Name of the geometry"
+      },
+      "X": {
+        "help": "X geometry",
+        "default": 0
+      },
+      "Y": {
+        "help": "Y geometry",
+        "default": 1
+      },
+      "Z": {
+        "help": "Z geometry",
+        "default": 2
       }
     }

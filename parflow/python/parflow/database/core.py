@@ -75,6 +75,6 @@ class PFDBObj:
         # skip internal variables
         pass
       else:
-        print(f'{indentStr}{name} - Nothing to validate')
+        print(f'{indentStr}{name}: {obj}')
 
     return errorCount

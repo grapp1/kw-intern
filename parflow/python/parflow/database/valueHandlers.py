@@ -26,7 +26,9 @@ class GeometryNameHandler:
       for name in names:
         if len(name):
           valideNames.append(name)
-          container.__dict__[name] = Geom(name)
+          obj = Geom()
+          obj.Name = name
+          container.__dict__[name] = obj
 
       return valideNames
 
@@ -35,7 +37,9 @@ class GeometryNameHandler:
       for name in value:
         if len(name):
           valideNames.append(name)
-          container.__dict__[name] = Geom(name)
+          obj = Geom()
+          obj.Name = name
+          container.__dict__[name] = obj
 
       return valideNames
 
