@@ -177,7 +177,7 @@ GeomItem:
     User-defined geometric instance. GeomItem names are taken from either
     GeomInput.Names or GeomItem.GeomNames.
 
-# Lower/Upper for Box geometry only
+  # Lower/Upper for Box geometry only
   Lower:
     __doc__: >
       This section sets the lower coordinate locations for the
