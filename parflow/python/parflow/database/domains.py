@@ -7,6 +7,8 @@ import sys
 import types
 import traceback
 
+from . import TerminalColors as term
+
 # -----------------------------------------------------------------------------
 
 class ValidationException(Exception):
@@ -96,16 +98,6 @@ def getDomain(className):
 
   return None
 
-class bgcolors:
-  HEADER = '\033[95m'
-  OKBLUE = '\033[94m'
-  OKGREEN = '\033[92m'
-  WARNING = '\033[93m'
-  FAIL = '\033[91m'
-  ENDC = '\033[0m'
-  BOLD = '\033[1m'
-  UNDERLINE = '\033[4m'
-
 # -----------------------------------------------------------------------------
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
@@ -146,18 +138,6 @@ def validateValueWithException(value, domainDefinition=None, exitOnError=False):
     if exitOnError:
       sys.exit(1)
 
-
-    # for i in range(3):
-    #   tb_frame = tb_frame.f_back
-    #   tb_lasti = tb_frame.f_lasti
-    #   f_lineno = tb_frame.f_lineno
-
-    # back_tb = types.TracebackType(tb_next=None,
-    #                               tb_frame=tb_frame,
-    #                               tb_lasti=tb_lasti,
-    #                               tb_lineno=f_lineno)
-    # raise ValidationException(errorString).with_traceback(back_tb)
-
 # -----------------------------------------------------------------------------
 
 def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
@@ -168,10 +148,10 @@ def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
   errors = validateValueWithErrors(value, domainDefinition)
 
   if len(errors):
-    print(f'{indentStr}  {bgcolors.FAIL}{ko}{bgcolors.ENDC} {name}: {value}')
+    print(f'{indentStr}  {term.FAIL}{ko}{term.ENDC} {name}: {value}')
     for error in errors:
-      print(f'{indentStr}    {bgcolors.WARNING}{errorItem}{bgcolors.ENDC} {error}')
+      print(f'{indentStr}    {term.WARNING}{errorItem}{term.ENDC} {error}')
   else:
-    print(f'{indentStr}  {bgcolors.OKGREEN}{ok}{bgcolors.ENDC} {name}: {value}')
+    print(f'{indentStr}  {term.OKGREEN}{ok}{term.ENDC} {name}: {value}')
 
   return len(errors)
