@@ -112,8 +112,10 @@ GeomInput:
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
-  __doc__: >
+  help: >
     [Type: string] One of the user-defined names for defining a geometry region
+  domain:
+    type: AnyStringDomain
 
   InputType:
     help: >
@@ -137,7 +139,7 @@ GeomInputItem:
       type: AnyStringDomain
     valueHandler: GeometryNameHandler
 
-  # FileName is for solid files and indicator fields only
+#FileName is for solid files and indicator fields only
   FileName: # note: this is capitalized incorrectly in the manual
     help: >
       [Type: string] For IndicatorField and SolidFile geometry inputs, this
@@ -146,7 +148,7 @@ GeomInputItem:
     domain:
       type: AnyStringDomain
 
-  # Value is for indicator field only
+# Value is for indicator field only
   Value:
     help: >
       [Type: int] For IndicatorField geometry inputs, you need to specify
@@ -167,13 +169,48 @@ Geom:
   __doc__: >
     This maps the various properties to the user-defined geometric inputs.
 
+  Perm:
+    __doc__: >
+      run.Geom.Perm input options are: Names, TensorByGeom.Names
+
+    Names:
+      help: >
+        [Type: string] This key specifies all of the geometries to which a
+        permeability field will be assigned. These geometries must cover the
+        entire computational domain.
+      default: none
+      domain:
+        type: AnyStringDomain
+
+    TensorByGeom:
+      __doc__: >
+        run.Geom.Perm.TensorByGeom input options are: Names
+
+      Names:
+        help: >
+          This key specifies all of the geometries to which permeability tensor
+          entries will be assigned. These geometries must cover the entire
+          computational domain.
+        default: none
+        domain:
+          type: AnyStringDomain
+
+  Porosity:
+    __doc__: >
+      run.Geom.Porosity input options are:
+
+
+
+
+
+
 
 GeomItem:
   __doc__: >
     User-defined geometric instance. GeomItem names are taken from either
     GeomInput.Names or GeomItem.GeomNames.
 
-  # Lower/Upper for Box geometry only
+# Lower/Upper for Box geometry only
   Lower:
     __doc__: >
       This section sets the lower coordinate locations for the
