@@ -114,10 +114,8 @@ GeomInput:
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
-  help: >
+  __doc__: >
     [Type: string] One of the user-defined names for defining a geometry region
-  domain:
-    type: AnyStringDomain
 
   InputType:
     help: >
