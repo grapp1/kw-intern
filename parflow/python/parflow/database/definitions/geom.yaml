@@ -112,10 +112,8 @@ GeomInput:
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
-  help: >
+  __doc__: >
     [Type: string] One of the user-defined names for defining a geometry region
-  domain:
-    type: AnyStringDomain
 
   InputType:
     help: >
@@ -141,7 +139,7 @@ GeomInputItem:
       type: AnyStringDomain
     valueHandler: GeometryNameHandler
 
-#FileName is for solid files and indicator fields only
+  # FileName is for solid files and indicator fields only
   FileName: # note: this is capitalized incorrectly in the manual
     help: >
       [Type: string] For IndicatorField and SolidFile geometry inputs, this
@@ -151,13 +149,13 @@ GeomInputItem:
     domain:
       type: AnyStringDomain
 
-# Value is for indicator field only
+  # Value is for indicator field only
   Value:
     help: >
       [Type: int] For IndicatorField geometry inputs, you need to specify
       the mapping between values in the input file and the geometry names.
-      The named geometry will be defined whereever the input file is equal
-      to the specifed value.
+      The named geometry will be defined wherever the input file is equal
+      to the specified value.
     default: none
     domain:
       type: AnyIntDomain

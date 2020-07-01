@@ -29,8 +29,14 @@ class IntRangeDomain:
   '''
   def validate(self, value, minValue=None, maxValue=None, **kwargs):
     errors = []
+
+    if value == None:
+      errors.append('Needs to be set')
+      return errors
+
     if not isinstance(value, int):
       errors.append('Needs to be an integer')
+
     if minValue != None and value < minValue:
       errors.append(f'Is smaller than min: {minValue}')
     if maxValue != None and value > maxValue:

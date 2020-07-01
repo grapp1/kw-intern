@@ -59,8 +59,7 @@ ComputationalGrid:
     correspond to a specific coordinate system (i.e. UTM). run.ComputationalGrid
     input options are: Lower.[X, Y, Z], [NX, NY, NZ], [DX, DY, DZ]
 
-# None of these entries have defaults
-
+  # None of these entries have defaults
   Lower:
     __doc__: >
       [Type: double] This section sets the lower coordinate locations for the
