@@ -8,6 +8,7 @@ import types
 import traceback
 
 from . import TerminalColors as term
+from . import TerminalSymbols as termSymbol
 
 # -----------------------------------------------------------------------------
 
@@ -94,7 +95,7 @@ def getDomain(className):
     AVAILABLE_DOMAINS[className] = instance
     return instance
 
-  print(f'Could not find domain: "{className}"')
+  print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find domain: "{className}"')
 
   return None
 
@@ -142,16 +143,13 @@ def validateValueWithException(value, domainDefinition=None, exitOnError=False):
 
 def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
   indentStr = '  '* (indent - 1)
-  ok = u'\u2714'
-  ko = u'\u2718'
-  errorItem = u'\u2605'
   errors = validateValueWithErrors(value, domainDefinition)
 
   if len(errors):
-    print(f'{indentStr}  {term.FAIL}{ko}{term.ENDC} {name}: {value}')
+    print(f'{indentStr}  {term.FAIL}{termSymbol.ko}{term.ENDC} {name}: {value}')
     for error in errors:
-      print(f'{indentStr}    {term.WARNING}{errorItem}{term.ENDC} {error}')
+      print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
   else:
-    print(f'{indentStr}  {term.OKGREEN}{ok}{term.ENDC} {name}: {value}')
+    print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
 
   return len(errors)

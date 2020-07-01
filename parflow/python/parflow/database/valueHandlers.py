@@ -9,6 +9,8 @@ object along the way.
 
 import sys
 from . import generated
+from . import TerminalColors as term
+from . import TerminalSymbols as termSymbol
 
 # -----------------------------------------------------------------------------
 
@@ -62,7 +64,7 @@ def getHandler(className):
     AVAILABLE_HANDLERS[className] = instance
     return instance
 
-  print(f'Could not find valueHandler: "{className}"')
+  print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find valueHandler: "{className}"')
 
   return None
 

@@ -7,3 +7,8 @@ class TerminalColors:
   ENDC = '\033[0m'
   BOLD = '\033[1m'
   UNDERLINE = '\033[4m'
+
+class TerminalSymbols:
+  ok = u'\u2714'
+  ko = u'\u2718'
+  errorItem = u'\u2605'
