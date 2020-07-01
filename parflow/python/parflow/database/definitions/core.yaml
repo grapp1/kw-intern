@@ -1,3 +1,6 @@
+# core.yaml
+# Definitions of core components of ParFlow
+# Includes Process, ComputationalGrid
 
 # -----------------------------------------------------------------------------
 # Process.Topology.*
@@ -143,100 +146,3 @@ ComputationalGrid:
     domain:
       type: FloatRangeDomain
       minValue: 1.0
-
-
-# -----------------------------------------------------------------------------
-# GeomInput.*
-# -----------------------------------------------------------------------------
-
-GeomInput:
-  __doc__: >
-    Here we define all “geometrical” information needed by ParFlow. For example,
-    the domain (and patches on the domain where boundary conditions are to be
-    imposed), lithology or hydrostratigraphic units, faults, initial plume
-    shapes, and so on, are considered geometries.
-
-  Names:
-    help: >
-      [Type: string] List of names to use for defining geometry regions
-    domain:
-      type: AnyStringDomain
-    valueHandler: GeometryNameHandler
-
-  <inputname>:
-    help: >
-      [Type: string] One of the user-defined names for defining a geometry region
-    domain:
-      type: AnyStringDomain
-
-    InputType:
-      help: >
-        [Type: string] This defines the type for the geometry input with the
-        given input name. This key must be one of: SolidFile, IndicatorField,
-        or Box.
-      default: none
-      domain:
-        type: EnumDomain
-        enumList: ['SolidFile', 'IndicatorField', 'Box']
-
-    GeomNames:
-      help: >
-        [Type: string] This is a list of the names of the geometries defined by
-        the geometry input. For a geometry input type of Box, the list should
-        contain a single geometry name. For the SolidFile geometry type this
-        should contain a list with the same number of gemetries as were defined
-        using GMS. The order of geometries in the SolidFile should match the
-        names. For IndicatorField types you need to specify the value in the
-        input field which matches the name using GeomInput.geom_input_name.Value.
-      default: none
-      domain:
-        type: AnyStringDomain
-      valueHandler: GeometryNameHandler
-
-# FileName is for solid files and indicator fields only
-    FileName: # note: this is capitalized incorrectly in the manual
-      help: >
-        [Type: string] For IndicatorField and SolidFile geometry inputs, this
-        key specifies the input filename which contains the field or solid
-        information.
-      default: none
-      domain:
-        type: AnyStringDomain
-
-# Value is for indicator field only
-    Value:
-      help: >
-        [Type: int] For IndicatorField geometry inputs, you need to specify
-        the mapping between values in the input file and the geometry names.
-        The named geometry will be defined whereever the input file is equal
-        to the specifed value.
-      default: none
-      domain:
-        type: AnyIntDomain
-
-Geom:
-  __doc__: >
-    Geometry instance
-
-  Name:
-    help: Name of the geometry
-
-  # Lower/Upper for Box geom only
-  Perm:
-    help: X geometry
-    default: 0
-  Y:
-    help: Y geometry
-    default: 1
-  Z:
-    help: Z geometry
-    default: 2
-  X:
-    help: X geometry
-    default: 0
-  Y:
-    help: Y geometry
-    default: 1
-  Z:
-    help: Z geometry
-    default: 2
