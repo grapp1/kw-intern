@@ -112,7 +112,7 @@ GeomInput:
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
-  help: >
+  __doc__: >
     [Type: string] One of the user-defined names for defining a geometry region
   domain:
     type: AnyStringDomain
@@ -178,7 +178,6 @@ Geom:
         [Type: string] This key specifies all of the geometries to which a
         permeability field will be assigned. These geometries must cover the
         entire computational domain.
-      default: none
       domain:
         type: AnyStringDomain
 
@@ -191,16 +190,20 @@ Geom:
           This key specifies all of the geometries to which permeability tensor
           entries will be assigned. These geometries must cover the entire
           computational domain.
-        default: none
         domain:
           type: AnyStringDomain
 
   Porosity:
     __doc__: >
-      run.Geom.Porosity input options are:
+      run.Geom.Porosity input options are: GeomNames
 
-
-
+    GeomNames:
+      help: >
+        [Type: string] This key specifies all of the geometries to which a
+        porosity will be assigned. These geometries must cover the
+        entire computational domain.
+      domain:
+        type: AnyStringDomain
 
 
 
@@ -262,3 +265,46 @@ GeomItem:
         the previously specified box geometry of name box_geom_name.
       domain:
         type: AnyDoubleDomain
+
+  # Permeability
+  Perm:
+    __doc__: >
+      Permeability values
+
+    Type:
+      # ParGauss is misspelled in the manual
+      help: >
+        [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry, geometry_name.
+        It must be either Constant, TurnBands, ParGauss, or PFBFile.
+      domain:
+        type: EnumDomain
+        enumList: ['Constant', 'TurnBands', 'ParGauss', 'PFBFile']
+
+    Value:
+      help: >
+        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+        to constant.
+      domain:
+        type: AnyDoubleDomain
+
+    LambdaX:
+      help: >
+        This key specifies the x correlation length of the field generated for the named geometry, geometry_name,
+        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+      domain:
+        type: AnyDoubleDomain
+
+    LambdaY:
+      help: >
+        This key specifies the y correlation length of the field generated for the named geometry, geometry_name,
+        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+      domain:
+        type: AnyDoubleDomain
+
+    LambdaZ:
+      help: >
+        This key specifies the z correlation length of the field generated for the named geometry, geometry_name,
+        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+      domain:
+        type: AnyDoubleDomain
+
