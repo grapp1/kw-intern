@@ -55,13 +55,48 @@ def isClass(key, definition):
 
 # -----------------------------------------------------------------------------
 
+class ValidationSummary:
+  def __init__(self):
+    self.classNameCount = {}
+    self.classCount = 0
+    self.fieldCount = 0
+
+  def addClass(self, className):
+    self.classCount += 1
+    if className in self.classNameCount:
+      self.classNameCount[className] += 1
+    else:
+      self.classNameCount[className] = 1
+
+  def addField(self, fieldName):
+    self.fieldCount += 1
+
+  def getSummary(self, lineSeparator='\n'):
+    content = [
+        f'Created {self.classCount} classes',
+    ]
+    if len(self.classNameCount) == self.classCount:
+      content.append(' => No class name duplication found')
+    else:
+      content.append(
+          f' => We found overlapping classNames ({self.classCount - len(self.classNameCount)})')
+    content.append(f'Defined {self.fieldCount} fields were found')
+    return lineSeparator.join(content)
+
+  def printSummary(self):
+    print(self.getSummary())
+
+# -----------------------------------------------------------------------------
+
 class PythonModule:
   def __init__(self, indent=2):
+    self.validationSummary = ValidationSummary()
     self.content = [
       "r'''",
       "--- DO NOT EDIT ---",
       "File automatically generated - any manual change will be lost",
       f"Generated on {datetime.now().strftime('%Y/%m/%d - %H:%M:%S')}",
+      "",
       "'''",
       "from .core import PFDBObj",
     ]
@@ -76,6 +111,7 @@ class PythonModule:
     self.addLine()
 
   def addClass(self, className, classDefinition):
+    self.validationSummary.addClass(className)
     classKeys = classDefinition.keys()
     classMembers = []
     fieldMembers = []
@@ -121,6 +157,7 @@ class PythonModule:
       self.addClass(classMember, classDefinition[classMember])
 
   def addField(self, fieldName, fieldDefinition, classDetails):
+    self.validationSummary.addField(fieldName)
     self.addLine(f"{self.strIndent*2}self.{fieldName} = {fieldDefinition['default'] if 'default' in fieldDefinition else 'None'}")
     classDetails[fieldName] = fieldDefinition
 
@@ -134,6 +171,7 @@ class PythonModule:
     self.addLine(f"{strIndent}'''")
 
   def getContent(self,  lineSeparator='\n'):
+    self.content[4] = self.validationSummary.getSummary(lineSeparator)
     # Ensure new line at the end
     if len(self.content[-1]):
       self.content.append('')
@@ -173,8 +211,6 @@ if __name__ == "__main__":
   print('Generate Parflow database module')
   print('-'*80)
   generatedModule = generateModuleFromDefinitions(definitionFiles)
-  print(generatedModule.getContent())
+  print(generatedModule.validationSummary.getSummary())
   print('-'*80)
   generatedModule.write(outputFilePath)
-  print('=> Done')
-
