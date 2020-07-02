@@ -68,6 +68,13 @@ class ValidationSummary:
     else:
       self.classNameCount[className] = 1
 
+    return self.classNameCount[className] - 1
+
+  def getDeduplicateClassName(self, className):
+    if className in self.classNameCount:
+      return f'{className}_{self.classNameCount[className]}'
+    return className
+
   def addField(self, fieldName):
     self.fieldCount += 1
 
@@ -116,7 +123,7 @@ class PythonModule:
     self.addLine()
 
   def addClass(self, className, classDefinition):
-    self.validationSummary.addClass(className)
+
     classKeys = classDefinition.keys()
     classMembers = []
     fieldMembers = []
@@ -125,7 +132,10 @@ class PythonModule:
 
     self.addSeparator()
 
-    self.addLine(f'class {className}(PFDBObj):')
+    dedupClassName = self.validationSummary.getDeduplicateClassName(className)
+    self.validationSummary.addClass(className)
+
+    self.addLine(f'class {dedupClassName}(PFDBObj):')
     if '__doc__' in classKeys:
       self.addComment(classDefinition['__doc__'], self.strIndent)
 
@@ -140,7 +150,8 @@ class PythonModule:
     if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
       self.addLine(f'{self.strIndent}def __init__(self):')
       for instance in classMembers:
-        self.addLine(f'{self.strIndent*2}self.{instance} = {instance}()')
+        self.addLine(
+            f'{self.strIndent*2}self.{instance} = {self.validationSummary.getDeduplicateClassName(instance)}()')
 
       for instance in classInstances:
         self.addClassInstance(instance)
@@ -167,7 +178,8 @@ class PythonModule:
     classDetails[fieldName] = fieldDefinition
 
   def addClassInstance(self, fieldName):
-    self.addLine(f"{self.strIndent*2}self.{fieldName} = {fieldName}()")
+    self.addLine(
+        f"{self.strIndent*2}self.{fieldName} = {fieldName}()")
 
   def addComment(self, docContent, strIndent):
     self.addLine(f"{strIndent}'''")
