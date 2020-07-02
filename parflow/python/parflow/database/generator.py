@@ -80,6 +80,11 @@ class ValidationSummary:
     else:
       content.append(
           f' => We found overlapping classNames ({self.classCount - len(self.classNameCount)})')
+      for name in self.classNameCount:
+        if self.classNameCount[name] > 1:
+          content.append(
+              f'   + {name} was defined {self.classNameCount[name]} time')
+
     content.append(f'Defined {self.fieldCount} fields were found')
     return lineSeparator.join(content)
 
