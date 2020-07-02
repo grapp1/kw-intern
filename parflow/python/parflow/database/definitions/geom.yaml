@@ -1,6 +1,9 @@
 # geom.yaml
 # Definitions of geometry-related keys in Parflow
 # includes GeomInput, Geom
+# typo: manual typos
+# missing: keys that are missing from manual
+
 # GeomInput.%s.FileName
 # GeomInput.%s.GeomName
 # GeomInput.%s.GeomNames
@@ -142,7 +145,7 @@ GeomInputItem:
       className: GeomItem
 
 #FileName is for solid files and indicator fields only
-  FileName: # note: this is capitalized incorrectly in the manual
+  FileName: # typo: this is capitalized incorrectly in the manual
     help: >
       [Type: string] For IndicatorField and SolidFile geometry inputs, this
       key specifies the input filename which contains the field or solid
@@ -202,11 +205,66 @@ SpecificStorage:
       enumList: ['Constant']
 
 # -----------------------------------------------------------------------------
+# dzScale.*
+# -----------------------------------------------------------------------------
+# note that this does not include the Solver.Nonlinear.VariableDz key, which is
+# in the solvers.yaml file.
+
+dzScale:
+  __doc__: >
+    This is where dZ multipliers are assigned within geounits using one of
+    several methods.
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies which problem domain is being applied a variable dz subsurface. These
+      geometries must cover the entire computational domain.
+    domain:
+      type: AnyStringDomain
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign variable vertical grid spacing. The choices currently
+      available are Constant which indicates that a constant is to be assigned to all grid cells within a geometry, nzList
+      which assigns all layers of a given model to a list value, and PFBFile which reads in values from a distributed pfb
+      file.
+    domain:
+      type: AnyStringDomain
+
+  nzListNumber:
+    help: >
+      [Type: int] This key indicates the number of layers with variable dz in the subsurface. This value is the same as
+      the ComputationalGrid.NZ key.
+    # Need to enforce a check to make sure that this is equal to ComputationalGrid.NZ
+    domain:
+      type: IntRangeDomain
+      minValue: 1
+
+CellnzItem:
+  __doc__: >
+    Setting the Cell.nzListNumber.dzScale.Value
+
+  dzScale:
+    __doc__: >
+      Setting the Cell.nzListNumber.dzScale.Value
+
+    Value:
+      help: >
+        [Type: double] This key assigns the thickness of each layer defined by nzListNumber. ParFlow assigns the layers from the bottom-up
+        (i.e. the bottom of the domain is layer 0, the top is layer NZ-1). The total domain depth (Geom.domain.Upper.Z)
+        does not change with variable dz. The layer thickness is calculated by ComputationalGrid.DZ *dZScale.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+
+
+
+# -----------------------------------------------------------------------------
 # Geom.*
 # -----------------------------------------------------------------------------
-# nothing is assigned to the base "Geom." key, as all properties depend on the
-# user-defined geometry names. Therefore, all properties defined below are
-# within the GeomItem class.
+# Only assignments to "Geom." key are Perm, Porosity, Retardation, and user-defined geometric
+# input names
 
 Geom:
   __doc__: >
@@ -246,6 +304,17 @@ Geom:
         [Type: string] This key specifies all of the geometries to which a
         porosity will be assigned. These geometries must cover the
         entire computational domain.
+      domain:
+        type: AnyStringDomain
+
+  Retardation:
+    __doc__: >
+      run.Geom.Retardation input options are: GeomNames
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies all of the geometries to which the
+        contaminants will have a retardation function applied.
       domain:
         type: AnyStringDomain
 
@@ -326,10 +395,10 @@ GeomItem:
       Permeability values
 
     Type:
-      # ParGauss is misspelled in the manual
+      # typo: ParGauss
       help: >
-        [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry, geometry_name.
-        It must be either Constant, TurnBands, ParGauss, or PFBFile.
+        [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry,
+        geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
       domain:
         type: EnumDomain
         enumList: ['Constant', 'TurnBands', 'ParGauss', 'PFBFile']
@@ -367,7 +436,7 @@ GeomItem:
 
     GeomMean:
       help: >
-        [Type: double] This key specifies the geometric mean, of the log normal
+        [Type: double] This key specifies the geometric mean of the log normal
         field generated for the named geometry, geometry_name, if either the
         Turning Bands or Parallel Gaussian Simulator are chosen.
       domain:
@@ -376,7 +445,7 @@ GeomItem:
 
     Sigma:
       help: >
-        [Type: double] This key specifies the standard deviation, of the normal
+        [Type: double] This key specifies the standard deviation of the normal
         field generated for the named geometry, geometry_name, if either the
         Turning Bands or Parallel Gaussian Simulator are chosen.
       domain:
@@ -455,7 +524,7 @@ GeomItem:
       default: 'LogTruncated'
       domain:
         type: EnumDomain
-        # LogTruncated is misspelled in the manual
+        # typo: LogTruncated is misspelled in the manual
         enumList: ['Normal', 'Log', 'NormalTruncated', 'LogTruncated']
 
     StratType:
@@ -484,7 +553,7 @@ GeomItem:
         type: DoubleRangeDomain
         minValue: 0.0
 
-    # MaxSearchRad is not in the manual. Need to come back to this.
+    # MaxSearchRad is missing from the manual. Need to come back to this.
     MaxSearchRad:
       help: >
         [Type: int] A key to improve correlation structure of RF in testing.
@@ -582,7 +651,7 @@ GeomItem:
       domain:
         type: AnyDoubleDomain
 
-    # FileName is not in the manual
+    # FileName is missing from manual
     FileName:
       help: >
         [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given
@@ -603,3 +672,60 @@ GeomItem:
       domain:
         type: AnyDoubleDomain
 
+  # Relative Permeability
+  RelPerm:
+    __doc__: >
+      Setting relative permeability value to geometries
+
+    Value:
+      help: >
+        [Type: double] This key specifies the constant relative permeability value on the specified geometry.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+
+
+
+  # dz Scaling
+  dzScale:
+    __doc__: >
+      Setting properties for the dz Scale.
+
+    Value:
+      help: >
+        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+        to constant.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    FileName:
+      help: >
+        [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type
+        was set to PFBFile.
+      domain:
+        type: AnyStringDomain
+
+# Setting Geom.geometry_name.contaminant_name.Retardation.Type and Value
+GeomContItem:
+  __doc__: >
+    Setting retardation properties for specific contaminants and specific geometries.
+
+  Type:
+    help: >
+      [Type: string] This key specifies which function is to be used to compute the retardation for the named contaminant, contaminant_
+      name, in the named geometry, geometry_name. The only choice currently available is Linear which indicates
+      that a simple linear retardation function is to be used to compute the retardation.
+    domain:
+      type: EnumDomain
+      enumList: ['Linear']
+
+  Value:
+    help: >
+      [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
+      named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
+      the density of the material in the geometry.
+    domain:
+      type: DoubleRangeDomain
+      minValue: 0.0
