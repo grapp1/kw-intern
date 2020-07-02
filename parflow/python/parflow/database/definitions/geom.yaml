@@ -684,7 +684,22 @@ GeomItem:
         type: DoubleRangeDomain
         minValue: 0.0
 
+    Alpha:
+      __doc__: >
+        This Alpha is for setting the file name of alpha parameters for the entire domain.
+      Filename:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domain:
+          type: AnyStringDomain
 
+    Alpha:
+      help: >
+        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
 
 
   # dz Scaling
