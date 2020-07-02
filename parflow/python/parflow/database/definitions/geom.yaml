@@ -195,6 +195,7 @@ Geom:
         domain:
           type: AnyStringDomain
 
+
   Porosity:
     __doc__: >
       run.Geom.Porosity input options are: GeomNames
@@ -268,6 +269,15 @@ GeomItem:
       domain:
         type: AnyDoubleDomain
 
+  # Patches
+  Patches:
+    help: >
+      [Type: string] Patches are defined on the surfaces of geometries. Currently you can only define patches on Box
+      geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back
+      bottom top) but you can name the sides anything you want.
+    domain:
+      type: AnyStringDomain
+
   # Permeability
   Perm:
     __doc__: >
@@ -284,29 +294,129 @@ GeomItem:
 
     Value:
       help: >
-        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
-        to constant.
+        [Type: double] This key specifies the value assigned to all points in
+        the named geometry, geometry_name, if the type was set to constant.
       domain:
         type: AnyDoubleDomain
 
     LambdaX:
       help: >
-        This key specifies the x correlation length of the field generated for the named geometry, geometry_name,
-        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+        [Type: double] This key specifies the x correlation length of the field
+        generated for the named geometry, geometry_name, if either the Turning
+        Bands or Parallel Gaussian Simulator are chosen.
       domain:
         type: AnyDoubleDomain
 
     LambdaY:
       help: >
-        This key specifies the y correlation length of the field generated for the named geometry, geometry_name,
-        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+        [Type: double] This key specifies the y correlation length of the field
+        generated for the named geometry, geometry_name, if either the Turning
+        Bands or Parallel Gaussian Simulator are chosen.
       domain:
         type: AnyDoubleDomain
 
     LambdaZ:
       help: >
-        This key specifies the z correlation length of the field generated for the named geometry, geometry_name,
-        if either the Turning Bands or Parallel Gaussian Simulator are chosen.
+        [Type: double] This key specifies the z correlation length of the field
+        generated for the named geometry, geometry_name, if either the Turning
+        Bands or Parallel Gaussian Simulator are chosen.
       domain:
         type: AnyDoubleDomain
 
+    GeomMean:
+      help: >
+        [Type: double] This key specifies the geometric mean, of the log normal
+        field generated for the named geometry, geometry_name, if either the
+        Turning Bands or Parallel Gaussian Simulator are chosen.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    Sigma:
+      help: >
+        [Type: double] This key specifies the standard deviation, of the normal
+        field generated for the named geometry, geometry_name, if either the
+        Turning Bands or Parallel Gaussian Simulator are chosen.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    Seed:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    NumLines:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    RZeta:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    KMax:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    DelK:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    MaxNPts:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    MaxCpts:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1
+
+    Seed:
+      help: >
+        [Type: int] This key specifies the initial seed for the random number
+        generator used to generate the field for the named geometry,
+        geometry_name, if either the Turning Bands or Parallel Gaussian
+        Simulator are chosen. This number must be positive.
+      domain:
+        type: IntRangeDomain
+        minValue: 1

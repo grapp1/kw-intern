@@ -47,6 +47,34 @@ class IntRangeDomain:
 
     return errors
 
+
+class DoubleRangeDomain:
+  '''
+  DoubleRange domain allow to constrain value to be a double
+  while also ensure optionally if its value needs to be
+  above or below another one.
+
+  The expected set of keyword arguments are:
+    - minValue: If available the value must be strictly above it
+    - maxValue: If available the value must be strictly below it
+  '''
+  def validate(self, value, minValue=None, maxValue=None, **kwargs):
+    errors = []
+
+    if value == None:
+      errors.append('Needs to be set')
+      return errors
+
+    if not isinstance(value, float):
+      errors.append('Needs to be a double')
+
+    if minValue != None and value < minValue:
+      errors.append(f'Is smaller than min: {minValue}')
+    if maxValue != None and value > maxValue:
+      errors.append(f'Is greater than max: {maxValue}')
+
+    return errors
+
 # -----------------------------------------------------------------------------
 
 class EnumDomain:
