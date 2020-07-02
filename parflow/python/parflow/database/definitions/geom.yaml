@@ -763,6 +763,134 @@ GeomItem:
       domain:
         type: DoubleRangeDomain
 
+  # Capillary Pressure
+  CapPressure:
+    __doc__: >
+      Setting capillary pressures for different phases
+
+  CapPressureItem:
+    __doc__: >
+      Phase name on which capillary pressure will be specified.
+    Value:
+      help: >
+        [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
+      domain:
+        type: DoubleRangeDomain
+
+  # Saturation
+  Saturation:
+    __doc__: >
+      Setting saturation values to geometries
+
+    Value:
+      help: >
+        [Type: double] This key specifies the constant saturation value on the specified geometry.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+        maxValue: 1.0
+
+    # Corner case with Alpha as class and field
+    AlphaFileName:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: Alpha.Filename
+
+    Alpha:
+      help: >
+        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    # Corner case with N as class and field
+    NFileName:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: N.Filename
+
+    N:
+      help: >
+        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    # Corner case with N as class and field
+    SResFilename:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: N.Filename
+
+    SRes:
+      help: >
+        [Type: double] This key specifies the residual saturation on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+        maxValue: 1.0
+
+    # Corner case with N as class and field
+    SSatFileName:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: N.Filename
+
+    SSat:
+      help: >
+        [Type: double] This key specifies the saturation at saturated conditions on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+        maxValue: 1.0
+
+    A:
+      help: >
+        [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
+      domain:
+        type: DoubleRangeDomain
+
+    Gamma:
+      help: >
+        [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
+      domain:
+        type: DoubleRangeDomain
+
+    Degree:
+      help: >
+        [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
+      domain:
+        type: IntRangeDomain
+
+    Coeff:
+      __doc__: >
+        Setting the coefficients for the polynomial saturation curve.
+
+    CoeffNumber:
+      help: >
+        [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
+      domain:
+        type: DoubleRangeDomain
+
+    FileName:
+      help: >
+        [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name
+        is “domain” for this key.
+      domain:
+        type: AnyStringDomain
+
   # dz Scaling
   dzScale:
     __doc__: >
