@@ -161,6 +161,47 @@ GeomInputItem:
       type: AnyIntDomain
 
 # -----------------------------------------------------------------------------
+# Perm.*
+# -----------------------------------------------------------------------------
+# Only key for this is defining Perm.TensorType
+Perm:
+  __doc__: >
+    run.Perm input options are: TensorType
+
+  TensorType:
+    help: >
+      [Type: string] This key specifies whether the permeability tensor entries kx; ky and kz will be specified as
+      three constants within a set of regions covering the domain or whether the entries will be specified cell-wise by
+      files. The choices for this key are TensorByGeom and TensorByFile.
+    domain:
+      type: EnumDomain
+      enumList: ['TensorByGeom', 'TensorByFile']
+
+# -----------------------------------------------------------------------------
+# SpecificStorage.*
+# -----------------------------------------------------------------------------
+# Only key for this is defining SpecificStorage.GeomNames and SpecificStorage.Type
+SpecificStorage:
+  __doc__: >
+    run.Perm input options are: GeomNames, Type
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies all of the geometries on which a different specific storage value will be
+      assigned. These geometries must cover the entire computational domain.
+    domain:
+      type: AnyStringDomain
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign specific storage data. The only choice
+      currently available is Constant which indicates that a constant is to be assigned to all grid cells within a
+      geometry.
+    domain:
+      type: EnumDomain
+      enumList: ['Constant']
+
+# -----------------------------------------------------------------------------
 # Geom.*
 # -----------------------------------------------------------------------------
 # nothing is assigned to the base "Geom." key, as all properties depend on the
@@ -207,6 +248,7 @@ Geom:
         entire computational domain.
       domain:
         type: AnyStringDomain
+
 
 
 
@@ -347,76 +389,217 @@ GeomItem:
         generator used to generate the field for the named geometry,
         geometry_name, if either the Turning Bands or Parallel Gaussian
         Simulator are chosen. This number must be positive.
+      default: 1
       domain:
         type: IntRangeDomain
         minValue: 1
 
     NumLines:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: int] This key specifies the number of lines to be used in the Turning Bands algorithm for the named
+        geometry, geometry_name.
+      default: 100
       domain:
         type: IntRangeDomain
         minValue: 1
 
     RZeta:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: double] This key specifies the resolution of the line processes, in terms of the minimum grid spacing,
+        to be used in the Turning Bands algorithm for the named geometry, geometry_name. Large values imply high
+        resolution.
+      default: 5.0
       domain:
-        type: IntRangeDomain
-        minValue: 1
+        type: DoubleRangeDomain
+        minValue: 0.0
 
     KMax:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: double] This key specifies the the maximum normalized frequency, Kmax, to be used in the Turning Bands
+        algorithm for the named geometry, geometry_name.
+      default: 100.0
       domain:
-        type: IntRangeDomain
-        minValue: 1
+        type: DoubleRangeDomain
+        minValue: 0.0
 
     DelK:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: double] This key specifies the normalized frequency increment to be used in the Turning Bands
+        algorithm for the named geometry, geometry_name.
+      default: 0.2
       domain:
-        type: IntRangeDomain
-        minValue: 1
+        type: DoubleRangeDomain
+        minValue: 0.0
 
     MaxNPts:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: int] This key sets limits on the number of simulated points in the search neighborhood to be used in the
+        Parallel Gaussian Simulator for the named geometry, geometry_name.
       domain:
         type: IntRangeDomain
         minValue: 1
 
     MaxCpts:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: int] This key sets limits on the number of external conditioning points in the search neighborhood to be
+        used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
       domain:
         type: IntRangeDomain
         minValue: 1
 
-    Seed:
+    LogNormal:
       help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
+        [Type: string] The key specifies when a normal, log normal, truncated normal or truncated log normal field is
+        to be generated by the method for the named geometry, geometry_name. This value must be one of Normal, Log,
+        NormalTruncated or LogTruncated and can be used with either Turning Bands or the Parallel Gaussian Simulator.
+      default: 'LogTruncated'
+      domain:
+        type: EnumDomain
+        # LogTruncated is misspelled in the manual
+        enumList: ['Normal', 'Log', 'NormalTruncated', 'LogTruncated']
+
+    StratType:
+      help: >
+        [Type: string] This key specifies the stratification of the permeability field generated by the method for the
+        named geometry, geometry_name. The value must be one of Horizontal, Bottom or Top and can be used with either
+        the Turning Bands or the Parallel Gaussian Simulator.
+      default: 'Bottom'
+      domain:
+        type: EnumDomain
+        enumList: ['Horizontal', 'Bottom', 'Top']
+
+    LowCutoff:
+      help: >
+        [Type: double] This key specifies the low cutoff value for truncating the generated field for the named
+        geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    HighCutoff:
+      help: >
+        [Type: double] This key specifies the high cutoff value for truncating the generated field for the named
+        geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    # MaxSearchRad is not in the manual. Need to come back to this.
+    MaxSearchRad:
+      help: >
+        [Type: int] A key to improve correlation structure of RF in testing.
       domain:
         type: IntRangeDomain
         minValue: 1
+
+    FileName:
+      help: >
+        [Type: string] This key specifies that permeability values for the specified geometry, geometry_name, are given
+        according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. For
+        a description of the ParFlow Binary file format, see the manual. The ParFlow Binary file associated with the
+        named geometry must contain a collection of permeability values corresponding in a one-to-one manner to the
+        entire computational grid. That is to say, when the contents of the file are read into the simulator, a
+        complete permeability description for the entire domain is supplied. Only those values associated with
+        computational cells residing within the geometry (as it is represented on the computational grid) will be
+        copied into data structures used during the course of a simulation. Thus, the values associated with cells
+        outside of the geounit are irrelevant. For clarity, consider a couple of different scenarios. For example, the
+        user may create a file for each geometry such that appropriate permeability values are given for the geometry
+        and “garbage" values (e.g., some flag value) are given for the rest of the computational domain. In this case,
+        a separate binary file is specified for each geometry. Alternatively, one may place all values representing the
+        permeability field on the union of the geometries into a single binary file. Note that the permeability values
+        must be represented in precisely the same configuration as the computational grid. Then, the same file could be
+        specified for each geounit in the input file. Or, the computational domain could be described as a single
+        geouint (in the ParFlow input file) in which case the permeability values would be read in only once.
+      domain:
+        type: AnyStringDomain
+
+    TensorValX:
+      help: >
+        [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    TensorValY:
+      help: >
+        [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    TensorValZ:
+      help: >
+        [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
+
+    TensorFileX:
+      help: >
+        [Type: string] This key specifies that kx values for the specified geometry, geometry_name, are given according
+        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+        choice for the value of geometry_name is “domain”.
+      # need to impose this condition
+      domain:
+        type: AnyStringDomain
+
+    TensorFileY:
+      help: >
+        [Type: string] This key specifies that ky values for the specified geometry, geometry_name, are given according
+        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+        choice for the value of geometry_name is “domain”.
+      # need to impose this condition
+      domain:
+        type: AnyStringDomain
+
+    TensorFileZ:
+      help: >
+        [Type: string] This key specifies that kz values for the specified geometry, geometry_name, are given according
+        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+        choice for the value of geometry_name is “domain”.
+      # need to impose this condition
+      domain:
+        type: AnyStringDomain
+
+  # Porosity
+  Porosity:
+    __doc__: >
+      Setting porosity values to elements of domain
+
+    Type:
+      help: >
+        [Type: string] This key specifies which method is to be used to assign porosity data to the named geometry,
+        geometry_name. The only choice currently available is Constant which indicates that a constant is to be
+        assigned to all grid cells within a geometry.
+      domain:
+        type: EnumDomain
+        enumList: ['Constant']
+
+    Value:
+      help: >
+        [Type: double] This key specifies the value assigned to all points in
+        the named geometry, geometry_name, if the type was set to constant.
+      domain:
+        type: AnyDoubleDomain
+
+    # FileName is not in the manual
+    FileName:
+      help: >
+        [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given
+        according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The
+        only choice for the value of geometry_name is “domain”.
+      domain:
+        type: AnyStringDomain
+
+  # Specific Storage
+  SpecificStorage:
+    __doc__: >
+      Setting specific storage values to elements of domain
+
+    Value:
+      help: >
+        [Type: double] This key specifies the value assigned to all points in
+        the named geometry, geometry_name, if the type was set to constant.
+      domain:
+        type: AnyDoubleDomain
+

@@ -1,5 +1,6 @@
 Checklist - adding * to ones that I have already entered into yaml
->* denotes keys that were not in the grep from the PF code, but are used and are in the manual
+> * denotes keys that were not in the grep from the PF code, but are used and are in the manual
++ * denotes keys that were in the grep from the PF code, but are not in the manual
 
 %s.%s						
 %s.AbsTol						
@@ -157,39 +158,39 @@ Geom.%s.ICPressure.RefGeom
 Geom.%s.ICPressure.RefPatch						
 Geom.%s.ICPressure.Value						
 Geom.%s.ICSaturation.%s.Value						
-Geom.%s.Lower.X						
-Geom.%s.Lower.Y						
-Geom.%s.Lower.Z						
-Geom.%s.Patches						
-Geom.%s.Perm.DelK						
-Geom.%s.Perm.FileName	
-Geom.%s.Perm.GeomMean						
-Geom.%s.Perm.HighCutoff						
-Geom.%s.Perm.KMax						
-Geom.%s.Perm.LambdaX						
-Geom.%s.Perm.LambdaY						
-Geom.%s.Perm.LambdaZ						
-Geom.%s.Perm.LogNormal						
-Geom.%s.Perm.LowCutoff						
-Geom.%s.Perm.MaxCpts						
-Geom.%s.Perm.MaxNPts						
-Geom.%s.Perm.MaxSearchRad						
-Geom.%s.Perm.NumLines						
-Geom.%s.Perm.RZeta						
-Geom.%s.Perm.Seed						
-Geom.%s.Perm.Sigma						
-Geom.%s.Perm.StratType						
-Geom.%s.Perm.TensorFileX						
-Geom.%s.Perm.TensorFileY						
-Geom.%s.Perm.TensorFileZ						
-Geom.%s.Perm.TensorValX						
-Geom.%s.Perm.TensorValY						
-Geom.%s.Perm.TensorValZ						
-Geom.%s.Perm.Type						
-Geom.%s.Perm.Value	
-Geom.%s.Porosity.FileName		
-Geom.%s.Porosity.Type						
-Geom.%s.Porosity.Value	
+* Geom.%s.Lower.X						
+* Geom.%s.Lower.Y						
+* Geom.%s.Lower.Z						
+* Geom.%s.Patches						
+* Geom.%s.Perm.DelK						
+* Geom.%s.Perm.FileName	
+* Geom.%s.Perm.GeomMean						
+* Geom.%s.Perm.HighCutoff						
+* Geom.%s.Perm.KMax						
+* Geom.%s.Perm.LambdaX						
+* Geom.%s.Perm.LambdaY						
+* Geom.%s.Perm.LambdaZ						
+* Geom.%s.Perm.LogNormal						
+* Geom.%s.Perm.LowCutoff						
+* Geom.%s.Perm.MaxCpts						
+* Geom.%s.Perm.MaxNPts						
++ * Geom.%s.Perm.MaxSearchRad						
+* Geom.%s.Perm.NumLines						
+* Geom.%s.Perm.RZeta						
+* Geom.%s.Perm.Seed						
+* Geom.%s.Perm.Sigma						
+* Geom.%s.Perm.StratType						
+* Geom.%s.Perm.TensorFileX						
+* Geom.%s.Perm.TensorFileY						
+* Geom.%s.Perm.TensorFileZ						
+* Geom.%s.Perm.TensorValX						
+* Geom.%s.Perm.TensorValY						
+* Geom.%s.Perm.TensorValZ						
+* Geom.%s.Perm.Type						
+* Geom.%s.Perm.Value	
++ * Geom.%s.Porosity.FileName		
+* Geom.%s.Porosity.Type						
+* Geom.%s.Porosity.Value	
 Geom.%s.RelPerm.A						
 Geom.%s.RelPerm.Alpha						
 Geom.%s.RelPerm.Alpha.Filename						
@@ -222,9 +223,9 @@ Geom.%s.ThermalConductivity.KDry.Filename
 Geom.%s.ThermalConductivity.KWet						
 Geom.%s.ThermalConductivity.KWet.Filename						
 Geom.%s.ThermalConductivity.Value						
-Geom.%s.Upper.X						
-Geom.%s.Upper.Y						
-Geom.%s.Upper.Z						
+* Geom.%s.Upper.X						
+* Geom.%s.Upper.Y						
+* Geom.%s.Upper.Z						
 Geom.%s.dzScale.FileName						
 Geom.%s.dzScale.Value						
 * GeomInput.%s.FileName	
