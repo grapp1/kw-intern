@@ -114,27 +114,27 @@ ComputationalGrid:
 
   DX:
     help: >
-      [Type: float] This defines the size of grid cells in the x direction.
+      [Type: double] This defines the size of grid cells in the x direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domain:
-      type: FloatRangeDomain
+      type: DoubleRangeDomain
       minValue: 1.0
 
   DY:
     help: >
-      [Type: float] This defines the size of grid cells in the y direction.
+      [Type: double] This defines the size of grid cells in the y direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domain:
-      type: FloatRangeDomain
+      type: DoubleRangeDomain
       minValue: 1.0
 
   DZ:
     help: >
-      [Type: float] This defines the size of grid cells in the z direction.
+      [Type: double] This defines the size of grid cells in the z direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domain:
-      type: FloatRangeDomain
+      type: DoubleRangeDomain
       minValue: 1.0

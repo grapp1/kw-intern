@@ -3,6 +3,7 @@
 # includes GeomInput, Geom
 # typo: manual typos
 # missing: keys that are missing from manual
+# Corner cases
 
 # GeomInput.%s.FileName
 # GeomInput.%s.GeomName
@@ -161,7 +162,7 @@ GeomInputItem:
       The named geometry will be defined wherever the input file is equal
       to the specified value.
     domain:
-      type: AnyIntDomain
+      type: IntRangeDomain
 
 # -----------------------------------------------------------------------------
 # Perm.*
@@ -338,21 +339,21 @@ GeomItem:
         [Type: double] This gives the lower X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     Y:
       help: >
         [Type: double] This gives the lower Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     Z:
       help: >
         [Type: double] This gives the lower Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
   Upper:
     __doc__: >
@@ -364,21 +365,21 @@ GeomItem:
         [Type: double] This gives the upper X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     Y:
       help: >
         [Type: double] This gives the upper Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     Z:
       help: >
         [Type: double] This gives the upper Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
   # Patches
   Patches:
@@ -408,7 +409,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     LambdaX:
       help: >
@@ -416,7 +417,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     LambdaY:
       help: >
@@ -424,7 +425,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     LambdaZ:
       help: >
@@ -432,7 +433,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     GeomMean:
       help: >
@@ -649,7 +650,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
     # FileName is missing from manual
     FileName:
@@ -670,7 +671,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domain:
-        type: AnyDoubleDomain
+        type: DoubleRangeDomain
 
   # Relative Permeability
   RelPerm:
@@ -716,6 +717,51 @@ GeomItem:
         type: DoubleRangeDomain
         minValue: 0.0
 
+    NumSamplePoints:
+      help: >
+        [Type: int] This key specifies the number of sample points for a spline base interpolation table for the Van Genuchten
+        function specified on geom_name. If this number is 0 (the default) then the function is evaluated directly. Using the
+        interpolation table is faster but is less accurate.
+      default: 0
+      domain:
+        type: IntRangeDomain
+        minValue: 0
+
+    MinPressureHead:
+      help: >
+        [Type: int] This key specifies the lower value for a spline base interpolation table for the Van Genuchten function specified
+        on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used
+        (NumSamplePoints is greater than 0).
+      domain:
+        type: IntRangeDomain
+
+    A:
+      help: >
+        [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
+      domain:
+        type: DoubleRangeDomain
+
+    Gamma:
+      help: >
+        [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
+      domain:
+        type: DoubleRangeDomain
+
+    Degree:
+      help: >
+        [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
+      domain:
+        type: IntRangeDomain
+
+    Coeff:
+      __doc__: >
+        Setting the coefficients for the polynomial relative permeability curve.
+
+    CoeffNumber:
+      help: >
+        [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
+      domain:
+        type: DoubleRangeDomain
 
   # dz Scaling
   dzScale:

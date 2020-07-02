@@ -97,16 +97,6 @@ class AnyStringDomain:
     errors.append(f'{value} ({type(value)} must be a string')
     return errors
 
-
-class AnyDoubleDomain:
-  def validate(self, value, **kwargs):
-    errors = []
-    if isinstance(value, float):
-      return errors
-
-    errors.append(f'{value} must be a double')
-    return errors
-
 # -----------------------------------------------------------------------------
 # Helper map with an instance of each domain type
 # -----------------------------------------------------------------------------
