@@ -24,15 +24,17 @@ class ValueHandlerException(Exception):
 
 
 class ChildrenHandler:
-  def decorate(self, value, container, className=None, **kwargs):
+  def decorate(self, value, container, className=None, location='.', **kwargs):
     klass = getattr(generated, className)
+    destination_container = container.getObjFromLocation(location)
+
     if isinstance(value, str):
       names = value.split(' ')
       valideNames = []
       for name in names:
         if len(name):
           valideNames.append(name)
-          container.__dict__[name] = klass()
+          destination_container.__dict__[name] = klass()
 
       return valideNames
 
@@ -41,7 +43,7 @@ class ChildrenHandler:
       for name in value:
         if len(name):
           valideNames.append(name)
-          container.__dict__[name] = klass()
+          destination_container.__dict__[name] = klass()
 
       return valideNames
 
@@ -64,7 +66,7 @@ def getHandler(className):
     AVAILABLE_HANDLERS[className] = instance
     return instance
 
-  print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find valueHandler: "{className}"')
+  print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find handler: "{className}"')
 
   return None
 
@@ -72,14 +74,40 @@ def getHandler(className):
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
 
-def decorateValue(value, container=None, valueHandler=None):
-  if valueHandler == None or 'type' not in valueHandler:
+def decorateValue(value, container=None, handlers=None):
+  '''
+  handlers = {
+      GeomInputUpdater: {
+        type: 'ChildrenHandler',
+        className: 'GeomInputItemValue',
+        location: '../..'
+      },
+      GeomUpdater: {
+        type: 'ChildrenHandler',
+        className: 'GeomItem',
+        location: '../../Geom'
+      },
+      ChildrenHandler: {
+        className: 'GeomInputLocal'
+      }
+  }
+  '''
+  if handlers == None:
     return value
 
-  className = valueHandler["type"]
-  handler = getHandler(className)
+  return_value = value
 
-  if handler:
-    return handler.decorate(value, container, **valueHandler)
+  for handler_classname in handlers:
+    handler = getHandler(handler_classname)
 
-  return value
+    if not handler and 'type' in handlers[handler_classname]:
+         handler = getHandler(handlers[handler_classname]['type'])
+
+    if handler:
+      handler_kwargs = handlers[handler_classname]
+      if isinstance(handler_kwargs, str):
+        return_value = handler.decorate(value)
+      else:
+        return_value = handler.decorate(value, **handler_kwargs)
+
+  return return_value

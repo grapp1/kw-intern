@@ -121,14 +121,27 @@ def getDomain(className):
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
 
-def validateValueWithErrors(value, domainDefinition=None):
+def validateValueWithErrors(value, domainDefinitions=None):
+  '''
+  domainDefinitions = {
+    IntRangeDomain: {
+      minValue: 1
+    },
+    NoNoneValueDomain: '__no_args__'
+  }
+  '''
   errors = []
-  if not domainDefinition:
+  if not domainDefinitions:
     return errors
 
-  domain = getDomain(domainDefinition['type'])
-  if domain:
-    errors = domain.validate(value, **domainDefinition)
+  for domain_classname in domainDefinitions:
+    domain = getDomain(domain_classname)
+    if domain:
+      domain_kwargs = domainDefinitions[domain_classname]
+      if isinstance(domain_kwargs, str):
+        errors.extend(domain.validate(value))
+      else:
+        errors.extend(domain.validate(value, **domain_kwargs))
 
   return errors
 

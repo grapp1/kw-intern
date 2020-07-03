@@ -24,17 +24,17 @@ Process:
       help: >
         [Type: int] P allocates the number of processes to the grid-cells in x.
       default: 1
-      domain:
-        type: IntRangeDomain
-        minValue: 1
+      domains:
+        IntRangeDomain:
+          minValue: 1
 
     Q:
       help: >
         [Type: int] Q allocates the number of processes to the grid-cells in y.
       default: 1
-      domain:
-        type: IntRangeDomain
-        minValue: 1
+      domains:
+        IntRangeDomain:
+          minValue: 1
 
     R:
       help: >
@@ -42,9 +42,9 @@ Process:
         Please note R should always be 1 if you are running with Solver Richards
         unless you are running a totally saturated domain (solver IMPES).
       default: 1
-      domain:
-        type: IntRangeDomain
-        minValue: 1
+      domains:
+        IntRangeDomain:
+          minValue: 1
 
 # -----------------------------------------------------------------------------
 # ComputationalGrid
@@ -70,71 +70,71 @@ ComputationalGrid:
         [Type: double] This assigns the lower x coordinate location for the
         computational grid.
       default: None
-      domain:
-        type: AnyDoubleDomain
+      domains:
+        AnyDoubleDomain: __no_args__
 
     Y:
       help: >
         [Type: double] This assigns the lower y coordinate location for the
         computational grid.
       default: None
-      domain:
-        type: AnyDoubleDomain
+      domains:
+        AnyDoubleDomain: __no_args__
 
     Z:
       help: >
         [Type: double] This assigns the lower z coordinate location for the
         computational grid.
-      domain:
-        type: AnyDoubleDomain
+      domains:
+        AnyDoubleDomain: __no_args__
 
   NX:
     help: >
       [Type: int] This assigns the number of grid cells in the x direction
       for the computational grid.
-    domain:
-      type: IntRangeDomain
-      minValue: 1
+    domains:
+      IntRangeDomain:
+        minValue: 1
 
   NY:
     help: >
       [Type: int] This assigns the number of grid cells in the y direction
       for the computational grid.
-    domain:
-      type: IntRangeDomain
-      minValue: 1
+    domains:
+      IntRangeDomain:
+        minValue: 1
 
   NZ:
     help: >
       [Type: int] This assigns the number of grid cells in the z direction
       for the computational grid.
-    domain:
-      type: IntRangeDomain
-      minValue: 1
+    domains:
+      IntRangeDomain:
+        minValue: 1
 
   DX:
     help: >
       [Type: double] This defines the size of grid cells in the x direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    domain:
-      type: DoubleRangeDomain
-      minValue: 1.0
+    domains:
+      DoubleRangeDomain:
+        minValue: 1.0
 
   DY:
     help: >
       [Type: double] This defines the size of grid cells in the y direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    domain:
-      type: DoubleRangeDomain
-      minValue: 1.0
+    domains:
+      DoubleRangeDomain:
+        minValue: 1.0
 
   DZ:
     help: >
       [Type: double] This defines the size of grid cells in the z direction.
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
-    domain:
-      type: DoubleRangeDomain
-      minValue: 1.0
+    domains:
+      DoubleRangeDomain:
+        minValue: 1.0

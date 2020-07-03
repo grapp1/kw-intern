@@ -4,7 +4,7 @@ a Parflow input deck.
 '''
 
 from .domains import validateValueWithException, validateValueWithPrint
-from .valueHandlers import decorateValue
+from .handlers import decorateValue
 
 class PFDBObj:
   printLineError = False
@@ -26,21 +26,22 @@ class PFDBObj:
   def disableExitError():
     PFDBObj.exitOnError = False
 
-  def __init__(self):
+  def __init__(self, parent=None):
     self._details = {}
+    self._parent = parent
 
   def __setattr__(self, name, value):
     '''
     Helper method that aims to streamline dot notation assignment
     '''
     domain = None
-    valueHandler = {}
+    handler = {}
     if hasattr(self, '_details'):
       if name in self._details:
         if 'domain' in self._details[name]:
           domain = self._details[name]['domain']
-        if 'valueHandler' in self._details[name]:
-          valueHandler = self._details[name]['valueHandler']
+        if 'handler' in self._details[name]:
+          handler = self._details[name]['handler']
       else:
         print(f'Field {name} is not part of the expected schema {self.__class__}')
         if PFDBObj.exitOnError:
@@ -53,7 +54,7 @@ class PFDBObj:
       validateValueWithException(value, domain, PFDBObj.exitOnError)
 
     # Decorate value if need be (i.e. Geom.names: 'a b c')
-    self.__dict__[name] = decorateValue(value, self, valueHandler)
+    self.__dict__[name] = decorateValue(value, self, handler)
 
 
   def help(self, key=None):
@@ -86,3 +87,22 @@ class PFDBObj:
         print(f'{indentStr}{name}: {obj}')
 
     return errorCount
+
+  def getParFlowKey(self, key):
+    if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
+      return self._details[key]['exportName']
+    return key
+
+  def getObjFromLocation(self, location='.'):
+    path_items = location.split('/')
+    current_location = self
+    for path_item in path_items:
+      if path_item == '..':
+        current_location = current_location._parent
+      elif path_item == '.':
+        pass
+      else:
+        current_location = current_location[path_item]
+
+    return current_location
+
