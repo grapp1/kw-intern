@@ -171,7 +171,7 @@ GeomInputItem:
         className: GeomItem
         location: ../../Geom
 
-  #FileName is for solid files and indicator fields only
+  # FileName is for solid files and indicator fields only
   FileName: # typo: this is capitalized incorrectly in the manual
     help: >
       [Type: string] For IndicatorField and SolidFile geometry inputs, this
@@ -350,7 +350,14 @@ GeomItem:
     User-defined geometric instance. GeomItem names are taken from either
     GeomInput.Names or GeomItem.GeomNames.
 
-  # Lower/Upper for Box geometry only
+  # Geom.geom_name.FileName
+  FileName:
+    help: >
+      [Type: string] This specifies some sort of filename for the specified geometry.
+    domains:
+      AnyStringDomain: __no_args__
+
+# Lower/Upper for Box geometry only
   Lower:
     __doc__: >
       This section sets the lower coordinate locations for the
@@ -977,7 +984,92 @@ GeomItem:
         DoubleRangeDomain:
           minValue: 0.0
 
-# Setting Geom.geometry_name.contaminant_name.Retardation.Type and Value
+  FBx:
+    __doc__: >
+      Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
+    FileName:
+      help: >
+        [Type: string] This key specifies file to be read in for the X flow barrier values for the domain,
+        if the type was set to PFBFile.
+      domains:
+        AnyStringDomain: __no_args__
+
+  FBy:
+    __doc__: >
+      Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
+    FileName:
+      help: >
+        [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain,
+        if the type was set to PFBFile.
+      domains:
+        AnyStringDomain: __no_args__
+
+  FBz:
+    __doc__: >
+      Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
+    FileName:
+      help: >
+        [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain,
+        if the type was set to PFBFile.
+      domains:
+        AnyStringDomain: __no_args__
+
+  # HeatCapacity is missing from the manual
+  HeatCapacity:
+    __doc__: >
+      Setting heat capacity properties for specified geometries.
+    Value:
+      help: >
+        [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+  ICPressure:
+    __doc__: >
+      Setting the initial conditions for pressure for specific geometries.
+    FileName:
+      help: >
+        [Type:string]
+      domains:
+        AnyStringDomain:  __no_args__
+
+    FileName:
+      help: >
+        [Type:string]
+      domains:
+        AnyStringDomain:  __no_args__
+
+    FileName:
+      help: >
+        [Type:string]
+      domains:
+        AnyStringDomain:  __no_args__
+
+    FileName:
+      help: >
+        [Type:string]
+      domains:
+        AnyStringDomain:  __no_args__
+
+    FileName:
+      help: >
+        [Type:string]
+      domains:
+        AnyStringDomain:  __no_args__
+
+  ICSaturation:
+    __doc__: >
+      Setting the
+#  Geom.%s.HeatCapacity.Value
+#  Geom.%s.ICPressure.FileName
+#  Geom.%s.ICPressure.RefElevation
+#  Geom.%s.ICPressure.RefGeom
+#  Geom.%s.ICPressure.RefPatch
+#  Geom.%s.ICPressure.Value
+#  Geom.%s.ICSaturation.%s.Value
+
+# Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
 GeomContItem:
   __doc__: >
     Setting retardation properties for specific contaminants and specific geometries.
@@ -991,7 +1083,18 @@ GeomContItem:
       EnumDomain:
         enumList: ['Linear']
 
+  # Value is in the manual, but not in the grep of PF keys
   Value:
+    help: >
+      [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
+      named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
+      the density of the material in the geometry.
+    domains:
+      DoubleRangeDomain:
+        minValue: 0.0
+
+  # Rate is missing from the manual. Is this equivalent to value?
+  Rate:
     help: >
       [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
       named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by

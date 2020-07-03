@@ -144,13 +144,13 @@ Contaminants.%s.Degradation.Value
 Cycle.%s.%s.Length						
 Cycle.%s.Names						
 Cycle.%s.Repeat						
-Geom.%s.%s.Retardation.Rate						
-Geom.%s.%s.Retardation.Type						
-Geom.%s.CapPressure.%s.Value						
++ * Geom.%s.%s.Retardation.Rate						
+* Geom.%s.%s.Retardation.Type						
+* Geom.%s.CapPressure.%s.Value						
 Geom.%s.FBx.FileName						
 Geom.%s.FBy.FileName						
 Geom.%s.FBz.FileName						
-Geom.%s.FileName						
++ * Geom.%s.FileName						
 Geom.%s.HeatCapacity.Value						
 Geom.%s.ICPressure.FileName						
 Geom.%s.ICPressure.RefElevation						
