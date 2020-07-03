@@ -5,7 +5,7 @@ from .utils import extractKeysFromObject, writeDict
 
 class Run(BaseRun):
   def __init__(self, name):
-    super().__init__()
+    super().__init__(None)
     self._name = name
 
   def getKeyDict(self):

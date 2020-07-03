@@ -27,22 +27,22 @@ class PFDBObj:
     PFDBObj.exitOnError = False
 
   def __init__(self, parent=None):
-    self._details = {}
     self._parent = parent
 
   def __setattr__(self, name, value):
     '''
     Helper method that aims to streamline dot notation assignment
     '''
-    domain = None
-    handler = {}
-    if hasattr(self, '_details'):
+    domains = None
+    handlers = None
+    if name[0] != '_' and hasattr(self, '_details'):
       if name in self._details:
-        if 'domain' in self._details[name]:
-          domain = self._details[name]['domain']
-        if 'handler' in self._details[name]:
-          handler = self._details[name]['handler']
+        if 'domains' in self._details[name]:
+          domains = self._details[name]['domains']
+        if 'handlers' in self._details[name]:
+          handlers = self._details[name]['handlers']
       else:
+        print(self._details)
         print(f'Field {name} is not part of the expected schema {self.__class__}')
         if PFDBObj.exitOnError:
           raise ValueError(
@@ -51,10 +51,10 @@ class PFDBObj:
 
     # Run domain validation
     if PFDBObj.printLineError:
-      validateValueWithException(value, domain, PFDBObj.exitOnError)
+      validateValueWithException(value, domains, PFDBObj.exitOnError)
 
     # Decorate value if need be (i.e. Geom.names: 'a b c')
-    self.__dict__[name] = decorateValue(value, self, handler)
+    self.__dict__[name] = decorateValue(value, self, handlers)
 
 
   def help(self, key=None):
@@ -71,19 +71,19 @@ class PFDBObj:
     errorCount = 0
     indentStr = '  '*indent
     for name in self.__dict__:
-      if name == '_details':
+      if name[0] == '_':
         continue
 
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         print(f'{indentStr}{name}:')
         errorCount += obj.validate(indent=indent+1)
-      elif hasattr(self, '_details') and name in self._details and 'domain' in self._details[name]:
-        errorCount += validateValueWithPrint(name, obj, self._details[name]['domain'], indent)
+      elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
+        errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], indent)
       elif name[0] == '_':
         # skip internal variables
         pass
-      else:
+      elif obj != None:
         print(f'{indentStr}{name}: {obj}')
 
     return errorCount
@@ -102,7 +102,7 @@ class PFDBObj:
       elif path_item == '.':
         pass
       else:
-        current_location = current_location[path_item]
+        current_location = getattr(current_location, path_item)
 
     return current_location
 

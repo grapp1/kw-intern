@@ -148,10 +148,17 @@ class PythonModule:
         classInstances = classDefinition['__class_instances__']
 
     if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
-      self.addLine(f'{self.strIndent}def __init__(self):')
+      '''
+        def __init__(self, parent=None):
+          super().__init__(parent)
+          self.Topology = Topology(self)
+      '''
+      self.addLine(f'{self.strIndent}def __init__(self, parent=None):')
+      self.addLine(f'{self.strIndent*2}super().__init__(parent)')
+
       for instance in classMembers:
         self.addLine(
-            f'{self.strIndent*2}self.{instance} = {self.validationSummary.getDeduplicateClassName(instance)}()')
+            f'{self.strIndent*2}self.{instance} = {self.validationSummary.getDeduplicateClassName(instance)}(self)')
 
       for instance in classInstances:
         self.addClassInstance(instance)
@@ -174,12 +181,16 @@ class PythonModule:
 
   def addField(self, fieldName, fieldDefinition, classDetails):
     self.validationSummary.addField(fieldName)
-    self.addLine(f"{self.strIndent*2}self.{fieldName} = {fieldDefinition['default'] if 'default' in fieldDefinition else 'None'}")
+    field_val = fieldDefinition['default'] if 'default' in fieldDefinition else None
+    if isinstance(field_val, str):
+      self.addLine(f"{self.strIndent*2}self.{fieldName} = '{field_val}'")
+    else:
+      self.addLine(f"{self.strIndent * 2}self.{fieldName} = {field_val}")
     classDetails[fieldName] = fieldDefinition
 
   def addClassInstance(self, fieldName):
     self.addLine(
-        f"{self.strIndent*2}self.{fieldName} = {fieldName}()")
+        f"{self.strIndent*2}self.{fieldName} = {fieldName}(self)")
 
   def addComment(self, docContent, strIndent):
     self.addLine(f"{strIndent}'''")

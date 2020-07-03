@@ -27,12 +27,14 @@ class ChildrenHandler:
   def decorate(self, value, container, className=None, location='.', **kwargs):
     klass = getattr(generated, className)
     destination_container = container.getObjFromLocation(location)
+    # print(container.__class__)
 
     if isinstance(value, str):
       names = value.split(' ')
       valideNames = []
       for name in names:
         if len(name):
+          # print(f' - {name} => {className} in {destination_container.__class__}')
           valideNames.append(name)
           destination_container.__dict__[name] = klass()
 
@@ -43,6 +45,7 @@ class ChildrenHandler:
       for name in value:
         if len(name):
           valideNames.append(name)
+          # print(f' - {name} => {className} in {destination_container.__class__}')
           destination_container.__dict__[name] = klass()
 
       return valideNames
@@ -56,7 +59,7 @@ class ChildrenHandler:
 
 AVAILABLE_HANDLERS = {}
 
-def getHandler(className):
+def getHandler(className, printError=True):
   if className in AVAILABLE_HANDLERS:
     return AVAILABLE_HANDLERS[className]
 
@@ -66,7 +69,8 @@ def getHandler(className):
     AVAILABLE_HANDLERS[className] = instance
     return instance
 
-  print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find handler: "{className}"')
+  if printError:
+    print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find handler: "{className}"')
 
   return None
 
@@ -98,16 +102,18 @@ def decorateValue(value, container=None, handlers=None):
   return_value = value
 
   for handler_classname in handlers:
-    handler = getHandler(handler_classname)
+    handler = getHandler(handler_classname, False)
 
     if not handler and 'type' in handlers[handler_classname]:
-         handler = getHandler(handlers[handler_classname]['type'])
+      handler = getHandler(handlers[handler_classname]['type'])
+    else:
+      getHandler(handler_classname)
 
     if handler:
       handler_kwargs = handlers[handler_classname]
       if isinstance(handler_kwargs, str):
-        return_value = handler.decorate(value)
+        return_value = handler.decorate(value, container)
       else:
-        return_value = handler.decorate(value, **handler_kwargs)
+        return_value = handler.decorate(value, container, **handler_kwargs)
 
   return return_value

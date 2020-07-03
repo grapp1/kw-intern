@@ -19,6 +19,16 @@ class ValidationException(Exception):
   pass
 
 # -----------------------------------------------------------------------------
+class MandatoryValue:
+  def validate(self, value, **kwargs):
+    errors = []
+
+    if value == None:
+      errors.append('Needs to be set')
+      return errors
+
+    return errors
+
 
 class IntRangeDomain:
   '''
@@ -34,7 +44,6 @@ class IntRangeDomain:
     errors = []
 
     if value == None:
-      errors.append('Needs to be set')
       return errors
 
     if not isinstance(value, int):
@@ -62,7 +71,6 @@ class DoubleRangeDomain:
     errors = []
 
     if value == None:
-      errors.append('Needs to be set')
       return errors
 
     if not isinstance(value, float):
@@ -80,6 +88,10 @@ class DoubleRangeDomain:
 class EnumDomain:
   def validate(self, value, enumList=[], **kwargs):
     errors = []
+
+    if value == None:
+      return errors
+
     if value not in enumList:
       strList = ', '.join(enumList)
       errors.append(f'{value} must be one of [{strList}]')
@@ -91,6 +103,10 @@ class EnumDomain:
 class AnyStringDomain:
   def validate(self, value, **kwargs):
     errors = []
+
+    if value == None:
+      return errors
+
     if isinstance(value, list) or isinstance(value, str):
       return errors
 
@@ -180,7 +196,7 @@ def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
     print(f'{indentStr}  {term.FAIL}{termSymbol.ko}{term.ENDC} {name}: {value}')
     for error in errors:
       print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
-  else:
+  elif value != None:
     print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
 
   return len(errors)

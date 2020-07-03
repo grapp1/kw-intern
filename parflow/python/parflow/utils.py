@@ -3,6 +3,9 @@ import json
 from .database.generated import PFDBObj
 
 def convertValueForStringDict(value):
+  if isinstance(value, str):
+    return value
+
   if hasattr(value, '__iter__'):
     return ' '.join([str(v) for v in value])
 

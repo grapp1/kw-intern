@@ -69,24 +69,23 @@ ComputationalGrid:
       help: >
         [Type: double] This assigns the lower x coordinate location for the
         computational grid.
-      default: None
       domains:
-        AnyDoubleDomain: __no_args__
+        MandatoryValue: __no_args__
+        DoubleRangeDomain: __no_args__
 
     Y:
       help: >
         [Type: double] This assigns the lower y coordinate location for the
         computational grid.
-      default: None
       domains:
-        AnyDoubleDomain: __no_args__
+        DoubleRangeDomain: __no_args__
 
     Z:
       help: >
         [Type: double] This assigns the lower z coordinate location for the
         computational grid.
       domains:
-        AnyDoubleDomain: __no_args__
+        DoubleRangeDomain: __no_args__
 
   NX:
     help: >
