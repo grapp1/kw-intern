@@ -319,7 +319,6 @@ Geom:
         domains:
           AnyStringDomain: __no_args__
 
-
   Porosity:
     __doc__: >
       run.Geom.Porosity input options are: GeomNames
@@ -593,22 +592,29 @@ GeomItem:
 
     FileName:
       help: >
-        [Type: string] This key specifies that permeability values for the specified geometry, geometry_name, are given
-        according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. For
-        a description of the ParFlow Binary file format, see the manual. The ParFlow Binary file associated with the
-        named geometry must contain a collection of permeability values corresponding in a one-to-one manner to the
-        entire computational grid. That is to say, when the contents of the file are read into the simulator, a
-        complete permeability description for the entire domain is supplied. Only those values associated with
-        computational cells residing within the geometry (as it is represented on the computational grid) will be
-        copied into data structures used during the course of a simulation. Thus, the values associated with cells
-        outside of the geounit are irrelevant. For clarity, consider a couple of different scenarios. For example, the
-        user may create a file for each geometry such that appropriate permeability values are given for the geometry
-        and “garbage" values (e.g., some flag value) are given for the rest of the computational domain. In this case,
-        a separate binary file is specified for each geometry. Alternatively, one may place all values representing the
-        permeability field on the union of the geometries into a single binary file. Note that the permeability values
-        must be represented in precisely the same configuration as the computational grid. Then, the same file could be
-        specified for each geounit in the input file. Or, the computational domain could be described as a single
-        geouint (in the ParFlow input file) in which case the permeability values would be read in only once.
+        [Type: string] This key specifies that permeability values for the specified
+        geometry, geometry_name, are given according to a user-supplied description
+        in the “ParFlow Binary” file whose filename is given as the value.
+        For a description of the ParFlow Binary file format, see the manual.
+        The ParFlow Binary file associated with the named geometry must contain a
+        collection of permeability values corresponding in a one-to-one manner to
+        the entire computational grid. That is to say, when the contents of the file
+        are read into the simulator, a complete permeability description for the entire
+        domain is supplied. Only those values associated with computational cells
+        residing within the geometry (as it is represented on the computational grid)
+        will be copied into data structures used during the course of a simulation.
+        Thus, the values associated with cells outside of the geounit are irrelevant.
+        For clarity, consider a couple of different scenarios. For example, the user may
+        create a file for each geometry such that appropriate permeability values are
+        given for the geometry and “garbage" values (e.g., some flag value) are given for
+        the rest of the computational domain. In this case, a separate binary file is
+        specified for each geometry. Alternatively, one may place all values representing
+        the permeability field on the union of the geometries into a single binary file.
+        Note that the permeability values must be represented in precisely the same
+        configuration as the computational grid. Then, the same file could be specified
+        for each geounit in the input file. Or, the computational domain could be described
+        as a single geouint (in the ParFlow input file) in which case the permeability
+        values would be read in only once.
       domains:
         AnyStringDomain: __no_args__
 
