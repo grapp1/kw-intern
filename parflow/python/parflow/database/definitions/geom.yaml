@@ -130,11 +130,24 @@ GeomInputItem:
       type: EnumDomain
       enumList: ['SolidFile', 'IndicatorField', 'Box']
 
+  # Will ParFlow return an error if you use singular vs. plural?
+  # Distinction needs to be more clear in manual (only lists plural)
+  GeomName:
+    help: >
+      [Type: string] This is a name of a single geometry defined by
+      the geometry input. This should be used for a geometry input type of Box,
+      which only requires a single name.
+    domain:
+      type: AnyStringDomain
+    valueHandler:
+      type: ChildrenHandler
+      className: GeomItem
+
   GeomNames:
     help: >
       [Type: string] This is a list of the names of the geometries defined by
-      the geometry input. For a geometry input type of Box, the list should
-      contain a single geometry name. For the SolidFile geometry type this
+      the geometry input. For a geometry input type of Box, the singular
+      GeomName should be used. For the SolidFile geometry type this
       should contain a list with the same number of gemetries as were defined
       using GMS. The order of geometries in the SolidFile should match the
       names. For IndicatorField types you need to specify the value in the
@@ -319,9 +332,7 @@ Geom:
       domain:
         type: AnyStringDomain
 
-
-
-
+# GeomItems: for keys in the form Geom.geom_name.[]
 
 GeomItem:
   __doc__: >
@@ -822,14 +833,14 @@ GeomItem:
         type: DoubleRangeDomain
         minValue: 0.0
 
-    # Corner case with N as class and field
+    # Corner case with SRes as class and field
     SResFilename:
       help: >
         [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domain:
         type: AnyStringDomain
-      exportName: N.Filename
+      exportName: SRes.Filename
 
     SRes:
       help: >
@@ -839,14 +850,14 @@ GeomItem:
         minValue: 0.0
         maxValue: 1.0
 
-    # Corner case with N as class and field
+    # Corner case with SSat as class and field
     SSatFileName:
       help: >
         [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domain:
         type: AnyStringDomain
-      exportName: N.Filename
+      exportName: SSat.Filename
 
     SSat:
       help: >
@@ -910,6 +921,50 @@ GeomItem:
         was set to PFBFile.
       domain:
         type: AnyStringDomain
+
+  # Thermal Conductivity - missing from manual
+  ThermalConductivity:
+    __doc__: >
+      Setting thermal conductivity values for various geometries
+
+    Value:
+      help: >
+        [Type: double] This key specifies the thermal conductivity value on the specified geometry.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0 # not sure appropriate range
+
+    # Corner case with KDry as class and field
+    KDryFileName:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: KDry.Filename
+
+    KDry:
+      help: >
+        [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0 # not sure appropriate range
+
+    # Corner case with KWet as class and field
+    KWetFileName:
+      help: >
+        [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
+        The ONLY option for geom_name is "domain."
+      domain:
+        type: AnyStringDomain
+      exportName: KDry.Filename
+
+    KWet:
+      help: >
+        [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
+      domain:
+        type: DoubleRangeDomain
+        minValue: 0.0
 
 # Setting Geom.geometry_name.contaminant_name.Retardation.Type and Value
 GeomContItem:

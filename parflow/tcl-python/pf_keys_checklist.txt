@@ -191,45 +191,45 @@ Geom.%s.ICSaturation.%s.Value
 + * Geom.%s.Porosity.FileName		
 * Geom.%s.Porosity.Type						
 * Geom.%s.Porosity.Value	
-Geom.%s.RelPerm.A						
-Geom.%s.RelPerm.Alpha						
-Geom.%s.RelPerm.Alpha.Filename						
-Geom.%s.RelPerm.Coeff.%d						
-Geom.%s.RelPerm.Degree						
-Geom.%s.RelPerm.InterpolationMethod						
-Geom.%s.RelPerm.MinPressureHead						
-Geom.%s.RelPerm.N						
-Geom.%s.RelPerm.N.Filename						
-Geom.%s.RelPerm.NumSamplePoints						
-Geom.%s.RelPerm.Value						
-Geom.%s.RelPerm.gamma						
-Geom.%s.Saturation.A						
-Geom.%s.Saturation.Alpha						
-Geom.%s.Saturation.Alpha.Filename						
-Geom.%s.Saturation.Coeff.%d						
-Geom.%s.Saturation.Degree						
-Geom.%s.Saturation.FileName						
-Geom.%s.Saturation.N						
-Geom.%s.Saturation.N.Filename						
-Geom.%s.Saturation.SRes						
-Geom.%s.Saturation.SRes.Filename						
-Geom.%s.Saturation.SSat						
-Geom.%s.Saturation.SSat.Filename						
-Geom.%s.Saturation.Value						
-Geom.%s.Saturation.gamma						
-Geom.%s.SpecificStorage.Value						
-Geom.%s.ThermalConductivity.KDry						
-Geom.%s.ThermalConductivity.KDry.Filename						
-Geom.%s.ThermalConductivity.KWet						
-Geom.%s.ThermalConductivity.KWet.Filename						
-Geom.%s.ThermalConductivity.Value						
+* Geom.%s.RelPerm.A						
+* Geom.%s.RelPerm.Alpha						
+* Geom.%s.RelPerm.Alpha.Filename						
+* Geom.%s.RelPerm.Coeff.%d						
+* Geom.%s.RelPerm.Degree						
++ * Geom.%s.RelPerm.InterpolationMethod						
+* Geom.%s.RelPerm.MinPressureHead						
+* Geom.%s.RelPerm.N						
+* Geom.%s.RelPerm.N.Filename						
+* Geom.%s.RelPerm.NumSamplePoints						
+* Geom.%s.RelPerm.Value						
+* Geom.%s.RelPerm.gamma						
+* Geom.%s.Saturation.A						
+* Geom.%s.Saturation.Alpha						
+* Geom.%s.Saturation.Alpha.Filename						
+* Geom.%s.Saturation.Coeff.%d						
+* Geom.%s.Saturation.Degree						
+* Geom.%s.Saturation.FileName						
+* Geom.%s.Saturation.N						
+* Geom.%s.Saturation.N.Filename						
+* Geom.%s.Saturation.SRes						
+* Geom.%s.Saturation.SRes.Filename						
+* Geom.%s.Saturation.SSat						
+* Geom.%s.Saturation.SSat.Filename						
+* Geom.%s.Saturation.Value						
+* Geom.%s.Saturation.gamma						
+* Geom.%s.SpecificStorage.Value						
++ * Geom.%s.ThermalConductivity.KDry						
++ * Geom.%s.ThermalConductivity.KDry.Filename						
++ * Geom.%s.ThermalConductivity.KWet						
++ * Geom.%s.ThermalConductivity.KWet.Filename						
++ * Geom.%s.ThermalConductivity.Value						
 * Geom.%s.Upper.X						
 * Geom.%s.Upper.Y						
 * Geom.%s.Upper.Z						
-Geom.%s.dzScale.FileName						
-Geom.%s.dzScale.Value						
+* Geom.%s.dzScale.FileName						
+* Geom.%s.dzScale.Value						
 * GeomInput.%s.FileName	
-GeomInput.%s.GeomName						
++ * GeomInput.%s.GeomName						
 * GeomInput.%s.GeomNames						
 * GeomInput.%s.InputType						
 * GeomInput.%s.Value						
