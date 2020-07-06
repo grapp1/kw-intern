@@ -36,7 +36,7 @@ class ChildrenHandler:
         if len(name):
           # print(f' - {name} => {className} in {destination_container.__class__}')
           valideNames.append(name)
-          destination_container.__dict__[name] = klass()
+          destination_container.__dict__[name] = klass(destination_container)
 
       return valideNames
 
@@ -46,7 +46,7 @@ class ChildrenHandler:
         if len(name):
           valideNames.append(name)
           # print(f' - {name} => {className} in {destination_container.__class__}')
-          destination_container.__dict__[name] = klass()
+          destination_container.__dict__[name] = klass(destination_container)
 
       return valideNames
 

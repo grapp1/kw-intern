@@ -61,7 +61,7 @@ GeomInputItem:
       GeomInputUpdater:
         type: ChildrenHandler
         className: GeomInputItemValue
-        location: ../..
+        location: ..
       GeomUpdater:
         type: ChildrenHandler
         className: GeomItem
@@ -82,7 +82,7 @@ GeomInputItem:
       GeomInputUpdater:
         type: ChildrenHandler
         className: GeomInputItemValue
-        location: ../..
+        location: ..
       GeomUpdater:
         type: ChildrenHandler
         className: GeomItem
