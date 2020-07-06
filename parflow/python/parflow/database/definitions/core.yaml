@@ -78,6 +78,7 @@ ComputationalGrid:
         [Type: double] This assigns the lower y coordinate location for the
         computational grid.
       domains:
+        MandatoryValue: __no_args__
         DoubleRangeDomain: __no_args__
 
     Z:
@@ -85,6 +86,7 @@ ComputationalGrid:
         [Type: double] This assigns the lower z coordinate location for the
         computational grid.
       domains:
+        MandatoryValue: __no_args__
         DoubleRangeDomain: __no_args__
 
   NX:
@@ -92,6 +94,7 @@ ComputationalGrid:
       [Type: int] This assigns the number of grid cells in the x direction
       for the computational grid.
     domains:
+      MandatoryValue: __no_args__
       IntRangeDomain:
         minValue: 1
 
@@ -100,6 +103,7 @@ ComputationalGrid:
       [Type: int] This assigns the number of grid cells in the y direction
       for the computational grid.
     domains:
+      MandatoryValue: __no_args__
       IntRangeDomain:
         minValue: 1
 
@@ -108,6 +112,7 @@ ComputationalGrid:
       [Type: int] This assigns the number of grid cells in the z direction
       for the computational grid.
     domains:
+      MandatoryValue: __no_args__
       IntRangeDomain:
         minValue: 1
 
@@ -117,6 +122,7 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
+      MandatoryValue: __no_args__
       DoubleRangeDomain:
         minValue: 1.0
 
@@ -126,6 +132,7 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
+      MandatoryValue: __no_args__
       DoubleRangeDomain:
         minValue: 1.0
 
@@ -135,5 +142,6 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
+      MandatoryValue: __no_args__
       DoubleRangeDomain:
         minValue: 1.0

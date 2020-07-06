@@ -41,12 +41,19 @@ class PFDBObj:
           domains = self._details[name]['domains']
         if 'handlers' in self._details[name]:
           handlers = self._details[name]['handlers']
+        if 'duplicate_count' in self._details[name]:
+          self._details[name]['duplicate_count'] += 1
+          duplicate_count = self._details[name]['duplicate_count']
+        else:
+          self._details[name]['duplicate_count'] = 0
       else:
         print(self._details)
         print(f'Field {name} is not part of the expected schema {self.__class__}')
         if PFDBObj.exitOnError:
           raise ValueError(
               f'Field "{name}" is not part of the expected schema {self.__class__}')
+      if self._details[name]['duplicate_count'] > 0:
+        print(f'{name} has {duplicate_count} duplicates in this file.')
 
 
     # Run domain validation

@@ -675,12 +675,11 @@ SolverItem:
 
   PrintConcentration:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the concentration data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintDZMultiplier:
     help: >
@@ -711,12 +710,11 @@ SolverItem:
 
   PrintLSMSink:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the flux array passed from CLM to ParFlow. Printing occurs at each
+      DumpInterval time.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintMannings:
     help: >
@@ -823,12 +821,11 @@ SolverItem:
 
   PrintWells:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on collection and printing of the well data. The data is collected at intervals given by
+      values in the timing information section. Printing occurs at the end of the run when all collected data is written.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   RAPType:
     help: >
@@ -1135,14 +1132,14 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
+  # typo in manual (says saturation instead of pressure)
   WriteSiloPressure:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the pressure data in silo binary format. The printing of the data is
+      controlled by values in the timing information section. This data may be read in by VisIT and other visualization packages.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloSaturation:
     help: >
@@ -1173,27 +1170,25 @@ SolverItem:
 
   WriteSiloSubsurfData:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the subsurface data, Permeability and Porosity in silo binary file format.
+      The data is printed after it is generated and before the main time stepping loop - only once during the run. This
+      data may be read in by VisIT and other visualization packages.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloTop:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloVelocities:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__

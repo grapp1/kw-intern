@@ -10,6 +10,9 @@ lw = Run('Little Washita')
 lw.Process.Topology.P = 1
 lw.Process.Topology.Q = 2
 lw.Process.Topology.P = 1
+lw.Process.Topology.P = 4
+lw.Process.Topology.P = 2
+lw.Process.Topology.Q = 2
 
 lw.GeomInput.Names = 'box_input indi_input'
 
