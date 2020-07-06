@@ -46,20 +46,21 @@ SolverItem:
 
   AbsTol:
     help: >
-      [Type: float] This value gives the absolute tolerance for the linear solve algorithm.
+      [Type: double] This value gives the absolute tolerance for the linear solve algorithm.
     default: 1e-9
     domains:
       DoubleRangeDomain:
-        minValue:
+        minValue: 0
 
   AdvectOrder:
     help: >
-      [Type: int]
-    default:
+      [Type: int] This key controls the order of the explicit method used in advancing the concentrations. This value can be either
+      1 for a standard upwind first order or 2 for a second order Godunov method.
+    default: 2
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      IntRangeDomain:
+        minValue: 1
+        maxValue: 2
 
   BetaFluid:
     help: >
@@ -113,7 +114,7 @@ SolverItem:
       also produce instabilities.
     default: 0.7
     domains:
-      DoubleRangeDomain:
+      DoubleRangeDomain: __no_args__
 
   # CLM settings
   CLM:
@@ -437,12 +438,12 @@ SolverItem:
 
   Drop:
     help: >
-      [Type: int]
-    default:
+      [Type: double] This key gives a clipping value for data written to PFSB files. Data values greater than the negative of this value
+      and less than the value itself are treated as zero and not written to PFSB files.
+    default: 1e-8
     domains:
-      MandatoryValue: __no_args__
       DoubleRangeDomain:
-        minValue:
+        minValue: 0
 
   DropTol:
     help: >
@@ -538,7 +539,7 @@ SolverItem:
       run-away simulation.
     default: 1000000
     domains:
-      IntRangeDomain:
+      IntRangeDomain: __no_args__
 
   MaxLevels:
     help: >
@@ -602,6 +603,30 @@ SolverItem:
       MandatoryValue: __no_args__
       DoubleRangeDomain:
         minValue:
+
+  OverlandDiffusive:
+    __doc__: >
+      Setting epsilon value for the diffusive overland flow formulation.
+
+    Epsilon:
+      help: >
+        [Type: double] This key provides a minimum value for the Sf used in the OverlandDiffusive boundary condition.
+      default: 1e-5
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+  OverlandKinematic:
+    __doc__: >
+      Setting epsilon value for the diffusive kinematic flow formulation.
+
+    Epsilon:
+      help: >
+        [Type: double] This key provides a minimum value for the Sf used in the OverlandKinematic boundary condition.
+      default: 1e-5
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
 
   PCMatrixType:
     help: >
@@ -731,21 +756,19 @@ SolverItem:
 
   PrintPressure:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the pressure data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintSaturation:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the saturation data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintSlopes:
     help: >
@@ -767,39 +790,36 @@ SolverItem:
 
   PrintSubsurf:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the subsurface data, Permeability and Porosity. The data is printed after
+      it is generated and before the main time stepping loop - only once during the run. The data is written as a PFB file.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
+  # PrintSubsurfData is missing from the manual. Is this equivalent to PrintSubsurf?
   PrintSubsurfData:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the subsurface data, Permeability and Porosity. The data is printed after
+      it is generated and before the main time stepping loop - only once during the run. The data is written as a PFB file.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
+  # PrintTop is missing from the manual.
   PrintTop:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] ?
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintVelocities:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintWells:
     help: >
@@ -821,12 +841,10 @@ SolverItem:
 
   RelTol:
     help: >
-      [Type: int]
-    default:
+      [Type: double] This value gives the relative tolerance for the linear solve algorithm.
+    default: 1.0
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   SadvectOrder:
     help: >

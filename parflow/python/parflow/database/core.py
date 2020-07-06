@@ -98,7 +98,6 @@ class PFDBObj:
     current_location = self
     for path_item in path_items:
       if path_item == '..':
-        print(path_item)
         current_location = current_location._parent
       elif path_item == '.':
         pass

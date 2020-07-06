@@ -1,100 +1,9 @@
 # geom.yaml
-# Definitions of geometry-related keys in Parflow
+# Definitions of geometry-related keys in ParFlow
 # includes GeomInput, Geom
 # typo: manual typos
 # missing: keys that are missing from manual
 # Corner cases
-
-# GeomInput.%s.FileName
-# GeomInput.%s.GeomName
-# GeomInput.%s.GeomNames
-# GeomInput.%s.InputType
-# GeomInput.%s.Value
-# Geom.%s.%s.Retardation.Rate
-# Geom.%s.%s.Retardation.Type
-# Geom.%s.CapPressure.%s.Value
-# Geom.%s.FBx.FileName
-# Geom.%s.FBy.FileName
-# Geom.%s.FBz.FileName
-# Geom.%s.FileName
-# Geom.%s.HeatCapacity.Value
-# Geom.%s.ICPressure.FileName
-# Geom.%s.ICPressure.RefElevation
-# Geom.%s.ICPressure.RefGeom
-# Geom.%s.ICPressure.RefPatch
-# Geom.%s.ICPressure.Value
-# Geom.%s.ICSaturation.%s.Value
-# Geom.%s.Lower.X
-# Geom.%s.Lower.Y
-# Geom.%s.Lower.Z
-# Geom.%s.Patches
-# Geom.%s.Perm.DelK
-# Geom.%s.Perm.FileName
-# Geom.%s.Perm.GeomMean
-# Geom.%s.Perm.HighCutoff
-# Geom.%s.Perm.KMax
-# Geom.%s.Perm.LambdaX
-# Geom.%s.Perm.LambdaY
-# Geom.%s.Perm.LambdaZ
-# Geom.%s.Perm.LogNormal
-# Geom.%s.Perm.LowCutoff
-# Geom.%s.Perm.MaxCpts
-# Geom.%s.Perm.MaxNPts
-# Geom.%s.Perm.MaxSearchRad
-# Geom.%s.Perm.NumLines
-# Geom.%s.Perm.RZeta
-# Geom.%s.Perm.Seed
-# Geom.%s.Perm.Sigma
-# Geom.%s.Perm.StratType
-# Geom.%s.Perm.TensorFileX
-# Geom.%s.Perm.TensorFileY
-# Geom.%s.Perm.TensorFileZ
-# Geom.%s.Perm.TensorValX
-# Geom.%s.Perm.TensorValY
-# Geom.%s.Perm.TensorValZ
-# Geom.%s.Perm.Type
-# Geom.%s.Perm.Value
-# Geom.%s.Porosity.FileName
-# Geom.%s.Porosity.Type
-# Geom.%s.Porosity.Value
-# Geom.%s.RelPerm.A
-# Geom.%s.RelPerm.Alpha
-# Geom.%s.RelPerm.Alpha.Filename
-# Geom.%s.RelPerm.Coeff.%d
-# Geom.%s.RelPerm.Degree
-# Geom.%s.RelPerm.InterpolationMethod
-# Geom.%s.RelPerm.MinPressureHead
-# Geom.%s.RelPerm.N
-# Geom.%s.RelPerm.N.Filename
-# Geom.%s.RelPerm.NumSamplePoints
-# Geom.%s.RelPerm.Value
-# Geom.%s.RelPerm.gamma
-# Geom.%s.Saturation.A
-# Geom.%s.Saturation.Alpha
-# Geom.%s.Saturation.Alpha.Filename
-# Geom.%s.Saturation.Coeff.%d
-# Geom.%s.Saturation.Degree
-# Geom.%s.Saturation.FileName
-# Geom.%s.Saturation.N
-# Geom.%s.Saturation.N.Filename
-# Geom.%s.Saturation.SRes
-# Geom.%s.Saturation.SRes.Filename
-# Geom.%s.Saturation.SSat
-# Geom.%s.Saturation.SSat.Filename
-# Geom.%s.Saturation.Value
-# Geom.%s.Saturation.gamma
-# Geom.%s.SpecificStorage.Value
-# Geom.%s.ThermalConductivity.KDry
-# Geom.%s.ThermalConductivity.KDry.Filename
-# Geom.%s.ThermalConductivity.KWet
-# Geom.%s.ThermalConductivity.KWet.Filename
-# Geom.%s.ThermalConductivity.Value
-# Geom.%s.Upper.X
-# Geom.%s.Upper.Y
-# Geom.%s.Upper.Z
-# Geom.%s.dzScale.FileName
-# Geom.%s.dzScale.Value
-
 
 # -----------------------------------------------------------------------------
 # GeomInput.*
@@ -214,7 +123,9 @@ Perm:
       files. The choices for this key are TensorByGeom and TensorByFile.
     domains:
       EnumDomain:
-        enumList: ['TensorByGeom', 'TensorByFile']
+        enumList:
+          - TensorByGeom
+          - TensorByFile
 
 # -----------------------------------------------------------------------------
 # SpecificStorage.*
@@ -238,7 +149,8 @@ SpecificStorage:
       geometry.
     domains:
       EnumDomain:
-        enumList: ['Constant']
+        enumList:
+          - Constant
 
 # -----------------------------------------------------------------------------
 # dzScale.*
@@ -1048,25 +960,25 @@ GeomItem:
       domains:
         AnyStringDomain:  __no_args__
 
-    FileName:
+    RefElevation:
       help: >
         [Type:string]
       domains:
         AnyStringDomain:  __no_args__
 
-    FileName:
+    RefGeom:
       help: >
         [Type:string]
       domains:
         AnyStringDomain:  __no_args__
 
-    FileName:
+    RefPatch:
       help: >
         [Type:string]
       domains:
         AnyStringDomain:  __no_args__
 
-    FileName:
+    Value:
       help: >
         [Type:string]
       domains:
@@ -1075,13 +987,12 @@ GeomItem:
   ICSaturation:
     __doc__: >
       Setting the
-#  Geom.%s.HeatCapacity.Value
-#  Geom.%s.ICPressure.FileName
-#  Geom.%s.ICPressure.RefElevation
-#  Geom.%s.ICPressure.RefGeom
-#  Geom.%s.ICPressure.RefPatch
-#  Geom.%s.ICPressure.Value
-#  Geom.%s.ICSaturation.%s.Value
+
+    Value:
+      help: >
+        [Type: double] Setting...
+      domains:
+        DoubleRangeDomain: __no_args__
 
 # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
 GeomContItem:
