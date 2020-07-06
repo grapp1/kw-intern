@@ -114,6 +114,21 @@ class AnyStringDomain:
     return errors
 
 # -----------------------------------------------------------------------------
+
+class BoolDomain:
+  def validate(self, value, **kwargs):
+    errors = []
+
+    if value == None:
+      return errors
+
+    if not isinstance(value, bool):
+      return errors
+
+    errors.append(f'{value} ({type(value)} must be True/False')
+    return errors
+
+# -----------------------------------------------------------------------------
 # Helper map with an instance of each domain type
 # -----------------------------------------------------------------------------
 

@@ -1,0 +1,1181 @@
+# solver.yaml
+# Definitions of solver components, time stepping, and other components of ParFlow
+# Includes Solver, TimeStep,
+
+#Solver.Linear.KrylovDimension
+#Solver.Linear.MaxRestarts
+#Solver.Linear.Preconditioner
+#Solver.Nonlinear.DerivativeEpsilon
+#Solver.Nonlinear.EtaChoice
+#Solver.Nonlinear.Globalization
+#Solver.Nonlinear.MaxIter
+#Solver.Nonlinear.PrintFlag
+#Solver.Nonlinear.ResidualTol
+#Solver.Nonlinear.StepTol
+#Solver.Nonlinear.UseJacobian
+#Solver.TerrainFollowingGrid.SlopeUpwindFormulation
+#NetCDF.Chunking
+#NetCDF.EvapTrans.FileName
+#NetCDF.EvapTransFileTransient
+#NetCDF.NodeLevelIO
+#NetCDF.ROMIOhints
+#NetCDF.WriteCLM
+#NetCDF.WriteDZMultiplier
+#NetCDF.WriteEvapTrans
+#NetCDF.WriteEvapTransSum
+#NetCDF.WriteMannings
+#NetCDF.WriteMask
+#NetCDF.WriteOverlandBCFlux
+#NetCDF.WriteOverlandSum
+#NetCDF.WritePressure
+#NetCDF.WriteSaturation
+#NetCDF.WriteSlopes
+#NetCDF.WriteSubsurface
+#OverlandSpinupDampP1
+#OverlandSpinupDampP2
+
+
+
+# -----------------------------------------------------------------------------
+# SolverItems
+# -----------------------------------------------------------------------------
+
+SolverItem:
+  __doc__: >
+    Assigning properties to solver
+
+  AbsTol:
+    help: >
+      [Type: float] This value gives the absolute tolerance for the linear solve algorithm.
+    default: 1e-9
+    domains:
+      DoubleRangeDomain:
+        minValue:
+
+  AdvectOrder:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  BetaFluid:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  BetaFracture:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  BetaPerm:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  BetaPore:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  BoxSizePowerOf2:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  CFL:
+    help: >
+      [Type: double] This key gives the value of the weight put on the computed CFL limit before computing a global timestep value.
+      Values greater than 1 are not suggested and in fact because this is an approximation, values slightly less than 1 can
+      also produce instabilities.
+    default: 0.7
+    domains:
+      DoubleRangeDomain:
+
+  # CLM settings
+  CLM:
+    __doc__: >
+      Setting CLM parameters
+
+    CLM.BinaryOutDir:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.CLMDumpInterval:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.CLMFileDir:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.DailyRST:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.EvapBeta:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.FieldCapacity:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.ForceVegetation:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.FstepStart:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationCycle:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationRate:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationStartTime:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationStopTime:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationThreshold:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationThresholdType:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IrrigationType:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.IstepStart:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.MetFileNT:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.MetFileName:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.MetFilePath:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.MetFileSubdir:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.MetForcing:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.Print1dOut:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.ResSat:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.ReuseCount:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.RootZoneNZ:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.SingleFile:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.SoiLayer:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.VegWaterStress:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.WiltingPoint:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.WriteLastRST:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+    CLM.WriteLogs:
+      help: >
+        [Type: int]
+      default:
+      domains:
+        MandatoryValue: __no_args__
+        DoubleRangeDomain:
+          minValue:
+
+  CoarseSolve:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  CompCompress:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  DiagScale:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  DiagSolver:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Drop:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  DropTol:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  EvapTrans.FileLooping:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  EvapTrans.FileName:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  EvapTransFile:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  EvapTransFileTransient:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Jacobian:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  LSM:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Linear:
+    help: >
+      [Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG,
+      and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient)
+      which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient
+      solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a
+      conjugate gradient solver.
+    default: 'PCG'
+    domains:
+      EnumDomain:
+        enumList:
+          - MGSemi
+          - PPCG
+          - PCG
+          - CGHS
+
+  MaxConvergenceFailures:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  MaxIter:
+    help: >
+      [Type: int] This key gives the maximum number of iterations that will be allowed for time-stepping. This is to prevent a
+      run-away simulation.
+    default: 1000000
+    domains:
+      IntRangeDomain:
+
+  MaxLevels:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  MaxMinNX:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  MaxMinNY:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  MaxMinNZ:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  NonlinearSolver:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  NumPostRelax:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  NumPreRelax:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PCMatrixType:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PolyDegree:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PolyPC:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Preconditioner:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintCLM:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintConcentration:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintDZMultiplier:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintEvapTrans:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintEvapTransSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintLSMSink:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintMannings:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintMask:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintOverlandBCFlux:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintOverlandSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintPressure:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintSaturation:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintSlopes:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintSpecificStorage:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintSubsurf:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintSubsurfData:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintTop:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintVelocities:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  PrintWells:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  RAPType:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  RelTol:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  SadvectOrder:
+    help: >
+      [Type: int] This key controls the order of the explicit method used in advancing the concentrations. This value can be either
+      1 for a standard upwind first order or 2 for a second order Godunov method.
+    default: 2
+    domains:
+      IntRangeDomain:
+        minValue: 1
+        maxValue: 2
+
+  Smoother:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Spinup:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Symmetric:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  TerrainFollowingGrid:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  TwoNorm:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Weight:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteCLMBinary:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloCLM:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloConcentration:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloDZMultiplier:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloEvapTrans:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloEvapTransSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloMannings:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloMask:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloOverlandBCFlux:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloOverlandSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOConcentration:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIODZMultiplier:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOEvapTrans:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOEvapTransSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOMannings:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOMask:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOOverlandBCFlux:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOOverlandSum:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOPressure:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOSaturation:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOSlopes:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOSpecificStorage:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOSubsurfData:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOTop:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPMPIOVelocities:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloPressure:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloSaturation:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloSlopes:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloSpecificStorage:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloSubsurfData:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloTop:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  WriteSiloVelocities:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:

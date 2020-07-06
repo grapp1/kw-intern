@@ -130,7 +130,7 @@ Checklist - adding * to ones that I have already entered into yaml
 %s.WriteSiloVelocities						
 CapPressure.%s.GeomNames						
 CapPressure.%s.Type						
-Cell.%d.dzScale.Value
+* Cell.%d.dzScale.Value
 > * ComputationalGrid.Lower.X
 > * ComputationalGrid.Lower.Y
 > * ComputationalGrid.Lower.Z
