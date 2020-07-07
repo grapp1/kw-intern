@@ -48,6 +48,9 @@ lw.GeomInput.g8.Value = 28
 # maybe test for duplicates or overwrites?
 lw.GeomInput.s1.Value = 5
 
+lw.Geom.domain.Perm.Seed = 15
+lw.Geom.domain.Perm.Seed = 30
+
 # -----------------------------------------------------------------------------
 # Validation process
 # -----------------------------------------------------------------------------

@@ -34,7 +34,7 @@ GeomInput:
 
 GeomInputItem:
   __doc__: >
-    [Type: string] One of the user-defined names for defining a geometry region
+    One of the user-defined names for defining a geometry region
 
   InputType:
     help: >

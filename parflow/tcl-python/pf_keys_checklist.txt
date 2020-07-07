@@ -96,7 +96,7 @@ Checklist - adding * to ones that I have already entered into yaml
 %s.TerrainFollowingGrid						
 %s.TwoNorm						
 %s.Weight						
-%s.WriteCLMBinary						
+* %s.WriteCLMBinary						
 %s.WriteSiloCLM						
 %s.WriteSiloConcentration						
 %s.WriteSiloDZMultiplier						
