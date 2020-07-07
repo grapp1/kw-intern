@@ -350,7 +350,11 @@ GeomItem:
         geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
       domains:
         EnumDomain:
-          enumList: ['Constant', 'TurnBands', 'ParGauss', 'PFBFile']
+          enumList:
+            - Constant
+            - TurnBands
+            - ParGauss
+            - PFBFile
 
     Value:
       help: >
@@ -474,7 +478,11 @@ GeomItem:
       domains:
         EnumDomain:
         # typo: LogTruncated is misspelled in the manual
-          enumList: ['Normal', 'Log', 'NormalTruncated', 'LogTruncated']
+          enumList:
+            - Normal
+            - Log
+            - NormalTruncated
+            - LogTruncated
 
     StratType:
       help: >
@@ -484,7 +492,10 @@ GeomItem:
       default: Bottom
       domains:
         EnumDomain:
-          enumList: ['Horizontal', 'Bottom', 'Top']
+          enumList:
+            - Horizontal
+            - Bottom
+            - Top
 
     LowCutoff:
       help: >
@@ -598,7 +609,8 @@ GeomItem:
         assigned to all grid cells within a geometry.
       domains:
         EnumDomain:
-          enumList: ['Constant']
+          enumList:
+            - Constant
 
     Value:
       help: >

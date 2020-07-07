@@ -309,8 +309,8 @@ PhaseSources.Geom.%s.Value
 > * Process.Topology.P
 > * Process.Topology.Q	
 > * Process.Topology.R					
-SILO.CompressionOptions						
-SILO.Filetype						
+* SILO.CompressionOptions						
+* SILO.Filetype						
 Solver.Linear.KrylovDimension		
 Solver.Linear.MaxRestarts						
 Solver.Linear.Preconditioner						

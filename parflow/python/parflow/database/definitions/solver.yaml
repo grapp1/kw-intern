@@ -123,30 +123,29 @@ SolverItem:
 
     CLM.BinaryOutDir:
       help: >
-        [Type: int]
-      default:
+        [Type: boolean/string] This key specifies whether the CLM writes each set of two dimensional binary output files to a corresponding
+        directory. These directories my be created before ParFlow is run (using the tcl script, for example). Choices for
+        this key include True and False. Note that CLM must be compiled and linked at runtime for this option to be active.
+      default: True
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        BoolDomain: __no_args__
 
     CLM.CLMDumpInterval:
       help: >
-        [Type: int]
-      default:
+        [Type: int] This key specifies how often output from the CLM is written. This key is in integer multipliers of the CLM timestep.
+        Note that CLM must be compiled and linked at runtime for this option to be active.
+      default: 1
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        IntRangeDomain:
+          minValue: 1
 
     CLM.CLMFileDir:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies what directory all output from the CLM is written to. This key may be set to "./" or "" to
+        write output to the ParFlow run directory. This directory must be created before ParFlow is run. Note that CLM
+        must be compiled and linked at runtime for this option to be active.
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        AnyStringDomain: __no_args__
 
     CLM.DailyRST:
       help: >
@@ -159,30 +158,47 @@ SolverItem:
 
     CLM.EvapBeta:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies the form of the bare soil evaporation  parameter in CLM. The valid types for this key are
+        None, Linear, Cosine.
+      default: Linear
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        enumDomain:
+          enumList:
+            - None
+            - Linear
+            - Cosine
 
     CLM.FieldCapacity:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the field capacity for the beta-t function in CLM specified above. Note that the units for this function
+        are pressure [m] for a Pressure formulation and saturation [-] for a Saturation formulation. Note that CLM must
+        be compiled and linked at runtime for this option to be active.
+      default: 1.0
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
+          maxValue: 1.0
 
     CLM.ForceVegetation:
       help: >
-        [Type: int]
-      default:
+        [Type: boolean/string] This key specifies whether vegetation should be forced in CLM. Currently this option only works for 1D and 3D
+        forcings, as specified by the key Solver.CLM.MetForcing. Choices for this key include True and False. Forced
+        vegetation variables are :
+        LAI: Leaf Area Index [-]
+        SAI: Stem Area Index [-]
+        Z0M: Aerodynamic roughness length [m]
+        DISPLA: Displacement height [m]
+        In the case of 1D meteorological forcings, CLM requires four files for vegetation time series and one vegetation map.
+        The four files should be named respectively lai.dat, sai.dat, z0m.dat, displa.dat. They are ASCII files and
+        contain 18 time-series columns (one per IGBP vegetation class, and each timestep per row). The vegetation map
+        should be a properly distributed 2D ParFlow binary file (.pfb) which contains vegetation indices (from 1 to 18).
+        The vegetation map filename is veg_map.pfb. ParFlow uses the vegetation map to pass to CLM a 2D map for each
+        vegetation variable at each time step. In the case of 3D meteorological forcings, ParFlow expects four distincts
+        properly distributed ParFlow binary file (.pfb), the third dimension being the timesteps. The files should be named
+        LAI.pfb, SAI.pfb, Z0M.pfb, DISPLA.pfb. No vegetation map is needed in this case.
+      default: False
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        BoolDomain: __no_args__
 
     CLM.FstepStart:
       help: >
@@ -195,48 +211,46 @@ SolverItem:
 
     CLM.IrrigationCycle:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies the cycle of the irrigation in CLM. The valid types for this key are Constant, Deficit. Note
+        only Constant is currently implemented. Constant cycle applies irrigation each day from IrrigationStartTime to
+        IrrigationStopTime in GMT.
+      default: Constant
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        enumDomain:
+          enumList:
+            - Constant
+            - Deficit
 
     CLM.IrrigationRate:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the rate of the irrigation in CLM in [mm/s].
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
 
     CLM.IrrigationStartTime:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the start time of the irrigation in CLM GMT.
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
+          maxValue: 2400.0
 
     CLM.IrrigationStopTime:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the stop time of the irrigation in CLM GMT.
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
+          maxValue: 2400.0
 
     CLM.IrrigationThreshold:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the threshold value for the irrigation in CLM [-].
+      default: 0.5
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
 
     CLM.IrrigationThresholdType:
       help: >
@@ -249,48 +263,64 @@ SolverItem:
 
     CLM.IrrigationType:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies the form of the irrigation in CLM. The valid types for this key are none, Spray, Drip, Instant.
+      default: none
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        enumDomain:
+          enumList:
+            - none
+            - Spray
+            - Drip
+            - Instant
 
     CLM.IstepStart:
       help: >
-        [Type: int]
-      default:
+        [Type: int] This key specifies the value of the counter, istep in CLM. This key primarily determines the start of the output
+        counter for CLM.It is used to restart a run by setting the key to the ending step of the previous run plus one. Note
+        that CLM must be compiled and linked at runtime for this option to be active.
+      default: 1
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        IntRangeDomain: __no_args__ # may need to update this
 
     CLM.MetFileNT:
       help: >
-        [Type: int]
-      default:
+        [Type: int] This key specifies the number of timesteps per file for 3D forcing data.
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        IntRangeDomain: __no_args__
 
     CLM.MetFileName:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies defines the file name for 1D, 2D or 3D forcing data. 1D meteorological forcing files are text
+        files with single columns for each variable and each timestep per row, while 2D and 3D forcing files are distributed
+        ParFlow binary files, one for each variable and timestep (2D) or one for each variable and multiple timesteps (3D).
+        Behavior of this key is different for 1D and 2D and 3D cases, as sepcified by the Solver.CLM.MetForcing key
+        above. For 1D cases, it is the FULL FILE NAME. Note that in this configuration, this forcing file is not distributed,
+        the user does not provide copies such as narr.1hr.txt.0, narr.1hr.txt.1 for each processor. ParFlow only needs
+        the single original file (e.g. narr.1hr.txt). For 2D cases, this key is the BASE FILE NAME for the 2D forcing files,
+        currently set to NLDAS, with individual files determined as follows NLDAS.<variable>.<time step>.pfb. Where the
+        <variable> is the forcing variable and <timestep> is the integer file counter corresponding to istep above. Forcing
+        is needed for following variables:
+        DSWR: Downward Visible or Short-Wave radiation [W/m2].
+        DLWR: Downward Infa-Red or Long-Wave radiation [W/m2]
+        APCP: Precipitation rate [mm/s]
+        Temp: Air temperature [K]
+        UGRD: West-to-East or U-component of wind [m/s]
+        VGRD: South-to-North or V-component of wind [m/s]
+        Press: Atmospheric Pressure [pa]
+        SPFH: Water-vapor specific humidity [kg/kg]
+        Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        AnyStringDomain: __no_args__
 
     CLM.MetFilePath:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies defines the location of 1D, 2D or 3D forcing data. For 1D cases, this is the path to a single
+        forcing file (e.g. narr.1hr.txt). For 2D and 3D cases, this is the path to the directory containing all forcing files.
+        Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        AnyStringDomain: __no_args__
 
     CLM.MetFileSubdir:
       help: >
@@ -303,39 +333,50 @@ SolverItem:
 
     CLM.MetForcing:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies defines whether 1D (uniform over the domain), 2D (spatially distributed) or 3D (spatially
+        distributed with multiple timesteps per .pfb forcing file) forcing data is used. Choices for this key are 1D, 2D and
+        3D. This key has no default so the user must set it to 1D, 2D or 3D. Failure to set this key will cause CLM to still be
+        run but with unpredictable values causing CLM to eventually crash. 1D meteorological forcing files are text files with
+        single columns for each variable and each timestep per row, while 2D forcing files are distributed ParFlow binary
+        files, one for each variable and timestep. File names are specified in the Solver.CLM.MetFileName variable below.
+        Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        enumDomain:
+          enumList:
+            - 1D
+            - 2D
+            - 3D
 
     CLM.Print1dOut:
       help: >
-        [Type: int]
-      default:
+        [Type: boolean/string] This key specifies whether the CLM one dimensional (averaged over each processor) output file is written or not.
+        Choices for this key include True and False. Note that CLM must be compiled and linked at runtime for this option
+        to be active.
+      default: False
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        BoolDomain: __no_args__
 
     CLM.ResSat:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the residual saturation for the  function in CLM specified above. Note that CLM must be
+        compiled and linked at runtime for this option to be active.
+      default: 0.1
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
 
     CLM.ReuseCount:
       help: >
-        [Type: int]
-      default:
+        [Type: int] How many times to reuse a CLM atmospheric forcing file input. For example timestep=1, reuse =1 is normal
+        behavior but reuse=2 and timestep=0.5 subdivides the time step using the same CLM input for both halves instead
+        of needing two files. This is particually useful for large, distributed runs when the user wants to run ParFlow at
+        a smaller timestep than the CLM forcing. Forcing files will be re-used and total fluxes adjusted accordingly without
+        needing duplicate files.
+      default: 1
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        IntRangeDomain:
+          minValue: 0
 
     CLM.RootZoneNZ:
       help: >
@@ -366,21 +407,25 @@ SolverItem:
 
     CLM.VegWaterStress:
       help: >
-        [Type: int]
-      default:
+        [Type: string] This key specifies the form of the plant water stress function t parameter in CLM. The valid types for this key
+        are None, Saturation, Pressure.
+      default: Saturation
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        enumDomain:
+          enumList:
+            - None
+            - Saturation
+            - Pressure
 
     CLM.WiltingPoint:
       help: >
-        [Type: int]
-      default:
+        [Type: double] This key specifies the wilting point for the beta-t function in CLM specified above. Note that the units for this function
+        are pressure [m] for a Pressure formulation and saturation [-] for a Saturation formulation. Note that CLM must
+        be compiled and linked at runtime for this option to be active.
+      default: 0.1
       domains:
-        MandatoryValue: __no_args__
         DoubleRangeDomain:
-          minValue:
+          minValue: 0.0
 
     CLM.WriteLastRST:
       help: >
@@ -666,12 +711,13 @@ SolverItem:
 
   PrintCLM:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key specifies whether the CLM writes two dimensional binary output files to a PFB binary format. Note that
+      CLM must be compiled and linked at runtime for this option to be active. These files are all written according to the
+      standard format used for all ParFlow variables, using the runname, and istep. Variables are either two-dimensional
+      or over the number of CLM layers (default of ten).
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   PrintConcentration:
     help: >
@@ -807,7 +853,7 @@ SolverItem:
   PrintTop:
     help: >
       [Type: boolean/string] ?
-    default: True
+    default: False
     domains:
       BoolDomain: __no_args__
 
@@ -882,12 +928,35 @@ SolverItem:
 
   TerrainFollowingGrid:
     help: >
-      [Type: int]
-    default:
+      This key specifies that a terrain-following coordinate transform is used for solver Richards. This key sets x and
+      y subsurface slopes to be the same as the Topographic slopes (a value of False sets these subsurface slopes to zero).
+      These slopes are used in the Darcy fluxes to add a density, gravity -dependent term. This key will not change the
+      output files (that is the output is still orthogonal) or the geometries (they will still follow the computational grid)–
+      these two things are both to do items. This key only changes solver Richards, not solver Impes.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
+
+  TerrainFolSlopeUpwind:
+    help: >
+      [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for
+      this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8
+      in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two
+      adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of
+      a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as
+      the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental
+      purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal
+      formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The
+      upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is
+      consistent with OverlandFlow.
+    default: False
+    domains:
+      enumDomain:
+        enumList:
+          - Original
+          - Upwind
+          - UpwindSine
+    exportName: TerrainFollowingGrid.SlopeUpwindFormulation
 
   TwoNorm:
     help: >
@@ -909,228 +978,194 @@ SolverItem:
 
   WriteCLMBinary:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key specifies whether the CLM writes two dimensional binary output files in a generic binary format. Note
+      that CLM must be compiled and linked at runtime for this option to be active.
+    default: True
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloCLM:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key specifies whether the CLM writes two dimensional binary output files to a silo binary format. This data
+      may be read in by VisIT and other visualization packages. Note that CLM and silo must be compiled and linked
+      at runtime for this option to be active. These files are all written according to the standard format used for all
+      ParFlow variables, using the runname, and istep. Variables are either two-dimensional or over the number of CLM
+      layers (default of ten).
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloConcentration:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the concentration data in silo binary format. The printing of the data is
+      controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloDZMultiplier:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloEvapTrans:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the evaporation and rainfall flux data using silo binary format. This
+      data comes from either clm or from external calls to ParFlow such as WRF. This data is in units of [L3T-1]. The
+      printing of the data is controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloEvapTransSum:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the evaporation and rainfall flux data using silo binary format as a running,
+      cumulative amount. This data comes from either clm or from external calls to ParFlow such as WRF. This data is
+      in units of [L3]. The printing of the data is controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloMannings:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the Manning’s roughness data in silo binary format. The printing of the
+      data is controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloMask:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the mask data using silo binary format. The mask contains values equal
+      to one for active cells and zero for inactive cells. The printing of the data is controlled by values in the timing
+      information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloOverlandBCFlux:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloOverlandSum:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify calculation and printing of the total overland outflow from the domain using silo
+      binary format as a running cumulative amount. This is integrated along all domain boundaries and is calculated any
+      location that slopes at the edge of the domain point outward. This data is in units of [L3]. The printing of the data
+      is controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOConcentration:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIODZMultiplier:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOEvapTrans:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOEvapTransSum:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOMannings:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOMask:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOOverlandBCFlux:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOOverlandSum:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOPressure:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOSaturation:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOSlopes:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOSpecificStorage:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOSubsurfData:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOTop:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloPMPIOVelocities:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string]
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   # typo in manual (says saturation instead of pressure)
   WriteSiloPressure:
@@ -1143,30 +1178,27 @@ SolverItem:
 
   WriteSiloSaturation:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the saturation data using silo binary format. The printing of the data is
+      controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloSlopes:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to turn on printing of the x adn y slope data in silo binary format. The printing of the data is controlled by values in the
+      timing information section. The data is written as a PFB file.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloSpecificStorage:
     help: >
-      [Type: int]
-    default:
+      [Type: boolean/string] This key is used to specify printing of the specific storage data in silo binary format. The printing of the data is
+      controlled by values in the timing information section.
+    default: False
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      BoolDomain: __no_args__
 
   WriteSiloSubsurfData:
     help: >
@@ -1187,8 +1219,32 @@ SolverItem:
 
   WriteSiloVelocities:
     help: >
-      [Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data. The printing of the data is controlled by values in the
+      [Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data in silo binary format. The printing of the data is controlled by values in the
       timing information section. The data is written as a PFB file.
     default: False
     domains:
       BoolDomain: __no_args__
+
+# SILO options
+SILO: # typo in documentation
+  __doc__: >
+    These keys are used to control how SILO writes data. SILO allows writing to PDB and HDF5 file formats.
+    SILO also allows data compression to be used, which can save significant amounts of disk space for some problems.
+
+  Filetype:
+    help: >
+      [Type: string] This key is used to specify the SILO filetype. Allowed values are PDB and HDF5. Note that you must have
+      configured SILO with HDF5 in order to use that option.
+    default: 'PDB'
+    domains:
+      enumDomain:
+        enumList:
+          - PDB
+          - HDF5
+
+  CompressionOptions:
+    help: > # typo on 'available' in manual
+      [Type: string] This key is used to specify the SILO compression options. See the SILO manual for the DB_SetCompression
+      command for information on available options. NOTE: the options available are highly dependent on the configure
+      options when building SILO.
+
