@@ -211,7 +211,6 @@ def duplicateSearch(history):
     pass
 
 
-
 # -----------------------------------------------------------------------------
 
 def validateValueWithPrint(name, value, domainDefinition=None, indent=1):

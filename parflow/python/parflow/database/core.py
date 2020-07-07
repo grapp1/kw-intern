@@ -82,6 +82,7 @@ class PFDBObj:
     errorCount = 0
     indentStr = '  '*indent
     for name in self.__dict__:
+      dupCount = 0
       if name[0] == '_':
         continue
 
@@ -91,16 +92,19 @@ class PFDBObj:
         errorCount += obj.validate(indent=indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
         errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], indent)
-        if len(self._details[name]['history']):
-          dup_count = duplicateSearch(self._details[name]['history'])
+        if 'history' in self._details[name]:
+          if len(self._details[name]['history']):
+            dupCount = duplicateSearch(self._details[name]['history'])
+            history = self._details[name]['history']
       elif name[0] == '_':
         # skip internal variables
         pass
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
 
-    if dup_count >= 1:
-      print(f'{name} has {dup_count} duplicates')
+      if dupCount is not None and dupCount >= 1:
+        print(f'{name} has {dupCount} duplicates: {history}')
+
     return errorCount
 
   def getParFlowKey(self, key):
