@@ -6,7 +6,7 @@
 # SolverItems
 # -----------------------------------------------------------------------------
 
-SolverItem:
+Solver:
   __doc__: >
     Assigning properties to solver
 
@@ -130,7 +130,7 @@ SolverItem:
 
     EvapBeta:
       help: >
-        [Type: string] This key specifies the form of the bare soil evaporation  parameter in CLM. The valid types for this key are
+        [Type: string] This key specifies the form of the bare soil evaporation parameter in CLM. The valid types for this key are
         None, Linear, Cosine.
       default: Linear
       domains:
@@ -142,7 +142,7 @@ SolverItem:
 
     FieldCapacity:
       help: >
-        [Type: double] This key specifies the field capacity for the beta-t function in CLM specified above. Note that the units for this function
+        [Type: double] This key specifies the field capacity for the beta-t function in CLM. Note that the units for this function
         are pressure [m] for a Pressure formulation and saturation [-] for a Saturation formulation. Note that CLM must
         be compiled and linked at runtime for this option to be active.
       default: 1.0
@@ -327,7 +327,7 @@ SolverItem:
 
     ResSat:
       help: >
-        [Type: double] This key specifies the residual saturation for the  function in CLM specified above. Note that CLM must be
+        [Type: double] This key specifies the residual saturation for the saturation function in CLM. Note that CLM must be
         compiled and linked at runtime for this option to be active.
       default: 0.1
       domains:
@@ -379,7 +379,7 @@ SolverItem:
 
     VegWaterStress:
       help: >
-        [Type: string] This key specifies the form of the plant water stress function t parameter in CLM. The valid types for this key
+        [Type: string] This key specifies the form of the plant water stress function parameter in CLM. The valid types for this key
         are None, Saturation, Pressure.
       default: Saturation
       domains:
@@ -391,7 +391,7 @@ SolverItem:
 
     WiltingPoint:
       help: >
-        [Type: double] This key specifies the wilting point for the beta-t function in CLM specified above. Note that the units for this function
+        [Type: double] This key specifies the wilting point for the bets-t function in CLM. Note that the units for this function
         are pressure [m] for a Pressure formulation and saturation [-] for a Saturation formulation. Note that CLM must
         be compiled and linked at runtime for this option to be active.
       default: 0.1
@@ -618,34 +618,6 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
-  # missing from manual
-  NonlinearSolver:
-    help: >
-      [Type: int]
-    default:
-    domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
-
-  LinNumPostRelax:
-    help: >
-      [Type: int]
-    default:
-    domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
-
-  NumPreRelax:
-    help: >
-      [Type: int]
-    default:
-    domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
-
   OverlandDiffusive:
     __doc__: >
       Setting epsilon value for the diffusive overland flow formulation.
@@ -670,6 +642,7 @@ SolverItem:
         DoubleRangeDomain:
           minValue: 0.0
 
+  # missing from manual - part of Linear.Preconditioner
   PCMatrixType:
     help: >
       [Type: int]
@@ -679,6 +652,7 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
+  # missing from manual
   PolyDegree:
     help: >
       [Type: int]
@@ -688,16 +662,8 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
+  # missing from manual
   PolyPC:
-    help: >
-      [Type: int]
-    default:
-    domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
-
-  Preconditioner:
     help: >
       [Type: int]
     default:
@@ -724,6 +690,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintDZMultiplier:
     help: >
       [Type: int]
@@ -733,6 +700,7 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
+  # missing from manual
   PrintEvapTrans:
     help: >
       [Type: int]
@@ -742,6 +710,7 @@ SolverItem:
       DoubleRangeDomain:
         minValue:
 
+  # missing from manual
   PrintEvapTransSum:
     help: >
       [Type: int]
@@ -759,6 +728,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintMannings:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the flux array passed from CLM to ParFlow. Printing occurs at each
@@ -767,6 +737,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintMask:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the flux array passed from CLM to ParFlow. Printing occurs at each
@@ -775,6 +746,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintOverlandBCFlux:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the flux array passed from CLM to ParFlow. Printing occurs at each
@@ -783,6 +755,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintOverlandSum:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the flux array passed from CLM to ParFlow. Printing occurs at each
@@ -807,6 +780,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintSlopes:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the saturation data. The printing of the data is controlled by values in the
@@ -815,6 +789,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual
   PrintSpecificStorage:
     help: >
       [Type: boolean/string] This key is used to turn on printing of the saturation data. The printing of the data is controlled by values in the
@@ -864,6 +839,7 @@ SolverItem:
     domains:
       BoolDomain: __no_args__
 
+  # missing from manual - maybe only included as Linear.Preconditioner.PFMG.RAPType
   RAPType:
     help: >
       [Type: int]
@@ -935,8 +911,8 @@ SolverItem:
     help: >
       [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for
       this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8
-      in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two
-      adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of
+      in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two
+      adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of
       a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as
       the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental
       purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal
@@ -1086,3 +1062,201 @@ SolverItem:
           - Galerkin
           - NonGalerkin
     exportName: Linear.Preconditioner.PFMG.RAPType
+
+  # Solver.Nonlinear.{} keys
+
+  # missing from manual
+  NonlinearSolver:
+    help: >
+      [Type: int]
+    default:
+    domains:
+      MandatoryValue: __no_args__
+      DoubleRangeDomain:
+        minValue:
+
+  Nonlinear:
+    __doc__: >
+      Setting nonlinear solver keys
+
+    VariableDz:
+      help: >
+        [Type: boolean/string] This key specifies whether dZ multipliers are to be used, the default is False. The default indicates a false or
+        non-active variable dz and each layer thickness is 1.0 [L].
+      default: False
+      domains:
+        BoolDomain: __no_args__
+
+    FlowBarrierX:
+      help: >
+        [Type: boolean/string] This key specifies whether Flow Barriers are to be used in the X direction, the default is False. The default
+        indicates a false or FBx value of one [-] everywhere in the domain.
+      default: False
+      domains:
+        BoolDomain: __no_args__
+
+    FlowBarrierY:
+      help: >
+        [Type: boolean/string] This key specifies whether Flow Barriers are to be used in the Y direction, the default is False. The default
+        indicates a false or FBy value of one [-] everywhere in the domain.
+      default: False
+      domains:
+        BoolDomain: __no_args__
+
+    FlowBarrierZ:
+      help: >
+        [Type: boolean/string] This key specifies whether Flow Barriers are to be used in the Z direction, the default is False. The default
+        indicates a false or FBz value of one [-] everywhere in the domain.
+      default: False
+      domains:
+        BoolDomain: __no_args__
+
+    ResidualTol:
+      help: >
+        [Type: double] This key specifies the tolerance that measures how much the relative reduction in the nonlinear residual should
+        be before nonlinear iterations stop. The magnitude of the residual is measured with the l1 (max) norm.
+      default: 1e-7
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    StepTol:
+      help: >
+        [Type: double] This key specifies the tolerance that measures how small the difference between two consecutive nonlinear steps
+        can be before nonlinear iterations stop.
+      default: 1e-7
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    MaxIter:
+      help: >
+        [Type: int] This key specifies the maximum number of nonlinear iterations allowed before iterations stop with a convergence
+        failure.
+      default: 15
+      domains:
+        IntRangeDomain:
+          minValue: 1
+
+    PrintFlag:
+      help: >
+        [Type: string] This key specifies the amount of informational data that is printed to the *.out.kinsol.log file. Choices for this
+        key are NoVerbosity, LowVerbosity, NormalVerbosity and HighVerbosity. The choice NoVerbosity prints
+        no statistics about the nonlinear convergence process. The choice LowVerbosity outputs the nonlinear iteration
+        count, the scaled norm of the nonlinear function, and the number of function calls. The choice NormalVerbosity
+        prints the same as for LowVerbosity and also the global strategy statistics. The choice HighVerbosity prints the
+        same as for NormalVerbosity with the addition of further Krylov iteration statistics.
+      default: HighVerbosity
+      domains:
+        EnumDomain:
+          enumList:
+            - NoVerbosity
+            - LowVerbosity
+            - NormalVerbosity
+            - HighVerbosity
+
+    EtaChoice:
+      help: >
+        [Type: string] This key specifies how the linear system tolerance will be selected. The linear system is solved until a relative
+        residual reduction of n is achieved. Linear residual norms are measured in the l^2 norm. Choices for this key include
+        EtaConstant, Walker1 and Walker2. If the choice EtaConstant is specified, then n will be taken as constant.
+        The choices Walker1 and Walker2 specify choices for n developed by Eisenstat and Walker (see reference in manual).
+        For both of the last two choices, n is never allowed to be less than 1e-4.
+      default: Walker2
+      domains:
+        EnumDomain:
+          enumList:
+            - EtaConstant
+            - Walker1
+            - Walker2
+
+    EtaValue:
+      help: >
+        [Type: double] This key specifies the constant value of n for the EtaChoice key EtaConstant.
+      default: 1e-4
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    EtaAlpha:
+      help: >
+        [Type: double] This key specifies the value of alpha for the case of EtaChoice being Walker2.
+      default: 2.0
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    EtaGamma:
+      help: >
+        [Type: double] This key specifies the value of gamma for the case of EtaChoice being Walker2.
+      default: 0.9
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    UseJacobian:
+      help: >
+        [Type: boolean/string] This key specifies whether the Jacobian will be used in matrix-vector products or whether a matrix-free version of
+        the code will run. Choices for this key are False and True. Using the Jacobian will most likely decrease the number
+        of nonlinear iterations but require more memory to run.
+      default: False
+      domains:
+        BoolDomain: __no_args__
+
+    DerivativeEpsilon:
+      help: >
+        [Type: double] This key specifies the value of epsilon used in approximating the action of the Jacobian on a vector with approximate
+        directional derivatives of the nonlinear function. This parameter is only used when the UseJacobian key is False.
+      default: 1e-7
+      domains:
+        DoubleRangeDomain:
+          minValue: 0.0
+
+    Globalization:
+      help: >
+        [Type: string] This key specifies the type of global strategy to use. Possible choices for this key are InexactNewton and
+        LineSearch. The choice InexactNewton specifies no global strategy, and the choice LineSearch specifies that
+        a line search strategy should be used where the nonlinear step can be lengthened or decreased to satisfy certain
+        criteria.
+      default: LineSearch
+      domains:
+        EnumDomain:
+          enumList:
+            - LineSearch
+            - InexactNewton
+
+# -----------------------------------------------------------------------------
+# Spinup Options (Overland Flow)
+# -----------------------------------------------------------------------------
+
+OverlandFlowSpinUp:
+  help: >
+    [Type: int] This key specifies that a simplified form of the overland flow boundary condition (Equation 5.17) be used in place
+    of the full equation. This formulation removes lateral flow and drives and ponded water pressures to zero using a
+    SeepageFace boundary condition. While this can be helpful in spinning up the subsurface, this is no longer coupled
+    subsurface-surface flow. If set to zero (the default) this key behaves normally.
+  default: 0
+  domains:
+    IntRangeDomain:
+      minValue: 0
+      maxValue: 1
+
+# equation is the same between P1 and P2 - need to check whether these should be different
+OverlandFlowSpinUpDampP1:
+  help: >
+    This key sets P1 and provides exponential dampening to the pressure relationship in the overland flow equation
+    by adding the following term: P2*exp[(pressure)*P2]
+  default: 0.0
+  domains:
+    DoubleRangeDomain:
+      minValue: 0.0
+
+OverlandFlowSpinUpDampP2:
+  help: >
+    This key sets P2 and provides exponential dampening to the pressure relationship in the overland flow equation
+    by adding the following term: P2*exp[(pressure)*P2]
+  default: 0.0
+  domains:
+    DoubleRangeDomain:
+      minValue: 0.0
+
