@@ -203,6 +203,17 @@ def validateValueWithException(value, domainDefinition=None, exitOnError=False):
 
 # -----------------------------------------------------------------------------
 
+def duplicateSearch(history):
+  if len(history) > 1:
+    dup_count = len(history)
+    return dup_count
+  else:
+    pass
+
+
+
+# -----------------------------------------------------------------------------
+
 def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
   indentStr = '  '* (indent - 1)
   errors = validateValueWithErrors(value, domainDefinition)

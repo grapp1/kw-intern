@@ -3,7 +3,7 @@ This module aims to provide the core components that are required to build
 a Parflow input deck.
 '''
 
-from .domains import validateValueWithException, validateValueWithPrint
+from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
 from .handlers import decorateValue
 
 class PFDBObj:
@@ -41,19 +41,23 @@ class PFDBObj:
           domains = self._details[name]['domains']
         if 'handlers' in self._details[name]:
           handlers = self._details[name]['handlers']
-        if 'duplicate_count' in self._details[name]:
-          self._details[name]['duplicate_count'] += 1
-          duplicate_count = self._details[name]['duplicate_count']
+        if 'history' in self._details[name]:
+          self._details[name]['history'].append(value)
         else:
-          self._details[name]['duplicate_count'] = 0
+          self._details[name]['history'] = []
+          self._details[name]['history'].append(value)
+
       else:
         print(self._details)
         print(f'Field {name} is not part of the expected schema {self.__class__}')
         if PFDBObj.exitOnError:
           raise ValueError(
               f'Field "{name}" is not part of the expected schema {self.__class__}')
-      if self._details[name]['duplicate_count'] > 0:
-        print(f'{name} has {duplicate_count} duplicates in this file.')
+
+      # Check for duplicates
+      #history = self._details[name]['history']
+      #dup_count = duplicateSearch(history)
+      #print(dup_count)
 
 
     # Run domain validation
@@ -87,12 +91,16 @@ class PFDBObj:
         errorCount += obj.validate(indent=indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
         errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], indent)
+        if len(self._details[name]['history']):
+          dup_count = duplicateSearch(self._details[name]['history'])
       elif name[0] == '_':
         # skip internal variables
         pass
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
 
+    if dup_count >= 1:
+      print(f'{name} has {dup_count} duplicates')
     return errorCount
 
   def getParFlowKey(self, key):
