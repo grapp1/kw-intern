@@ -213,7 +213,7 @@ def duplicateSearch(history):
 
 # -----------------------------------------------------------------------------
 
-def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
+def validateValueWithPrint(name, value, domainDefinition=None, history=None, indent=1):
   indentStr = '  '* (indent - 1)
   errors = validateValueWithErrors(value, domainDefinition)
 
@@ -222,6 +222,13 @@ def validateValueWithPrint(name, value, domainDefinition=None, indent=1):
     for error in errors:
       print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
   elif value != None:
-    print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
+    if history != None:
+      dupCount = duplicateSearch(history)
+      if dupCount is not None and dupCount >= 1:
+        print(f'{indentStr}  {term.MAGENTA}\u26A0 {name}: {value}  ({dupCount} duplicates: {history}){term.ENDC}')
+      else:
+        print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
+    else:
+      print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
 
   return len(errors)

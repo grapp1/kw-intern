@@ -7,6 +7,8 @@ class TerminalColors:
   ENDC = '\033[0m'
   BOLD = '\033[1m'
   UNDERLINE = '\033[4m'
+  BLUE = '\033[34m'
+  MAGENTA = '\033[35m'
 
 class TerminalSymbols:
   ok = u'\u2714'

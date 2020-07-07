@@ -5,6 +5,7 @@ a Parflow input deck.
 
 from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
 from .handlers import decorateValue
+from . import TerminalColors as term
 
 class PFDBObj:
   printLineError = False
@@ -54,12 +55,6 @@ class PFDBObj:
           raise ValueError(
               f'Field "{name}" is not part of the expected schema {self.__class__}')
 
-      # Check for duplicates
-      #history = self._details[name]['history']
-      #dup_count = duplicateSearch(history)
-      #print(dup_count)
-
-
     # Run domain validation
     if PFDBObj.printLineError:
       validateValueWithException(value, domains, PFDBObj.exitOnError)
@@ -91,19 +86,19 @@ class PFDBObj:
         print(f'{indentStr}{name}:')
         errorCount += obj.validate(indent=indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
-        errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], indent)
         if 'history' in self._details[name]:
           if len(self._details[name]['history']):
-            dupCount = duplicateSearch(self._details[name]['history'])
             history = self._details[name]['history']
+            errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], history, indent)
+          else:
+            errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], None, indent)
+        else:
+          errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], None, indent)
       elif name[0] == '_':
         # skip internal variables
         pass
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
-
-      if dupCount is not None and dupCount >= 1:
-        print(f'{name} has {dupCount} duplicates: {history}')
 
     return errorCount
 
