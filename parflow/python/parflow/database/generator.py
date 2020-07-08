@@ -124,62 +124,63 @@ class PythonModule:
     self.addLine()
 
   def addClass(self, className, classDefinition):
+    try:
+      classKeys = classDefinition.keys()
+      classMembers = []
+      fieldMembers = []
+      classInstances = []
+      classDetails = {}
 
-    classKeys = classDefinition.keys()
-    classMembers = []
-    fieldMembers = []
-    classInstances = []
-    classDetails = {}
+      self.addSeparator()
 
-    self.addSeparator()
+      dedupClassName = self.validationSummary.getDeduplicateClassName(className)
+      self.validationSummary.addClass(className)
 
-    dedupClassName = self.validationSummary.getDeduplicateClassName(className)
-    self.validationSummary.addClass(className)
+      self.addLine(f'class {dedupClassName}(PFDBObj):')
+      if '__doc__' in classKeys:
+        self.addComment(classDefinition['__doc__'], self.strIndent)
 
-    self.addLine(f'class {dedupClassName}(PFDBObj):')
-    if '__doc__' in classKeys:
-      self.addComment(classDefinition['__doc__'], self.strIndent)
+      for key in classDefinition:
+        if isClass(key, classDefinition):
+          classMembers.append(key)
+        if isField(key, classDefinition):
+          fieldMembers.append(key)
+        if key == '__class_instances__':
+          classInstances = classDefinition['__class_instances__']
 
-    for key in classDefinition:
-      print(key)
-      if isClass(key, classDefinition):
-        classMembers.append(key)
-      if isField(key, classDefinition):
-        fieldMembers.append(key)
-      if key == '__class_instances__':
-        classInstances = classDefinition['__class_instances__']
+      if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
+        '''
+          def __init__(self, parent=None):
+            super().__init__(parent)
+            self.Topology = Topology(self)
+        '''
+        self.addLine(f'{self.strIndent}def __init__(self, parent=None):')
+        self.addLine(f'{self.strIndent*2}super().__init__(parent)')
 
-    if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
-      '''
-        def __init__(self, parent=None):
-          super().__init__(parent)
-          self.Topology = Topology(self)
-      '''
-      self.addLine(f'{self.strIndent}def __init__(self, parent=None):')
-      self.addLine(f'{self.strIndent*2}super().__init__(parent)')
+        for instance in classMembers:
+          self.addLine(
+              f'{self.strIndent*2}self.{instance} = {self.validationSummary.getDeduplicateClassName(instance)}(self)')
 
-      for instance in classMembers:
-        self.addLine(
-            f'{self.strIndent*2}self.{instance} = {self.validationSummary.getDeduplicateClassName(instance)}(self)')
+        for instance in classInstances:
+          self.addClassInstance(instance)
 
-      for instance in classInstances:
-        self.addClassInstance(instance)
+        for field in fieldMembers:
+          self.addField(field, classDefinition[field], classDetails)
 
-      for field in fieldMembers:
-        self.addField(field, classDefinition[field], classDetails)
+        if len(classDetails):
+          detailsLines = json.dumps(classDetails, indent=2).splitlines()
+          self.addLine(f'{self.strIndent*2}self._details = {detailsLines[0]}')
+          for line in detailsLines[1:]:
+            self.addLine(f'{self.strIndent*2}{line}')
 
-      if len(classDetails):
-        detailsLines = json.dumps(classDetails, indent=2).splitlines()
-        self.addLine(f'{self.strIndent*2}self._details = {detailsLines[0]}')
-        for line in detailsLines[1:]:
-          self.addLine(f'{self.strIndent*2}{line}')
-
-    for classMember in classMembers:
-      # Catch error
-      if classMember == 'help':
-        print(f'Invalid syntax: {className} must use __doc__ rather than help')
-        sys.exit(1)
-      self.addClass(classMember, classDefinition[classMember])
+      for classMember in classMembers:
+        # Catch error
+        if classMember == 'help':
+          print(f'Invalid syntax: {className} must use __doc__ rather than help')
+          sys.exit(1)
+        self.addClass(classMember, classDefinition[classMember])
+    except:
+      print(f'Error when processing class {className}')
 
   def addField(self, fieldName, fieldDefinition, classDetails):
     self.validationSummary.addField(fieldName)
