@@ -2,7 +2,7 @@
 # Definitions of solver components, time stepping, and other components of ParFlow
 # Includes Solver, TimeStep,
 
-Solver:
+#Solver:
 
 
 
@@ -1155,7 +1155,7 @@ SolverItem:
 # -----------------------------------------------------------------------------
 #
 OverlandFlowSpinUp:
-  help: >
+  __doc__: >
     [Type: int] This key specifies that a simplified form of the overland flow boundary condition (Equation 5.17) be used in place
     of the full equation. This formulation removes lateral flow and drives and ponded water pressures to zero using a
     SeepageFace boundary condition. While this can be helpful in spinning up the subsurface, this is no longer coupled
