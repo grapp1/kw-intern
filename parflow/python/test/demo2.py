@@ -9,10 +9,8 @@ lw = Run('Little Washita')
 # -----------------------------------------------------------------------------
 lw.Process.Topology.P = 1
 lw.Process.Topology.Q = 2
-lw.Process.Topology.P = 1
 lw.Process.Topology.P = 4
-lw.Process.Topology.P = 2
-lw.Process.Topology.Q = 2
+lw.Process.Topology.R = 6
 
 lw.GeomInput.Names = 'box_input indi_input'
 
@@ -45,11 +43,8 @@ lw.GeomInput.g6.Value = 26
 lw.GeomInput.g7.Value = 27
 lw.GeomInput.g8.Value = 28
 
-# maybe test for duplicates or overwrites?
-lw.GeomInput.s1.Value = 5
 
-lw.Geom.domain.Perm.Seed = 15
-lw.Geom.domain.Perm.Seed = 30
+lw.Geom.domain.Perm.Type = 'Constant'
 
 # -----------------------------------------------------------------------------
 # Validation process

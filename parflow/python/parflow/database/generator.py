@@ -141,6 +141,7 @@ class PythonModule:
       self.addComment(classDefinition['__doc__'], self.strIndent)
 
     for key in classDefinition:
+      print(key)
       if isClass(key, classDefinition):
         classMembers.append(key)
       if isField(key, classDefinition):

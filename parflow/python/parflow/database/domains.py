@@ -233,7 +233,7 @@ def validateValueWithPrint(name, value, domainDefinition=None, history=None, ind
         dup_str += str(history[dupCount-1]) + ')'
         print(f'{indentStr}  {term.MAGENTA}\u26A0{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
       else:
-        print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name} : {value}')
+        print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
     else:
       print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
 

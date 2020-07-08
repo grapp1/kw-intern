@@ -16,7 +16,7 @@ Solver:
     default: 1e-9
     domains:
       DoubleRangeDomain:
-        minValue: 0
+        minValue: 0.0
 
   AdvectOrder:
     help: >
@@ -32,50 +32,35 @@ Solver:
   BetaFluid:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   BetaFracture:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   BetaPerm:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   BetaPore:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   BoxSizePowerOf2:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   CFL:
     help: >
@@ -426,41 +411,29 @@ Solver:
   CoarseSolve:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   CompCompress:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   DiagScale:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   DiagSolver:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   Drop:
     help: >
@@ -475,11 +448,8 @@ Solver:
   DropTol:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   EvapTrans:
     __doc__: >
@@ -523,11 +493,8 @@ Solver:
   Jacobian:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   LSM:
     help: >
@@ -582,41 +549,29 @@ Solver:
   MaxLevels:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   MaxMinNX:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   MaxMinNY:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   MaxMinNZ:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   OverlandDiffusive:
     __doc__: >
@@ -646,31 +601,22 @@ Solver:
   PCMatrixType:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   PolyDegree:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   PolyPC:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   PrintCLM:
     help: >
@@ -694,31 +640,22 @@ Solver:
   PrintDZMultiplier:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   PrintEvapTrans:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   PrintEvapTransSum:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   PrintLSMSink:
     help: >
@@ -843,11 +780,8 @@ Solver:
   RAPType:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   RelTol:
     help: >
@@ -870,7 +804,6 @@ Solver:
   Smoother:
     help: >
       [Type: int]
-    default:
     domains:
       MandatoryValue: __no_args__
       DoubleRangeDomain:
@@ -880,7 +813,6 @@ Solver:
   Spinup:
     help: >
       [Type: int]
-    default:
     domains:
       MandatoryValue: __no_args__
       DoubleRangeDomain:
@@ -890,11 +822,8 @@ Solver:
   Symmetric:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   TerrainFollowingGrid:
     help: >
@@ -932,21 +861,15 @@ Solver:
   TwoNorm:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   # missing from manual
   Weight:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   WriteCLMBinary:
     help: >
@@ -1069,11 +992,8 @@ Solver:
   NonlinearSolver:
     help: >
       [Type: int]
-    default:
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleRangeDomain: __no_args__
 
   Nonlinear:
     __doc__: >

@@ -3,56 +3,56 @@ Checklist - adding * to ones that I have already entered into yaml
 + * denotes keys that were in the grep from the PF code, but are not in the manual
 
 %s.%s						
-%s.AbsTol						
-%s.AdvectOrder						
-%s.BetaFluid						
-%s.BetaFracture						
-%s.BetaPerm						
-%s.BetaPore						
-%s.BoxSizePowerOf2						
-%s.CFL						
-%s.CLM.BinaryOutDir						
-%s.CLM.CLMDumpInterval						
-%s.CLM.CLMFileDir						
-%s.CLM.DailyRST						
-%s.CLM.EvapBeta						
-%s.CLM.FieldCapacity						
-%s.CLM.ForceVegetation						
-%s.CLM.FstepStart						
-%s.CLM.IrrigationCycle						
-%s.CLM.IrrigationRate						
-%s.CLM.IrrigationStartTime						
-%s.CLM.IrrigationStopTime						
-%s.CLM.IrrigationThreshold						
-%s.CLM.IrrigationThresholdType						
-%s.CLM.IrrigationType						
-%s.CLM.IstepStart						
-%s.CLM.MetFileNT						
-%s.CLM.MetFileName						
-%s.CLM.MetFilePath						
-%s.CLM.MetFileSubdir						
-%s.CLM.MetForcing						
-%s.CLM.Print1dOut						
-%s.CLM.ResSat						
-%s.CLM.ReuseCount						
-%s.CLM.RootZoneNZ						
-%s.CLM.SingleFile						
-%s.CLM.SoiLayer						
-%s.CLM.VegWaterStress						
-%s.CLM.WiltingPoint						
-%s.CLM.WriteLastRST						
-%s.CLM.WriteLogs						
-%s.CoarseSolve						
-%s.CompCompress						
-%s.DiagScale						
-%s.DiagSolver						
-%s.Drop						
-%s.DropTol						
-%s.EvapTrans.FileLooping						
-%s.EvapTrans.FileName						
-%s.EvapTransFile						
-%s.EvapTransFileTransient						
-%s.Jacobian						
+* %s.AbsTol						
+* %s.AdvectOrder						
+* %s.BetaFluid						
+* %s.BetaFracture						
+* %s.BetaPerm						
+* %s.BetaPore						
+* %s.BoxSizePowerOf2						
+* %s.CFL						
+* %s.CLM.BinaryOutDir						
+* %s.CLM.CLMDumpInterval						
+* %s.CLM.CLMFileDir						
+* %s.CLM.DailyRST						
+* %s.CLM.EvapBeta						
+* %s.CLM.FieldCapacity						
+* %s.CLM.ForceVegetation						
+* %s.CLM.FstepStart						
+* %s.CLM.IrrigationCycle						
+* %s.CLM.IrrigationRate						
+* %s.CLM.IrrigationStartTime						
+* %s.CLM.IrrigationStopTime						
+* %s.CLM.IrrigationThreshold						
+* %s.CLM.IrrigationThresholdType						
+* %s.CLM.IrrigationType						
+* %s.CLM.IstepStart						
+* %s.CLM.MetFileNT						
+* %s.CLM.MetFileName						
+* %s.CLM.MetFilePath						
+* %s.CLM.MetFileSubdir						
+* %s.CLM.MetForcing						
+* %s.CLM.Print1dOut						
+* %s.CLM.ResSat						
+* %s.CLM.ReuseCount						
+* %s.CLM.RootZoneNZ						
+* %s.CLM.SingleFile						
+* %s.CLM.SoiLayer						
+* %s.CLM.VegWaterStress						
+* %s.CLM.WiltingPoint						
+* %s.CLM.WriteLastRST						
+* %s.CLM.WriteLogs						
++ * %s.CoarseSolve						
++ * %s.CompCompress						
++ * %s.DiagScale						
++ * %s.DiagSolver						
++ * %s.Drop						
++ * %s.DropTol						
++ * %s.EvapTrans.FileLooping						
++ * %s.EvapTrans.FileName						
++ * %s.EvapTransFile						
++ * %s.EvapTransFileTransient						
++ * %s.Jacobian						
 %s.LSM						
 %s.Linear						
 %s.MaxConvergenceFailures						
