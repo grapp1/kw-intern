@@ -4,3 +4,6 @@ BaseRun:
     - ComputationalGrid
     - GeomInput
     - Geom
+    - OverlandFlowSpinUp
+    - OverlandFlowSpinUpDampP1
+    - OverlandFlowSpinUpDampP2

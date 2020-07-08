@@ -225,13 +225,13 @@ def validateValueWithPrint(name, value, domainDefinition=None, history=None, ind
     # checking for duplicates and changing print statement
     if history != None:
       dupCount = duplicateSearch(history)
-      if dupCount is not None and dupCount >= 1:
+      if dupCount != None and dupCount >= 1:
         # offset = 1 if 'default' in name else 1
         dup_str = '('
         for val in range(dupCount-1):
           dup_str += str(history[val]) + ' => '
         dup_str += str(history[dupCount-1]) + ')'
-        print(f'{indentStr}  {term.MAGENTA}\u26A0{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
+        print(f'{indentStr}  {term.MAGENTA}{termSymbol.warning}{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
       else:
         print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
     else:

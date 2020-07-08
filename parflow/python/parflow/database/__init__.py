@@ -14,3 +14,4 @@ class TerminalSymbols:
   ok = u'\u2714'
   ko = u'\u2718'
   errorItem = u'\u2605'
+  warning = u'\u26A0'

@@ -77,7 +77,6 @@ class PFDBObj:
     errorCount = 0
     indentStr = '  '*indent
     for name in self.__dict__:
-      dupCount = 0
       if name[0] == '_':
         continue
 
@@ -99,6 +98,8 @@ class PFDBObj:
         pass
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
+      elif obj == None:
+        pass
 
     return errorCount
 

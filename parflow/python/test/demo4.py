@@ -11,15 +11,15 @@ lw.Process.Topology.P = 1
 lw.Process.Topology.Q = 2
 lw.Process.Topology.P = 1
 
-lw.TimingInfo.BaseUnit = 1.0
-lw.TimingInfo.StartCount = 0.0
-lw.TimingInfo.StartTime = 0.0
-lw.TimingInfo.StopTime = 24.0   # need to make sure this is greater than the start time, etc.
-lw.TimingInfo.DumpInterval = 1.0
-lw.TimeStep.Type = Constant
-lw.TimeStep.Value = 1.0
+# lw.TimingInfo.BaseUnit = 1.0
+# lw.TimingInfo.StartCount = 0.0
+# lw.TimingInfo.StartTime = 0.0
+# lw.TimingInfo.StopTime = 24.0   # need to make sure this is greater than the start time, etc.
+# lw.TimingInfo.DumpInterval = 1.0
+# lw.TimeStep.Type = Constant
+# lw.TimeStep.Value = 1.0
 
-lw.Solver = Richards
+# lw.Solver = 'Richards'
 lw.Solver.TerrainFollowingGrid = True
 lw.Solver.Nonlinear.VariableDz = False
 
