@@ -20,7 +20,7 @@ GeomInput:
     help: >
       [Type: string] List of names to use for defining geometry regions
     domains:
-      AnyString: __no_args__
+      AnyString:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
@@ -56,7 +56,7 @@ GeomInputItem:
       the geometry input. This should be used for a geometry input type of Box,
       which only requires a single name.
     domains:
-      AnyString: __no_args__
+      AnyString:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
@@ -77,7 +77,7 @@ GeomInputItem:
       names. For IndicatorField types you need to specify the value in the
       input field which matches the name using GeomInput.geom_input_name.Value.
     domains:
-      AnyString: __no_args__
+      AnyString:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
@@ -95,7 +95,7 @@ GeomInputItem:
       key specifies the input filename which contains the field or solid
       information.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
 # Value is for indicator field only
 GeomInputItemValue:
@@ -106,7 +106,7 @@ GeomInputItemValue:
       The named geometry will be defined wherever the input file is equal
       to the specified value.
     domains:
-      IntValue: __no_args__
+      IntValue:
 
 # -----------------------------------------------------------------------------
 # Perm.*
@@ -140,7 +140,7 @@ SpecificStorage:
       [Type: string] This key specifies all of the geometries on which a different specific storage value will be
       assigned. These geometries must cover the entire computational domain.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
   Type:
     help: >
@@ -168,7 +168,7 @@ dzScale:
       [Type: string] This key specifies which problem domain is being applied a variable dz subsurface. These
       geometries must cover the entire computational domain.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
   Type:
     help: >
@@ -177,7 +177,7 @@ dzScale:
       which assigns all layers of a given model to a list value, and PFBFile which reads in values from a distributed pfb
       file.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
   nzListNumber:
     help: >
@@ -225,7 +225,7 @@ Geom:
         permeability field will be assigned. These geometries must cover the
         entire computational domain.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     TensorByGeom:
       __doc__: >
@@ -237,7 +237,7 @@ Geom:
           entries will be assigned. These geometries must cover the entire
           computational domain.
         domains:
-          AnyString: __no_args__
+          AnyString:
 
   Porosity:
     __doc__: >
@@ -249,7 +249,7 @@ Geom:
         porosity will be assigned. These geometries must cover the
         entire computational domain.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   Retardation:
     __doc__: >
@@ -260,7 +260,7 @@ Geom:
         [Type: string] This key specifies all of the geometries to which the
         contaminants will have a retardation function applied.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
 # GeomItems: for keys in the form Geom.geom_name.[]
 
@@ -274,7 +274,7 @@ GeomItem:
     help: >
       [Type: string] This specifies some sort of filename for the specified geometry.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
 # Lower/Upper for Box geometry only
   Lower:
@@ -287,21 +287,21 @@ GeomItem:
         [Type: double] This gives the lower X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Y:
       help: >
         [Type: double] This gives the lower Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Z:
       help: >
         [Type: double] This gives the lower Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
   Upper:
     __doc__: >
@@ -313,21 +313,21 @@ GeomItem:
         [Type: double] This gives the upper X real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Y:
       help: >
         [Type: double] This gives the upper Y real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Z:
       help: >
         [Type: double] This gives the upper Z real space coordinate value of
         the previously specified box geometry of name box_geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
   # Patches
   Patches:
@@ -336,7 +336,7 @@ GeomItem:
       geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back
       bottom top) but you can name the sides anything you want.
     domains:
-      AnyString: __no_args__
+      AnyString:
 
   # Permeability
   Perm:
@@ -361,7 +361,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     LambdaX:
       help: >
@@ -369,7 +369,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     LambdaY:
       help: >
@@ -377,7 +377,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     LambdaZ:
       help: >
@@ -385,7 +385,7 @@ GeomItem:
         generated for the named geometry, geometry_name, if either the Turning
         Bands or Parallel Gaussian Simulator are chosen.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     GeomMean:
       help: >
@@ -547,7 +547,7 @@ GeomItem:
         as a single geouint (in the ParFlow input file) in which case the permeability
         values would be read in only once.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     TensorValX:
       help: >
@@ -577,7 +577,7 @@ GeomItem:
         choice for the value of geometry_name is “domain”.
       # need to impose this condition
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     TensorFileY:
       help: >
@@ -586,7 +586,7 @@ GeomItem:
         choice for the value of geometry_name is “domain”.
       # need to impose this condition
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     TensorFileZ:
       help: >
@@ -595,7 +595,7 @@ GeomItem:
         choice for the value of geometry_name is “domain”.
       # need to impose this condition
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   # Porosity
   Porosity:
@@ -617,7 +617,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     # FileName is missing from manual
     FileName:
@@ -626,7 +626,7 @@ GeomItem:
         according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The
         only choice for the value of geometry_name is “domain”.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   # Specific Storage
   SpecificStorage:
@@ -638,7 +638,7 @@ GeomItem:
         [Type: double] This key specifies the value assigned to all points in
         the named geometry, geometry_name, if the type was set to constant.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
   # Relative Permeability
   RelPerm:
@@ -658,7 +658,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .Alpha.Filename
 
     Alpha:
@@ -674,7 +674,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .N.Filename
 
     N:
@@ -700,25 +700,25 @@ GeomItem:
         on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used
         (NumSamplePoints is greater than 0).
       domains:
-        IntValue: __no_args__
+        IntValue:
 
     A:
       help: >
         [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Gamma:
       help: >
         [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Degree:
       help: >
         [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
       domains:
-        IntValue: __no_args__
+        IntValue:
 
     # Coeff is for setting the key Geom.geom_name.RelPerm.Coeff.coeff_number
     Coeff:
@@ -729,7 +729,7 @@ GeomItem:
       help: >
         [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
   # Capillary Pressure
   CapPressure:
@@ -743,7 +743,7 @@ GeomItem:
       help: >
         [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
   # Saturation
   Saturation:
@@ -764,7 +764,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .Alpha.Filename
 
     Alpha:
@@ -780,7 +780,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .N.Filename
 
     N:
@@ -796,7 +796,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .SRes.Filename
 
     SRes:
@@ -813,7 +813,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .SSat.Filename
 
     SSat:
@@ -828,19 +828,19 @@ GeomItem:
       help: >
         [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Gamma:
       help: >
         [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     Degree:
       help: >
         [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
       domains:
-        IntValue: __no_args__
+        IntValue:
 
     # Coeff is for setting the key Geom.geom_name.Saturation.Coeff.coeff_number
     Coeff:
@@ -851,14 +851,14 @@ GeomItem:
       help: >
         [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     FileName:
       help: >
         [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name
         is “domain” for this key.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   # dz Scaling
   dzScale:
@@ -878,7 +878,7 @@ GeomItem:
         [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type
         was set to PFBFile.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   # Thermal Conductivity - missing from manual
   ThermalConductivity:
@@ -898,7 +898,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .KDry.Filename
 
     KDry:
@@ -914,7 +914,7 @@ GeomItem:
         [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
         The ONLY option for geom_name is "domain."
       domains:
-        AnyString: __no_args__
+        AnyString:
       exportName: .KDry.Filename
 
     KWet:
@@ -932,7 +932,7 @@ GeomItem:
         [Type: string] This key specifies file to be read in for the X flow barrier values for the domain,
         if the type was set to PFBFile.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   FBy:
     __doc__: >
@@ -942,7 +942,7 @@ GeomItem:
         [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain,
         if the type was set to PFBFile.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   FBz:
     __doc__: >
@@ -952,7 +952,7 @@ GeomItem:
         [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain,
         if the type was set to PFBFile.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   # HeatCapacity is missing from the manual
   HeatCapacity:
@@ -972,31 +972,31 @@ GeomItem:
       help: >
         [Type:string]
       domains:
-        AnyString:  __no_args__
+        AnyString: 
 
     RefElevation:
       help: >
         [Type:string]
       domains:
-        AnyString:  __no_args__
+        AnyString: 
 
     RefGeom:
       help: >
         [Type:string]
       domains:
-        AnyString:  __no_args__
+        AnyString: 
 
     RefPatch:
       help: >
         [Type:string]
       domains:
-        AnyString:  __no_args__
+        AnyString: 
 
     Value:
       help: >
         [Type:string]
       domains:
-        AnyString:  __no_args__
+        AnyString: 
 
   ICSaturation:
     __doc__: >
@@ -1006,7 +1006,7 @@ GeomItem:
       help: >
         [Type: double] Setting...
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
 # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
 GeomContItem:

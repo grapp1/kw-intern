@@ -57,7 +57,7 @@ def isClass(key, definition):
 # -----------------------------------------------------------------------------
 
 def jsonToPython(txt):
-  return txt.replace(' true,', ' True,').replace(' false,', ' False,')
+  return txt.replace(' true,', ' True,').replace(' false,', ' False,').replace(' null', ' None')
 
 # -----------------------------------------------------------------------------
 

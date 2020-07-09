@@ -45,34 +45,34 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   BetaFracture:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   BetaPerm:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   BetaPore:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   BoxSizePowerOf2:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   CFL:
     help: >
@@ -81,7 +81,7 @@ Solver:
       also produce instabilities.
     default: 0.7
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # CLM settings
   CLM:
@@ -95,7 +95,7 @@ Solver:
         this key include True and False. Note that CLM must be compiled and linked at runtime for this option to be active.
       default: True
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     CLMDumpInterval:
       help: >
@@ -112,7 +112,7 @@ Solver:
         write output to the ParFlow run directory. This directory must be created before ParFlow is run. Note that CLM
         must be compiled and linked at runtime for this option to be active.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     DailyRST:
       help: >
@@ -123,7 +123,7 @@ Solver:
         is the processor number.
       default: True
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     EvapBeta:
       help: >
@@ -167,13 +167,13 @@ Solver:
         LAI.pfb, SAI.pfb, Z0M.pfb, DISPLA.pfb. No vegetation map is needed in this case.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     FstepStart:
       help: >
         [Type: int]
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     IrrigationCycle:
       help: >
@@ -223,7 +223,7 @@ Solver:
       help: >
         [Type: string]
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     IrrigationType:
       help: >
@@ -244,13 +244,13 @@ Solver:
         that CLM must be compiled and linked at runtime for this option to be active.
       default: 1
       domains:
-        IntValue: __no_args__ # may need to update this
+        IntValue: # may need to update this
 
     MetFileNT:
       help: >
         [Type: int] This key specifies the number of timesteps per file for 3D forcing data.
       domains:
-        IntValue: __no_args__
+        IntValue:
 
     MetFileName:
       help: >
@@ -274,7 +274,7 @@ Solver:
         SPFH: Water-vapor specific humidity [kg/kg]
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     MetFilePath:
       help: >
@@ -282,14 +282,14 @@ Solver:
         forcing file (e.g. narr.1hr.txt). For 2D and 3D cases, this is the path to the directory containing all forcing files.
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
     # missing from the manual
     MetFileSubdir:
       help: >
         [Type: int]
       domains:
-        DoubleValue: __no_args__
+        DoubleValue:
 
     MetForcing:
       help: >
@@ -314,7 +314,7 @@ Solver:
         to be active.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     ResSat:
       help: >
@@ -357,7 +357,7 @@ Solver:
         formats as above.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     SoiLayer:
       help: >
@@ -398,7 +398,7 @@ Solver:
         for the latter, outputs are written every n steps where n is the value of ReuseCount.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     WriteLogs:
       help: >
@@ -407,7 +407,7 @@ Solver:
         created, assuming washita is the run name.
       default: True
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
   # -----------------------------------------------------------------------------
   # Other Solver Settings
@@ -418,28 +418,28 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   CompCompress:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   DiagScale:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   DiagSolver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   Drop:
     help: >
@@ -455,7 +455,7 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   EvapTrans:
     __doc__: >
@@ -466,7 +466,7 @@ Solver:
       help: >
         [Type: boolean/string]
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     FileName:
       help: >
@@ -475,7 +475,7 @@ Solver:
         filename. For the transient option (Solver.EvapTransFileTransient=True then the filename is a header and ParFlow
         will load one file per timestep, with the form filename.00000.pfb.
       domains:
-        AnyString: __no_args__
+        AnyString:
 
   EvapTransFile:
     help: >
@@ -484,7 +484,7 @@ Solver:
       below.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   EvapTransFileTransient:
     help: >
@@ -493,14 +493,14 @@ Solver:
       to True at a time, not both.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   Jacobian:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   LSM:
     help: >
@@ -549,35 +549,35 @@ Solver:
       run-away simulation.
     default: 1000000
     domains:
-      IntValue: __no_args__
+      IntValue:
 
   # missing from manual
   MaxLevels:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   MaxMinNX:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   MaxMinNY:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   MaxMinNZ:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   OverlandDiffusive:
     __doc__: >
@@ -608,21 +608,21 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   PolyDegree:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   PolyPC:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   PrintCLM:
     help: >
@@ -632,7 +632,7 @@ Solver:
       or over the number of CLM layers (default of ten).
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintConcentration:
     help: >
@@ -640,28 +640,28 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintDZMultiplier:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   PrintEvapTrans:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   PrintEvapTransSum:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   PrintLSMSink:
     help: >
@@ -669,7 +669,7 @@ Solver:
       DumpInterval time.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintMannings:
@@ -678,7 +678,7 @@ Solver:
       DumpInterval time.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintMask:
@@ -687,7 +687,7 @@ Solver:
       DumpInterval time.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintOverlandBCFlux:
@@ -696,7 +696,7 @@ Solver:
       DumpInterval time.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintOverlandSum:
@@ -705,7 +705,7 @@ Solver:
       DumpInterval time.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintPressure:
     help: >
@@ -713,7 +713,7 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintSaturation:
     help: >
@@ -721,7 +721,7 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintSlopes:
@@ -730,7 +730,7 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual
   PrintSpecificStorage:
@@ -739,7 +739,7 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintSubsurf:
     help: >
@@ -747,7 +747,7 @@ Solver:
       it is generated and before the main time stepping loop - only once during the run. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # PrintSubsurfData is missing from the manual. Is this equivalent to PrintSubsurf?
   PrintSubsurfData:
@@ -756,7 +756,7 @@ Solver:
       it is generated and before the main time stepping loop - only once during the run. The data is written as a PFB file.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # PrintTop is missing from the manual.
   PrintTop:
@@ -764,7 +764,7 @@ Solver:
       [Type: boolean/string] ?
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintVelocities:
     help: >
@@ -772,7 +772,7 @@ Solver:
       timing information section. The data is written as a PFB file.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   PrintWells:
     help: >
@@ -780,21 +780,21 @@ Solver:
       values in the timing information section. Printing occurs at the end of the run when all collected data is written.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # missing from manual - maybe only included as Linear.Preconditioner.PFMG.RAPType
   RAPType:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   RelTol:
     help: >
       [Type: double] This value gives the relative tolerance for the linear solve algorithm.
     default: 1.0
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   SadvectOrder:
     help: >
@@ -811,21 +811,21 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   Spinup:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   Symmetric:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   TerrainFollowingGrid:
     help: >
@@ -836,7 +836,7 @@ Solver:
       these two things are both to do items. This key only changes solver Richards, not solver Impes.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   TerrainFolSlopeUpwind:
     help: >
@@ -864,14 +864,14 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   # missing from manual
   Weight:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   WriteCLMBinary:
     help: >
@@ -879,7 +879,7 @@ Solver:
       that CLM must be compiled and linked at runtime for this option to be active.
     default: True
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # Solver.Linear.{} keys
   # corner case
@@ -995,7 +995,7 @@ Solver:
     help: >
       [Type: int]
     domains:
-      DoubleValue: __no_args__
+      DoubleValue:
 
   Nonlinear:
     __doc__: >
@@ -1007,7 +1007,7 @@ Solver:
         non-active variable dz and each layer thickness is 1.0 [L].
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     FlowBarrierX:
       help: >
@@ -1015,7 +1015,7 @@ Solver:
         indicates a false or FBx value of one [-] everywhere in the domain.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     FlowBarrierY:
       help: >
@@ -1023,7 +1023,7 @@ Solver:
         indicates a false or FBy value of one [-] everywhere in the domain.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     FlowBarrierZ:
       help: >
@@ -1031,7 +1031,7 @@ Solver:
         indicates a false or FBz value of one [-] everywhere in the domain.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     ResidualTol:
       help: >
@@ -1123,7 +1123,7 @@ Solver:
         of nonlinear iterations but require more memory to run.
       default: False
       domains:
-        BoolDomain: __no_args__
+        BoolDomain:
 
     DerivativeEpsilon:
       help: >

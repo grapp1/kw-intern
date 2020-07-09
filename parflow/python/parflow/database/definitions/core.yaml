@@ -70,31 +70,31 @@ ComputationalGrid:
         [Type: double] This assigns the lower x coordinate location for the
         computational grid.
       domains:
-        MandatoryValue: __no_args__
-        DoubleValue: __no_args__
+        MandatoryValue:
+        DoubleValue:
 
     Y:
       help: >
         [Type: double] This assigns the lower y coordinate location for the
         computational grid.
       domains:
-        MandatoryValue: __no_args__
-        DoubleValue: __no_args__
+        MandatoryValue:
+        DoubleValue:
 
     Z:
       help: >
         [Type: double] This assigns the lower z coordinate location for the
         computational grid.
       domains:
-        MandatoryValue: __no_args__
-        DoubleValue: __no_args__
+        MandatoryValue:
+        DoubleValue:
 
   NX:
     help: >
       [Type: int] This assigns the number of grid cells in the x direction
       for the computational grid.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       IntValue:
         minValue: 1
 
@@ -103,7 +103,7 @@ ComputationalGrid:
       [Type: int] This assigns the number of grid cells in the y direction
       for the computational grid.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       IntValue:
         minValue: 1
 
@@ -112,7 +112,7 @@ ComputationalGrid:
       [Type: int] This assigns the number of grid cells in the z direction
       for the computational grid.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       IntValue:
         minValue: 1
 
@@ -122,7 +122,7 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       DoubleValue:
         minValue: 1.0
 
@@ -132,7 +132,7 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       DoubleValue:
         minValue: 1.0
 
@@ -142,6 +142,6 @@ ComputationalGrid:
       Units are L and are defined by the units of the hydraulic conductivity
       used in the problem.
     domains:
-      MandatoryValue: __no_args__
+      MandatoryValue:
       DoubleValue:
         minValue: 1.0

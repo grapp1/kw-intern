@@ -11,6 +11,7 @@ lw.Process.Topology.P = 1
 lw.Process.Topology.Q = 2
 lw.Process.Topology.P = 4
 lw.Process.Topology.R = 6
+lw.ComputationalGrid.Lower.X = 5.0
 
 lw.Solver.Type = 'Richards'
 lw.Solver.AbsTol = 1e-7

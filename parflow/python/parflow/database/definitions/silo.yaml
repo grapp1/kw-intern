@@ -17,7 +17,7 @@ SolverItem:
       layers (default of ten).
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloConcentration:
     help: >
@@ -25,14 +25,14 @@ SolverItem:
       controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloDZMultiplier:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloEvapTrans:
     help: >
@@ -41,7 +41,7 @@ SolverItem:
       printing of the data is controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloEvapTransSum:
     help: >
@@ -50,7 +50,7 @@ SolverItem:
       in units of [L3]. The printing of the data is controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloMannings:
     help: >
@@ -58,7 +58,7 @@ SolverItem:
       data is controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloMask:
     help: >
@@ -67,14 +67,14 @@ SolverItem:
       information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloOverlandBCFlux:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloOverlandSum:
     help: >
@@ -84,112 +84,112 @@ SolverItem:
       is controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOConcentration:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIODZMultiplier:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOEvapTrans:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOEvapTransSum:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOMannings:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOMask:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOOverlandBCFlux:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOOverlandSum:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOPressure:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOSaturation:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOSlopes:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOSpecificStorage:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOSubsurfData:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOTop:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloPMPIOVelocities:
     help: >
       [Type: boolean/string]
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   # typo in manual (says saturation instead of pressure)
   WriteSiloPressure:
@@ -198,7 +198,7 @@ SolverItem:
       controlled by values in the timing information section. This data may be read in by VisIT and other visualization packages.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloSaturation:
     help: >
@@ -206,7 +206,7 @@ SolverItem:
       controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloSlopes:
     help: >
@@ -214,7 +214,7 @@ SolverItem:
       timing information section. The data is written as a PFB file.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloSpecificStorage:
     help: >
@@ -222,7 +222,7 @@ SolverItem:
       controlled by values in the timing information section.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloSubsurfData:
     help: >
@@ -231,7 +231,7 @@ SolverItem:
       data may be read in by VisIT and other visualization packages.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloTop:
     help: >
@@ -239,7 +239,7 @@ SolverItem:
       timing information section. The data is written as a PFB file.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
   WriteSiloVelocities:
     help: >
@@ -247,7 +247,7 @@ SolverItem:
       timing information section. The data is written as a PFB file.
     default: False
     domains:
-      BoolDomain: __no_args__
+      BoolDomain:
 
 # SILO options
 SILO: # typo in documentation

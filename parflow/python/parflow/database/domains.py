@@ -158,7 +158,7 @@ def validateValueWithErrors(value, domainDefinitions=None):
     IntRangeDomain: {
       minValue: 1
     },
-    NoNoneValueDomain: '__no_args__'
+    NoNoneValueDomain:
   }
   '''
   errors = []
@@ -170,8 +170,8 @@ def validateValueWithErrors(value, domainDefinitions=None):
     if domain:
       domain_kwargs = domainDefinitions[domain_classname]
       if isinstance(domain_kwargs, str):
-      #   print(domain_kwargs)
-      # if domain_kwargs == None:
+        errors.extend(domain.validate(value))
+      elif domain_kwargs == None:
         errors.extend(domain.validate(value))
       else:
         errors.extend(domain.validate(value, **domain_kwargs))
