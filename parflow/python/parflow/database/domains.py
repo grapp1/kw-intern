@@ -30,7 +30,7 @@ class MandatoryValue:
     return errors
 
 
-class IntRangeDomain:
+class IntValue:
   '''
   IntRange domain allow to constrain value to be an integer
   while also ensure optionally if its value needs to be
@@ -57,9 +57,9 @@ class IntRangeDomain:
     return errors
 
 
-class DoubleRangeDomain:
+class DoubleValue:
   '''
-  DoubleRange domain allow to constrain value to be a double
+  DoubleValue domain allow to constrain value to be a double
   while also ensure optionally if its value needs to be
   above or below another one.
 
@@ -100,7 +100,7 @@ class EnumDomain:
 
 # -----------------------------------------------------------------------------
 
-class AnyStringDomain:
+class AnyString:
   def validate(self, value, **kwargs):
     errors = []
 
@@ -122,10 +122,10 @@ class BoolDomain:
     if value == None:
       return errors
 
-    if not isinstance(value, bool):
+    if isinstance(value, bool):
       return errors
 
-    errors.append(f'{value} ({type(value)} must be True/False')
+    errors.append(f'{value} ({type(value)} must be True/False)')
     return errors
 
 # -----------------------------------------------------------------------------
@@ -170,6 +170,8 @@ def validateValueWithErrors(value, domainDefinitions=None):
     if domain:
       domain_kwargs = domainDefinitions[domain_classname]
       if isinstance(domain_kwargs, str):
+      #   print(domain_kwargs)
+      # if domain_kwargs == None:
         errors.extend(domain.validate(value))
       else:
         errors.extend(domain.validate(value, **domain_kwargs))

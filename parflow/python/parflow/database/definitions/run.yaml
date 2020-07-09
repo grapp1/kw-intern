@@ -4,6 +4,13 @@ BaseRun:
     - ComputationalGrid
     - GeomInput
     - Geom
+    - Solver
+
+  # -----------------------------------------------------------------------------
+  # Solver
+  # -----------------------------------------------------------------------------
+
+
 
   # -----------------------------------------------------------------------------
   # Spinup Options (Overland Flow)
@@ -18,7 +25,7 @@ BaseRun:
 
     default: 0
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 0
         maxValue: 1
 
@@ -29,7 +36,7 @@ BaseRun:
       by adding the following term: P2*exp[(pressure)*P2]
     default: 0.0
     domains:
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 0.0
 
   OverlandFlowSpinUpDampP2:
@@ -38,5 +45,5 @@ BaseRun:
       by adding the following term: P2*exp[(pressure)*P2]
     default: 0.0
     domains:
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 0.0

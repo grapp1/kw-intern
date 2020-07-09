@@ -2,25 +2,32 @@
 # Definitions of solver components, time stepping, and other components of ParFlow
 # Includes Solver, TimeStep,
 
-#Solver:
-
-
-
 
 # -----------------------------------------------------------------------------
 # SolverItems
 # -----------------------------------------------------------------------------
 
-SolverItem:
+Solver:
   __doc__: >
     Assigning properties to solver
+
+  # corner case - This is the definition of the solver name
+  Type:
+    help: >
+      [Type: string] This is the Impes or Richards
+    domains:
+      EnumDomain:
+        enumList:
+          - Impes
+          - Richards
+    exportName: ..Solver
 
   AbsTol:
     help: >
       [Type: double] This value gives the absolute tolerance for the linear solve algorithm.
     default: 1e-9
     domains:
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 0.0
 
   AdvectOrder:
@@ -29,7 +36,7 @@ SolverItem:
       1 for a standard upwind first order or 2 for a second order Godunov method.
     default: 2
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1
         maxValue: 2
 
@@ -38,34 +45,34 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   BetaFracture:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   BetaPerm:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   BetaPore:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   BoxSizePowerOf2:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   CFL:
     help: >
@@ -74,7 +81,7 @@ SolverItem:
       also produce instabilities.
     default: 0.7
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # CLM settings
   CLM:
@@ -96,7 +103,7 @@ SolverItem:
         Note that CLM must be compiled and linked at runtime for this option to be active.
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
     CLMFileDir:
@@ -105,7 +112,7 @@ SolverItem:
         write output to the ParFlow run directory. This directory must be created before ParFlow is run. Note that CLM
         must be compiled and linked at runtime for this option to be active.
       domains:
-        AnyStringDomain: __no_args__
+        AnyString: __no_args__
 
     DailyRST:
       help: >
@@ -124,7 +131,7 @@ SolverItem:
         None, Linear, Cosine.
       default: Linear
       domains:
-        enumDomain:
+        EnumDomain:
           enumList:
             - None
             - Linear
@@ -137,7 +144,7 @@ SolverItem:
         be compiled and linked at runtime for this option to be active.
       default: 1.0
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
           maxValue: 1.0
 
@@ -165,11 +172,8 @@ SolverItem:
     FstepStart:
       help: >
         [Type: int]
-      default:
       domains:
-        MandatoryValue: __no_args__
-        DoubleRangeDomain:
-          minValue:
+        DoubleValue: __no_args__
 
     IrrigationCycle:
       help: >
@@ -178,7 +182,7 @@ SolverItem:
         IrrigationStopTime in GMT.
       default: Constant
       domains:
-        enumDomain:
+        EnumDomain:
           enumList:
             - Constant
             - Deficit
@@ -187,14 +191,14 @@ SolverItem:
       help: >
         [Type: double] This key specifies the rate of the irrigation in CLM in [mm/s].
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     IrrigationStartTime:
       help: >
         [Type: double] This key specifies the start time of the irrigation in CLM GMT.
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
           maxValue: 2400.0
 
@@ -202,7 +206,7 @@ SolverItem:
       help: >
         [Type: double] This key specifies the stop time of the irrigation in CLM GMT.
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
           maxValue: 2400.0
 
@@ -211,7 +215,7 @@ SolverItem:
         [Type: double] This key specifies the threshold value for the irrigation in CLM [-].
       default: 0.5
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     # missing from manual
@@ -219,14 +223,14 @@ SolverItem:
       help: >
         [Type: string]
       domains:
-        DoubleRangeDomain: __no_args__
+        DoubleValue: __no_args__
 
     IrrigationType:
       help: >
         [Type: string] This key specifies the form of the irrigation in CLM. The valid types for this key are none, Spray, Drip, Instant.
       default: none
       domains:
-        enumDomain:
+        EnumDomain:
           enumList:
             - none
             - Spray
@@ -240,13 +244,13 @@ SolverItem:
         that CLM must be compiled and linked at runtime for this option to be active.
       default: 1
       domains:
-        IntRangeDomain: __no_args__ # may need to update this
+        IntValue: __no_args__ # may need to update this
 
     MetFileNT:
       help: >
         [Type: int] This key specifies the number of timesteps per file for 3D forcing data.
       domains:
-        IntRangeDomain: __no_args__
+        IntValue: __no_args__
 
     MetFileName:
       help: >
@@ -270,8 +274,7 @@ SolverItem:
         SPFH: Water-vapor specific humidity [kg/kg]
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
-        MandatoryValue: __no_args__
-        AnyStringDomain: __no_args__
+        AnyString: __no_args__
 
     MetFilePath:
       help: >
@@ -279,15 +282,14 @@ SolverItem:
         forcing file (e.g. narr.1hr.txt). For 2D and 3D cases, this is the path to the directory containing all forcing files.
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
-        MandatoryValue: __no_args__
-        AnyStringDomain: __no_args__
+        AnyString: __no_args__
 
     # missing from the manual
     MetFileSubdir:
       help: >
         [Type: int]
       domains:
-        DoubleRangeDomain: __no_args__
+        DoubleValue: __no_args__
 
     MetForcing:
       help: >
@@ -299,8 +301,7 @@ SolverItem:
         files, one for each variable and timestep. File names are specified in the Solver.CLM.MetFileName variable below.
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
-        MandatoryValue: __no_args__
-        enumDomain:
+        EnumDomain:
           enumList:
             - 1D
             - 2D
@@ -321,7 +322,7 @@ SolverItem:
         compiled and linked at runtime for this option to be active.
       default: 0.1
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     ReuseCount:
@@ -333,7 +334,7 @@ SolverItem:
         needing duplicate files.
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 0
 
     RootZoneNZ:
@@ -343,7 +344,7 @@ SolverItem:
         not required anymore. Most likely the key Solver.CLM.SoiLayer will also need to be changed.
       default: 10
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1 # can we set the max value to whatever the user sets to NZ?
 
     SingleFile:
@@ -364,7 +365,7 @@ SolverItem:
         all leaf and stem area indices.
       default: 7
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
     VegWaterStress:
@@ -373,7 +374,7 @@ SolverItem:
         are None, Saturation, Pressure.
       default: Saturation
       domains:
-        enumDomain:
+        EnumDomain:
           enumList:
             - None
             - Saturation
@@ -386,7 +387,7 @@ SolverItem:
         be compiled and linked at runtime for this option to be active.
       default: 0.1
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     WriteLastRST:
@@ -417,28 +418,28 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   CompCompress:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   DiagScale:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   DiagSolver:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   Drop:
     help: >
@@ -446,7 +447,7 @@ SolverItem:
       and less than the value itself are treated as zero and not written to PFSB files.
     default: 1e-8
     domains:
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 0
 
   # missing from manual
@@ -454,7 +455,7 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   EvapTrans:
     __doc__: >
@@ -474,7 +475,7 @@ SolverItem:
         filename. For the transient option (Solver.EvapTransFileTransient=True then the filename is a header and ParFlow
         will load one file per timestep, with the form filename.00000.pfb.
       domains:
-        AnyStringDomain: __no_args__
+        AnyString: __no_args__
 
   EvapTransFile:
     help: >
@@ -499,7 +500,7 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   LSM:
     help: >
@@ -539,7 +540,7 @@ SolverItem:
       smaller value.
     default: 3
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1
 
   MaxIter:
@@ -548,35 +549,35 @@ SolverItem:
       run-away simulation.
     default: 1000000
     domains:
-      IntRangeDomain: __no_args__
+      IntValue: __no_args__
 
   # missing from manual
   MaxLevels:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   MaxMinNX:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   MaxMinNY:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   MaxMinNZ:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   OverlandDiffusive:
     __doc__: >
@@ -585,9 +586,9 @@ SolverItem:
     Epsilon:
       help: >
         [Type: double] This key provides a minimum value for the Sf used in the OverlandDiffusive boundary condition.
-      default: 1e-5
+      default: 0.00001
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
   OverlandKinematic:
@@ -597,9 +598,9 @@ SolverItem:
     Epsilon:
       help: >
         [Type: double] This key provides a minimum value for the Sf used in the OverlandKinematic boundary condition.
-      default: 1e-5
+      default: 0.00001
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
   # missing from manual - part of Linear.Preconditioner
@@ -607,21 +608,21 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   PolyDegree:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   PolyPC:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   PrintCLM:
     help: >
@@ -646,21 +647,21 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   PrintEvapTrans:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   PrintEvapTransSum:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   PrintLSMSink:
     help: >
@@ -786,14 +787,14 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   RelTol:
     help: >
       [Type: double] This value gives the relative tolerance for the linear solve algorithm.
     default: 1.0
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   SadvectOrder:
     help: >
@@ -801,7 +802,7 @@ SolverItem:
       1 for a standard upwind first order or 2 for a second order Godunov method.
     default: 2
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1
         maxValue: 2
 
@@ -810,25 +811,21 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleValue: __no_args__
 
   # missing from manual
   Spinup:
     help: >
       [Type: int]
     domains:
-      MandatoryValue: __no_args__
-      DoubleRangeDomain:
-        minValue:
+      DoubleValue: __no_args__
 
   # missing from manual
   Symmetric:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   TerrainFollowingGrid:
     help: >
@@ -853,9 +850,9 @@ SolverItem:
       formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The
       upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is
       consistent with OverlandFlow.
-    default: False
+    default: Original
     domains:
-      enumDomain:
+      EnumDomain:
         enumList:
           - Original
           - Upwind
@@ -867,14 +864,14 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   # missing from manual
   Weight:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   WriteCLMBinary:
     help: >
@@ -893,9 +890,9 @@ SolverItem:
       limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
     default: 10
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1 # check
-    exportName: Linear.KrylovDimension
+    exportName: .Linear.KrylovDimension
 
   # corner case
   LinMaxRestarts:
@@ -904,9 +901,9 @@ SolverItem:
       Krylov subspace over using the current iterate as the initial iterate for the next pass.
     default: 0
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 0
-    exportName: Linear.MaxRestarts
+    exportName: .Linear.MaxRestarts
 
   # corner case
   LinPreconditioner:
@@ -926,7 +923,7 @@ SolverItem:
           - PFMG
           - PFMGOctree
           - SMG
-    exportName: Linear.Preconditioner
+    exportName: .Linear.Preconditioner
 
   # corner case
   LinPrecondSym:
@@ -941,7 +938,7 @@ SolverItem:
         enumList:
           - Symmetric
           - Nonsymmetric
-    exportName: Linear.Preconditioner.SymmetricMat
+    exportName: .Linear.Preconditioner.SymmetricMat
 
   # defining key for Solver.Linear.Preconditioner.precond_method.MaxIter
   PrecondItem:
@@ -954,7 +951,7 @@ SolverItem:
         method solver.
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
   # corner case
@@ -964,9 +961,9 @@ SolverItem:
       Note that this key is only relevant to the SMG multigrid preconditioner.
     default: 1
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1
-    exportName: Linear.Preconditioner.SMG.NumPreRelax
+    exportName: .Linear.Preconditioner.SMG.NumPreRelax
 
   # corner case
   LinPrecondSMGPostRelax:
@@ -975,9 +972,9 @@ SolverItem:
       Note that this key is only relevant to the SMG multigrid preconditioner.
     default: 1
     domains:
-      IntRangeDomain:
+      IntValue:
         minValue: 1
-    exportName: Linear.Preconditioner.SMG.NumPostRelax
+    exportName: .Linear.Preconditioner.SMG.NumPostRelax
 
   # corner case
   LinPrecondPFMGRAPType:
@@ -989,7 +986,7 @@ SolverItem:
         enumList:
           - Galerkin
           - NonGalerkin
-    exportName: Linear.Preconditioner.PFMG.RAPType
+    exportName: .Linear.Preconditioner.PFMG.RAPType
 
   # Solver.Nonlinear.{} keys
 
@@ -998,7 +995,7 @@ SolverItem:
     help: >
       [Type: int]
     domains:
-      DoubleRangeDomain: __no_args__
+      DoubleValue: __no_args__
 
   Nonlinear:
     __doc__: >
@@ -1042,7 +1039,7 @@ SolverItem:
         be before nonlinear iterations stop. The magnitude of the residual is measured with the l1 (max) norm.
       default: 1e-7
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     StepTol:
@@ -1051,7 +1048,7 @@ SolverItem:
         can be before nonlinear iterations stop.
       default: 1e-7
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     MaxIter:
@@ -1060,7 +1057,7 @@ SolverItem:
         failure.
       default: 15
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
     PrintFlag:
@@ -1100,7 +1097,7 @@ SolverItem:
         [Type: double] This key specifies the constant value of n for the EtaChoice key EtaConstant.
       default: 1e-4
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     EtaAlpha:
@@ -1108,7 +1105,7 @@ SolverItem:
         [Type: double] This key specifies the value of alpha for the case of EtaChoice being Walker2.
       default: 2.0
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     EtaGamma:
@@ -1116,7 +1113,7 @@ SolverItem:
         [Type: double] This key specifies the value of gamma for the case of EtaChoice being Walker2.
       default: 0.9
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     UseJacobian:
@@ -1134,7 +1131,7 @@ SolverItem:
         directional derivatives of the nonlinear function. This parameter is only used when the UseJacobian key is False.
       default: 1e-7
       domains:
-        DoubleRangeDomain:
+        DoubleValue:
           minValue: 0.0
 
     Globalization:

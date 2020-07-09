@@ -53,16 +53,16 @@ Checklist - adding * to ones that I have already entered into yaml
 + * %s.EvapTransFile						
 + * %s.EvapTransFileTransient						
 + * %s.Jacobian						
-%s.LSM						
-%s.Linear						
-%s.MaxConvergenceFailures						
-%s.MaxIter	
-%s.MaxLevels						
-%s.MaxMinNX						
-%s.MaxMinNY						
-%s.MaxMinNZ						
-%s.NonlinearSolver						
-%s.NumPostRelax						
+* %s.LSM						
+* %s.Linear						
+* %s.MaxConvergenceFailures						
+* %s.MaxIter	
+* %s.MaxLevels						
+* %s.MaxMinNX						
+* %s.MaxMinNY						
+* %s.MaxMinNZ						
+* %s.NonlinearSolver						
+* %s.NumPostRelax						
 %s.NumPreRelax						
 %s.PCMatrixType						
 %s.PolyDegree						
@@ -151,7 +151,7 @@ Geom.%s.FBx.FileName
 Geom.%s.FBy.FileName						
 Geom.%s.FBz.FileName						
 + * Geom.%s.FileName						
-Geom.%s.HeatCapacity.Value						
+* Geom.%s.HeatCapacity.Value						
 Geom.%s.ICPressure.FileName						
 Geom.%s.ICPressure.RefElevation						
 Geom.%s.ICPressure.RefGeom						
@@ -310,19 +310,20 @@ PhaseSources.Geom.%s.Value
 > * Process.Topology.Q	
 > * Process.Topology.R					
 * SILO.CompressionOptions						
-* SILO.Filetype						
-Solver.Linear.KrylovDimension		
-Solver.Linear.MaxRestarts						
-Solver.Linear.Preconditioner						
-Solver.Nonlinear.DerivativeEpsilon						
-Solver.Nonlinear.EtaChoice						
-Solver.Nonlinear.Globalization						
-Solver.Nonlinear.MaxIter	
-Solver.Nonlinear.PrintFlag						
-Solver.Nonlinear.ResidualTol	
-Solver.Nonlinear.StepTol	
-Solver.Nonlinear.UseJacobian						
-Solver.TerrainFollowingGrid.SlopeUpwindFormulation					
+* SILO.Filetype
+> * Solver					
+* Solver.Linear.KrylovDimension		
+* Solver.Linear.MaxRestarts						
+* Solver.Linear.Preconditioner						
+* Solver.Nonlinear.DerivativeEpsilon						
+* Solver.Nonlinear.EtaChoice						
+* Solver.Nonlinear.Globalization						
+* Solver.Nonlinear.MaxIter	
+* Solver.Nonlinear.PrintFlag						
+* Solver.Nonlinear.ResidualTol	
+* Solver.Nonlinear.StepTol	
+* Solver.Nonlinear.UseJacobian						
+* Solver.TerrainFollowingGrid.SlopeUpwindFormulation					
 TopoSlopesX.Geom.%s.Value				
 TopoSlopesY.Geom.%s.Value						
 Wells.%s.%s.Concentration.%s.%s.Value						

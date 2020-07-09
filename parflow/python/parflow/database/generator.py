@@ -13,8 +13,8 @@ from datetime import datetime
 YAML_MODULES_TO_PROCESS = [
   'core',
   'geom',
-  'run',
-  'solver'
+  'solver',
+  'run'
 ]
 # -----------------------------------------------------------------------------
 
@@ -53,6 +53,22 @@ def isClass(key, definition):
     return False
 
   return True
+
+# -----------------------------------------------------------------------------
+
+def jsonToPython(txt):
+  return txt.replace(' true,', ' True,').replace(' false,', ' False,')
+
+# -----------------------------------------------------------------------------
+
+def yamlValue(yamlval):
+  if isinstance(yamlval, str):
+    try:
+      return float(yamlval)
+    except ValueError:
+      return yamlval
+
+  return yamlval
 
 # -----------------------------------------------------------------------------
 
@@ -167,11 +183,7 @@ class PythonModule:
         for field in fieldMembers:
           self.addField(field, classDefinition[field], classDetails)
 
-        if len(classDetails):
-          detailsLines = json.dumps(classDetails, indent=2).splitlines()
-          self.addLine(f'{self.strIndent*2}self._details = {detailsLines[0]}')
-          for line in detailsLines[1:]:
-            self.addLine(f'{self.strIndent*2}{line}')
+        self.addDetails(classDetails)
 
       for classMember in classMembers:
         # Catch error
@@ -182,9 +194,22 @@ class PythonModule:
     except:
       print(f'Error when processing class {className}')
 
+  def addDetails(self, classDetails):
+    if len(classDetails):
+      detailsLines = json.dumps(classDetails, indent=2).splitlines()
+      self.addLine(f'{self.strIndent * 2}self._details = {detailsLines[0]}')
+      for line in detailsLines[1:]:
+        lineWithIndent = f'{self.strIndent * 2}{line}'
+        self.addLine(jsonToPython(lineWithIndent))
+
+
   def addField(self, fieldName, fieldDefinition, classDetails):
     self.validationSummary.addField(fieldName)
-    field_val = fieldDefinition['default'] if 'default' in fieldDefinition else None
+    field_val = None
+    if 'default' in fieldDefinition:
+      field_val = yamlValue(fieldDefinition['default'])
+      fieldDefinition['default'] = field_val
+
     if isinstance(field_val, str):
       self.addLine(f"{self.strIndent*2}self.{fieldName} = '{field_val}'")
     else:

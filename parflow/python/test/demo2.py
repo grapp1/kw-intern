@@ -12,6 +12,9 @@ lw.Process.Topology.Q = 2
 lw.Process.Topology.P = 4
 lw.Process.Topology.R = 6
 
+lw.Solver.Type = 'Richards'
+lw.Solver.AbsTol = 1e-7
+
 lw.GeomInput.Names = 'box_input indi_input'
 
 lw.GeomInput.box_input.InputType = 'Box'
@@ -51,5 +54,5 @@ lw.Geom.domain.Perm.Type = 'Constant'
 # -----------------------------------------------------------------------------
 
 lw.validate()
-lw.write()
+lw.write('./output/demo2_lw.pfidb')
 lw.run()

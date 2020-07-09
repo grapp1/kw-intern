@@ -21,7 +21,7 @@ def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
     if value == None:
       continue
 
-    fullQualifiedKey = f'{parentNamespace}.{instance.getParFlowKey(key)}' if parentNamespace else key
+    fullQualifiedKey = instance.getParFlowKey(parentNamespace, key)
     if isinstance(value, PFDBObj):
       extractKeysFromObject(dictToFill, value, fullQualifiedKey)
     else:

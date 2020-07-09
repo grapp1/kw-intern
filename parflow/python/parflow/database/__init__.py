@@ -15,3 +15,4 @@ class TerminalSymbols:
   ko = u'\u2718'
   errorItem = u'\u2605'
   warning = u'\u26A0'
+  default = u'\u2622'

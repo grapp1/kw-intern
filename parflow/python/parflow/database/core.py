@@ -73,7 +73,27 @@ class PFDBObj:
       else:
         print(self.__doc__)
 
+  def __len__(self):
+    valueCount = 0
+    for name in self.__dict__:
+      if name[0] == '_':
+        continue
+
+      obj = self.__dict__[name]
+      if isinstance(obj, PFDBObj):
+        valueCount += len(obj)
+      elif obj != None:
+        valueCount += 1
+      elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
+        if 'MandatoryValue' in self._details[name]['domains']:
+          valueCount += 1
+
+    return valueCount
+
   def validate(self, indent=1):
+    if len(self) == 0:
+      return 0
+
     errorCount = 0
     indentStr = '  '*indent
     for name in self.__dict__:
@@ -82,8 +102,9 @@ class PFDBObj:
 
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
-        print(f'{indentStr}{name}:')
-        errorCount += obj.validate(indent=indent+1)
+        if len(obj):
+          print(f'{indentStr}{name}:')
+          errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
         if 'history' in self._details[name]:
           if len(self._details[name]['history']):
@@ -103,9 +124,23 @@ class PFDBObj:
 
     return errorCount
 
-  def getParFlowKey(self, key):
+  def getParFlowKey(self, parentNamespace, key):
     if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
-      return self._details[key]['exportName']
+      exportKey = self._details[key]['exportName']
+      parentTokens = parentNamespace.split('.')
+      parentOffset = 0
+
+      while exportKey[parentOffset] == '.':
+        parentOffset += 1
+
+      if len(parentTokens[:1-parentOffset]):
+        return f'{".".join(parentTokens[:1-parentOffset])}.{exportKey[parentOffset:]}'
+
+      return exportKey[parentOffset:]
+
+    if parentNamespace:
+      return f'{parentNamespace}.{key}'
+
     return key
 
   def getObjFromLocation(self, location='.'):

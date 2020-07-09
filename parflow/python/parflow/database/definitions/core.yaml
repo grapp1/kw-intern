@@ -25,7 +25,7 @@ Process:
         [Type: int] P allocates the number of processes to the grid-cells in x.
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
     Q:
@@ -33,7 +33,7 @@ Process:
         [Type: int] Q allocates the number of processes to the grid-cells in y.
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
     R:
@@ -43,7 +43,7 @@ Process:
         unless you are running a totally saturated domain (solver IMPES).
       default: 1
       domains:
-        IntRangeDomain:
+        IntValue:
           minValue: 1
 
 # -----------------------------------------------------------------------------
@@ -71,7 +71,7 @@ ComputationalGrid:
         computational grid.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain: __no_args__
+        DoubleValue: __no_args__
 
     Y:
       help: >
@@ -79,7 +79,7 @@ ComputationalGrid:
         computational grid.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain: __no_args__
+        DoubleValue: __no_args__
 
     Z:
       help: >
@@ -87,7 +87,7 @@ ComputationalGrid:
         computational grid.
       domains:
         MandatoryValue: __no_args__
-        DoubleRangeDomain: __no_args__
+        DoubleValue: __no_args__
 
   NX:
     help: >
@@ -95,7 +95,7 @@ ComputationalGrid:
       for the computational grid.
     domains:
       MandatoryValue: __no_args__
-      IntRangeDomain:
+      IntValue:
         minValue: 1
 
   NY:
@@ -104,7 +104,7 @@ ComputationalGrid:
       for the computational grid.
     domains:
       MandatoryValue: __no_args__
-      IntRangeDomain:
+      IntValue:
         minValue: 1
 
   NZ:
@@ -113,7 +113,7 @@ ComputationalGrid:
       for the computational grid.
     domains:
       MandatoryValue: __no_args__
-      IntRangeDomain:
+      IntValue:
         minValue: 1
 
   DX:
@@ -123,7 +123,7 @@ ComputationalGrid:
       used in the problem.
     domains:
       MandatoryValue: __no_args__
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 1.0
 
   DY:
@@ -133,7 +133,7 @@ ComputationalGrid:
       used in the problem.
     domains:
       MandatoryValue: __no_args__
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 1.0
 
   DZ:
@@ -143,5 +143,5 @@ ComputationalGrid:
       used in the problem.
     domains:
       MandatoryValue: __no_args__
-      DoubleRangeDomain:
+      DoubleValue:
         minValue: 1.0
