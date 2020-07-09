@@ -965,46 +965,53 @@ GeomItem:
         DoubleValue:
           minValue: 0.0
 
+  # Setting keys for Geom.geom_name.ICPressure.{}
   ICPressure:
     __doc__: >
       Setting the initial conditions for pressure for specific geometries.
     FileName:
       help: >
-        [Type:string]
+        This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name
+        is “domain” for this key.
       domains:
         AnyString: 
 
     RefElevation:
       help: >
-        [Type:string]
+        [Type: double] This key specifies the reference elevation on which the reference pressure is given for type HydroStaticDepth
+        initial pressures.
       domains:
-        AnyString: 
+        DoubleValue:
 
+    # type is wrong in manual
     RefGeom:
       help: >
-        [Type:string]
+        [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
       domains:
         AnyString: 
 
+    # type is wrong in manual
     RefPatch:
       help: >
-        [Type:string]
+        [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
       domains:
         AnyString: 
 
     Value:
       help: >
-        [Type:string]
+        [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value
+        for types HydroStaticDepth and HydroStaticPatch.
       domains:
-        AnyString: 
+        DoubleValue:
 
-  ICSaturation:
+  # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
+  ICSaturationItem:
     __doc__: >
-      Setting the
+      Setting Geom.geom_input_name.ICSaturation.phase_name.Value
 
     Value:
       help: >
-        [Type: double] Setting...
+        [Type: double] Setting
       domains:
         DoubleValue:
 
@@ -1042,6 +1049,37 @@ GeomContItem:
     domains:
       DoubleValue:
         minValue: 0.0
+
+# Setting ICSaturation
+ICSaturation:
+  __doc__: >
+    This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards'
+    equation cases.
+
+  Type:
+    help: >
+      [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase,
+      phase_name. The only key currently available is Constant. The choice Constant will apply constants values
+      within geometries for the phase.
+    domains:
+      EnumDomain:
+        enumList:
+          - Constant
+
+
+
+# Setting ICPressure GeomNames
+ICPressure:
+  __doc__: >
+    Specifying GeomNames for ICPressure
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies the geometry names on which the initial pressure data will be given. These geometries must
+      comprise the entire domain. Note that conditions for regions that overlap other regions will have unpredictable
+      results. The regions given must be disjoint.
+    domains:
+      AnyString:
 
 # Setting TopoSlopes
 
