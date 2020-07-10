@@ -35,8 +35,20 @@ with open(r'../parflow/database/definitions/core.yaml') as file:
 
 not_keys=['__doc__', 'help', 'domains', 'default']
 
-def keyBuilder:
-  for key, value in core.items():
-    if value not in not_keys:
-      print(value)
+def keyBuilder(input, not_keys, key_all=None):
+  for key, value in input.items():
+    if isinstance(value, dict):
+      for k in value.keys():
+        if k not in not_keys:
+          if key_all == None:
+            key_all = str(k)
+          else:
+            key_all += '.' + str(k)
+          keyBuilder(value, not_keys, key_all)
+          key_all = None
 
+  print(key_all)
+
+
+
+keyBuilder(core, not_keys)
