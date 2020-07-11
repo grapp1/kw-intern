@@ -21,12 +21,58 @@ YAML_MODULES_TO_PROCESS = [
 LEVELS = [
   '=',
   '-',
-  '~',
-  '~',
-  '~',
-  '~',
-  '~',
+  '^',
+  '"',
+  '"',
+  '"',
+  '"',
 ]
+
+def handleDomain(name, definition):
+  indentStr = ' '*4
+  lines = []
+  listCount = 0
+
+  if name == 'MandatoryValue':
+    lines.append(f'{indentStr}The value is required')
+
+  if name == 'IntValue':
+    lines.append(f'{indentStr}The value must be an Integer')
+    if definition and 'minValue' in definition:
+      listCount += 1
+      lines.append(
+          f'{indentStr}  - with a value bigger or equal to {definition["minValue"]}')
+    if definition and 'maxValue' in definition:
+      listCount += 1
+      lines.append(
+          f'{indentStr}  - with a value smaller or equal to {definition["maxValue"]}')
+
+  if name == 'DoubleValue':
+    lines.append(f'{indentStr}The value must be an Integer')
+    if definition and 'minValue' in definition:
+      listCount += 1
+      lines.append(
+          f'{indentStr}  - with a value bigger or equal to {definition["minValue"]}')
+    if definition and 'maxValue' in definition:
+      listCount += 1
+      lines.append(
+          f'{indentStr}  - with a value smaller or equal to {definition["maxValue"]}')
+
+  if name == 'EnumDomain':
+    lines.append(
+        f'{indentStr}The value must be one of the following options {definition["enumList"]}')
+
+  if name == 'AnyString':
+    lines.append(f'{indentStr}The value must a string')
+
+  if name == 'BoolDomain':
+    lines.append(f'{indentStr}The value must a True or False')
+
+  if listCount:
+    lines.append('')
+
+  return '\n'.join(lines)
+
 
 class RSTModule:
   def __init__(self, title):
@@ -62,7 +108,14 @@ class RSTModule:
 
     if leaf:
       # Need to process domains and more...
-      pass
+      if 'default' in subSection:
+        self.addLine(f':default: {subSection["default"]}')
+
+      if 'domains' in subSection:
+        self.addLine('.. note::')
+        for domain in subSection['domains']:
+          self.addLine(handleDomain(domain, subSection['domains'][domain]))
+        self.addLine()
     else:
       # Keep adding sections
       for subKey in subSection:
