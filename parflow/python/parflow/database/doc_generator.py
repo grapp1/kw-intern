@@ -88,6 +88,16 @@ class RSTModule:
   def addSection(self, level, prefix, key, subSection):
     title = f'{prefix}.{key}' if prefix else key
 
+    if '__rst__' in subSection:
+      if 'name' in subSection['__rst__']:
+        title = subSection['__rst__']['name']
+      if 'skip' in subSection['__rst__']:
+        for subKey in subSection:
+          if subKey[0] != '_':
+            self.addSection(level, '', subKey, subSection[subKey])
+        return
+
+
     self.addLine()
     self.addLine(title)
     self.addLine(LEVELS[level]*80)

@@ -33,6 +33,8 @@ GeomInput:
 # user-defined entries in GeomInput.Names are passed to GeomInputItem
 
 GeomInputItem:
+  __rst__:
+    name: GeomInput.{name}
   __doc__: >
     One of the user-defined names for defining a geometry region
 
@@ -99,6 +101,8 @@ GeomInputItem:
 
 # Value is for indicator field only
 GeomInputItemValue:
+  __rst__:
+    name: GeomInput.{name}.Garrett-conflict
   Value:
     help: >
       [Type: int] For IndicatorField geometry inputs, you need to specify
@@ -189,6 +193,8 @@ dzScale:
         minValue: 1
 
 CellnzItem:
+  __rst__:
+    name: Cell.{nzListNumber}
   __doc__: >
     Setting the Cell.nzListNumber.dzScale.Value
 
@@ -265,6 +271,8 @@ Geom:
 # GeomItems: for keys in the form Geom.geom_name.[]
 
 GeomItem:
+  __rst__:
+    name: Geom.{name}
   __doc__: >
     User-defined geometric instance. GeomItem names are taken from either
     GeomInput.Names or GeomItem.GeomNames.
@@ -737,6 +745,8 @@ GeomItem:
       Setting capillary pressures for different phases
 
   CapPressureItem:
+    __rst__:
+      name: Garrett.what.is.the.path
     __doc__: >
       Phase name on which capillary pressure will be specified.
     Value:
@@ -974,7 +984,7 @@ GeomItem:
         This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name
         is “domain” for this key.
       domains:
-        AnyString: 
+        AnyString:
 
     RefElevation:
       help: >
@@ -988,14 +998,14 @@ GeomItem:
       help: >
         [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
       domains:
-        AnyString: 
+        AnyString:
 
     # type is wrong in manual
     RefPatch:
       help: >
         [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
       domains:
-        AnyString: 
+        AnyString:
 
     Value:
       help: >
@@ -1006,6 +1016,8 @@ GeomItem:
 
   # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
   ICSaturationItem:
+    __rst__:
+      name: Geom.{name}.ICSaturation.{phase}
     __doc__: >
       Setting Geom.geom_input_name.ICSaturation.phase_name.Value
 
@@ -1017,6 +1029,8 @@ GeomItem:
 
 # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
 GeomContItem:
+  __rst__:
+    name: Geom.{name}.{contaminant}
   __doc__: >
     Setting retardation properties for specific contaminants and specific geometries.
 

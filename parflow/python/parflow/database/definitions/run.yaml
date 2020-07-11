@@ -1,4 +1,7 @@
 BaseRun:
+  __rst__:
+    skip:
+
   __class_instances__:
     - Process
     - ComputationalGrid
