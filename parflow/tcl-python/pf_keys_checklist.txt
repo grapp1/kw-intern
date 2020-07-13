@@ -147,17 +147,17 @@ Cycle.%s.Repeat
 + * Geom.%s.%s.Retardation.Rate						
 * Geom.%s.%s.Retardation.Type						
 * Geom.%s.CapPressure.%s.Value						
-Geom.%s.FBx.FileName						
-Geom.%s.FBy.FileName						
-Geom.%s.FBz.FileName						
+* Geom.%s.FBx.FileName						
+* Geom.%s.FBy.FileName						
+* Geom.%s.FBz.FileName						
 + * Geom.%s.FileName						
 * Geom.%s.HeatCapacity.Value						
-Geom.%s.ICPressure.FileName						
-Geom.%s.ICPressure.RefElevation						
-Geom.%s.ICPressure.RefGeom						
-Geom.%s.ICPressure.RefPatch						
-Geom.%s.ICPressure.Value						
-Geom.%s.ICSaturation.%s.Value						
+* Geom.%s.ICPressure.FileName						
+* Geom.%s.ICPressure.RefElevation						
+* Geom.%s.ICPressure.RefGeom						
+* Geom.%s.ICPressure.RefPatch						
+* Geom.%s.ICPressure.Value						
+* Geom.%s.ICSaturation.%s.Value						
 * Geom.%s.Lower.X						
 * Geom.%s.Lower.Y						
 * Geom.%s.Lower.Z						
@@ -233,8 +233,8 @@ Geom.%s.ICSaturation.%s.Value
 * GeomInput.%s.GeomNames						
 * GeomInput.%s.InputType						
 * GeomInput.%s.Value						
-ICSaturation.%s.GeomNames						
-ICSaturation.%s.Type						
+* ICSaturation.%s.GeomNames						
+* ICSaturation.%s.Type						
 InternalBC.%s.Value						
 InternalBC.%s.X						
 InternalBC.%s.Y						

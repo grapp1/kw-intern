@@ -248,13 +248,7 @@ GeomInput.{name}.FileName
     The value must a string
 
 
-GeomInput.{name}.Garrett-conflict
-================================================================================
-
-
-
-
-GeomInput.{name}.Garrett-conflict.Value
+GeomInput.{name}.Value
 --------------------------------------------------------------------------------
 
 [Type: int] For IndicatorField geometry inputs, you need to specify the mapping between values in the input file and the geometry names. The named geometry will be defined wherever the input file is equal to the specified value.
@@ -448,14 +442,14 @@ Geom.Retardation.GeomNames
     The value must a string
 
 
-Geom.{name}
+Geom.{geom_name}
 ================================================================================
 
 User-defined geometric instance. GeomItem names are taken from either GeomInput.Names or GeomItem.GeomNames.
 
 
 
-Geom.{name}.FileName
+Geom.{geom_name}.FileName
 --------------------------------------------------------------------------------
 
 [Type: string] This specifies some sort of filename for the specified geometry.
@@ -465,14 +459,14 @@ Geom.{name}.FileName
     The value must a string
 
 
-Geom.{name}.Lower
+Geom.{geom_name}.Lower
 --------------------------------------------------------------------------------
 
 This section sets the lower coordinate locations for the box geometry.
 
 
 
-Geom.{name}.Lower.X
+Geom.{geom_name}.Lower.X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the lower X real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -482,7 +476,7 @@ Geom.{name}.Lower.X
     The value must be an Integer
 
 
-Geom.{name}.Lower.Y
+Geom.{geom_name}.Lower.Y
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the lower Y real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -492,7 +486,7 @@ Geom.{name}.Lower.Y
     The value must be an Integer
 
 
-Geom.{name}.Lower.Z
+Geom.{geom_name}.Lower.Z
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the lower Z real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -502,14 +496,14 @@ Geom.{name}.Lower.Z
     The value must be an Integer
 
 
-Geom.{name}.Upper
+Geom.{geom_name}.Upper
 --------------------------------------------------------------------------------
 
 This section sets the lower coordinate locations for the box geometry.
 
 
 
-Geom.{name}.Upper.X
+Geom.{geom_name}.Upper.X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the upper X real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -519,7 +513,7 @@ Geom.{name}.Upper.X
     The value must be an Integer
 
 
-Geom.{name}.Upper.Y
+Geom.{geom_name}.Upper.Y
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the upper Y real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -529,7 +523,7 @@ Geom.{name}.Upper.Y
     The value must be an Integer
 
 
-Geom.{name}.Upper.Z
+Geom.{geom_name}.Upper.Z
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This gives the upper Z real space coordinate value of the previously specified box geometry of name box_geom_name.
@@ -539,7 +533,7 @@ Geom.{name}.Upper.Z
     The value must be an Integer
 
 
-Geom.{name}.Patches
+Geom.{geom_name}.Patches
 --------------------------------------------------------------------------------
 
 [Type: string] Patches are defined on the surfaces of geometries. Currently you can only define patches on Box geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back bottom top) but you can name the sides anything you want.
@@ -549,14 +543,14 @@ Geom.{name}.Patches
     The value must a string
 
 
-Geom.{name}.Perm
+Geom.{geom_name}.Perm
 --------------------------------------------------------------------------------
 
 Permeability values
 
 
 
-Geom.{name}.Perm.Type
+Geom.{geom_name}.Perm.Type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry, geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
@@ -566,7 +560,7 @@ Geom.{name}.Perm.Type
     The value must be one of the following options ['Constant', 'TurnBands', 'ParGauss', 'PFBFile']
 
 
-Geom.{name}.Perm.Value
+Geom.{geom_name}.Perm.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -576,7 +570,7 @@ Geom.{name}.Perm.Value
     The value must be an Integer
 
 
-Geom.{name}.Perm.LambdaX
+Geom.{geom_name}.Perm.LambdaX
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the x correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
@@ -586,7 +580,7 @@ Geom.{name}.Perm.LambdaX
     The value must be an Integer
 
 
-Geom.{name}.Perm.LambdaY
+Geom.{geom_name}.Perm.LambdaY
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the y correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
@@ -596,7 +590,7 @@ Geom.{name}.Perm.LambdaY
     The value must be an Integer
 
 
-Geom.{name}.Perm.LambdaZ
+Geom.{geom_name}.Perm.LambdaZ
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the z correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
@@ -606,7 +600,7 @@ Geom.{name}.Perm.LambdaZ
     The value must be an Integer
 
 
-Geom.{name}.Perm.GeomMean
+Geom.{geom_name}.Perm.GeomMean
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the geometric mean of the log normal field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
@@ -618,7 +612,7 @@ Geom.{name}.Perm.GeomMean
 
 
 
-Geom.{name}.Perm.Sigma
+Geom.{geom_name}.Perm.Sigma
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the standard deviation of the normal field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
@@ -630,7 +624,7 @@ Geom.{name}.Perm.Sigma
 
 
 
-Geom.{name}.Perm.Seed
+Geom.{geom_name}.Perm.Seed
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the initial seed for the random number generator used to generate the field for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen. This number must be positive.
@@ -643,7 +637,7 @@ Geom.{name}.Perm.Seed
 
 
 
-Geom.{name}.Perm.NumLines
+Geom.{geom_name}.Perm.NumLines
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of lines to be used in the Turning Bands algorithm for the named geometry, geometry_name.
@@ -656,7 +650,7 @@ Geom.{name}.Perm.NumLines
 
 
 
-Geom.{name}.Perm.RZeta
+Geom.{geom_name}.Perm.RZeta
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the resolution of the line processes, in terms of the minimum grid spacing, to be used in the Turning Bands algorithm for the named geometry, geometry_name. Large values imply high resolution.
@@ -669,7 +663,7 @@ Geom.{name}.Perm.RZeta
 
 
 
-Geom.{name}.Perm.KMax
+Geom.{geom_name}.Perm.KMax
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the the maximum normalized frequency, Kmax, to be used in the Turning Bands algorithm for the named geometry, geometry_name.
@@ -682,7 +676,7 @@ Geom.{name}.Perm.KMax
 
 
 
-Geom.{name}.Perm.DelK
+Geom.{geom_name}.Perm.DelK
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the normalized frequency increment to be used in the Turning Bands algorithm for the named geometry, geometry_name.
@@ -695,7 +689,7 @@ Geom.{name}.Perm.DelK
 
 
 
-Geom.{name}.Perm.MaxNPts
+Geom.{geom_name}.Perm.MaxNPts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key sets limits on the number of simulated points in the search neighborhood to be used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
@@ -707,7 +701,7 @@ Geom.{name}.Perm.MaxNPts
 
 
 
-Geom.{name}.Perm.MaxCpts
+Geom.{geom_name}.Perm.MaxCpts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key sets limits on the number of external conditioning points in the search neighborhood to be used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
@@ -719,7 +713,7 @@ Geom.{name}.Perm.MaxCpts
 
 
 
-Geom.{name}.Perm.LogNormal
+Geom.{geom_name}.Perm.LogNormal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] The key specifies when a normal, log normal, truncated normal or truncated log normal field is to be generated by the method for the named geometry, geometry_name. This value must be one of Normal, Log, NormalTruncated or LogTruncated and can be used with either Turning Bands or the Parallel Gaussian Simulator.
@@ -730,7 +724,7 @@ Geom.{name}.Perm.LogNormal
     The value must be one of the following options ['Normal', 'Log', 'NormalTruncated', 'LogTruncated']
 
 
-Geom.{name}.Perm.StratType
+Geom.{geom_name}.Perm.StratType
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies the stratification of the permeability field generated by the method for the named geometry, geometry_name. The value must be one of Horizontal, Bottom or Top and can be used with either the Turning Bands or the Parallel Gaussian Simulator.
@@ -741,7 +735,7 @@ Geom.{name}.Perm.StratType
     The value must be one of the following options ['Horizontal', 'Bottom', 'Top']
 
 
-Geom.{name}.Perm.LowCutoff
+Geom.{geom_name}.Perm.LowCutoff
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the low cutoff value for truncating the generated field for the named geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
@@ -753,7 +747,7 @@ Geom.{name}.Perm.LowCutoff
 
 
 
-Geom.{name}.Perm.HighCutoff
+Geom.{geom_name}.Perm.HighCutoff
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the high cutoff value for truncating the generated field for the named geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
@@ -765,7 +759,7 @@ Geom.{name}.Perm.HighCutoff
 
 
 
-Geom.{name}.Perm.MaxSearchRad
+Geom.{geom_name}.Perm.MaxSearchRad
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] A key to improve correlation structure of RF in testing.
@@ -777,7 +771,7 @@ Geom.{name}.Perm.MaxSearchRad
 
 
 
-Geom.{name}.Perm.FileName
+Geom.{geom_name}.Perm.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies that permeability values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. For a description of the ParFlow Binary file format, see the manual. The ParFlow Binary file associated with the named geometry must contain a collection of permeability values corresponding in a one-to-one manner to the entire computational grid. That is to say, when the contents of the file are read into the simulator, a complete permeability description for the entire domain is supplied. Only those values associated with computational cells residing within the geometry (as it is represented on the computational grid) will be copied into data structures used during the course of a simulation. Thus, the values associated with cells outside of the geounit are irrelevant. For clarity, consider a couple of different scenarios. For example, the user may create a file for each geometry such that appropriate permeability values are given for the geometry and “garbage" values (e.g., some flag value) are given for the rest of the computational domain. In this case, a separate binary file is specified for each geometry. Alternatively, one may place all values representing the permeability field on the union of the geometries into a single binary file. Note that the permeability values must be represented in precisely the same configuration as the computational grid. Then, the same file could be specified for each geounit in the input file. Or, the computational domain could be described as a single geouint (in the ParFlow input file) in which case the permeability values would be read in only once.
@@ -787,7 +781,7 @@ Geom.{name}.Perm.FileName
     The value must a string
 
 
-Geom.{name}.Perm.TensorValX
+Geom.{geom_name}.Perm.TensorValX
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
@@ -799,7 +793,7 @@ Geom.{name}.Perm.TensorValX
 
 
 
-Geom.{name}.Perm.TensorValY
+Geom.{geom_name}.Perm.TensorValY
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
@@ -811,7 +805,7 @@ Geom.{name}.Perm.TensorValY
 
 
 
-Geom.{name}.Perm.TensorValZ
+Geom.{geom_name}.Perm.TensorValZ
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
@@ -823,7 +817,7 @@ Geom.{name}.Perm.TensorValZ
 
 
 
-Geom.{name}.Perm.TensorFileX
+Geom.{geom_name}.Perm.TensorFileX
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies that kx values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
@@ -833,7 +827,7 @@ Geom.{name}.Perm.TensorFileX
     The value must a string
 
 
-Geom.{name}.Perm.TensorFileY
+Geom.{geom_name}.Perm.TensorFileY
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies that ky values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
@@ -843,7 +837,7 @@ Geom.{name}.Perm.TensorFileY
     The value must a string
 
 
-Geom.{name}.Perm.TensorFileZ
+Geom.{geom_name}.Perm.TensorFileZ
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies that kz values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
@@ -853,14 +847,14 @@ Geom.{name}.Perm.TensorFileZ
     The value must a string
 
 
-Geom.{name}.Porosity
+Geom.{geom_name}.Porosity
 --------------------------------------------------------------------------------
 
 Setting porosity values to elements of domain
 
 
 
-Geom.{name}.Porosity.Type
+Geom.{geom_name}.Porosity.Type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies which method is to be used to assign porosity data to the named geometry, geometry_name. The only choice currently available is Constant which indicates that a constant is to be assigned to all grid cells within a geometry.
@@ -870,7 +864,7 @@ Geom.{name}.Porosity.Type
     The value must be one of the following options ['Constant']
 
 
-Geom.{name}.Porosity.Value
+Geom.{geom_name}.Porosity.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -880,7 +874,7 @@ Geom.{name}.Porosity.Value
     The value must be an Integer
 
 
-Geom.{name}.Porosity.FileName
+Geom.{geom_name}.Porosity.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
@@ -890,14 +884,14 @@ Geom.{name}.Porosity.FileName
     The value must a string
 
 
-Geom.{name}.SpecificStorage
+Geom.{geom_name}.SpecificStorage
 --------------------------------------------------------------------------------
 
 Setting specific storage values to elements of domain
 
 
 
-Geom.{name}.SpecificStorage.Value
+Geom.{geom_name}.SpecificStorage.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -907,14 +901,14 @@ Geom.{name}.SpecificStorage.Value
     The value must be an Integer
 
 
-Geom.{name}.RelPerm
+Geom.{geom_name}.RelPerm
 --------------------------------------------------------------------------------
 
 Setting relative permeability value to geometries
 
 
 
-Geom.{name}.RelPerm.Value
+Geom.{geom_name}.RelPerm.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the constant relative permeability value on the specified geometry.
@@ -926,7 +920,7 @@ Geom.{name}.RelPerm.Value
 
 
 
-Geom.{name}.RelPerm.AlphaFileName
+Geom.{geom_name}.RelPerm.AlphaFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -936,7 +930,7 @@ Geom.{name}.RelPerm.AlphaFileName
     The value must a string
 
 
-Geom.{name}.RelPerm.Alpha
+Geom.{geom_name}.RelPerm.Alpha
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
@@ -948,7 +942,7 @@ Geom.{name}.RelPerm.Alpha
 
 
 
-Geom.{name}.RelPerm.NFileName
+Geom.{geom_name}.RelPerm.NFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -958,7 +952,7 @@ Geom.{name}.RelPerm.NFileName
     The value must a string
 
 
-Geom.{name}.RelPerm.N
+Geom.{geom_name}.RelPerm.N
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
@@ -970,7 +964,7 @@ Geom.{name}.RelPerm.N
 
 
 
-Geom.{name}.RelPerm.NumSamplePoints
+Geom.{geom_name}.RelPerm.NumSamplePoints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of sample points for a spline base interpolation table for the Van Genuchten function specified on geom_name. If this number is 0 (the default) then the function is evaluated directly. Using the interpolation table is faster but is less accurate.
@@ -983,7 +977,7 @@ Geom.{name}.RelPerm.NumSamplePoints
 
 
 
-Geom.{name}.RelPerm.MinPressureHead
+Geom.{geom_name}.RelPerm.MinPressureHead
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the lower value for a spline base interpolation table for the Van Genuchten function specified on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used (NumSamplePoints is greater than 0).
@@ -993,7 +987,7 @@ Geom.{name}.RelPerm.MinPressureHead
     The value must be an Integer
 
 
-Geom.{name}.RelPerm.A
+Geom.{geom_name}.RelPerm.A
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
@@ -1003,7 +997,7 @@ Geom.{name}.RelPerm.A
     The value must be an Integer
 
 
-Geom.{name}.RelPerm.Gamma
+Geom.{geom_name}.RelPerm.Gamma
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
@@ -1013,7 +1007,7 @@ Geom.{name}.RelPerm.Gamma
     The value must be an Integer
 
 
-Geom.{name}.RelPerm.Degree
+Geom.{geom_name}.RelPerm.Degree
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
@@ -1023,14 +1017,14 @@ Geom.{name}.RelPerm.Degree
     The value must be an Integer
 
 
-Geom.{name}.RelPerm.Coeff
+Geom.{geom_name}.RelPerm.Coeff
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting the coefficients for the polynomial relative permeability curve.
 
 
 
-Geom.{name}.RelPerm.CoeffNumber
+Geom.{geom_name}.RelPerm.CoeffNumber
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
@@ -1040,21 +1034,21 @@ Geom.{name}.RelPerm.CoeffNumber
     The value must be an Integer
 
 
-Geom.{name}.CapPressure
+Geom.{geom_name}.CapPressure
 --------------------------------------------------------------------------------
 
 Setting capillary pressures for different phases
 
 
 
-Garrett.what.is.the.path
+Geom.geom_name.RelPerm.Coeff.coeff_number
 --------------------------------------------------------------------------------
 
 Phase name on which capillary pressure will be specified.
 
 
 
-Garrett.what.is.the.path.Value
+Geom.geom_name.RelPerm.Coeff.coeff_number.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
@@ -1064,14 +1058,14 @@ Garrett.what.is.the.path.Value
     The value must be an Integer
 
 
-Geom.{name}.Saturation
+Geom.{geom_name}.Saturation
 --------------------------------------------------------------------------------
 
 Setting saturation values to geometries
 
 
 
-Geom.{name}.Saturation.Value
+Geom.{geom_name}.Saturation.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the constant saturation value on the specified geometry.
@@ -1084,7 +1078,7 @@ Geom.{name}.Saturation.Value
 
 
 
-Geom.{name}.Saturation.AlphaFileName
+Geom.{geom_name}.Saturation.AlphaFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1094,7 +1088,7 @@ Geom.{name}.Saturation.AlphaFileName
     The value must a string
 
 
-Geom.{name}.Saturation.Alpha
+Geom.{geom_name}.Saturation.Alpha
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
@@ -1106,7 +1100,7 @@ Geom.{name}.Saturation.Alpha
 
 
 
-Geom.{name}.Saturation.NFileName
+Geom.{geom_name}.Saturation.NFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1116,7 +1110,7 @@ Geom.{name}.Saturation.NFileName
     The value must a string
 
 
-Geom.{name}.Saturation.N
+Geom.{geom_name}.Saturation.N
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
@@ -1128,7 +1122,7 @@ Geom.{name}.Saturation.N
 
 
 
-Geom.{name}.Saturation.SResFilename
+Geom.{geom_name}.Saturation.SResFilename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1138,7 +1132,7 @@ Geom.{name}.Saturation.SResFilename
     The value must a string
 
 
-Geom.{name}.Saturation.SRes
+Geom.{geom_name}.Saturation.SRes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the residual saturation on geom_name.
@@ -1151,7 +1145,7 @@ Geom.{name}.Saturation.SRes
 
 
 
-Geom.{name}.Saturation.SSatFileName
+Geom.{geom_name}.Saturation.SSatFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1161,7 +1155,7 @@ Geom.{name}.Saturation.SSatFileName
     The value must a string
 
 
-Geom.{name}.Saturation.SSat
+Geom.{geom_name}.Saturation.SSat
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the saturation at saturated conditions on geom_name.
@@ -1174,7 +1168,7 @@ Geom.{name}.Saturation.SSat
 
 
 
-Geom.{name}.Saturation.A
+Geom.{geom_name}.Saturation.A
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
@@ -1184,7 +1178,7 @@ Geom.{name}.Saturation.A
     The value must be an Integer
 
 
-Geom.{name}.Saturation.Gamma
+Geom.{geom_name}.Saturation.Gamma
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
@@ -1194,7 +1188,7 @@ Geom.{name}.Saturation.Gamma
     The value must be an Integer
 
 
-Geom.{name}.Saturation.Degree
+Geom.{geom_name}.Saturation.Degree
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
@@ -1204,14 +1198,14 @@ Geom.{name}.Saturation.Degree
     The value must be an Integer
 
 
-Geom.{name}.Saturation.Coeff
+Geom.{geom_name}.Saturation.Coeff
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting the coefficients for the polynomial saturation curve.
 
 
 
-Geom.{name}.Saturation.CoeffNumber
+Geom.{geom_name}.Saturation.CoeffNumber
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
@@ -1221,7 +1215,7 @@ Geom.{name}.Saturation.CoeffNumber
     The value must be an Integer
 
 
-Geom.{name}.Saturation.FileName
+Geom.{geom_name}.Saturation.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name is “domain” for this key.
@@ -1231,14 +1225,14 @@ Geom.{name}.Saturation.FileName
     The value must a string
 
 
-Geom.{name}.dzScale
+Geom.{geom_name}.dzScale
 --------------------------------------------------------------------------------
 
 Setting properties for the dz Scale.
 
 
 
-Geom.{name}.dzScale.Value
+Geom.{geom_name}.dzScale.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -1250,7 +1244,7 @@ Geom.{name}.dzScale.Value
 
 
 
-Geom.{name}.dzScale.FileName
+Geom.{geom_name}.dzScale.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type was set to PFBFile.
@@ -1260,14 +1254,14 @@ Geom.{name}.dzScale.FileName
     The value must a string
 
 
-Geom.{name}.ThermalConductivity
+Geom.{geom_name}.ThermalConductivity
 --------------------------------------------------------------------------------
 
 Setting thermal conductivity values for various geometries
 
 
 
-Geom.{name}.ThermalConductivity.Value
+Geom.{geom_name}.ThermalConductivity.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the thermal conductivity value on the specified geometry.
@@ -1279,7 +1273,7 @@ Geom.{name}.ThermalConductivity.Value
 
 
 
-Geom.{name}.ThermalConductivity.KDryFileName
+Geom.{geom_name}.ThermalConductivity.KDryFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1289,7 +1283,7 @@ Geom.{name}.ThermalConductivity.KDryFileName
     The value must a string
 
 
-Geom.{name}.ThermalConductivity.KDry
+Geom.{geom_name}.ThermalConductivity.KDry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
@@ -1301,7 +1295,7 @@ Geom.{name}.ThermalConductivity.KDry
 
 
 
-Geom.{name}.ThermalConductivity.KWetFileName
+Geom.{geom_name}.ThermalConductivity.KWetFileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1311,7 +1305,7 @@ Geom.{name}.ThermalConductivity.KWetFileName
     The value must a string
 
 
-Geom.{name}.ThermalConductivity.KWet
+Geom.{geom_name}.ThermalConductivity.KWet
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
@@ -1323,14 +1317,14 @@ Geom.{name}.ThermalConductivity.KWet
 
 
 
-Geom.{name}.FBx
+Geom.{geom_name}.FBx
 --------------------------------------------------------------------------------
 
 Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{name}.FBx.FileName
+Geom.{geom_name}.FBx.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies file to be read in for the X flow barrier values for the domain, if the type was set to PFBFile.
@@ -1340,14 +1334,14 @@ Geom.{name}.FBx.FileName
     The value must a string
 
 
-Geom.{name}.FBy
+Geom.{geom_name}.FBy
 --------------------------------------------------------------------------------
 
 Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{name}.FBy.FileName
+Geom.{geom_name}.FBy.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain, if the type was set to PFBFile.
@@ -1357,14 +1351,14 @@ Geom.{name}.FBy.FileName
     The value must a string
 
 
-Geom.{name}.FBz
+Geom.{geom_name}.FBz
 --------------------------------------------------------------------------------
 
 Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{name}.FBz.FileName
+Geom.{geom_name}.FBz.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain, if the type was set to PFBFile.
@@ -1374,14 +1368,14 @@ Geom.{name}.FBz.FileName
     The value must a string
 
 
-Geom.{name}.HeatCapacity
+Geom.{geom_name}.HeatCapacity
 --------------------------------------------------------------------------------
 
 Setting heat capacity properties for specified geometries.
 
 
 
-Geom.{name}.HeatCapacity.Value
+Geom.{geom_name}.HeatCapacity.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
@@ -1393,14 +1387,14 @@ Geom.{name}.HeatCapacity.Value
 
 
 
-Geom.{name}.ICPressure
+Geom.{geom_name}.ICPressure
 --------------------------------------------------------------------------------
 
 Setting the initial conditions for pressure for specific geometries.
 
 
 
-Geom.{name}.ICPressure.FileName
+Geom.{geom_name}.ICPressure.FileName
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name is “domain” for this key.
@@ -1410,7 +1404,7 @@ This key specifies the name of the file containing pressure values for the domai
     The value must a string
 
 
-Geom.{name}.ICPressure.RefElevation
+Geom.{geom_name}.ICPressure.RefElevation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the reference elevation on which the reference pressure is given for type HydroStaticDepth initial pressures.
@@ -1420,7 +1414,7 @@ Geom.{name}.ICPressure.RefElevation
     The value must be an Integer
 
 
-Geom.{name}.ICPressure.RefGeom
+Geom.{geom_name}.ICPressure.RefGeom
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
@@ -1430,7 +1424,7 @@ Geom.{name}.ICPressure.RefGeom
     The value must a string
 
 
-Geom.{name}.ICPressure.RefPatch
+Geom.{geom_name}.ICPressure.RefPatch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
@@ -1440,7 +1434,7 @@ Geom.{name}.ICPressure.RefPatch
     The value must a string
 
 
-Geom.{name}.ICPressure.Value
+Geom.{geom_name}.ICPressure.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value for types HydroStaticDepth and HydroStaticPatch.
@@ -1450,14 +1444,14 @@ Geom.{name}.ICPressure.Value
     The value must be an Integer
 
 
-Geom.{name}.ICSaturation.{phase}
+Geom.{geom_name}.ICSaturation.{phase_name}
 --------------------------------------------------------------------------------
 
 Setting Geom.geom_input_name.ICSaturation.phase_name.Value
 
 
 
-Geom.{name}.ICSaturation.{phase}.Value
+Geom.{geom_name}.ICSaturation.{phase_name}.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] Setting
@@ -1467,14 +1461,14 @@ Geom.{name}.ICSaturation.{phase}.Value
     The value must be an Integer
 
 
-Geom.{name}.{contaminant}
+Geom.{geom_name}.{contaminant}
 ================================================================================
 
 Setting retardation properties for specific contaminants and specific geometries.
 
 
 
-Geom.{name}.{contaminant}.Type
+Geom.{geom_name}.{contaminant}.Type
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies which function is to be used to compute the retardation for the named contaminant, contaminant_ name, in the named geometry, geometry_name. The only choice currently available is Linear which indicates that a simple linear retardation function is to be used to compute the retardation.
@@ -1484,7 +1478,7 @@ Geom.{name}.{contaminant}.Type
     The value must be one of the following options ['Linear']
 
 
-Geom.{name}.{contaminant}.Value
+Geom.{geom_name}.{contaminant}.Value
 --------------------------------------------------------------------------------
 
 [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by the density of the material in the geometry.
@@ -1496,7 +1490,7 @@ Geom.{name}.{contaminant}.Value
 
 
 
-Geom.{name}.{contaminant}.Rate
+Geom.{geom_name}.{contaminant}.Rate
 --------------------------------------------------------------------------------
 
 [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by the density of the material in the geometry.
@@ -1508,14 +1502,14 @@ Geom.{name}.{contaminant}.Rate
 
 
 
-ICSaturation
+ICSaturation.{phase_name}
 ================================================================================
 
 This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards' equation cases.
 
 
 
-ICSaturation.Type
+ICSaturation.{phase_name}.Type
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase, phase_name. The only key currently available is Constant. The choice Constant will apply constants values within geometries for the phase.
@@ -1525,10 +1519,20 @@ ICSaturation.Type
     The value must be one of the following options ['Constant']
 
 
+ICSaturation.{phase_name}.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the geometries on which an initial condition will be given if the type is set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
+
+
+.. note::
+    The value must a string
+
+
 ICPressure
 ================================================================================
 
-Specifying GeomNames for ICPressure
+The keys in this section are used to specify pressure initial conditions for Richards’ equation cases only. These keys will be ignored if any other case is run.
 
 
 
@@ -1540,6 +1544,131 @@ ICPressure.GeomNames
 
 .. note::
     The value must a string
+
+
+ICPressure.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of initial condition given. The choices for this key are Constant, HydroStaticDepth, HydroStaticPatch and PFBFile. The choice Constant specifies that the initial pressure will be constant over the regions given. The choice HydroStaticDepth specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure specified at a given depth. The choice HydroStaticPatch specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure on a specified patch. Note that all regions must have the same type of initial data - different regions cannot have different types of initial data. However, the parameters for the type may be different. The PFBFile specification means that the initial pressure will be taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'PFBFile', 'HydroStaticPatch', 'NCFile']
+
+
+TopoSlopes
+================================================================================
+
+Setting filename for elevation data from which ParFlow will calculate slopes
+
+
+
+TopoSlopesX
+================================================================================
+
+Setting data for domain slopes in the X direction
+
+
+
+TopoSlopesX.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies all of the geometries on which a different x topographic slope values will be assigned. Topographic slopes may be assigned by PFBFile or as Constant by geometry. These geometries must cover the entire upper surface of the computational domain.
+
+
+.. note::
+    The value must a string
+
+
+TopoSlopesX.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies which method is to be used to assign topographic slopes. The choices currently available are Constant which indicates that a constant is to be assigned to all grid cells within a geometry and PFBFile which indicates that all values are read in from a distributed, grid-based ParFlow binary file. If NetCDF is used, NCFile can be specified, which will read in slopes from a NetCDF file.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'PFBFile', 'NCFile']
+
+
+TopoSlopesX.FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the value assigned to all points be read in from a ParFlow binary file.
+
+
+.. note::
+    The value must a string
+
+
+Geom.{geom_name}
+--------------------------------------------------------------------------------
+
+Setting value for slopes in the X direction
+
+
+
+Geom.{geom_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
+
+
+.. note::
+    The value must be an Integer
+
+
+TopoSlopesY
+================================================================================
+
+Setting data for domain slopes in the Y direction
+
+
+
+TopoSlopesY.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies all of the geometries on which a different y topographic slope values will be assigned. Topographic slopes may be assigned by PFBFile or as Constant by geometry. These geometries must cover the entire upper surface of the computational domain.
+
+
+.. note::
+    The value must a string
+
+
+TopoSlopesY.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies which method is to be used to assign topographic slopes. The choices currently available are Constant which indicates that a constant is to be assigned to all grid cells within a geometry and PFBFile which indicates that all values are read in from a distributed, grid-based ParFlow binary file. If NetCDF is used, NCFile can be specified, which will read in slopes from a NetCDF file.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'PFBFile', 'NCFile']
+
+
+TopoSlopesY.FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the value assigned to all points be read in from a ParFlow binary file.
+
+
+.. note::
+    The value must a string
+
+
+Geom.{geom_name}
+--------------------------------------------------------------------------------
+
+Setting value for slopes in the Y direction
+
+
+
+Geom.{geom_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
+
+
+.. note::
+    The value must be an Integer
 
 
 Solver
