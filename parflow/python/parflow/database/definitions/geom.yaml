@@ -749,6 +749,7 @@ GeomItem:
   CapPressurePhase:
     __rst__:
       name: Geom.{geom_name}.CapPressure.{phase_name}
+      skip:
     __doc__: >
       Setting phase name for capillary pressure of a specified geometry.
     Value:

@@ -1047,15 +1047,8 @@ Setting capillary pressures for specified geometries
 
 
 
-Geom.{geom_name}.CapPressure.{phase_name}
+Value
 --------------------------------------------------------------------------------
-
-Setting phase name for capillary pressure of a specified geometry.
-
-
-
-Geom.{geom_name}.CapPressure.{phase_name}.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
 
