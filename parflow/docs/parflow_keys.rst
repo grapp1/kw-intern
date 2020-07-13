@@ -930,7 +930,7 @@ Geom.{geom_name}.RelPerm.AlphaFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .Alpha.Filename
+    The ParFlow key is written as *Geom.{geom_name}.RelPerm.AlphaFileName.Alpha.Filename*
 
 
 Geom.{geom_name}.RelPerm.Alpha
@@ -955,7 +955,7 @@ Geom.{geom_name}.RelPerm.NFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .N.Filename
+    The ParFlow key is written as *Geom.{geom_name}.RelPerm.NFileName.N.Filename*
 
 
 Geom.{geom_name}.RelPerm.N
@@ -1088,7 +1088,7 @@ Geom.{geom_name}.Saturation.AlphaFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .Alpha.Filename
+    The ParFlow key is written as *Geom.{geom_name}.Saturation.AlphaFileName.Alpha.Filename*
 
 
 Geom.{geom_name}.Saturation.Alpha
@@ -1113,7 +1113,7 @@ Geom.{geom_name}.Saturation.NFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .N.Filename
+    The ParFlow key is written as *Geom.{geom_name}.Saturation.NFileName.N.Filename*
 
 
 Geom.{geom_name}.Saturation.N
@@ -1138,7 +1138,7 @@ Geom.{geom_name}.Saturation.SResFilename
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .SRes.Filename
+    The ParFlow key is written as *Geom.{geom_name}.Saturation.SResFilename.SRes.Filename*
 
 
 Geom.{geom_name}.Saturation.SRes
@@ -1164,7 +1164,7 @@ Geom.{geom_name}.Saturation.SSatFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .SSat.Filename
+    The ParFlow key is written as *Geom.{geom_name}.Saturation.SSatFileName.SSat.Filename*
 
 
 Geom.{geom_name}.Saturation.SSat
@@ -1295,7 +1295,7 @@ Geom.{geom_name}.ThermalConductivity.KDryFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .KDry.Filename
+    The ParFlow key is written as *Geom.{geom_name}.ThermalConductivity.KDryFileName.KDry.Filename*
 
 
 Geom.{geom_name}.ThermalConductivity.KDry
@@ -1320,7 +1320,7 @@ Geom.{geom_name}.ThermalConductivity.KWetFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as  .KDry.Filename
+    The ParFlow key is written as *Geom.{geom_name}.ThermalConductivity.KWetFileName.KDry.Filename*
 
 
 Geom.{geom_name}.ThermalConductivity.KWet
@@ -1758,7 +1758,7 @@ Solver.Type
     The value must be one of the following options ['Impes', 'Richards']
 
 .. warning::
-    The ParFlow key is written as  ..Solver
+    The ParFlow key is written as *Solver*
 
 
 Solver.AbsTol
@@ -2782,7 +2782,7 @@ Solver.TerrainFolSlopeUpwind
     The value must be one of the following options ['Original', 'Upwind', 'UpwindSine']
 
 .. warning::
-    The ParFlow key is written as  TerrainFollowingGrid.SlopeUpwindFormulation
+    The ParFlow key is written as *Solver.TerrainFolSlopeUpwindTerrainFollowingGrid.SlopeUpwindFormulation*
 
 
 Solver.TwoNorm
@@ -2829,7 +2829,7 @@ Solver.LinKrylovDimension
 
 
 .. warning::
-    The ParFlow key is written as  .Linear.KrylovDimension
+    The ParFlow key is written as *Solver.LinKrylovDimension.Linear.KrylovDimension*
 
 
 Solver.LinMaxRestarts
@@ -2845,7 +2845,7 @@ Solver.LinMaxRestarts
 
 
 .. warning::
-    The ParFlow key is written as  .Linear.MaxRestarts
+    The ParFlow key is written as *Solver.LinMaxRestarts.Linear.MaxRestarts*
 
 
 Solver.LinPreconditioner
@@ -2859,7 +2859,7 @@ Solver.LinPreconditioner
     The value must be one of the following options ['NoPC', 'MGSemi', 'PFMG', 'PFMGOctree', 'SMG']
 
 .. warning::
-    The ParFlow key is written as  .Linear.Preconditioner
+    The ParFlow key is written as *Solver.LinPreconditioner.Linear.Preconditioner*
 
 
 Solver.LinPrecondSym
@@ -2873,7 +2873,7 @@ Solver.LinPrecondSym
     The value must be one of the following options ['Symmetric', 'Nonsymmetric']
 
 .. warning::
-    The ParFlow key is written as  .Linear.Preconditioner.SymmetricMat
+    The ParFlow key is written as *Solver.LinPrecondSym.Linear.Preconditioner.SymmetricMat*
 
 
 Solver.PrecondItem
@@ -2909,7 +2909,7 @@ Solver.LinPrecondSMGPreRelax
 
 
 .. warning::
-    The ParFlow key is written as  .Linear.Preconditioner.SMG.NumPreRelax
+    The ParFlow key is written as *Solver.LinPrecondSMGPreRelax.Linear.Preconditioner.SMG.NumPreRelax*
 
 
 Solver.LinPrecondSMGPostRelax
@@ -2925,7 +2925,7 @@ Solver.LinPrecondSMGPostRelax
 
 
 .. warning::
-    The ParFlow key is written as  .Linear.Preconditioner.SMG.NumPostRelax
+    The ParFlow key is written as *Solver.LinPrecondSMGPostRelax.Linear.Preconditioner.SMG.NumPostRelax*
 
 
 Solver.LinPrecondPFMGRAPType
@@ -2939,7 +2939,7 @@ Solver.LinPrecondPFMGRAPType
     The value must be one of the following options ['Galerkin', 'NonGalerkin']
 
 .. warning::
-    The ParFlow key is written as  .Linear.Preconditioner.PFMG.RAPType
+    The ParFlow key is written as *Solver.LinPrecondPFMGRAPType.Linear.Preconditioner.PFMG.RAPType*
 
 
 Solver.NonlinearSolver

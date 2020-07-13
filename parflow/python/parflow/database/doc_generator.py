@@ -129,7 +129,10 @@ class RSTModule:
 
       if 'exportName' in subSection:
         self.addLine('.. warning::')
-        self.addLine(f'    The ParFlow key is written as  {subSection["exportName"]}')
+        if subSection["exportName"][1] == '.':
+          self.addLine(f'    The ParFlow key is written as *{prefix}*')
+        else:
+          self.addLine(f'    The ParFlow key is written as *{title}{subSection["exportName"]}*')
         self.addLine()
 
     else:
