@@ -929,6 +929,9 @@ Geom.{geom_name}.RelPerm.AlphaFileName
 .. note::
     The value must a string
 
+.. warning::
+    The ParFlow key is written as  .Alpha.Filename
+
 
 Geom.{geom_name}.RelPerm.Alpha
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -950,6 +953,9 @@ Geom.{geom_name}.RelPerm.NFileName
 
 .. note::
     The value must a string
+
+.. warning::
+    The ParFlow key is written as  .N.Filename
 
 
 Geom.{geom_name}.RelPerm.N
@@ -1024,7 +1030,7 @@ Setting the coefficients for the polynomial relative permeability curve.
 
 
 
-Geom.{geom_name}.RelPerm.CoeffNumber
+Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
@@ -1087,6 +1093,9 @@ Geom.{geom_name}.Saturation.AlphaFileName
 .. note::
     The value must a string
 
+.. warning::
+    The ParFlow key is written as  .Alpha.Filename
+
 
 Geom.{geom_name}.Saturation.Alpha
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1108,6 +1117,9 @@ Geom.{geom_name}.Saturation.NFileName
 
 .. note::
     The value must a string
+
+.. warning::
+    The ParFlow key is written as  .N.Filename
 
 
 Geom.{geom_name}.Saturation.N
@@ -1131,6 +1143,9 @@ Geom.{geom_name}.Saturation.SResFilename
 .. note::
     The value must a string
 
+.. warning::
+    The ParFlow key is written as  .SRes.Filename
+
 
 Geom.{geom_name}.Saturation.SRes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1153,6 +1168,9 @@ Geom.{geom_name}.Saturation.SSatFileName
 
 .. note::
     The value must a string
+
+.. warning::
+    The ParFlow key is written as  .SSat.Filename
 
 
 Geom.{geom_name}.Saturation.SSat
@@ -1282,6 +1300,9 @@ Geom.{geom_name}.ThermalConductivity.KDryFileName
 .. note::
     The value must a string
 
+.. warning::
+    The ParFlow key is written as  .KDry.Filename
+
 
 Geom.{geom_name}.ThermalConductivity.KDry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1303,6 +1324,9 @@ Geom.{geom_name}.ThermalConductivity.KWetFileName
 
 .. note::
     The value must a string
+
+.. warning::
+    The ParFlow key is written as  .KDry.Filename
 
 
 Geom.{geom_name}.ThermalConductivity.KWet
@@ -1563,6 +1587,23 @@ Setting filename for elevation data from which ParFlow will calculate slopes
 
 
 
+TopoSlopes.Elevation
+--------------------------------------------------------------------------------
+
+Setting filename for elevation data from which ParFlow will calculate slopes
+
+
+
+TopoSlopes.Elevation.FileName
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key is the name of the PFB file that contains elevations which ParFlow uses to derive slopes. This is optional but can be useful when post-processing terrain-following grids.
+
+
+.. note::
+
+
+
 TopoSlopesX
 ================================================================================
 
@@ -1600,14 +1641,14 @@ TopoSlopesX.FileName
     The value must a string
 
 
-Geom.{geom_name}
+TopoSlopesX.Geom.{geom_name}
 --------------------------------------------------------------------------------
 
 Setting value for slopes in the X direction
 
 
 
-Geom.{geom_name}.Value
+TopoSlopesX.Geom.{geom_name}.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -1654,14 +1695,14 @@ TopoSlopesY.FileName
     The value must a string
 
 
-Geom.{geom_name}
+TopoSlopesY.Geom.{geom_name}
 --------------------------------------------------------------------------------
 
 Setting value for slopes in the Y direction
 
 
 
-Geom.{geom_name}.Value
+TopoSlopesY.Geom.{geom_name}.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
@@ -1686,6 +1727,9 @@ Solver.Type
 
 .. note::
     The value must be one of the following options ['Impes', 'Richards']
+
+.. warning::
+    The ParFlow key is written as  ..Solver
 
 
 Solver.AbsTol
@@ -2708,6 +2752,9 @@ Solver.TerrainFolSlopeUpwind
 .. note::
     The value must be one of the following options ['Original', 'Upwind', 'UpwindSine']
 
+.. warning::
+    The ParFlow key is written as  TerrainFollowingGrid.SlopeUpwindFormulation
+
 
 Solver.TwoNorm
 --------------------------------------------------------------------------------
@@ -2752,6 +2799,9 @@ Solver.LinKrylovDimension
       - with a value bigger or equal to 1
 
 
+.. warning::
+    The ParFlow key is written as  .Linear.KrylovDimension
+
 
 Solver.LinMaxRestarts
 --------------------------------------------------------------------------------
@@ -2765,6 +2815,9 @@ Solver.LinMaxRestarts
       - with a value bigger or equal to 0
 
 
+.. warning::
+    The ParFlow key is written as  .Linear.MaxRestarts
+
 
 Solver.LinPreconditioner
 --------------------------------------------------------------------------------
@@ -2776,6 +2829,9 @@ Solver.LinPreconditioner
 .. note::
     The value must be one of the following options ['NoPC', 'MGSemi', 'PFMG', 'PFMGOctree', 'SMG']
 
+.. warning::
+    The ParFlow key is written as  .Linear.Preconditioner
+
 
 Solver.LinPrecondSym
 --------------------------------------------------------------------------------
@@ -2786,6 +2842,9 @@ Solver.LinPrecondSym
 :default: Symmetric
 .. note::
     The value must be one of the following options ['Symmetric', 'Nonsymmetric']
+
+.. warning::
+    The ParFlow key is written as  .Linear.Preconditioner.SymmetricMat
 
 
 Solver.PrecondItem
@@ -2820,6 +2879,9 @@ Solver.LinPrecondSMGPreRelax
       - with a value bigger or equal to 1
 
 
+.. warning::
+    The ParFlow key is written as  .Linear.Preconditioner.SMG.NumPreRelax
+
 
 Solver.LinPrecondSMGPostRelax
 --------------------------------------------------------------------------------
@@ -2833,6 +2895,9 @@ Solver.LinPrecondSMGPostRelax
       - with a value bigger or equal to 1
 
 
+.. warning::
+    The ParFlow key is written as  .Linear.Preconditioner.SMG.NumPostRelax
+
 
 Solver.LinPrecondPFMGRAPType
 --------------------------------------------------------------------------------
@@ -2843,6 +2908,9 @@ Solver.LinPrecondPFMGRAPType
 :default: NonGalerkin
 .. note::
     The value must be one of the following options ['Galerkin', 'NonGalerkin']
+
+.. warning::
+    The ParFlow key is written as  .Linear.Preconditioner.PFMG.RAPType
 
 
 Solver.NonlinearSolver

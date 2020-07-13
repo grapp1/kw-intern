@@ -734,6 +734,8 @@ GeomItem:
         Setting the coefficients for the polynomial relative permeability curve.
 
     CoeffNumber:
+      __rst__:
+        name: Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
       help: >
         [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
       domains:
@@ -1136,6 +1138,15 @@ ICPressure:
 TopoSlopes:
   __doc__: >
     Setting filename for elevation data from which ParFlow will calculate slopes
+  Elevation:
+    __doc__: >
+      Setting filename for elevation data from which ParFlow will calculate slopes
+    FileName:
+      help: >
+        [Type: string] This key is the name of the PFB file that contains elevations which ParFlow uses to derive
+        slopes. This is optional but can be useful when post-processing terrain-following grids.
+      domains:
+        Anystring:
 
 TopoSlopesX:
   __doc__: >
@@ -1171,7 +1182,7 @@ TopoSlopesX:
 
   TopoSlopeXItem:
     __rst__:
-      name: Geom.{geom_name}
+      name: TopoSlopesX.Geom.{geom_name}
     __doc__: >
       Setting value for slopes in the X direction
     Value:
@@ -1215,7 +1226,7 @@ TopoSlopesY:
 
   TopoSlopeYItem:
     __rst__:
-      name: Geom.{geom_name}
+      name: TopoSlopesY.Geom.{geom_name}
     __doc__: >
       Setting value for slopes in the Y direction
     Value:

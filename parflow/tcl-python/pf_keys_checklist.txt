@@ -323,9 +323,10 @@ PhaseSources.Geom.%s.Value
 * Solver.Nonlinear.ResidualTol	
 * Solver.Nonlinear.StepTol	
 * Solver.Nonlinear.UseJacobian						
-* Solver.TerrainFollowingGrid.SlopeUpwindFormulation					
-TopoSlopesX.Geom.%s.Value				
-TopoSlopesY.Geom.%s.Value						
+* Solver.TerrainFollowingGrid.SlopeUpwindFormulation
+> * TopoSlopes.Elevation.FileName					
+* TopoSlopesX.Geom.%s.Value				
+* TopoSlopesY.Geom.%s.Value						
 Wells.%s.%s.Concentration.%s.%s.Value						
 Wells.%s.%s.Extraction.Flux.%s.Value						
 Wells.%s.%s.Extraction.Pressure.Value						

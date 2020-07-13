@@ -126,6 +126,12 @@ class RSTModule:
         for domain in subSection['domains']:
           self.addLine(handleDomain(domain, subSection['domains'][domain]))
         self.addLine()
+
+      if 'exportName' in subSection:
+        self.addLine('.. warning::')
+        self.addLine(f'    The ParFlow key is written as  {subSection["exportName"]}')
+        self.addLine()
+
     else:
       # Keep adding sections
       for subKey in subSection:
