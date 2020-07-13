@@ -63,10 +63,10 @@ def handleDomain(name, definition):
         f'{indentStr}The value must be one of the following options {definition["enumList"]}')
 
   if name == 'AnyString':
-    lines.append(f'{indentStr}The value must a string')
+    lines.append(f'{indentStr}The value must be a string')
 
   if name == 'BoolDomain':
-    lines.append(f'{indentStr}The value must a True or False')
+    lines.append(f'{indentStr}The value must be True or False')
 
   if listCount:
     lines.append('')

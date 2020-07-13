@@ -744,20 +744,18 @@ GeomItem:
   # Capillary Pressure
   CapPressure:
     __doc__: >
-      Setting capillary pressures for different phases
+      Setting capillary pressures for specified geometries
 
-  CapPressureItem:
+  CapPressurePhase:
     __rst__:
-      name: Geom.geom_name.RelPerm.Coeff.coeff_number
+      name: Geom.{geom_name}.CapPressure.{phase_name}
     __doc__: >
-      Phase name on which capillary pressure will be specified.
-
-    _rst:
-      prefix: CapPressure.{phase_name}
-
+      Setting phase name for capillary pressure of a specified geometry.
     Value:
       help: >
-        [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
+        [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named
+        phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
+      default: 0.0
       domains:
         DoubleValue:
 
@@ -1236,3 +1234,31 @@ TopoSlopesY:
       domains:
         DoubleValue:
 
+# Capillary Pressure
+CapPressure:
+  __doc__: >
+    Setting capillary pressures for different phases
+
+CapPressurePhaseItem:
+  __rst__:
+    name: CapPressure.{phase_name}
+  __doc__: >
+    Phase name on which capillary pressure will be specified.
+
+  Type:
+    help: >
+      [Type: string] This key specifies the capillary pressure between phase 0 and the named phase, phase_name. The only choice
+      available is Constant which indicates that a constant capillary pressure exists between the phases.
+    default: Constant
+    domains:
+      EnumDomain:
+        enumList:
+          - Constant
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies the geometries that capillary pressures will be computed for in the named phase, phase_name.
+      Regions listed later “overlay” regions listed earlier. Any geometries not listed will be assigned 0:0 capillary pressure
+      by ParFlow.
+    domains:
+      AnyString:

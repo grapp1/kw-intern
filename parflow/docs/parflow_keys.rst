@@ -198,7 +198,7 @@ GeomInput.Names
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 GeomInput.{name}
@@ -225,7 +225,7 @@ GeomInput.{name}.GeomName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 GeomInput.{name}.GeomNames
@@ -235,7 +235,7 @@ GeomInput.{name}.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 GeomInput.{name}.FileName
@@ -245,7 +245,7 @@ GeomInput.{name}.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 GeomInput.{name}.Value
@@ -289,7 +289,7 @@ SpecificStorage.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 SpecificStorage.Type
@@ -316,7 +316,7 @@ dzScale.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 dzScale.Type
@@ -326,7 +326,7 @@ dzScale.Type
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 dzScale.nzListNumber
@@ -388,7 +388,7 @@ Geom.Perm.Names
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.Perm.TensorByGeom
@@ -405,7 +405,7 @@ This key specifies all of the geometries to which permeability tensor entries wi
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.Porosity
@@ -422,7 +422,7 @@ Geom.Porosity.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.Retardation
@@ -439,7 +439,7 @@ Geom.Retardation.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}
@@ -456,7 +456,7 @@ Geom.{geom_name}.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Lower
@@ -540,7 +540,7 @@ Geom.{geom_name}.Patches
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Perm
@@ -778,7 +778,7 @@ Geom.{geom_name}.Perm.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Perm.TensorValX
@@ -824,7 +824,7 @@ Geom.{geom_name}.Perm.TensorFileX
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Perm.TensorFileY
@@ -834,7 +834,7 @@ Geom.{geom_name}.Perm.TensorFileY
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Perm.TensorFileZ
@@ -844,7 +844,7 @@ Geom.{geom_name}.Perm.TensorFileZ
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.Porosity
@@ -881,7 +881,7 @@ Geom.{geom_name}.Porosity.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.SpecificStorage
@@ -927,7 +927,7 @@ Geom.{geom_name}.RelPerm.AlphaFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .Alpha.Filename
@@ -952,7 +952,7 @@ Geom.{geom_name}.RelPerm.NFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .N.Filename
@@ -1043,23 +1043,24 @@ Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
 Geom.{geom_name}.CapPressure
 --------------------------------------------------------------------------------
 
-Setting capillary pressures for different phases
+Setting capillary pressures for specified geometries
 
 
 
-Geom.geom_name.RelPerm.Coeff.coeff_number
+Geom.{geom_name}.CapPressure.{phase_name}
 --------------------------------------------------------------------------------
 
-Phase name on which capillary pressure will be specified.
+Setting phase name for capillary pressure of a specified geometry.
 
 
 
-Geom.geom_name.RelPerm.Coeff.coeff_number.Value
+Geom.{geom_name}.CapPressure.{phase_name}.Value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-[Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
+[Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
 
 
+:default: 0.0
 .. note::
     The value must be an Integer
 
@@ -1091,7 +1092,7 @@ Geom.{geom_name}.Saturation.AlphaFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .Alpha.Filename
@@ -1116,7 +1117,7 @@ Geom.{geom_name}.Saturation.NFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .N.Filename
@@ -1141,7 +1142,7 @@ Geom.{geom_name}.Saturation.SResFilename
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .SRes.Filename
@@ -1167,7 +1168,7 @@ Geom.{geom_name}.Saturation.SSatFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .SSat.Filename
@@ -1240,7 +1241,7 @@ Geom.{geom_name}.Saturation.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.dzScale
@@ -1269,7 +1270,7 @@ Geom.{geom_name}.dzScale.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.ThermalConductivity
@@ -1298,7 +1299,7 @@ Geom.{geom_name}.ThermalConductivity.KDryFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .KDry.Filename
@@ -1323,7 +1324,7 @@ Geom.{geom_name}.ThermalConductivity.KWetFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 .. warning::
     The ParFlow key is written as  .KDry.Filename
@@ -1355,7 +1356,7 @@ Geom.{geom_name}.FBx.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.FBy
@@ -1372,7 +1373,7 @@ Geom.{geom_name}.FBy.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.FBz
@@ -1389,7 +1390,7 @@ Geom.{geom_name}.FBz.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.HeatCapacity
@@ -1425,7 +1426,7 @@ This key specifies the name of the file containing pressure values for the domai
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.ICPressure.RefElevation
@@ -1445,7 +1446,7 @@ Geom.{geom_name}.ICPressure.RefGeom
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.ICPressure.RefPatch
@@ -1455,7 +1456,7 @@ Geom.{geom_name}.ICPressure.RefPatch
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Geom.{geom_name}.ICPressure.Value
@@ -1550,7 +1551,7 @@ ICSaturation.{phase_name}.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 ICPressure
@@ -1567,7 +1568,7 @@ ICPressure.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 ICPressure.Type
@@ -1618,7 +1619,7 @@ TopoSlopesX.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 TopoSlopesX.Type
@@ -1638,7 +1639,7 @@ TopoSlopesX.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 TopoSlopesX.Geom.{geom_name}
@@ -1672,7 +1673,7 @@ TopoSlopesY.GeomNames
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 TopoSlopesY.Type
@@ -1692,7 +1693,7 @@ TopoSlopesY.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 TopoSlopesY.Geom.{geom_name}
@@ -1710,6 +1711,41 @@ TopoSlopesY.Geom.{geom_name}.Value
 
 .. note::
     The value must be an Integer
+
+
+CapPressure
+================================================================================
+
+Setting capillary pressures for different phases
+
+
+
+CapPressure.{phase_name}
+================================================================================
+
+Phase name on which capillary pressure will be specified.
+
+
+
+CapPressure.{phase_name}.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the capillary pressure between phase 0 and the named phase, phase_name. The only choice available is Constant which indicates that a constant capillary pressure exists between the phases.
+
+
+:default: Constant
+.. note::
+    The value must be one of the following options ['Constant']
+
+
+CapPressure.{phase_name}.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the geometries that capillary pressures will be computed for in the named phase, phase_name. Regions listed later “overlay” regions listed earlier. Any geometries not listed will be assigned 0:0 capillary pressure by ParFlow.
+
+
+.. note::
+    The value must be a string
 
 
 Solver
@@ -1835,7 +1871,7 @@ Solver.CLM.BinaryOutDir
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.CLMDumpInterval
@@ -1858,7 +1894,7 @@ Solver.CLM.CLMFileDir
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Solver.CLM.DailyRST
@@ -1869,7 +1905,7 @@ Solver.CLM.DailyRST
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.EvapBeta
@@ -1905,7 +1941,7 @@ Solver.CLM.ForceVegetation
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.FstepStart
@@ -2029,7 +2065,7 @@ Solver.CLM.MetFileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Solver.CLM.MetFilePath
@@ -2039,7 +2075,7 @@ Solver.CLM.MetFilePath
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Solver.CLM.MetFileSubdir
@@ -2070,7 +2106,7 @@ Solver.CLM.Print1dOut
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.ResSat
@@ -2120,7 +2156,7 @@ Solver.CLM.SingleFile
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.SoiLayer
@@ -2168,7 +2204,7 @@ Solver.CLM.WriteLastRST
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CLM.WriteLogs
@@ -2179,7 +2215,7 @@ Solver.CLM.WriteLogs
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.CoarseSolve
@@ -2259,7 +2295,7 @@ Solver.EvapTrans.FileLooping
 
 
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.EvapTrans.FileName
@@ -2269,7 +2305,7 @@ Solver.EvapTrans.FileName
 
 
 .. note::
-    The value must a string
+    The value must be a string
 
 
 Solver.EvapTransFile
@@ -2280,7 +2316,7 @@ Solver.EvapTransFile
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.EvapTransFileTransient
@@ -2291,7 +2327,7 @@ Solver.EvapTransFileTransient
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Jacobian
@@ -2468,7 +2504,7 @@ Solver.PrintCLM
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintConcentration
@@ -2479,7 +2515,7 @@ Solver.PrintConcentration
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintDZMultiplier
@@ -2520,7 +2556,7 @@ Solver.PrintLSMSink
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintMannings
@@ -2531,7 +2567,7 @@ Solver.PrintMannings
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintMask
@@ -2542,7 +2578,7 @@ Solver.PrintMask
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintOverlandBCFlux
@@ -2553,7 +2589,7 @@ Solver.PrintOverlandBCFlux
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintOverlandSum
@@ -2564,7 +2600,7 @@ Solver.PrintOverlandSum
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintPressure
@@ -2575,7 +2611,7 @@ Solver.PrintPressure
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintSaturation
@@ -2586,7 +2622,7 @@ Solver.PrintSaturation
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintSlopes
@@ -2597,7 +2633,7 @@ Solver.PrintSlopes
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintSpecificStorage
@@ -2608,7 +2644,7 @@ Solver.PrintSpecificStorage
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintSubsurf
@@ -2619,7 +2655,7 @@ Solver.PrintSubsurf
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintSubsurfData
@@ -2630,7 +2666,7 @@ Solver.PrintSubsurfData
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintTop
@@ -2641,7 +2677,7 @@ Solver.PrintTop
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintVelocities
@@ -2652,7 +2688,7 @@ Solver.PrintVelocities
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.PrintWells
@@ -2663,7 +2699,7 @@ Solver.PrintWells
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.RAPType
@@ -2739,7 +2775,7 @@ Solver.TerrainFollowingGrid
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.TerrainFolSlopeUpwind
@@ -2784,7 +2820,7 @@ Solver.WriteCLMBinary
 
 :default: True
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.LinKrylovDimension
@@ -2938,7 +2974,7 @@ Solver.Nonlinear.VariableDz
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Nonlinear.FlowBarrierX
@@ -2949,7 +2985,7 @@ Solver.Nonlinear.FlowBarrierX
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Nonlinear.FlowBarrierY
@@ -2960,7 +2996,7 @@ Solver.Nonlinear.FlowBarrierY
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Nonlinear.FlowBarrierZ
@@ -2971,7 +3007,7 @@ Solver.Nonlinear.FlowBarrierZ
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Nonlinear.ResidualTol
@@ -3082,7 +3118,7 @@ Solver.Nonlinear.UseJacobian
 
 :default: False
 .. note::
-    The value must a True or False
+    The value must be True or False
 
 
 Solver.Nonlinear.DerivativeEpsilon
