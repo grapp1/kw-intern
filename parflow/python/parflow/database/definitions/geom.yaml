@@ -277,6 +277,9 @@ GeomItem:
     User-defined geometric instance. GeomItem names are taken from either
     GeomInput.Names or GeomItem.GeomNames.
 
+  _rst:
+    prefix: Geom.{geom_name}
+
   # Geom.geom_name.FileName
   FileName:
     help: >
@@ -749,6 +752,10 @@ GeomItem:
       name: Garrett.what.is.the.path
     __doc__: >
       Phase name on which capillary pressure will be specified.
+
+    _rst:
+      prefix: CapPressure.{phase_name}
+
     Value:
       help: >
         [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name.
