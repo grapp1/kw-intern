@@ -14,6 +14,7 @@ YAML_MODULES_TO_PROCESS = [
   'core',
   'geom',
   'solver',
+  # 'wells',
   'run'
 ]
 # -----------------------------------------------------------------------------
@@ -158,6 +159,11 @@ class PythonModule:
 
       for key in classDefinition:
         if isClass(key, classDefinition):
+          # if key[0] == '.':
+          #   classMembers.append(key[1:])
+          #   print(key)
+          # else:
+          #   classMembers.append(key)
           classMembers.append(key)
         if isField(key, classDefinition):
           fieldMembers.append(key)
