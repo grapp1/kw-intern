@@ -130,9 +130,11 @@ class RSTModule:
       if 'exportName' in subSection:
         self.addLine('.. warning::')
         if subSection["exportName"][1] == '.':
-          self.addLine(f'    The ParFlow key is written as *{prefix}*')
+          self.addLine(f'    In Python we will define *{title}* which will set'
+                       f'    *{prefix}* inside the ParFlow .pfidb file.')
         else:
-          self.addLine(f'    The ParFlow key is written as *{title}{subSection["exportName"]}*')
+          self.addLine(f'    In Python we will define *{title}* which will set'
+                       f'    *{prefix}{subSection["exportName"]}* inside the ParFlow .pfidb file.')
         self.addLine()
 
     else:

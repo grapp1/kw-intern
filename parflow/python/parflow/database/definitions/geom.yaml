@@ -34,7 +34,7 @@ GeomInput:
 
 GeomInputItem:
   __rst__:
-    name: GeomInput.{name}
+    name: GeomInput.{geom_name}
   __doc__: >
     One of the user-defined names for defining a geometry region
 
@@ -748,11 +748,12 @@ GeomItem:
 
   CapPressurePhase:
     __rst__:
-      name: Geom.{geom_name}.CapPressure.{phase_name}
       skip:
     __doc__: >
       Setting phase name for capillary pressure of a specified geometry.
     Value:
+      __rst__:
+        name: Geom.{geom_name}.CapPressure.{phase_name}.Value
       help: >
         [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named
         phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.

@@ -1,6 +1,6 @@
 # solver.yaml
 # Definitions of solver components, time stepping, and other components of ParFlow
-# Includes Solver, TimeStep,
+# Includes Solver and all subkeys (not including silo outputs - those are in silo.yaml)
 
 
 # -----------------------------------------------------------------------------

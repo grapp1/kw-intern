@@ -201,14 +201,14 @@ GeomInput.Names
     The value must be a string
 
 
-GeomInput.{name}
+GeomInput.{geom_name}
 ================================================================================
 
 One of the user-defined names for defining a geometry region
 
 
 
-GeomInput.{name}.InputType
+GeomInput.{geom_name}.InputType
 --------------------------------------------------------------------------------
 
 [Type: string] This defines the type for the geometry input with the given input name. This key must be one of: SolidFile, IndicatorField, or Box.
@@ -218,7 +218,7 @@ GeomInput.{name}.InputType
     The value must be one of the following options ['SolidFile', 'IndicatorField', 'Box']
 
 
-GeomInput.{name}.GeomName
+GeomInput.{geom_name}.GeomName
 --------------------------------------------------------------------------------
 
 [Type: string] This is a name of a single geometry defined by the geometry input. This should be used for a geometry input type of Box, which only requires a single name.
@@ -228,7 +228,7 @@ GeomInput.{name}.GeomName
     The value must be a string
 
 
-GeomInput.{name}.GeomNames
+GeomInput.{geom_name}.GeomNames
 --------------------------------------------------------------------------------
 
 [Type: string] This is a list of the names of the geometries defined by the geometry input. For a geometry input type of Box, the singular GeomName should be used. For the SolidFile geometry type this should contain a list with the same number of geometries as were defined using GMS. The order of geometries in the SolidFile should match the names. For IndicatorField types you need to specify the value in the input field which matches the name using GeomInput.geom_input_name.Value.
@@ -238,7 +238,7 @@ GeomInput.{name}.GeomNames
     The value must be a string
 
 
-GeomInput.{name}.FileName
+GeomInput.{geom_name}.FileName
 --------------------------------------------------------------------------------
 
 [Type: string] For IndicatorField and SolidFile geometry inputs, this key specifies the input filename which contains the field or solid information.
@@ -248,7 +248,7 @@ GeomInput.{name}.FileName
     The value must be a string
 
 
-GeomInput.{name}.Value
+GeomInput.{geom_name}.Value
 --------------------------------------------------------------------------------
 
 [Type: int] For IndicatorField geometry inputs, you need to specify the mapping between values in the input file and the geometry names. The named geometry will be defined wherever the input file is equal to the specified value.
@@ -930,7 +930,7 @@ Geom.{geom_name}.RelPerm.AlphaFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.RelPerm.AlphaFileName.Alpha.Filename*
+    In Python we will define *Geom.{geom_name}.RelPerm.AlphaFileName* which will set    *Geom.{geom_name}.RelPerm.Alpha.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.RelPerm.Alpha
@@ -955,7 +955,7 @@ Geom.{geom_name}.RelPerm.NFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.RelPerm.NFileName.N.Filename*
+    In Python we will define *Geom.{geom_name}.RelPerm.NFileName* which will set    *Geom.{geom_name}.RelPerm.N.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.RelPerm.N
@@ -1047,7 +1047,7 @@ Setting capillary pressures for specified geometries
 
 
 
-Value
+Geom.{geom_name}.CapPressure.{phase_name}.Value
 --------------------------------------------------------------------------------
 
 [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
@@ -1088,7 +1088,7 @@ Geom.{geom_name}.Saturation.AlphaFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.Saturation.AlphaFileName.Alpha.Filename*
+    In Python we will define *Geom.{geom_name}.Saturation.AlphaFileName* which will set    *Geom.{geom_name}.Saturation.Alpha.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.Saturation.Alpha
@@ -1113,7 +1113,7 @@ Geom.{geom_name}.Saturation.NFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.Saturation.NFileName.N.Filename*
+    In Python we will define *Geom.{geom_name}.Saturation.NFileName* which will set    *Geom.{geom_name}.Saturation.N.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.Saturation.N
@@ -1138,7 +1138,7 @@ Geom.{geom_name}.Saturation.SResFilename
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.Saturation.SResFilename.SRes.Filename*
+    In Python we will define *Geom.{geom_name}.Saturation.SResFilename* which will set    *Geom.{geom_name}.Saturation.SRes.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.Saturation.SRes
@@ -1164,7 +1164,7 @@ Geom.{geom_name}.Saturation.SSatFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.Saturation.SSatFileName.SSat.Filename*
+    In Python we will define *Geom.{geom_name}.Saturation.SSatFileName* which will set    *Geom.{geom_name}.Saturation.SSat.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.Saturation.SSat
@@ -1295,7 +1295,7 @@ Geom.{geom_name}.ThermalConductivity.KDryFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.ThermalConductivity.KDryFileName.KDry.Filename*
+    In Python we will define *Geom.{geom_name}.ThermalConductivity.KDryFileName* which will set    *Geom.{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.ThermalConductivity.KDry
@@ -1320,7 +1320,7 @@ Geom.{geom_name}.ThermalConductivity.KWetFileName
     The value must be a string
 
 .. warning::
-    The ParFlow key is written as *Geom.{geom_name}.ThermalConductivity.KWetFileName.KDry.Filename*
+    In Python we will define *Geom.{geom_name}.ThermalConductivity.KWetFileName* which will set    *Geom.{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
 
 
 Geom.{geom_name}.ThermalConductivity.KWet
@@ -1758,7 +1758,7 @@ Solver.Type
     The value must be one of the following options ['Impes', 'Richards']
 
 .. warning::
-    The ParFlow key is written as *Solver*
+    In Python we will define *Solver.Type* which will set    *Solver* inside the ParFlow .pfidb file.
 
 
 Solver.AbsTol
@@ -2782,7 +2782,7 @@ Solver.TerrainFolSlopeUpwind
     The value must be one of the following options ['Original', 'Upwind', 'UpwindSine']
 
 .. warning::
-    The ParFlow key is written as *Solver.TerrainFolSlopeUpwindTerrainFollowingGrid.SlopeUpwindFormulation*
+    In Python we will define *Solver.TerrainFolSlopeUpwind* which will set    *SolverTerrainFollowingGrid.SlopeUpwindFormulation* inside the ParFlow .pfidb file.
 
 
 Solver.TwoNorm
@@ -2829,7 +2829,7 @@ Solver.LinKrylovDimension
 
 
 .. warning::
-    The ParFlow key is written as *Solver.LinKrylovDimension.Linear.KrylovDimension*
+    In Python we will define *Solver.LinKrylovDimension* which will set    *Solver.Linear.KrylovDimension* inside the ParFlow .pfidb file.
 
 
 Solver.LinMaxRestarts
@@ -2845,7 +2845,7 @@ Solver.LinMaxRestarts
 
 
 .. warning::
-    The ParFlow key is written as *Solver.LinMaxRestarts.Linear.MaxRestarts*
+    In Python we will define *Solver.LinMaxRestarts* which will set    *Solver.Linear.MaxRestarts* inside the ParFlow .pfidb file.
 
 
 Solver.LinPreconditioner
@@ -2859,7 +2859,7 @@ Solver.LinPreconditioner
     The value must be one of the following options ['NoPC', 'MGSemi', 'PFMG', 'PFMGOctree', 'SMG']
 
 .. warning::
-    The ParFlow key is written as *Solver.LinPreconditioner.Linear.Preconditioner*
+    In Python we will define *Solver.LinPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
 
 
 Solver.LinPrecondSym
@@ -2873,7 +2873,7 @@ Solver.LinPrecondSym
     The value must be one of the following options ['Symmetric', 'Nonsymmetric']
 
 .. warning::
-    The ParFlow key is written as *Solver.LinPrecondSym.Linear.Preconditioner.SymmetricMat*
+    In Python we will define *Solver.LinPrecondSym* which will set    *Solver.Linear.Preconditioner.SymmetricMat* inside the ParFlow .pfidb file.
 
 
 Solver.PrecondItem
@@ -2909,7 +2909,7 @@ Solver.LinPrecondSMGPreRelax
 
 
 .. warning::
-    The ParFlow key is written as *Solver.LinPrecondSMGPreRelax.Linear.Preconditioner.SMG.NumPreRelax*
+    In Python we will define *Solver.LinPrecondSMGPreRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPreRelax* inside the ParFlow .pfidb file.
 
 
 Solver.LinPrecondSMGPostRelax
@@ -2925,7 +2925,7 @@ Solver.LinPrecondSMGPostRelax
 
 
 .. warning::
-    The ParFlow key is written as *Solver.LinPrecondSMGPostRelax.Linear.Preconditioner.SMG.NumPostRelax*
+    In Python we will define *Solver.LinPrecondSMGPostRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPostRelax* inside the ParFlow .pfidb file.
 
 
 Solver.LinPrecondPFMGRAPType
@@ -2939,7 +2939,7 @@ Solver.LinPrecondPFMGRAPType
     The value must be one of the following options ['Galerkin', 'NonGalerkin']
 
 .. warning::
-    The ParFlow key is written as *Solver.LinPrecondPFMGRAPType.Linear.Preconditioner.PFMG.RAPType*
+    In Python we will define *Solver.LinPrecondPFMGRAPType* which will set    *Solver.Linear.Preconditioner.PFMG.RAPType* inside the ParFlow .pfidb file.
 
 
 Solver.NonlinearSolver
