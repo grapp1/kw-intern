@@ -194,79 +194,169 @@ WellName:
           - Weighted
           - Patterned
 
-    Cycle:
-      help: >
-        [Type: string] This key specifies the time cycles to which data for the well well_name corresponds.
-      domains:
-        AnyString:
+  Cycle:
+    help: >
+      [Type: string] This key specifies the time cycles to which data for the well well_name corresponds.
+    domains:
+      AnyString:
 
-    WellCycleItem:
+  # Setting key Wells.{well_name}.{interval_name}...
+  WellCycleItem:
+    __rst__:
+      skip:
+    __doc__: >
+      This is to set properties for named wells within specified cycles.
+
+    Pressure:
       __rst__:
         skip:
       __doc__: >
-        This is to set properties for named wells within specified cycles.
+        Setting pressure for a named well within a specified cycle.
+      Value:
+        __rst__:
+          name: Wells.{well_name}.{interval_name}.Pressure.Value
+        help: >
+          [Type: double] This key specifies the hydrostatic pressure value for a vertical well if the type key is set to Pressure.
+          Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
+          computed from the physical relationships that exist between the phases.
+        domains:
+          DoubleValue:
 
+    # Setting key Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
+    Saturation:
+      __rst__:
+        skip:
+      __doc__: >
+        Setting saturation for a named well within a specified cycle for a specific phase.
+
+      Value:
+        __rst__:
+          name: Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
+        help: >
+          [Type: double] This key specifies the saturation value of a vertical well.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+            maxValue: 1.0
+
+    # Setting key Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
+    Flux:
+      __rst__:
+        skip:
+      __doc__: >
+        Setting flux for a named well within a specified cycle for a specific phase.
+
+      # typos in the description - vertical, assign
+      Value:
+        __rst__:
+          name: Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
+        help: >
+          [Type: double] This key specifies the volumetric flux for a vertical well if the type key is set to Flux.
+          Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action
+          for the well.
+        domains:
+          DoubleValue:
+
+    Concentration:
+      __doc__: >
+        Setting contaminant value of vertical well.
+
+      # Setting key Wells.{well_name}.{interval_name}.Concentration.{phase_name}.{contaminant_name}.Value
+      Value:
+        __rst__:
+          name: Wells.{well_name}.{interval_name}.Concentration.{phase_name}.{contaminant_name}.Value
+        help: >
+          [Type: double] This key specifies the contaminant value of a vertical well.
+
+    Extraction:
+      __rst__:
+        skip:
+      __doc__: >
+        Setting extraction pressure for a named well within a specified cycle.
       Pressure:
         __rst__:
           skip:
         __doc__: >
-          Setting pressure for a named well within a specified cycle.
+          Setting extraction pressure for a named well within a specified cycle.
         Value:
           __rst__:
-            name: Wells.{well_name}.{interval_name}.Pressure.Value
+            name: Wells.{well_name}.{interval_name}.Extraction.Pressure.Value
           help: >
-            [Type: double] This key specifies the hydrostatic pressure value for a vertical well if the type key is set to Pressure.
-            Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
+            [Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to
+            Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
             computed from the physical relationships that exist between the phases.
           domains:
             DoubleValue:
+      # Setting key Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
+      Flux:
+        __rst__:
+          skip:
+        __doc__: >
+          Setting flux for a named well within a specified cycle for a specific phase in an extraction well.
 
-      Extraction:
+        # typos in the description - assign
+        Value:
+          __rst__:
+            name: Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
+          help: >
+            [Type: double] This key specifies the volumetric flux for an extraction well if the extraction type key is set to Flux.
+            Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action
+            for the well.
+          domains:
+            DoubleValue:
+
+    Injection:
+      __rst__:
+        skip:
+      __doc__: >
+        Setting extraction pressure for a named well within a specified cycle.
+      Pressure:
         __rst__:
           skip:
         __doc__: >
           Setting extraction pressure for a named well within a specified cycle.
-        Pressure:
+        Value:
           __rst__:
-            skip:
-          __doc__: >
-            Setting extraction pressure for a named well within a specified cycle.
-          Value:
-            __rst__:
-              name: Wells.{well_name}.{interval_name}.Extraction.Pressure.Value
-            help: >
-              [Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to
-              Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
-              computed from the physical relationships that exist between the phases.
-            domains:
-              DoubleValue:
-
-      Injection:
+            name: Wells.{well_name}.{interval_name}.Injection.Pressure.Value
+          help: >
+            [Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to
+            Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
+            computed from the physical relationships that exist between the phases.
+          domains:
+            DoubleValue:
+      # Setting key Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
+      Flux:
         __rst__:
           skip:
         __doc__: >
-          Setting extraction pressure for a named well within a specified cycle.
-        Pressure:
+          Setting flux for a named well within a specified cycle for a specific phase in an injection well.
+
+        # typos in the description - assign
+        Value:
           __rst__:
-            skip:
-          __doc__: >
-            Setting extraction pressure for a named well within a specified cycle.
-          Value:
-            __rst__:
-              name: Wells.{well_name}.{interval_name}.Injection.Pressure.Value
-            help: >
-              [Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to
-              Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are
-              computed from the physical relationships that exist between the phases.
-            domains:
-              DoubleValue:
+            name: Wells.{well_name}.{interval_name}.Injection.Flux.{phase_name}.Value
+          help: >
+            [Type: double] This key specifies the volumetric flux for an injection well if the injection type key is set to Flux.
+            Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action
+            for the well.
+          domains:
+            DoubleValue:
+
+      # Setting key Wells.{well_name}.{interval_name}.Injection.Concentration.{phase_name}.{contaminant_name}.Fraction
+      Concentration:
+        __rst__:
+          skip:
+        __doc__: >
+          Setting the fraction of the extracted contaminant which gets resupplied to the injection well.
+
+        Fraction:
+          __rst__:
+            name: Wells.{well_name}.{interval_name}.Injection.Concentration.{phase_name}.{contaminant_name}.Fraction
+          help: >
+            [Type: double] This key specifies the fraction of the extracted contaminant which gets resupplied to the injection well.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+              maxValue: 1.0
 
 
-#Wells.%s.%s.Concentration.%s.%s.Value
-#Wells.%s.%s.Extraction.Flux.%s.Value
-#Wells.%s.%s.Extraction.Pressure.Value
-#Wells.%s.%s.Flux.%s.Value
-#Wells.%s.%s.Injection.Flux.%s.Value
-#Wells.%s.%s.Injection.Pressure.Value
-#Wells.%s.%s.Pressure.Value
-#Wells.%s.%s.Saturation.%s.Value

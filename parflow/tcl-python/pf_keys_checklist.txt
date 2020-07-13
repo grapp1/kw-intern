@@ -327,28 +327,29 @@ PhaseSources.Geom.%s.Value
 > * TopoSlopes.Elevation.FileName					
 * TopoSlopesX.Geom.%s.Value				
 * TopoSlopesY.Geom.%s.Value						
-Wells.%s.%s.Concentration.%s.%s.Value						
-Wells.%s.%s.Extraction.Flux.%s.Value						
-Wells.%s.%s.Extraction.Pressure.Value						
-Wells.%s.%s.Flux.%s.Value						
-Wells.%s.%s.Injection.Flux.%s.Value						
-Wells.%s.%s.Injection.Pressure.Value						
-Wells.%s.%s.Pressure.Value						
-Wells.%s.%s.Saturation.%s.Value						
-Wells.%s.Action						
-Wells.%s.Cycle						
-Wells.%s.ExtractionMethod						
-Wells.%s.ExtractionType						
-Wells.%s.ExtractionZLower						
-Wells.%s.ExtractionZUpper						
-Wells.%s.InjectionMethod						
-Wells.%s.InjectionType						
-Wells.%s.InjectionZLower						
-Wells.%s.InjectionZUpper						
-Wells.%s.InputType						
-Wells.%s.Method						
-Wells.%s.Type						
-Wells.%s.X						
-Wells.%s.Y						
-Wells.%s.ZLower						
-Wells.%s.ZUpper						
+* Wells.%s.%s.Concentration.%s.%s.Value						
+* Wells.%s.%s.Extraction.Flux.%s.Value						
+* Wells.%s.%s.Extraction.Pressure.Value						
+* Wells.%s.%s.Flux.%s.Value						
+* Wells.%s.%s.Injection.Flux.%s.Value						
+* Wells.%s.%s.Injection.Pressure.Value	
+> * Wells.%s.%s.Injection.Concentration.%s.%s.Fraction
+* Wells.%s.%s.Pressure.Value						
+* Wells.%s.%s.Saturation.%s.Value						
+* Wells.%s.Action						
+* Wells.%s.Cycle						
+* Wells.%s.ExtractionMethod						
+* Wells.%s.ExtractionType						
+* Wells.%s.ExtractionZLower						
+* Wells.%s.ExtractionZUpper						
+* Wells.%s.InjectionMethod						
+* Wells.%s.InjectionType						
+* Wells.%s.InjectionZLower						
+* Wells.%s.InjectionZUpper						
+* Wells.%s.InputType						
+* Wells.%s.Method						
+* Wells.%s.Type						
+* Wells.%s.X						
+* Wells.%s.Y						
+* Wells.%s.ZLower						
+* Wells.%s.ZUpper						
