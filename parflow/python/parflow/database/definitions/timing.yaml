@@ -38,43 +38,93 @@ TimingInfo:
         maxValue: 0
 
   StartTime:
+    help: >
+      [Type: double] This key is used to indicate the starting time for the simulation.
+    domains:
+      MandatoryValue:
+      DoubleValue:
 
   StopTime:
+    help: >
+      [Type: double] This key is used to indicate the stopping time for the simulation.
+    domains:
+      MandatoryValue:
+      DoubleValue:
 
   DumpInterval:
+    help: >
+      [Type: double] This key is the real time interval at which time-dependent output should be written. A value of 0 will produce
+      undefined behavior. If the value is negative, output will be dumped out every n time steps, where n is the absolute
+      value of the integer part of the value.
+    domains:
+      MandatoryValue:
+      DoubleValue:
 
   DumpIntervalExecutionTimeLimit:
-
-
+    help: >
+      [Type: int] This key is used to indicate a wall clock time to halt the execution of a run. At the end of each dump interval
+      the time remaining in the batch job is compared with the user supplied value, if remaining time is less than or equal
+      to the supplied value the execution is halted. Typically used when running on batch systems with time limits to force
+      a clean shutdown near the end of the batch job. Time units is seconds, a value of 0 (the default) disables the check.
+      Currently only supported on SLURM based systems, “–with-slurm” must be specified at configure time to enable.
+    default: 0
+    domains:
+      IntValue:
 
 TimeStep:
   __doc__: >
     Setting parameters for modeled time steps
 
   Type:
+    help: >
+      [Type: string] This key must be one of: Constant or Growth. The value Constant defines a constant time step. The value
+      Growth defines a time step that starts as dt0 and is defined for other steps as dtnew = gamma*dtold such that
+      dtnew is less than or equal to dtmax and dtnew is greater than or equal to dtmin.
+    domains:
+      MandatoryValue:
+      EnumDomain:
+        enumList:
+          - Constant
+          - Growth
 
   Value:
+    help: >
+      [Type: double] This key is used only if a constant time step is selected and indicates the value of the time step for all steps
+      taken.
+    domains:
+      DoubleValue:
 
   InitialStep:
+    help: >
+      [Type: double] This key specifies the initial time step dt0 if the Growth type time step is selected.
+    domains:
+      DoubleValue:
 
   GrowthFactor:
+    help: >
+      [Type: double] This key specifies the growth factor gamma by which a time step will be multiplied to get the new time step when the
+      Growth type time step is selected.
+    domains:
+      DoubleValue:
 
   MaxStep:
+    help: >
+      [Type: double] This key specifies the maximum time step allowed, dtmax, when the Growth type time step is selected.
+    domains:
+      DoubleValue:
+        minValue: 0.0
 
   MinStep:
-
+    help: >
+      [Type: double] This key specifies the minimum time step allowed, dtmin, when the Growth type time step is selected.
+    domains:
+      DoubleValue:
+        minValue: 0.0
 
 # -----------------------------------------------------------------------------
 # Cycles
 # -----------------------------------------------------------------------------
 
-CycleNames:
-  help: >
-    [Type: string] This key is used to specify the named time cycles to be used in a simulation. It is a list of names and each name
-    defines a time cycle and the number of items determines the total number of time cycles specified. Each named cycle
-    is described using a number of keys defined under Cycle.
-  domains:
-    AnyString:
 
 Cycle:
   __doc__: >

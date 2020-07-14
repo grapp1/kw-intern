@@ -6,6 +6,24 @@
 # Corner cases
 
 # -----------------------------------------------------------------------------
+# Domain.GeomName
+# -----------------------------------------------------------------------------
+
+Domain:
+  __doc__: >
+    The domain may be represented by any of the solid types in GeomInput.{geom_input_name}.InputType that allow the
+    definition of surface patches. These surface patches are used to define boundary conditions. Subsequently, it is
+    required that the union (or combination) of the defined surface patches equal the entire domain surface. NOTE: This
+    requirement is NOT checked in the code.
+  GeomName:
+    help: >
+      [Type: string] This key specifies which of the named geometries is the problem domain.
+    domains:
+      MandatoryValue:
+      AnyString:
+
+
+# -----------------------------------------------------------------------------
 # GeomInput.*
 # -----------------------------------------------------------------------------
 
@@ -62,7 +80,7 @@ GeomInputItem:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
-        className: GeomInputItemValue
+        className: GeomInputItem
         location: ..
       GeomUpdater:
         type: ChildrenHandler
@@ -83,7 +101,7 @@ GeomInputItem:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
-        className: GeomInputItemValue
+        className: GeomInputItem
         location: ..
       GeomUpdater:
         type: ChildrenHandler

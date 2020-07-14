@@ -8,12 +8,21 @@ BaseRun:
     - GeomInput
     - Geom
     - Solver
+    - TimingInfo
+    - TimeStep
+    - Cycle
 
   # -----------------------------------------------------------------------------
-  # Solver
+  # CycleNames
   # -----------------------------------------------------------------------------
 
-
+  CycleNames:
+    help: >
+      [Type: string] This key is used to specify the named time cycles to be used in a simulation. It is a list of names and each name
+      defines a time cycle and the number of items determines the total number of time cycles specified. Each named cycle
+      is described using a number of keys defined under Cycle.
+    domains:
+      AnyString:
 
   # -----------------------------------------------------------------------------
   # Spinup Options (Overland Flow)
@@ -50,3 +59,34 @@ BaseRun:
     domains:
       DoubleValue:
         minValue: 0.0
+
+  # -----------------------------------------------------------------------------
+  # KnownSolution
+  # -----------------------------------------------------------------------------
+
+  KnownSolution:
+    help: >
+      [Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No-
+      KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1,
+      XYZTPlus1 and XYZTPlus1PermTensor.
+      Choices for this key correspond to solutions as follows:
+      NoKnownSolution: No solution is known for this problem.
+      Constant: p = constant
+      X: p = x
+      XPlusYPlusZ: p = x + y + z
+      X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1
+      X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1
+      XYZTPlus1: p = xyzt + 1
+      XYZTPlus1: p = xyzt + 1
+    domains:
+      MandatoryValue:
+      EnumDomain:
+        enumList:
+          - NoKnownSolution
+          - Constant
+          - X
+          - XPlusYPlusZ
+          - X3Y2PlusSinXYPlus1
+          - X3Y4PlusX2PlusSinXYCosYPlus1
+          - XYZTPlus1
+          - XYZTPlus1

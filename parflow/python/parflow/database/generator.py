@@ -14,7 +14,8 @@ YAML_MODULES_TO_PROCESS = [
   'core',
   'geom',
   'solver',
-  # 'wells',
+  'wells',
+  'timing',
   'run'
 ]
 # -----------------------------------------------------------------------------
@@ -108,7 +109,7 @@ class ValidationSummary:
       for name in self.classNameCount:
         if self.classNameCount[name] > 1:
           content.append(
-              f'   + {name} was defined {self.classNameCount[name]} time')
+              f'   + {name} was defined {self.classNameCount[name]} times')
 
     content.append(f'Defined {self.fieldCount} fields were found')
     return lineSeparator.join(content)
@@ -159,11 +160,6 @@ class PythonModule:
 
       for key in classDefinition:
         if isClass(key, classDefinition):
-          # if key[0] == '.':
-          #   classMembers.append(key[1:])
-          #   print(key)
-          # else:
-          #   classMembers.append(key)
           classMembers.append(key)
         if isField(key, classDefinition):
           fieldMembers.append(key)
