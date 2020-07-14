@@ -18,6 +18,39 @@ Phase:
         type: ChildrenHandler
         className: PhaseNameItem
 
+  RelPerm:
+    __doc__: >
+      The following keys are used to describe relative permeability input for the Richards’ equation implementation. They
+      will be ignored if a full two-phase formulation is used.
+
+    Type:
+      help: >
+        [Type: string] This key specifies the type of relative permeability function that will be used on all specified geometries. Note that
+        only one type of relative permeability may be used for the entire problem. However, parameters may be different for
+        that type in different geometries. For instance, if the problem consists of three geometries, then VanGenuchten may
+        be specified with three different sets of parameters for the three different geometries. However, once VanGenuchten
+        is specified, one geometry cannot later be specified to have Data as its relative permeability. The possible values for
+        this key are Constant, VanGenuchten, Haverkamp, Data, and Polynomial.
+      domains:
+        EnumDomain:
+          enumList:
+            - Constant
+            - VanGenuchten
+            - Haverkamp
+            - Data
+            - Polynomial
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the geometries on which relative permeability will be given. The union of these geometries
+        must cover the entire computational domain.
+      domains:
+        AnyString:
+
+    VanGenuchten:
+      __doc__: ''
+
+
   .{phase_name}:
     __class__: PhaseNameItem
     __rst__:

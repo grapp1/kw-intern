@@ -44,26 +44,26 @@ def handleDomain(name, definition):
     if definition and 'minValue' in definition:
       listCount += 1
       lines.append(
-          f'{indentStr}  - with a value bigger or equal to {definition["minValue"]}')
+          f'{indentStr}  - with a value greater than or equal to {definition["minValue"]}')
     if definition and 'maxValue' in definition:
       listCount += 1
       lines.append(
-          f'{indentStr}  - with a value smaller or equal to {definition["maxValue"]}')
+          f'{indentStr}  - with a value less than or equal to {definition["maxValue"]}')
 
   if name == 'DoubleValue':
     lines.append(f'{indentStr}The value must be an Integer')
     if definition and 'minValue' in definition:
       listCount += 1
       lines.append(
-          f'{indentStr}  - with a value bigger or equal to {definition["minValue"]}')
+          f'{indentStr}  - with a value greater than or equal to {definition["minValue"]}')
     if definition and 'maxValue' in definition:
       listCount += 1
       lines.append(
-          f'{indentStr}  - with a value smaller or equal to {definition["maxValue"]}')
+          f'{indentStr}  - with a value less than or equal to {definition["maxValue"]}')
 
   if name == 'EnumDomain':
     lines.append(
-        f'{indentStr}The value must be one of the following options {definition["enumList"]}')
+        f'{indentStr}The value must be one of the following options: {(", ".join(definition["enumList"]))}')
 
   if name == 'AnyString':
     lines.append(f'{indentStr}The value must be a string')

@@ -29,7 +29,7 @@ Process.Topology.P
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -42,7 +42,7 @@ Process.Topology.Q
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -55,7 +55,7 @@ Process.Topology.R
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -115,7 +115,7 @@ ComputationalGrid.NX
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -128,7 +128,7 @@ ComputationalGrid.NY
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -141,7 +141,7 @@ ComputationalGrid.NZ
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -154,7 +154,7 @@ ComputationalGrid.DX
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1.0
+      - with a value greater than or equal to 1.0
 
 
 
@@ -167,7 +167,7 @@ ComputationalGrid.DY
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1.0
+      - with a value greater than or equal to 1.0
 
 
 
@@ -180,7 +180,7 @@ ComputationalGrid.DZ
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 1.0
+      - with a value greater than or equal to 1.0
 
 
 
@@ -233,7 +233,7 @@ GeomInput.{geom_name}.InputType
 
 
 .. note::
-    The value must be one of the following options ['SolidFile', 'IndicatorField', 'Box']
+    The value must be one of the following options: SolidFile, IndicatorField, Box
 
 
 GeomInput.{geom_name}.GeomName
@@ -290,7 +290,7 @@ Perm.TensorType
 
 
 .. note::
-    The value must be one of the following options ['TensorByGeom', 'TensorByFile']
+    The value must be one of the following options: TensorByGeom, TensorByFile
 
 
 FileName
@@ -328,7 +328,7 @@ SpecificStorage.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant']
+    The value must be one of the following options: Constant
 
 
 dzScale
@@ -366,7 +366,7 @@ dzScale.nzListNumber
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -392,7 +392,7 @@ Cell.{nzListNumber}.dzScale.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -586,7 +586,7 @@ Geom.{geom_name}.Perm.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'TurnBands', 'ParGauss', 'PFBFile']
+    The value must be one of the following options: Constant, TurnBands, ParGauss, PFBFile
 
 
 Geom.{geom_name}.Perm.Value
@@ -637,7 +637,7 @@ Geom.{geom_name}.Perm.GeomMean
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -649,7 +649,7 @@ Geom.{geom_name}.Perm.Sigma
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -662,7 +662,7 @@ Geom.{geom_name}.Perm.Seed
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -675,7 +675,7 @@ Geom.{geom_name}.Perm.NumLines
 :default: 100
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -688,7 +688,7 @@ Geom.{geom_name}.Perm.RZeta
 :default: 5.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -701,7 +701,7 @@ Geom.{geom_name}.Perm.KMax
 :default: 100.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -714,7 +714,7 @@ Geom.{geom_name}.Perm.DelK
 :default: 0.2
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -726,7 +726,7 @@ Geom.{geom_name}.Perm.MaxNPts
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -738,7 +738,7 @@ Geom.{geom_name}.Perm.MaxCpts
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -750,7 +750,7 @@ Geom.{geom_name}.Perm.LogNormal
 
 :default: LogTruncated
 .. note::
-    The value must be one of the following options ['Normal', 'Log', 'NormalTruncated', 'LogTruncated']
+    The value must be one of the following options: Normal, Log, NormalTruncated, LogTruncated
 
 
 Geom.{geom_name}.Perm.StratType
@@ -761,7 +761,7 @@ Geom.{geom_name}.Perm.StratType
 
 :default: Bottom
 .. note::
-    The value must be one of the following options ['Horizontal', 'Bottom', 'Top']
+    The value must be one of the following options: Horizontal, Bottom, Top
 
 
 Geom.{geom_name}.Perm.LowCutoff
@@ -772,7 +772,7 @@ Geom.{geom_name}.Perm.LowCutoff
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -784,7 +784,7 @@ Geom.{geom_name}.Perm.HighCutoff
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -796,7 +796,7 @@ Geom.{geom_name}.Perm.MaxSearchRad
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -818,7 +818,7 @@ Geom.{geom_name}.Perm.TensorValX
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -830,7 +830,7 @@ Geom.{geom_name}.Perm.TensorValY
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -842,7 +842,7 @@ Geom.{geom_name}.Perm.TensorValZ
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -890,7 +890,7 @@ Geom.{geom_name}.Porosity.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant']
+    The value must be one of the following options: Constant
 
 
 Geom.{geom_name}.Porosity.Value
@@ -945,7 +945,7 @@ Geom.{geom_name}.RelPerm.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -970,7 +970,7 @@ Geom.{geom_name}.RelPerm.Alpha
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -995,7 +995,7 @@ Geom.{geom_name}.RelPerm.N
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1008,7 +1008,7 @@ Geom.{geom_name}.RelPerm.NumSamplePoints
 :default: 0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0
+      - with a value greater than or equal to 0
 
 
 
@@ -1102,8 +1102,8 @@ Geom.{geom_name}.Saturation.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -1128,7 +1128,7 @@ Geom.{geom_name}.Saturation.Alpha
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1153,7 +1153,7 @@ Geom.{geom_name}.Saturation.N
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1178,8 +1178,8 @@ Geom.{geom_name}.Saturation.SRes
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -1204,8 +1204,8 @@ Geom.{geom_name}.Saturation.SSat
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -1281,7 +1281,7 @@ Geom.{geom_name}.dzScale.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1310,7 +1310,7 @@ Geom.{geom_name}.ThermalConductivity.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1335,7 +1335,7 @@ Geom.{geom_name}.ThermalConductivity.KDry
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1360,7 +1360,7 @@ Geom.{geom_name}.ThermalConductivity.KWet
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1430,7 +1430,7 @@ Geom.{geom_name}.HeatCapacity.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1522,7 +1522,7 @@ Geom.{geom_name}.{contaminant}.Type
 
 
 .. note::
-    The value must be one of the following options ['Linear']
+    The value must be one of the following options: Linear
 
 
 Geom.{geom_name}.{contaminant}.Value
@@ -1533,7 +1533,7 @@ Geom.{geom_name}.{contaminant}.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1545,7 +1545,7 @@ Geom.{geom_name}.{contaminant}.Rate
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1563,7 +1563,7 @@ ICSaturation.{phase_name}.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant']
+    The value must be one of the following options: Constant
 
 
 ICSaturation.{phase_name}.GeomNames
@@ -1600,7 +1600,7 @@ ICPressure.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'PFBFile', 'HydroStaticPatch', 'NCFile']
+    The value must be one of the following options: Constant, PFBFile, HydroStaticPatch, NCFile
 
 
 TopoSlopes
@@ -1651,7 +1651,7 @@ TopoSlopesX.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'PFBFile', 'NCFile']
+    The value must be one of the following options: Constant, PFBFile, NCFile
 
 
 TopoSlopesX.FileName
@@ -1705,7 +1705,7 @@ TopoSlopesY.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'PFBFile', 'NCFile']
+    The value must be one of the following options: Constant, PFBFile, NCFile
 
 
 TopoSlopesY.FileName
@@ -1757,7 +1757,7 @@ CapPressure.{phase_name}.Type
 
 :default: Constant
 .. note::
-    The value must be one of the following options ['Constant']
+    The value must be one of the following options: Constant
 
 
 CapPressure.{phase_name}.GeomNames
@@ -1794,7 +1794,7 @@ Mannings.Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'PFBFile']
+    The value must be one of the following options: Constant, PFBFile
 
 
 Mannings.FileName
@@ -1831,7 +1831,7 @@ Solver.Type
 
 
 .. note::
-    The value must be one of the following options ['Impes', 'Richards']
+    The value must be one of the following options: Impes, Richards
 
 .. warning::
     In Python we will define *Solver.Type* which will set    *Solver* inside the ParFlow .pfidb file.
@@ -1846,7 +1846,7 @@ Solver.AbsTol
 :default: 1e-9
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -1859,8 +1859,8 @@ Solver.AdvectOrder
 :default: 2
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
-      - with a value smaller or equal to 2
+      - with a value greater than or equal to 1
+      - with a value less than or equal to 2
 
 
 
@@ -1952,7 +1952,7 @@ Solver.CLM.CLMDumpInterval
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -1985,7 +1985,7 @@ Solver.CLM.EvapBeta
 
 :default: Linear
 .. note::
-    The value must be one of the following options ['None', 'Linear', 'Cosine']
+    The value must be one of the following options: None, Linear, Cosine
 
 
 Solver.CLM.FieldCapacity
@@ -1997,8 +1997,8 @@ Solver.CLM.FieldCapacity
 :default: 1.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -2031,7 +2031,7 @@ Solver.CLM.IrrigationCycle
 
 :default: Constant
 .. note::
-    The value must be one of the following options ['Constant', 'Deficit']
+    The value must be one of the following options: Constant, Deficit
 
 
 Solver.CLM.IrrigationRate
@@ -2042,7 +2042,7 @@ Solver.CLM.IrrigationRate
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2054,8 +2054,8 @@ Solver.CLM.IrrigationStartTime
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 2400.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 2400.0
 
 
 
@@ -2067,8 +2067,8 @@ Solver.CLM.IrrigationStopTime
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 2400.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 2400.0
 
 
 
@@ -2081,7 +2081,7 @@ Solver.CLM.IrrigationThreshold
 :default: 0.5
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2103,7 +2103,7 @@ Solver.CLM.IrrigationType
 
 :default: none
 .. note::
-    The value must be one of the following options ['none', 'Spray', 'Drip', 'Instant']
+    The value must be one of the following options: none, Spray, Drip, Instant
 
 
 Solver.CLM.IstepStart
@@ -2164,7 +2164,7 @@ Solver.CLM.MetForcing
 
 
 .. note::
-    The value must be one of the following options ['1D', '2D', '3D']
+    The value must be one of the following options: 1D, 2D, 3D
 
 
 Solver.CLM.Print1dOut
@@ -2187,7 +2187,7 @@ Solver.CLM.ResSat
 :default: 0.1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2200,7 +2200,7 @@ Solver.CLM.ReuseCount
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0
+      - with a value greater than or equal to 0
 
 
 
@@ -2213,7 +2213,7 @@ Solver.CLM.RootZoneNZ
 :default: 10
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -2237,7 +2237,7 @@ Solver.CLM.SoiLayer
 :default: 7
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -2249,7 +2249,7 @@ Solver.CLM.VegWaterStress
 
 :default: Saturation
 .. note::
-    The value must be one of the following options ['None', 'Saturation', 'Pressure']
+    The value must be one of the following options: None, Saturation, Pressure
 
 
 Solver.CLM.WiltingPoint
@@ -2261,7 +2261,7 @@ Solver.CLM.WiltingPoint
 :default: 0.1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2336,7 +2336,7 @@ Solver.Drop
 :default: 1e-8
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0
+      - with a value greater than or equal to 0
 
 
 
@@ -2417,7 +2417,7 @@ Solver.LSM
 
 :default: none
 .. note::
-    The value must be one of the following options ['none', 'CLM']
+    The value must be one of the following options: none, CLM
 
 
 Solver.Linear
@@ -2428,7 +2428,7 @@ Solver.Linear
 
 :default: PCG
 .. note::
-    The value must be one of the following options ['MGSemi', 'PPCG', 'PCG', 'CGHS']
+    The value must be one of the following options: MGSemi, PPCG, PCG, CGHS
 
 
 Solver.MaxConvergenceFailures
@@ -2440,7 +2440,7 @@ Solver.MaxConvergenceFailures
 :default: 3
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -2511,7 +2511,7 @@ Solver.OverlandDiffusive.Epsilon
 :default: 1e-05
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2531,7 +2531,7 @@ Solver.OverlandKinematic.Epsilon
 :default: 1e-05
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -2801,8 +2801,8 @@ Solver.SadvectOrder
 :default: 2
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
-      - with a value smaller or equal to 2
+      - with a value greater than or equal to 1
+      - with a value less than or equal to 2
 
 
 
@@ -2855,7 +2855,7 @@ Solver.TerrainFolSlopeUpwind
 
 :default: Original
 .. note::
-    The value must be one of the following options ['Original', 'Upwind', 'UpwindSine']
+    The value must be one of the following options: Original, Upwind, UpwindSine
 
 .. warning::
     In Python we will define *Solver.TerrainFolSlopeUpwind* which will set    *SolverTerrainFollowingGrid.SlopeUpwindFormulation* inside the ParFlow .pfidb file.
@@ -2901,7 +2901,7 @@ Solver.LinKrylovDimension
 :default: 10
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 .. warning::
@@ -2917,7 +2917,7 @@ Solver.LinMaxRestarts
 :default: 0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0
+      - with a value greater than or equal to 0
 
 
 .. warning::
@@ -2932,7 +2932,7 @@ Solver.LinPreconditioner
 
 :default: MGSemi
 .. note::
-    The value must be one of the following options ['NoPC', 'MGSemi', 'PFMG', 'PFMGOctree', 'SMG']
+    The value must be one of the following options: NoPC, MGSemi, PFMG, PFMGOctree, SMG
 
 .. warning::
     In Python we will define *Solver.LinPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
@@ -2946,7 +2946,7 @@ Solver.LinPrecondSym
 
 :default: Symmetric
 .. note::
-    The value must be one of the following options ['Symmetric', 'Nonsymmetric']
+    The value must be one of the following options: Symmetric, Nonsymmetric
 
 .. warning::
     In Python we will define *Solver.LinPrecondSym* which will set    *Solver.Linear.Preconditioner.SymmetricMat* inside the ParFlow .pfidb file.
@@ -2968,7 +2968,7 @@ Solver.PrecondItem.MaxIter
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -2981,7 +2981,7 @@ Solver.LinPrecondSMGPreRelax
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 .. warning::
@@ -2997,7 +2997,7 @@ Solver.LinPrecondSMGPostRelax
 :default: 1
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 .. warning::
@@ -3012,7 +3012,7 @@ Solver.LinPrecondPFMGRAPType
 
 :default: NonGalerkin
 .. note::
-    The value must be one of the following options ['Galerkin', 'NonGalerkin']
+    The value must be one of the following options: Galerkin, NonGalerkin
 
 .. warning::
     In Python we will define *Solver.LinPrecondPFMGRAPType* which will set    *Solver.Linear.Preconditioner.PFMG.RAPType* inside the ParFlow .pfidb file.
@@ -3088,7 +3088,7 @@ Solver.Nonlinear.ResidualTol
 :default: 1e-7
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3101,7 +3101,7 @@ Solver.Nonlinear.StepTol
 :default: 1e-7
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3114,7 +3114,7 @@ Solver.Nonlinear.MaxIter
 :default: 15
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 1
+      - with a value greater than or equal to 1
 
 
 
@@ -3126,7 +3126,7 @@ Solver.Nonlinear.PrintFlag
 
 :default: HighVerbosity
 .. note::
-    The value must be one of the following options ['NoVerbosity', 'LowVerbosity', 'NormalVerbosity', 'HighVerbosity']
+    The value must be one of the following options: NoVerbosity, LowVerbosity, NormalVerbosity, HighVerbosity
 
 
 Solver.Nonlinear.EtaChoice
@@ -3137,7 +3137,7 @@ Solver.Nonlinear.EtaChoice
 
 :default: Walker2
 .. note::
-    The value must be one of the following options ['EtaConstant', 'Walker1', 'Walker2']
+    The value must be one of the following options: EtaConstant, Walker1, Walker2
 
 
 Solver.Nonlinear.EtaValue
@@ -3149,7 +3149,7 @@ Solver.Nonlinear.EtaValue
 :default: 1e-4
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3162,7 +3162,7 @@ Solver.Nonlinear.EtaAlpha
 :default: 2.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3175,7 +3175,7 @@ Solver.Nonlinear.EtaGamma
 :default: 0.9
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3199,7 +3199,7 @@ Solver.Nonlinear.DerivativeEpsilon
 :default: 1e-7
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3211,7 +3211,7 @@ Solver.Nonlinear.Globalization
 
 :default: LineSearch
 .. note::
-    The value must be one of the following options ['LineSearch', 'InexactNewton']
+    The value must be one of the following options: LineSearch, InexactNewton
 
 
 Wells
@@ -3245,7 +3245,7 @@ Wells.{well_name}.InputType
 
 
 .. note::
-    The value must be one of the following options ['Vertical', 'Recirc']
+    The value must be one of the following options: Vertical, Recirc
 
 
 Wells.{well_name}.Action
@@ -3255,7 +3255,7 @@ Wells.{well_name}.Action
 
 
 .. note::
-    The value must be one of the following options ['Injection', 'Extraction']
+    The value must be one of the following options: Injection, Extraction
 
 
 Wells.{well_name}.Type
@@ -3265,7 +3265,7 @@ Wells.{well_name}.Type
 
 
 .. note::
-    The value must be one of the following options ['Pressure', 'Flux']
+    The value must be one of the following options: Pressure, Flux
 
 
 Wells.{well_name}.ExtractionType
@@ -3275,7 +3275,7 @@ Wells.{well_name}.ExtractionType
 
 
 .. note::
-    The value must be one of the following options ['Pressure', 'Flux']
+    The value must be one of the following options: Pressure, Flux
 
 
 Wells.{well_name}.InjectionType
@@ -3285,7 +3285,7 @@ Wells.{well_name}.InjectionType
 
 
 .. note::
-    The value must be one of the following options ['Pressure', 'Flux']
+    The value must be one of the following options: Pressure, Flux
 
 
 Wells.{well_name}.X
@@ -3375,7 +3375,7 @@ Wells.{well_name}.Method
 
 
 .. note::
-    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+    The value must be one of the following options: Standard, Weighted, Patterned
 
 
 Wells.{well_name}.ExtractionMethod
@@ -3385,7 +3385,7 @@ Wells.{well_name}.ExtractionMethod
 
 
 .. note::
-    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+    The value must be one of the following options: Standard, Weighted, Patterned
 
 
 Wells.{well_name}.InjectionMethod
@@ -3395,7 +3395,7 @@ Wells.{well_name}.InjectionMethod
 
 
 .. note::
-    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+    The value must be one of the following options: Standard, Weighted, Patterned
 
 
 Wells.{well_name}.Cycle
@@ -3426,8 +3426,8 @@ Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -3506,8 +3506,8 @@ Fraction
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
-      - with a value smaller or equal to 1.0
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
 
 
 
@@ -3527,6 +3527,39 @@ Phase.Names
     The value must be a string
 
 
+Phase.RelPerm
+--------------------------------------------------------------------------------
+
+The following keys are used to describe relative permeability input for the Richards’ equation implementation. They will be ignored if a full two-phase formulation is used.
+
+
+
+Phase.RelPerm.Type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the type of relative permeability function that will be used on all specified geometries. Note that only one type of relative permeability may be used for the entire problem. However, parameters may be different for that type in different geometries. For instance, if the problem consists of three geometries, then VanGenuchten may be specified with three different sets of parameters for the three different geometries. However, once VanGenuchten is specified, one geometry cannot later be specified to have Data as its relative permeability. The possible values for this key are Constant, VanGenuchten, Haverkamp, Data, and Polynomial.
+
+
+.. note::
+    The value must be one of the following options: Constant, VanGenuchten, Haverkamp, Data, Polynomial
+
+
+Phase.RelPerm.GeomNames
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the geometries on which relative permeability will be given. The union of these geometries must cover the entire computational domain.
+
+
+.. note::
+    The value must be a string
+
+
+Phase.RelPerm.VanGenuchten
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
 Type
 --------------------------------------------------------------------------------
 
@@ -3534,7 +3567,7 @@ Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'EquationOfState']
+    The value must be one of the following options: Constant, EquationOfState
 
 
 Value
@@ -3575,7 +3608,7 @@ Type
 
 :default: Constant
 .. note::
-    The value must be one of the following options ['Constant']
+    The value must be one of the following options: Constant
 
 
 Value
@@ -3622,7 +3655,7 @@ Type
 
 
 .. note::
-    The value must be one of the following options ['Constant', 'PFBFile']
+    The value must be one of the following options: Constant, PFBFile
 
 
 FileName
@@ -3686,7 +3719,7 @@ TimingInfo.BaseUnit
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3698,8 +3731,8 @@ TimingInfo.StartCount
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to -1
-      - with a value smaller or equal to 0
+      - with a value greater than or equal to -1
+      - with a value less than or equal to 0
 
 
 
@@ -3762,7 +3795,7 @@ TimeStep.Type
 
 .. note::
     The value is required
-    The value must be one of the following options ['Constant', 'Growth']
+    The value must be one of the following options: Constant, Growth
 
 
 TimeStep.Value
@@ -3803,7 +3836,7 @@ TimeStep.MaxStep
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3815,7 +3848,7 @@ TimeStep.MinStep
 
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3845,7 +3878,7 @@ Cycle.Repeat
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to -1
+      - with a value greater than or equal to -1
 
 
 
@@ -3868,7 +3901,7 @@ Gravity
 .. note::
     The value is required
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3881,8 +3914,8 @@ OverlandFlowSpinUp
 :default: 0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0
-      - with a value smaller or equal to 1
+      - with a value greater than or equal to 0
+      - with a value less than or equal to 1
 
 
 
@@ -3895,7 +3928,7 @@ This key sets P1 and provides exponential dampening to the pressure relationship
 :default: 0.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3908,7 +3941,7 @@ This key sets P2 and provides exponential dampening to the pressure relationship
 :default: 0.0
 .. note::
     The value must be an Integer
-      - with a value bigger or equal to 0.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -3920,4 +3953,4 @@ KnownSolution
 
 .. note::
     The value is required
-    The value must be one of the following options ['NoKnownSolution', 'Constant', 'X', 'XPlusYPlusZ', 'X3Y2PlusSinXYPlus1', 'X3Y4PlusX2PlusSinXYCosYPlus1', 'XYZTPlus1', 'XYZTPlus1']
+    The value must be one of the following options: NoKnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1, XYZTPlus1
