@@ -3214,6 +3214,641 @@ Solver.Nonlinear.Globalization
     The value must be one of the following options ['LineSearch', 'InexactNewton']
 
 
+Wells
+================================================================================
+
+Here we define the wells for the model.
+
+
+
+Wells.Names
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the names fo the wells for which input data will be given.
+
+
+.. note::
+    The value must be a string
+
+
+Wells.{well_name}
+--------------------------------------------------------------------------------
+
+Specifying properties for wells
+
+
+
+Wells.{well_name}.InputType
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the type of well to be defined for the given well, well_name. This key can be either Vertical or Recirc. The value Vertical indicates that this is a single segmented well whose action will be specified by the user. The value Recirc indicates that this is a dual segmented, recirculating, well with one segment being an extraction well and another being an injection well. The extraction well filters out a specified fraction of each contaminant and recirculates the remainder to the injection well where the diluted fluid is injected back in. The phase saturations at the extraction well are passed without modification to the injection well. Note with the recirculating well, several input options are not needed as the extraction well will provide these values to the injection well.
+
+
+.. note::
+    The value must be one of the following options ['Vertical', 'Recirc']
+
+
+Wells.{well_name}.Action
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the pumping action of the well. This key can be either Injection or Extraction. A value of Injection indicates that this is an injection well. A value of Extraction indicates that this is an extraction well.
+
+
+.. note::
+    The value must be one of the following options ['Injection', 'Extraction']
+
+
+Wells.{well_name}.Type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the mechanism by which the well works (how ParFlow works with the well data) if the input type key is set to Vertical. This key can be either Pressure or Flux. A value of Pressure indicates that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this condition in the computational cells which define the well.
+
+
+.. note::
+    The value must be one of the following options ['Pressure', 'Flux']
+
+
+Wells.{well_name}.ExtractionType
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the mechanism by which the extraction well works (how ParFlow works with the well data) if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this condition in the computational cells which define the well.
+
+
+.. note::
+    The value must be one of the following options ['Pressure', 'Flux']
+
+
+Wells.{well_name}.InjectionType
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the mechanism by which the injection well works (how ParFlow works with the well data) if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this condition in the computational cells which define the well.
+
+
+.. note::
+    The value must be one of the following options ['Pressure', 'Flux']
+
+
+Wells.{well_name}.X
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the x location of the vertical well if the input type is set to Vertical or of both the extraction and injection wells if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.Y
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the y location of the vertical well if the input type is set to Vertical or of both the extraction and injection wells if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.ZUpper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the upper extent of a vertical well if the input type is set to Vertical.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.ExtractionZUpper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.InjectionZUpper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.ZLower
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the lower extent of a vertical well if the input type is set to Vertical.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.ExtractionZLower
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.InjectionZLower
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.Method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies a method by which pressure or flux for a vertical well will be weighted before assignment to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be either Standard,Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not implemented.
+
+
+.. note::
+    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+
+
+Wells.{well_name}.ExtractionMethod
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies a method by which pressure or flux for an extraction well will be weighted before assignment to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not implemented.
+
+
+.. note::
+    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+
+
+Wells.{well_name}.InjectionMethod
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies a method by which pressure or flux for an injection well will be weighted before assignment to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not implemented.
+
+
+.. note::
+    The value must be one of the following options ['Standard', 'Weighted', 'Patterned']
+
+
+Wells.{well_name}.Cycle
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the time cycles to which data for the well well_name corresponds.
+
+
+.. note::
+    The value must be a string
+
+
+Wells.{well_name}.{interval_name}.Pressure.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the hydrostatic pressure value for a vertical well if the type key is set to Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are computed from the physical relationships that exist between the phases.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the saturation value of a vertical well.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+      - with a value smaller or equal to 1.0
+
+
+
+Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the volumetric flux for a vertical well if the type key is set to Flux. Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action for the well.
+
+
+.. note::
+    The value must be an Integer
+
+
+Concentration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Setting contaminant value of vertical well.
+
+
+
+Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: double] This key specifies the contaminant value of a vertical well.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.{interval_name}.Extraction.Pressure.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are computed from the physical relationships that exist between the phases.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the volumetric flux for an extraction well if the extraction type key is set to Flux. Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action for the well.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.{interval_name}.Injection.Pressure.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the hydrostatic pressure value for an extraction well if the extraction type key is set to Pressure. Note This value gives the pressure of the primary phase (water) at z = 0. The other phase pressures (if any) are computed from the physical relationships that exist between the phases.
+
+
+.. note::
+    The value must be an Integer
+
+
+Wells.{well_name}.{interval_name}.Injection.Flux.{phase_name}.Value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the volumetric flux for an injection well if the injection type key is set to Flux. Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action for the well.
+
+
+.. note::
+    The value must be an Integer
+
+
+Fraction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: double] This key specifies the fraction of the extracted contaminant which gets resupplied to the injection well.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+      - with a value smaller or equal to 1.0
+
+
+
+Phase
+================================================================================
+
+
+
+
+Phase.Names
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the names of phases to be modeled. Currently only 1 or 2 phases may be modeled.
+
+
+.. note::
+    The value must be a string
+
+
+Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies whether density will be a constant value or if it will be given by an equation of state of the form (rd)exp(cP), where P is pressure, rd is the density at atmospheric pressure, and c is the phase compressibility constant. This key must be either Constant or EquationOfState.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'EquationOfState']
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This specifies the value of density if this phase was specified to have a constant density value for the phase phase_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+ReferenceDensity
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the reference density if an equation of state density function is specified for the phase phase_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+CompressibilityConstant
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the phase compressibility constant if an equation of state density function is specified for the phase phase_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies whether viscosity will be a constant value. Currently, the only choice for this key is Constant.
+
+
+:default: Constant
+.. note::
+    The value must be one of the following options ['Constant']
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This specifies the value of density if this phase was specified to have a constant density value for the phase phase_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+PhaseConcen
+================================================================================
+
+Here we define initial concentration conditions for contaminants.
+
+
+
+GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
+
+
+.. note::
+    The value must be a string
+
+
+PredefinedFunction
+--------------------------------------------------------------------------------
+
+[Type: string]
+
+
+.. note::
+    The value must be a string
+
+
+Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase, phase_name, and the given contaminant, contaminant_name. The choices for this key are Constant or PFBFile. The choice Constant will apply constants values to different geometries. The choice PFBFile will read values from a “ParFlow Binary” file.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'PFBFile']
+
+
+FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the name of the “ParFlow Binary” file which contains the initial condition values if the type was set to PFBFile.
+
+
+.. note::
+    The value must be a string
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name, if the type was set to Constant.
+
+
+.. note::
+    The value must be an Integer
+
+
+Contaminants
+================================================================================
+
+
+
+
+Contaminants.Names
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the names of contaminants to be advected.
+
+
+.. note::
+    The value must be a string
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the half-life decay rate of the named contaminant, contaminant_name. At present only first- order decay reactions are implemented and it is assumed that one contaminant cannot decay into another.
+
+
+.. note::
+    The value must be an Integer
+
+
+TimingInfo
+================================================================================
+
+Setting timing parameters
+
+
+
+TimingInfo.BaseUnit
+--------------------------------------------------------------------------------
+
+[Type: double] This key is used to indicate the base unit of time for entering time values. All time should be expressed as a multiple of this value. This should be set to the smallest interval of time to be used in the problem. For example, a base unit of “1” means that all times will be integer valued. A base unit of “0.5” would allow integers and fractions of 0.5 to be used for time input values. The rationale behind this restriction is to allow time to be discretized on some interval to enable integer arithmetic to be used when computing/comparing times. This avoids the problems associated with real value comparisons which can lead to events occurring at different timesteps on different architectures or compilers. This value is also used when describing “time cycling data” in, currently, the well and boundary condition sections. The lengths of the cycles in those sections will be integer multiples of this value, therefore it needs to be the smallest divisor which produces an integral result for every “real time” cycle interval length needed.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+
+
+
+TimingInfo.StartCount
+--------------------------------------------------------------------------------
+
+[Type: int] This key is used to indicate the time step number that will be associated with the first advection cycle in a transient problem. The value -1 indicates that advection is not to be done. The value 0 indicates that advection should begin with the given initial conditions. Values greater than 0 are intended to mean “restart” from some previous “checkpoint” time-step, but this has not yet been implemented.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to -1
+      - with a value smaller or equal to 0
+
+
+
+TimingInfo.StartTime
+--------------------------------------------------------------------------------
+
+[Type: double] This key is used to indicate the starting time for the simulation.
+
+
+.. note::
+    The value is required
+    The value must be an Integer
+
+
+TimingInfo.StopTime
+--------------------------------------------------------------------------------
+
+[Type: double] This key is used to indicate the stopping time for the simulation.
+
+
+.. note::
+    The value is required
+    The value must be an Integer
+
+
+TimingInfo.DumpInterval
+--------------------------------------------------------------------------------
+
+[Type: double] This key is the real time interval at which time-dependent output should be written. A value of 0 will produce undefined behavior. If the value is negative, output will be dumped out every n time steps, where n is the absolute value of the integer part of the value.
+
+
+.. note::
+    The value is required
+    The value must be an Integer
+
+
+TimingInfo.DumpIntervalExecutionTimeLimit
+--------------------------------------------------------------------------------
+
+[Type: int] This key is used to indicate a wall clock time to halt the execution of a run. At the end of each dump interval the time remaining in the batch job is compared with the user supplied value, if remaining time is less than or equal to the supplied value the execution is halted. Typically used when running on batch systems with time limits to force a clean shutdown near the end of the batch job. Time units is seconds, a value of 0 (the default) disables the check. Currently only supported on SLURM based systems, “–with-slurm” must be specified at configure time to enable.
+
+
+:default: 0
+.. note::
+    The value must be an Integer
+
+
+TimeStep
+================================================================================
+
+Setting parameters for modeled time steps
+
+
+
+TimeStep.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key must be one of: Constant or Growth. The value Constant defines a constant time step. The value Growth defines a time step that starts as dt0 and is defined for other steps as dtnew = gamma*dtold such that dtnew is less than or equal to dtmax and dtnew is greater than or equal to dtmin.
+
+
+.. note::
+    The value is required
+    The value must be one of the following options ['Constant', 'Growth']
+
+
+TimeStep.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key is used only if a constant time step is selected and indicates the value of the time step for all steps taken.
+
+
+.. note::
+    The value must be an Integer
+
+
+TimeStep.InitialStep
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the initial time step dt0 if the Growth type time step is selected.
+
+
+.. note::
+    The value must be an Integer
+
+
+TimeStep.GrowthFactor
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the growth factor gamma by which a time step will be multiplied to get the new time step when the Growth type time step is selected.
+
+
+.. note::
+    The value must be an Integer
+
+
+TimeStep.MaxStep
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the maximum time step allowed, dtmax, when the Growth type time step is selected.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+
+
+
+TimeStep.MinStep
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the minimum time step allowed, dtmin, when the Growth type time step is selected.
+
+
+.. note::
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+
+
+
+Cycle
+================================================================================
+
+Setting properties for cycles and intervals within those cycles.
+
+
+
+Cycle.Names
+--------------------------------------------------------------------------------
+
+[Type: string] This key is used to specify the named time intervals for each cycle. It is a list of names and each name defines a time interval when a specific boundary condition is applied and the number of items determines the total number of intervals in that time cycle.
+
+
+.. note::
+    The value must be a string
+
+
+Cycle.Repeat
+--------------------------------------------------------------------------------
+
+[Type: int] This key is used to specify the how many times a named time interval repeats. A positive value specifies a number of repeat cycles a value of -1 specifies that the cycle repeat for the entire simulation.
+
+
+.. note::
+    The value is required
+    The value must be an Integer
+      - with a value bigger or equal to -1
+
+
+
 CycleNames
 ================================================================================
 

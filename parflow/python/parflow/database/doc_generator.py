@@ -14,6 +14,9 @@ YAML_MODULES_TO_PROCESS = [
     'core',
     'geom',
     'solver',
+    'wells',
+    'phase',
+    'timing',
     'run'
 ]
 # -----------------------------------------------------------------------------
