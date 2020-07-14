@@ -1,8 +1,11 @@
 # demo2.py: testing run to set up geom inputs
 
 from parflow import Run
+import os
 
 lw = Run('Little Washita')
+
+workdir = os.getcwd()
 
 # -----------------------------------------------------------------------------
 # Setup database keys

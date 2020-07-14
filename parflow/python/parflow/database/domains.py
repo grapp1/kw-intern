@@ -6,6 +6,7 @@ enable inside Parflow run.
 import sys
 import types
 import traceback
+import os
 
 from . import TerminalColors as term
 from . import TerminalSymbols as termSymbol
@@ -126,6 +127,21 @@ class BoolDomain:
       return errors
 
     errors.append(f'{value} ({type(value)} must be True/False)')
+    return errors
+
+# -----------------------------------------------------------------------------
+
+class File:
+  def validate(self, value, workdir=os.getcwd(), **kwargs):
+    errors = []
+
+    if value == None:
+      return errors
+
+    if os.path.exists(f'{workdir}{value}'):
+      return errors
+
+    errors.append(f'{value} not located in {workdir}')
     return errors
 
 # -----------------------------------------------------------------------------

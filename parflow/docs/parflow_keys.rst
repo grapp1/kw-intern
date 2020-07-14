@@ -266,6 +266,7 @@ GeomInput.{geom_name}.FileName
     The value must be a string
 
 
+
 GeomInput.{geom_name}.Value
 --------------------------------------------------------------------------------
 
@@ -486,6 +487,7 @@ Geom.{geom_name}.FileName
 
 .. note::
     The value must be a string
+
 
 
 Geom.{geom_name}.Lower
@@ -949,7 +951,7 @@ Geom.{geom_name}.RelPerm.Value
 
 
 
-Geom.{geom_name}.RelPerm.AlphaFileName
+Geom.{geom_name}.RelPerm.Alpha.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -974,7 +976,7 @@ Geom.{geom_name}.RelPerm.Alpha
 
 
 
-Geom.{geom_name}.RelPerm.NFileName
+Geom.{geom_name}.RelPerm.N.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1107,7 +1109,7 @@ Geom.{geom_name}.Saturation.Value
 
 
 
-Geom.{geom_name}.Saturation.AlphaFileName
+Geom.{geom_name}.Saturation.Alpha.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1132,7 +1134,7 @@ Geom.{geom_name}.Saturation.Alpha
 
 
 
-Geom.{geom_name}.Saturation.NFileName
+Geom.{geom_name}.Saturation.N.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1157,7 +1159,7 @@ Geom.{geom_name}.Saturation.N
 
 
 
-Geom.{geom_name}.Saturation.SResFilename
+Geom.{geom_name}.Saturation.SRes.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1183,7 +1185,7 @@ Geom.{geom_name}.Saturation.SRes
 
 
 
-Geom.{geom_name}.Saturation.SSatFileName
+Geom.{geom_name}.Saturation.SSat.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1314,7 +1316,7 @@ Geom.{geom_name}.ThermalConductivity.Value
 
 
 
-Geom.{geom_name}.ThermalConductivity.KDryFileName
+Geom.{geom_name}.ThermalConductivity.KDry.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1339,7 +1341,7 @@ Geom.{geom_name}.ThermalConductivity.KDry
 
 
 
-Geom.{geom_name}.ThermalConductivity.KWetFileName
+Geom.{geom_name}.ThermalConductivity.KDry.Filename
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
@@ -1824,7 +1826,7 @@ Assigning properties to solver
 
 
 
-Solver.Type
+Solver
 --------------------------------------------------------------------------------
 
 [Type: string] This is the Impes or Richards
@@ -2847,7 +2849,7 @@ Solver.TerrainFollowingGrid
     The value must be True or False
 
 
-Solver.TerrainFolSlopeUpwind
+SolverTerrainFollowingGrid.SlopeUpwindFormulation
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8 in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is consistent with OverlandFlow.
@@ -2892,7 +2894,7 @@ Solver.WriteCLMBinary
     The value must be True or False
 
 
-Solver.LinKrylovDimension
+Solver.Linear.KrylovDimension
 --------------------------------------------------------------------------------
 
 [Type: int] This key specifies the maximum number of vectors to be used in setting up the Krylov subspace in the GMRES iterative solver. These vectors are of problem size and it should be noted that large increases in this parameter can limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
@@ -2908,7 +2910,7 @@ Solver.LinKrylovDimension
     In Python we will define *Solver.LinKrylovDimension* which will set    *Solver.Linear.KrylovDimension* inside the ParFlow .pfidb file.
 
 
-Solver.LinMaxRestarts
+Solver.Linear.MaxRestarts
 --------------------------------------------------------------------------------
 
 [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the Krylov subspace over using the current iterate as the initial iterate for the next pass.
@@ -2924,7 +2926,7 @@ Solver.LinMaxRestarts
     In Python we will define *Solver.LinMaxRestarts* which will set    *Solver.Linear.MaxRestarts* inside the ParFlow .pfidb file.
 
 
-Solver.LinPreconditioner
+Solver.Linear.Preconditioner
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG, PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi specifies a semi-coarsening multigrid algorithm which uses a point relaxation method. The choice SMG specifies a semi-coarsening multigrid algorithm which uses plane relaxations. This method is more robust than MGSemi, but generally requires more memory and compute time. The choice PFMGOctree can be more efficient for problems with large numbers of inactive cells.
@@ -2938,7 +2940,7 @@ Solver.LinPreconditioner
     In Python we will define *Solver.LinPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
 
 
-Solver.LinPrecondSym
+Solver.Linear.Preconditioner.SymmetricMat
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies whether the preconditioning matrix is symmetric. Choices fo rthis key are Symmetric and Nonsymmetric. The choice Symmetric specifies that the symmetric part of the Jacobian will be used as the preconditioning matrix. The choice Nonsymmetric specifies that the full Jacobian will be used as the preconditioning matrix. NOTE: ONLY Symmetric CAN BE USED IF MGSemi IS THE SPECIFIED PRECONDITIONER!
@@ -2972,7 +2974,7 @@ Solver.PrecondItem.MaxIter
 
 
 
-Solver.LinPrecondSMGPreRelax
+Solver.Linear.Preconditioner.SMG.NumPreRelax
 --------------------------------------------------------------------------------
 
 [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
@@ -2988,7 +2990,7 @@ Solver.LinPrecondSMGPreRelax
     In Python we will define *Solver.LinPrecondSMGPreRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPreRelax* inside the ParFlow .pfidb file.
 
 
-Solver.LinPrecondSMGPostRelax
+Solver.Linear.Preconditioner.SMG.NumPostRelax
 --------------------------------------------------------------------------------
 
 [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
@@ -3004,7 +3006,7 @@ Solver.LinPrecondSMGPostRelax
     In Python we will define *Solver.LinPrecondSMGPostRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPostRelax* inside the ParFlow .pfidb file.
 
 
-Solver.LinPrecondPFMGRAPType
+Solver.Linear.Preconditioner.PFMG.RAPType
 --------------------------------------------------------------------------------
 
 [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
