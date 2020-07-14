@@ -1,0 +1,172 @@
+# phase.yaml
+# Definitions of phase components of ParFlow
+# Includes Phase, PhaseConcen, Contaminants
+
+# -----------------------------------------------------------------------------
+# Phase
+# -----------------------------------------------------------------------------
+Phase:
+  __doc__:
+
+  Names:
+    help: >
+      [Type: string] This specifies the names of phases to be modeled. Currently only 1 or 2 phases may be modeled.
+    domains:
+      AnyString:
+
+  .{phase_name}:
+    __rst__:
+      skip:
+    __doc__:
+
+    Density:
+      __rst__:
+        skip:
+      __doc__:
+
+      Type:
+        help: >
+          [Type: string] This key specifies whether density will be a constant value or if it will be given by an equation of state of the
+          form (rd)exp(cP), where P is pressure, rd is the density at atmospheric pressure, and c is the phase compressibility
+          constant. This key must be either Constant or EquationOfState.
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+              - EquationOfState
+
+      Value:
+        help: >
+          [Type: double] This specifies the value of density if this phase was specified to have a constant density value for the phase
+          phase_name.
+        domains:
+          DoubleValue:
+
+      ReferenceDensity:
+        help: >
+          [Type: double] This key specifies the reference density if an equation of state density function is specified
+          for the phase phase_name.
+        domains:
+          DoubleValue:
+
+      CompressibilityConstant:
+        help: >
+          [Type: double] This key specifies the phase compressibility constant if an equation of state density function is specified for the
+          phase phase_name.
+        domains:
+          DoubleValue:
+
+    Viscosity:
+      __rst__:
+        skip:
+      __doc__:
+
+      Type:
+        help: >
+          [Type: string] This key specifies whether viscosity will be a constant value. Currently, the only choice for this key is Constant.
+        default: Constant
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+
+      Value:
+        help: >
+          [Type: double] This specifies the value of density if this phase was specified to have a constant density value for the phase
+          phase_name.
+        domains:
+          DoubleValue:
+
+
+# -----------------------------------------------------------------------------
+# PhaseConcen
+# -----------------------------------------------------------------------------
+
+PhaseConcen:
+  __doc__: >
+    Here we define initial concentration conditions for contaminants.
+
+  .{phase_name}:
+    __rst__:
+      skip:
+    __doc__:
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
+        Note that geometries listed later “overlay” geometries listed earlier.
+      domains:
+        AnyString:
+
+    # PredefinedFunction is missing from the manual
+    PredefinedFunction:
+      help: >
+        [Type: string]
+      domains:
+        AnyString:
+
+    .{contaminant_name}:
+      __rst__:
+        skip:
+      __doc__:
+
+      Type:
+        help: >
+          [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase,
+          phase_name, and the given contaminant, contaminant_name. The choices for this key are Constant or PFBFile.
+          The choice Constant will apply constants values to different geometries. The choice PFBFile will read values from
+          a “ParFlow Binary” file.
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+              - PFBFile
+
+      FileName:
+        help: >
+          [Type: string] This key specifies the name of the “ParFlow Binary” file which contains the initial condition values if the type
+          was set to PFBFile.
+        domains:
+          AnyString:
+
+      .{geom_input_name}:
+        __rst__:
+          skip:
+        __doc__:
+        Value:
+          help: >
+            [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
+            if the type was set to Constant.
+          domains:
+            DoubleValue:
+
+
+# -----------------------------------------------------------------------------
+# Contaminants
+# -----------------------------------------------------------------------------
+
+Contaminants:
+  __doc__:
+
+  Names:
+    help: >
+      [Type: string] This specifies the names of contaminants to be advected.
+    domains:
+      AnyString:
+
+  .{contaminant_name}:
+    __rst__:
+      skip:
+    __doc__:
+
+    Degradation:
+      __rst__:
+        skip:
+      __doc__:
+
+      Value:
+        help: >
+          [Type: double] This key specifies the half-life decay rate of the named contaminant, contaminant_name. At present only first-
+          order decay reactions are implemented and it is assumed that one contaminant cannot decay into another.
+        domains:
+          DoubleValue:

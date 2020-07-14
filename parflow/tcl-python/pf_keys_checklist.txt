@@ -279,11 +279,13 @@ Patch.%s.BCSaturation.%s.Value
 Patch.%s.BCSaturation.%s.XLower						
 Patch.%s.BCSaturation.%s.XUpper						
 Patch.%s.BCSaturation.%s.YLower						
-Patch.%s.BCSaturation.%s.YUpper						
-Phase.%s.Density.CompressibiltyConstant						
-Phase.%s.Density.ReferenceDensity						
-Phase.%s.Density.Type						
-Phase.%s.Density.Value						
+Patch.%s.BCSaturation.%s.YUpper	
+> * Perm.Conditioning.FileName
+> * Perm.TensorType					
+* Phase.%s.Density.CompressibiltyConstant						
+* Phase.%s.Density.ReferenceDensity						
+* Phase.%s.Density.Type						
+* Phase.%s.Density.Value						
 Phase.%s.Geom.%s.HeatCapacity.Value						
 Phase.%s.HeatCapacity.GeomNames						
 Phase.%s.HeatCapacity.Type						
@@ -292,8 +294,8 @@ Phase.%s.InternalEnergy.Value
 Phase.%s.Mobility.Exponent						
 Phase.%s.Mobility.IrreducibleSaturation						
 Phase.%s.Mobility.Value						
-Phase.%s.Viscosity.Type						
-Phase.%s.Viscosity.Value						
+* Phase.%s.Viscosity.Type						
+* Phase.%s.Viscosity.Value						
 Phase.RelPerm.VanGenuchten.File						
 Phase.Saturation.VanGenuchten.File						
 Phase.ThermalConductivity.Function1.File						
@@ -301,11 +303,11 @@ PhaseConcen.%s.%s.FileName
 PhaseConcen.%s.%s.Geom.%s.Value						
 PhaseConcen.%s.%s.GeomNames						
 PhaseConcen.%s.%s.Type						
-PhaseSources.%s.Geom.%s.Value						
-PhaseSources.%s.GeomNames						
-PhaseSources.%s.PredefinedFunction						
-PhaseSources.%s.Type						
-PhaseSources.Geom.%s.Value
+* PhaseSources.%s.Geom.%s.Value						
+* PhaseSources.%s.GeomNames						
++ * PhaseSources.%s.PredefinedFunction						
+* PhaseSources.%s.Type						
+* PhaseSources.Geom.%s.Value
 > * Process.Topology.P
 > * Process.Topology.Q	
 > * Process.Topology.R					

@@ -146,6 +146,18 @@ Perm:
           - TensorByGeom
           - TensorByFile
 
+  Conditioning:
+    __rst__:
+      skip:
+    __doc__:
+    FileName:
+      help: >
+        [Type: string] This key specifies the name of the file that contains the conditioning data. The default string NA indicates that
+        conditioning data is not applicable.
+      default: NA
+      domains:
+        AnyString:
+
 # -----------------------------------------------------------------------------
 # SpecificStorage.*
 # -----------------------------------------------------------------------------
@@ -1091,6 +1103,10 @@ GeomContItem:
       DoubleValue:
         minValue: 0.0
 
+# -----------------------------------------------------------------------------
+# Initial Conditions
+# -----------------------------------------------------------------------------
+
 # Setting ICSaturation
 ICSaturation:
   __rst__:
@@ -1151,7 +1167,9 @@ ICPressure:
           - HydroStaticPatch
           - NCFile
 
-# Setting TopoSlopes
+# -----------------------------------------------------------------------------
+# TopoSlopes
+# -----------------------------------------------------------------------------
 # TopoSlopes missing from manual and grep
 TopoSlopes:
   __doc__: >
@@ -1254,7 +1272,10 @@ TopoSlopesY:
       domains:
         DoubleValue:
 
+# -----------------------------------------------------------------------------
 # Capillary Pressure
+# -----------------------------------------------------------------------------
+
 CapPressure:
   __doc__: >
     Setting capillary pressures for different phases
@@ -1282,3 +1303,48 @@ CapPressurePhaseItem:
       by ParFlow.
     domains:
       AnyString:
+
+# -----------------------------------------------------------------------------
+# Mannings
+# -----------------------------------------------------------------------------
+
+Mannings:
+  __doc__: >
+    Here, Manning's roughness values (n) are assigned to the upper boundary of the domain.
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies all of the geometries on which a different Mannings roughness value will be assigned. Mannings
+      values may be assigned by PFBFile or as Constant by geometry. These geometries must cover the entire upper
+      surface of the computational domain.
+    domains:
+      AnyString:
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign Mannings roughness data. The choices currently available
+      are Constant which indicates that a constant is to be assigned to all grid cells within a geometry and PFBFile
+      which indicates that all values are read in from a distributed, grid-based ParFlow binary file.
+    domains:
+      EnumDomain:
+        enumList:
+          - Constant
+          - PFBFile
+
+  # type/description appears to be wrong in the manual
+  FileName:
+    help: >
+      [Type: string] This key specifies the name of the ParFlow binary file with Manning's values.
+    domains:
+      AnyString:
+
+  .{geom_name}:
+    __rst__:
+      skip:
+    __doc__:
+    Value:
+      help: >
+        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+        to constant.
+      domains:
+        DoubleValue:
