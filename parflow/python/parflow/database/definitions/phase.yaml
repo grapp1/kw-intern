@@ -6,23 +6,28 @@
 # Phase
 # -----------------------------------------------------------------------------
 Phase:
-  __doc__:
+  __doc__: ''
 
   Names:
     help: >
       [Type: string] This specifies the names of phases to be modeled. Currently only 1 or 2 phases may be modeled.
     domains:
       AnyString:
+    handlers:
+      PhaseUpdater:
+        type: ChildrenHandler
+        className: PhaseNameItem
 
   .{phase_name}:
+    __class__: PhaseNameItem
     __rst__:
       skip:
-    __doc__:
+    __doc__: ''
 
     Density:
       __rst__:
         skip:
-      __doc__:
+      __doc__: ''
 
       Type:
         help: >
@@ -59,7 +64,7 @@ Phase:
     Viscosity:
       __rst__:
         skip:
-      __doc__:
+      __doc__: ''
 
       Type:
         help: >
@@ -87,9 +92,10 @@ PhaseConcen:
     Here we define initial concentration conditions for contaminants.
 
   .{phase_name}:
+    __class__: PhaseConcenNameItem
     __rst__:
       skip:
-    __doc__:
+    __doc__: ''
 
     GeomNames:
       help: >
@@ -106,9 +112,10 @@ PhaseConcen:
         AnyString:
 
     .{contaminant_name}:
+      __class__: PhaseConcenContItem
       __rst__:
         skip:
-      __doc__:
+      __doc__: ''
 
       Type:
         help: >
@@ -130,9 +137,10 @@ PhaseConcen:
           AnyString:
 
       .{geom_input_name}:
+        __class__: PhaseConContGeomItem
         __rst__:
           skip:
-        __doc__:
+        __doc__: ''
         Value:
           help: >
             [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
@@ -146,7 +154,7 @@ PhaseConcen:
 # -----------------------------------------------------------------------------
 
 Contaminants:
-  __doc__:
+  __doc__: ''
 
   Names:
     help: >
@@ -155,14 +163,15 @@ Contaminants:
       AnyString:
 
   .{contaminant_name}:
+    __class__: ContNameItem
     __rst__:
       skip:
-    __doc__:
+    __doc__: ''
 
     Degradation:
       __rst__:
         skip:
-      __doc__:
+      __doc__: ''
 
       Value:
         help: >

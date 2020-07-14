@@ -149,7 +149,7 @@ Perm:
   Conditioning:
     __rst__:
       skip:
-    __doc__:
+    __doc__: ''
     FileName:
       help: >
         [Type: string] This key specifies the name of the file that contains the conditioning data. The default string NA indicates that
@@ -1341,7 +1341,8 @@ Mannings:
   .{geom_name}:
     __rst__:
       skip:
-    __doc__:
+    __doc__: ''
+    __class__: ManningsGeomItem
     Value:
       help: >
         [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set

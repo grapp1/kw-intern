@@ -21,6 +21,7 @@ Wells:
         className: WellHandler
 
   .{well_name}:
+    __class__: WellItem
     __rst__:
       name: Wells.{well_name}
     __doc__: >
@@ -202,6 +203,7 @@ Wells:
 
     # Setting key Wells.{well_name}.{interval_name}...
     .{interval_name}:
+      __class__: WellIntItem
       __rst__:
         skip:
       __doc__: >
@@ -263,13 +265,15 @@ Wells:
 
         # Setting key Wells.{well_name}.{interval_name}.Concentration.{phase_name}.{contaminant_name}.Value
         .{phase_name}:
+          __class__: ConcentrationPhaseItem
           __rst__:
             skip:
-          __doc__:
+          __doc__: ''
           .{contaminant_name}:
+            __class__: ConcentrationPhaseContItem
             __rst__:
               skip:
-            __doc__:
+            __doc__: ''
             Value:
               help: >
                 [Type: double] This key specifies the contaminant value of a vertical well.
@@ -302,9 +306,10 @@ Wells:
           __doc__: >
             Setting flux for a named well within a specified cycle for a specific phase in an extraction well.
           .{phase_name}:
+            __class__: ExtFluxPhaseItem
             __rst__:
               skip:
-            __doc__:
+            __doc__: ''
             # typos in the description - assign
             Value:
               __rst__:
@@ -343,9 +348,10 @@ Wells:
             Setting flux for a named well within a specified cycle for a specific phase in an injection well.
 
           .{phase_name}:
+            __class__: InjFluxPhaseItem
             __rst__:
               skip:
-            __doc__:
+            __doc__: ''
             # typos in the description - assign
             Value:
               __rst__:
@@ -365,13 +371,15 @@ Wells:
             Setting the fraction of the extracted contaminant which gets resupplied to the injection well.
 
           .{phase_name}:
+            __class__: InjConcPhaseItem
             __rst__:
               skip:
-            __doc__:
+            __doc__: ''
             .{contaminant_name}:
+              __class__: InjConcPhaseContItem
               __rst__:
                 skip:
-              __doc__:
+              __doc__: ''
               Fraction:
                 help: >
                   [Type: double] This key specifies the fraction of the extracted contaminant which gets resupplied to the injection well.

@@ -11,6 +11,12 @@ BaseRun:
     - TimingInfo
     - TimeStep
     - Cycle
+    - Perm
+    - SpecificStorage
+    - Phase
+    - PhaseConcen
+    - Contaminants
+    - Domain
 
   # -----------------------------------------------------------------------------
   # CycleNames

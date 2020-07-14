@@ -184,6 +184,24 @@ ComputationalGrid.DZ
 
 
 
+Domain
+================================================================================
+
+The domain may be represented by any of the solid types in GeomInput.{geom_input_name}.InputType that allow the definition of surface patches. These surface patches are used to define boundary conditions. Subsequently, it is required that the union (or combination) of the defined surface patches equal the entire domain surface. NOTE: This requirement is NOT checked in the code.
+
+
+
+Domain.GeomName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies which of the named geometries is the problem domain.
+
+
+.. note::
+    The value is required
+    The value must be a string
+
+
 GeomInput
 ================================================================================
 
@@ -273,6 +291,17 @@ Perm.TensorType
 
 .. note::
     The value must be one of the following options ['TensorByGeom', 'TensorByFile']
+
+
+FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the name of the file that contains the conditioning data. The default string NA indicates that conditioning data is not applicable.
+
+
+:default: NA
+.. note::
+    The value must be a string
 
 
 SpecificStorage
@@ -1741,6 +1770,53 @@ CapPressure.{phase_name}.GeomNames
     The value must be a string
 
 
+Mannings
+================================================================================
+
+Here, Manning's roughness values (n) are assigned to the upper boundary of the domain.
+
+
+
+Mannings.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies all of the geometries on which a different Mannings roughness value will be assigned. Mannings values may be assigned by PFBFile or as Constant by geometry. These geometries must cover the entire upper surface of the computational domain.
+
+
+.. note::
+    The value must be a string
+
+
+Mannings.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies which method is to be used to assign Mannings roughness data. The choices currently available are Constant which indicates that a constant is to be assigned to all grid cells within a geometry and PFBFile which indicates that all values are read in from a distributed, grid-based ParFlow binary file.
+
+
+.. note::
+    The value must be one of the following options ['Constant', 'PFBFile']
+
+
+Mannings.FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the name of the ParFlow binary file with Manning's values.
+
+
+.. note::
+    The value must be a string
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
+
+
+.. note::
+    The value must be an Integer
+
+
 Solver
 ================================================================================
 
@@ -3138,6 +3214,29 @@ Solver.Nonlinear.Globalization
     The value must be one of the following options ['LineSearch', 'InexactNewton']
 
 
+CycleNames
+================================================================================
+
+[Type: string] This key is used to specify the named time cycles to be used in a simulation. It is a list of names and each name defines a time cycle and the number of items determines the total number of time cycles specified. Each named cycle is described using a number of keys defined under Cycle.
+
+
+.. note::
+    The value must be a string
+
+
+Gravity
+================================================================================
+
+[Type: double] Specifies the gravity constant to be used.
+
+
+.. note::
+    The value is required
+    The value must be an Integer
+      - with a value bigger or equal to 0.0
+
+
+
 OverlandFlowSpinUp
 ================================================================================
 
@@ -3176,3 +3275,14 @@ This key sets P2 and provides exponential dampening to the pressure relationship
     The value must be an Integer
       - with a value bigger or equal to 0.0
 
+
+
+KnownSolution
+================================================================================
+
+[Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No- KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor. Choices for this key correspond to solutions as follows: NoKnownSolution: No solution is known for this problem. Constant: p = constant X: p = x XPlusYPlusZ: p = x + y + z X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1 X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1 XYZTPlus1: p = xyzt + 1 XYZTPlus1: p = xyzt + 1
+
+
+.. note::
+    The value is required
+    The value must be one of the following options ['NoKnownSolution', 'Constant', 'X', 'XPlusYPlusZ', 'X3Y2PlusSinXYPlus1', 'X3Y4PlusX2PlusSinXYCosYPlus1', 'XYZTPlus1', 'XYZTPlus1']

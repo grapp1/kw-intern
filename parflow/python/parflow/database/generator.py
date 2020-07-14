@@ -4,7 +4,7 @@ database structure as Python classes so IDE and runtime environment can
 be used to query the help and constraints associated to each keys.
 '''
 
-import os, sys
+import os, sys, traceback
 import yaml
 import json
 from datetime import datetime
@@ -16,6 +16,7 @@ YAML_MODULES_TO_PROCESS = [
   'solver',
   'wells',
   'timing',
+  'phase',
   'run'
 ]
 # -----------------------------------------------------------------------------
@@ -43,6 +44,9 @@ def isClass(key, definition):
   if key[0] == '_':
     return False
 
+  if key[0] == '.':
+    return False
+
   value = definition[key]
 
   if '__doc__' in value:
@@ -55,6 +59,14 @@ def isClass(key, definition):
     return False
 
   return True
+
+# -----------------------------------------------------------------------------
+
+def isClassItem(key, definition):
+  if key[0] == '.':
+    return True
+
+  return False
 
 # -----------------------------------------------------------------------------
 
@@ -89,7 +101,9 @@ class ValidationSummary:
 
     return self.classNameCount[className] - 1
 
-  def getDeduplicateClassName(self, className):
+  def getDeduplicateClassName(self, className, classDefinition=None):
+    if classDefinition and '__class__' in classDefinition:
+      return classDefinition['__class__']
     if className in self.classNameCount:
       return f'{className}_{self.classNameCount[className]}'
     return className
@@ -147,11 +161,12 @@ class PythonModule:
       classMembers = []
       fieldMembers = []
       classInstances = []
+      classItems = []
       classDetails = {}
 
       self.addSeparator()
 
-      dedupClassName = self.validationSummary.getDeduplicateClassName(className)
+      dedupClassName = self.validationSummary.getDeduplicateClassName(className, classDefinition)
       self.validationSummary.addClass(className)
 
       self.addLine(f'class {dedupClassName}(PFDBObj):')
@@ -165,6 +180,8 @@ class PythonModule:
           fieldMembers.append(key)
         if key == '__class_instances__':
           classInstances = classDefinition['__class_instances__']
+        if isClassItem(key, classDefinition):
+          classItems.append(classDefinition[key])
 
       if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
         '''
@@ -193,7 +210,12 @@ class PythonModule:
           print(f'Invalid syntax: {className} must use __doc__ rather than help')
           sys.exit(1)
         self.addClass(classMember, classDefinition[classMember])
+
+      for classItem in classItems:
+        self.addClass(classItem['__class__'], classItem)
+
     except:
+      # traceback.print_exc()
       print(f'Error when processing class {className}')
 
   def addDetails(self, classDetails):

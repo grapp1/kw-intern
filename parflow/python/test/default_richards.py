@@ -1,6 +1,9 @@
 #  This runs the basic default_richards test case.
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
+
+from parflow import Run
+
 drich = Run('Default Richards')
 
 
@@ -32,8 +35,8 @@ drich.GeomInput.Names = "domain_input background_input source_region_input conce
 #---------------------------------------------------------
 # Domain Geometry Input
 #---------------------------------------------------------
-drich.GeomInput.domain_input.InputType = Box
-drich.GeomInput.domain_input.GeomName = domain
+drich.GeomInput.domain_input.InputType = 'Box'
+drich.GeomInput.domain_input.GeomName = 'domain'
 
 #---------------------------------------------------------
 # Domain Geometry
@@ -51,8 +54,8 @@ drich.Geom.domain.Patches = "left right front back bottom top"
 #---------------------------------------------------------
 # Background Geometry Input
 #---------------------------------------------------------
-drich.GeomInput.background_input.InputType = Box
-drich.GeomInput.background_input.GeomName = background
+drich.GeomInput.background_input.InputType = 'Box'
+drich.GeomInput.background_input.GeomName = 'background'
 
 #---------------------------------------------------------
 # Background Geometry
@@ -69,8 +72,8 @@ drich.Geom.background.Upper.Z = 99999999.0
 #---------------------------------------------------------
 # Source_Region Geometry Input
 #---------------------------------------------------------
-drich.GeomInput.source_region_input.InputType = Box
-drich.GeomInput.source_region_input.GeomName = source_region
+drich.GeomInput.source_region_input.InputType = 'Box'
+drich.GeomInput.source_region_input.GeomName = 'source_region'
 
 #---------------------------------------------------------
 # Source_Region Geometry
@@ -87,8 +90,8 @@ drich.Geom.source_region.Upper.Z = 5.5
 #---------------------------------------------------------
 # Concen_Region Geometry Input
 #---------------------------------------------------------
-drich.GeomInput.concen_region_input.InputType = Box
-drich.GeomInput.concen_region_input.GeomName = concen_region
+drich.GeomInput.concen_region_input.InputType = 'Box'
+drich.GeomInput.concen_region_input.GeomName = 'concen_region'
 
 #---------------------------------------------------------
 # Concen_Region Geometry
@@ -106,10 +109,10 @@ drich.Geom.concen_region.Upper.Z = 6.0
 #-----------------------------------------------------------------------------
 drich.Geom.Perm.Names = "background"
 
-drich.Geom.background.Perm.Type = Constant
+drich.Geom.background.Perm.Type = 'Constant'
 drich.Geom.background.Perm.Value = 4.0
 
-drich.Perm.TensorType = TensorByGeom
+drich.Perm.TensorType = 'TensorByGeom'
 
 drich.Geom.Perm.TensorByGeom.Names = "background"
 
@@ -121,7 +124,7 @@ drich.Geom.background.Perm.TensorValZ = 1.0
 # Specific Storage
 #-----------------------------------------------------------------------------
 
-drich.SpecificStorage.Type = Constant
+drich.SpecificStorage.Type = 'Constant'
 drich.SpecificStorage.GeomNames = "domain"
 drich.Geom.domain.SpecificStorage.Value = 1.0e-4
 
@@ -131,10 +134,10 @@ drich.Geom.domain.SpecificStorage.Value = 1.0e-4
 
 drich.Phase.Names = "water"
 
-drich.Phase.water.Density.Type = Constant
+drich.Phase.water.Density.Type = 'Constant'
 drich.Phase.water.Density.Value = 1.0
 
-drich.Phase.water.Viscosity.Type = Constant
+drich.Phase.water.Viscosity.Type = 'Constant'
 drich.Phase.water.Viscosity.Value = 1.0
 
 #-----------------------------------------------------------------------------
@@ -162,29 +165,29 @@ drich.TimingInfo.StartCount = 0
 drich.TimingInfo.StartTime = 0.0
 drich.TimingInfo.StopTime = 0.010
 drich.TimingInfo.DumpInterval = -1
-drich.TimeStep.Type = Constant
+drich.TimeStep.Type = 'Constant'
 drich.TimeStep.Value = 0.001
 
 #-----------------------------------------------------------------------------
 # Porosity
 #-----------------------------------------------------------------------------
 
-drich.Geom.Porosity.GeomNames = background
+drich.Geom.Porosity.GeomNames = 'background'
 
-drich.Geom.background.Porosity.Type = Constant
+drich.Geom.background.Porosity.Type = 'Constant'
 drich.Geom.background.Porosity.Value = 1.0
 
 #-----------------------------------------------------------------------------
 # Domain
 #-----------------------------------------------------------------------------
-drich.Domain.GeomName = domain
+drich.Domain.GeomName = 'domain'
 
 #-----------------------------------------------------------------------------
 # Relative Permeability
 #-----------------------------------------------------------------------------
 
-drich.Phase.RelPerm.Type = VanGenuchten
-drich.Phase.RelPerm.GeomNames = domain
+drich.Phase.RelPerm.Type = 'VanGenuchten'
+drich.Phase.RelPerm.GeomNames = 'domain'
 drich.Geom.domain.RelPerm.Alpha = 0.005
 drich.Geom.domain.RelPerm.N = 2.0
 
@@ -192,8 +195,8 @@ drich.Geom.domain.RelPerm.N = 2.0
 # Saturation
 #---------------------------------------------------------
 
-drich.Phase.Saturation.Type = VanGenuchten
-drich.Phase.Saturation.GeomNames = domain
+drich.Phase.Saturation.Type = 'VanGenuchten'
+drich.Phase.Saturation.GeomNames = 'domain'
 drich.Geom.domain.Saturation.Alpha = 0.005
 drich.Geom.domain.Saturation.N = 2.0
 drich.Geom.domain.Saturation.SRes = 0.2
@@ -207,7 +210,7 @@ drich.Wells.Names = ""
 #-----------------------------------------------------------------------------
 # Time Cycles
 #-----------------------------------------------------------------------------
-drich.Cycle.Names = constant
+drich.Cycle.Names = 'constant'
 drich.Cycle.constant.Names = "alltime"
 drich.Cycle.constant.alltime.Length = 1
 drich.Cycle.constant.Repeat = -1
@@ -217,31 +220,31 @@ drich.Cycle.constant.Repeat = -1
 #-----------------------------------------------------------------------------
 drich.BCPressure.PatchNames = "left right front back bottom top"
 
-drich.Patch.left.BCPressure.Type = DirEquilRefPatch
+drich.Patch.left.BCPressure.Type = 'DirEquilRefPatch'
 drich.Patch.left.BCPressure.Cycle = "constant"
-drich.Patch.left.BCPressure.RefGeom = domain
-drich.Patch.left.BCPressure.RefPatch = bottom
+drich.Patch.left.BCPressure.RefGeom = 'domain'
+drich.Patch.left.BCPressure.RefPatch = 'bottom'
 drich.Patch.left.BCPressure.alltime.Value = 5.0
 
-drich.Patch.right.BCPressure.Type = DirEquilRefPatch
+drich.Patch.right.BCPressure.Type = 'DirEquilRefPatch'
 drich.Patch.right.BCPressure.Cycle = "constant"
-drich.Patch.right.BCPressure.RefGeom = domain
-drich.Patch.right.BCPressure.RefPatch = bottom
+drich.Patch.right.BCPressure.RefGeom = 'domain'
+drich.Patch.right.BCPressure.RefPatch = 'bottom'
 drich.Patch.right.BCPressure.alltime.Value = 3.0
 
-drich.Patch.front.BCPressure.Type = FluxConst
+drich.Patch.front.BCPressure.Type = 'FluxConst'
 drich.Patch.front.BCPressure.Cycle = "constant"
 drich.Patch.front.BCPressure.alltime.Value = 0.0
 
-drich.Patch.back.BCPressure.Type = FluxConst
+drich.Patch.back.BCPressure.Type = 'FluxConst'
 drich.Patch.back.BCPressure.Cycle = "constant"
 drich.Patch.back.BCPressure.alltime.Value = 0.0
 
-drich.Patch.bottom.BCPressure.Type = FluxConst
+drich.Patch.bottom.BCPressure.Type = 'FluxConst'
 drich.Patch.bottom.BCPressure.Cycle = "constant"
 drich.Patch.bottom.BCPressure.alltime.Value = 0.0
 
-drich.Patch.top.BCPressure.Type = FluxConst
+drich.Patch.top.BCPressure.Type = 'FluxConst'
 drich.Patch.top.BCPressure.Cycle = "constant"
 drich.Patch.top.BCPressure.alltime.Value = 0.0
 
@@ -267,26 +270,26 @@ drich.TopoSlopesY.Geom.domain.Value = 0.0
 # Mannings coefficient 
 #---------------------------------------------------------
 
-drich.Mannings.Type "Constant"
-drich.Mannings.GeomNames ""
-drich.Mannings.Geom.domain.Value 0.
+drich.Mannings.Type = "Constant"
+drich.Mannings.GeomNames = ""
+drich.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
 # Initial conditions: water pressure
 #---------------------------------------------------------
 
-drich.ICPressure.Type = HydroStaticPatch
-drich.ICPressure.GeomNames = domain
+drich.ICPressure.Type = 'HydroStaticPatch'
+drich.ICPressure.GeomNames = 'domain'
 drich.Geom.domain.ICPressure.Value = 3.0
-drich.Geom.domain.ICPressure.RefGeom = domain
-drich.Geom.domain.ICPressure.RefPatch = bottom
+drich.Geom.domain.ICPressure.RefGeom = 'domain'
+drich.Geom.domain.ICPressure.RefPatch = 'bottom'
 
 #-----------------------------------------------------------------------------
 # Phase sources:
 #-----------------------------------------------------------------------------
 
-drich.PhaseSources.water.Type = Constant
-drich.PhaseSources.water.GeomNames = background
+drich.PhaseSources.water.Type = 'Constant'
+drich.PhaseSources.water.GeomNames = 'background'
 drich.PhaseSources.water.Geom.background.Value = 0.0
 
 
@@ -294,24 +297,29 @@ drich.PhaseSources.water.Geom.background.Value = 0.0
 # Exact solution specification for error calculations
 #-----------------------------------------------------------------------------
 
-drich.KnownSolution = NoKnownSolution
+drich.KnownSolution = 'NoKnownSolution'
 
 
 #-----------------------------------------------------------------------------
 # Set solver parameters
 #-----------------------------------------------------------------------------
-drich.Solver = Richards
+drich.Solver.Type = 'Richards'
 drich.Solver.MaxIter = 5
 
 drich.Solver.Nonlinear.MaxIter = 10
 drich.Solver.Nonlinear.ResidualTol = 1e-9
-drich.Solver.Nonlinear.EtaChoice = EtaConstant
+drich.Solver.Nonlinear.EtaChoice = 'EtaConstant'
 drich.Solver.Nonlinear.EtaValue = 1e-5
 drich.Solver.Nonlinear.UseJacobian = True
 drich.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 
 drich.Solver.Linear.KrylovDimension = 10
 
-drich.Solver.Linear.Preconditioner = PFMG
+drich.Solver.Linear.Preconditioner = 'PFMG'
 drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+
+
+drich.validate()
+drich.write('./output/default_richards.pfidb')
+drich.run()
