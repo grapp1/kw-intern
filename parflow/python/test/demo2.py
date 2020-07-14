@@ -1,11 +1,8 @@
 # demo2.py: testing run to set up geom inputs
 
 from parflow import Run
-import os
 
-lw = Run('Little Washita')
-
-workdir = os.getcwd()
+lw = Run(__file__, 'Little Washita')
 
 # -----------------------------------------------------------------------------
 # Setup database keys
@@ -57,6 +54,6 @@ lw.Geom.domain.Perm.Type = 'Constant'
 # Validation process
 # -----------------------------------------------------------------------------
 
-lw.validate()
+lw.validate(__file__)
 lw.write('./output/demo2_lw.pfidb')
 lw.run()

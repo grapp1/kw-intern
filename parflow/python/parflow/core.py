@@ -3,7 +3,7 @@ import os
 from .database.generated import BaseRun
 from .utils import extractKeysFromObject, writeDict
 
-class Run(BaseRun):
+class Run(__file__, BaseRun):
   def __init__(self, name):
     super().__init__(None)
     self._name = name

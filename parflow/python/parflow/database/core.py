@@ -90,7 +90,7 @@ class PFDBObj:
 
     return valueCount
 
-  def validate(self, indent=1):
+  def validate(self, indent=1, workdir=None):
     if len(self) == 0:
       return 0
 
@@ -106,6 +106,8 @@ class PFDBObj:
           print(f'{indentStr}{name}:')
           errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
+        if 'File' in self._details[name]['domains']:
+          self._details[name]['domains']['File'] = workdir
         if 'history' in self._details[name]:
           if len(self._details[name]['history']):
             history = self._details[name]['history']
