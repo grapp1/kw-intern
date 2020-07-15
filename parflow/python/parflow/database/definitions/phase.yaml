@@ -17,9 +17,11 @@ Phase:
       PhaseUpdater:
         type: ChildrenHandler
         className: PhaseNameItem
+        location: .
       PhaseSourceUpdater:
         type: ChildrenHandler
         className: PhaseSourceNameItem
+        location: ../PhaseSources
 
   RelPerm:
     __doc__: >

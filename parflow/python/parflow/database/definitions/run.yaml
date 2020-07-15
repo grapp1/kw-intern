@@ -23,6 +23,10 @@ BaseRun:
     - TopoSlopesY
     - Mannings
     - ICPressure
+    - InternalBC
+    - BCSaturation
+    - BCPressure
+    - Patch
 
 
   # -----------------------------------------------------------------------------

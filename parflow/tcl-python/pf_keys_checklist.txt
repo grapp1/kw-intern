@@ -259,27 +259,27 @@ NetCDF.WriteSlopes
 NetCDF.WriteSubsurface						
 OverlandSpinupDampP1						
 OverlandSpinupDampP2						
-Patch.%s.BCPressure.%s.%d.Location		
-Patch.%s.BCPressure.%s.%d.Value
-Patch.%s.BCPressure.%s.%s.IntValue
-Patch.%s.BCPressure.%s.FileName	
-Patch.%s.BCPressure.%s.NumPoints	
-Patch.%s.BCPressure.%s.PredefinedFunction	
-Patch.%s.BCPressure.%s.Value	
-Patch.%s.BCPressure.%s.XLower	
-Patch.%s.BCPressure.%s.XUpper	
-Patch.%s.BCPressure.%s.YLower	
-Patch.%s.BCPressure.%s.YUpper	
-Patch.%s.BCPressure.Cycle				
-Patch.%s.BCPressure.RefGeom		
-Patch.%s.BCPressure.RefPatch		
-Patch.%s.BCPressure.Type			
-Patch.%s.BCSaturation.%s.Type						
-Patch.%s.BCSaturation.%s.Value						
-Patch.%s.BCSaturation.%s.XLower						
-Patch.%s.BCSaturation.%s.XUpper						
-Patch.%s.BCSaturation.%s.YLower						
-Patch.%s.BCSaturation.%s.YUpper	
+* Patch.%s.BCPressure.%s.%d.Location		
+* Patch.%s.BCPressure.%s.%d.Value
+* Patch.%s.BCPressure.%s.%s.IntValue
+* Patch.%s.BCPressure.%s.FileName	
+* Patch.%s.BCPressure.%s.NumPoints	
+* Patch.%s.BCPressure.%s.PredefinedFunction	
+* Patch.%s.BCPressure.%s.Value	
+* Patch.%s.BCPressure.%s.XLower	
+* Patch.%s.BCPressure.%s.XUpper	
+* Patch.%s.BCPressure.%s.YLower	
+* Patch.%s.BCPressure.%s.YUpper	
+* Patch.%s.BCPressure.Cycle				
+* Patch.%s.BCPressure.RefGeom		
+* Patch.%s.BCPressure.RefPatch		
+* Patch.%s.BCPressure.Type			
+* Patch.%s.BCSaturation.%s.Type						
+* Patch.%s.BCSaturation.%s.Value						
+* Patch.%s.BCSaturation.%s.XLower						
+* Patch.%s.BCSaturation.%s.XUpper						
+* Patch.%s.BCSaturation.%s.YLower						
+* Patch.%s.BCSaturation.%s.YUpper	
 > * Perm.Conditioning.FileName
 > * Perm.TensorType					
 * Phase.%s.Density.CompressibiltyConstant						

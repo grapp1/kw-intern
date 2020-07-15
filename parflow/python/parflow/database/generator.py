@@ -17,6 +17,7 @@ YAML_MODULES_TO_PROCESS = [
   'wells',
   'timing',
   'phase',
+  'bconditions',
   'run'
 ]
 # -----------------------------------------------------------------------------

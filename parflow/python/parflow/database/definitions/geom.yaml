@@ -22,7 +22,6 @@ Domain:
       MandatoryValue:
       AnyString:
 
-
 # -----------------------------------------------------------------------------
 # GeomInput.*
 # -----------------------------------------------------------------------------
@@ -43,90 +42,91 @@ GeomInput:
       GeomInputUpdater:
         type: ChildrenHandler
         className: GeomInputItem
+        location: .
       GeomUpdater:
         type: ChildrenHandler
         className: GeomItem
         location: ../Geom
 
-# user-defined entries in GeomInput.Names are passed to GeomInputItem
+  # user-defined entries in GeomInput.Names are passed to .
+  .{geom_input_name}:
+    __class__: GeomInputItem
+    __rst__:
+      name: GeomInput.{geom_name}
+    __doc__: >
+      One of the user-defined names for defining a geometry region
 
-GeomInputItem:
-  __rst__:
-    name: GeomInput.{geom_name}
-  __doc__: >
-    One of the user-defined names for defining a geometry region
+    InputType:
+      help: >
+        [Type: string] This defines the type for the geometry input with the
+        given input name. This key must be one of: SolidFile, IndicatorField,
+        or Box.
+      domains:
+        EnumDomain:
+          enumList:
+            - SolidFile
+            - IndicatorField
+            - Box
 
-  InputType:
-    help: >
-      [Type: string] This defines the type for the geometry input with the
-      given input name. This key must be one of: SolidFile, IndicatorField,
-      or Box.
-    domains:
-      EnumDomain:
-        enumList:
-          - SolidFile
-          - IndicatorField
-          - Box
+    # Will ParFlow return an error if you use singular vs. plural?
+    # Distinction needs to be more clear in manual (only lists plural)
+    GeomName:
+      help: >
+        [Type: string] This is a name of a single geometry defined by
+        the geometry input. This should be used for a geometry input type of Box,
+        which only requires a single name.
+      domains:
+        AnyString:
+      handlers:
+        GeomInputUpdater:
+          type: ChildrenHandler
+          className: GeomInputItem
+          location: ..
+        GeomUpdater:
+          type: ChildrenHandler
+          className: GeomItem
+          location: ../../Geom
 
-  # Will ParFlow return an error if you use singular vs. plural?
-  # Distinction needs to be more clear in manual (only lists plural)
-  GeomName:
-    help: >
-      [Type: string] This is a name of a single geometry defined by
-      the geometry input. This should be used for a geometry input type of Box,
-      which only requires a single name.
-    domains:
-      AnyString:
-    handlers:
-      GeomInputUpdater:
-        type: ChildrenHandler
-        className: GeomInputItem
-        location: ..
-      GeomUpdater:
-        type: ChildrenHandler
-        className: GeomItem
-        location: ../../Geom
+    GeomNames:
+      help: >
+        [Type: string] This is a list of the names of the geometries defined by
+        the geometry input. For a geometry input type of Box, the singular
+        GeomName should be used. For the SolidFile geometry type this
+        should contain a list with the same number of geometries as were defined
+        using GMS. The order of geometries in the SolidFile should match the
+        names. For IndicatorField types you need to specify the value in the
+        input field which matches the name using GeomInput.geom_input_name.Value.
+      domains:
+        AnyString:
+      handlers:
+        GeomInputUpdater:
+          type: ChildrenHandler
+          className: GeomInputItem
+          location: ..
+        GeomUpdater:
+          type: ChildrenHandler
+          className: GeomItem
+          location: ../../Geom
 
-  GeomNames:
-    help: >
-      [Type: string] This is a list of the names of the geometries defined by
-      the geometry input. For a geometry input type of Box, the singular
-      GeomName should be used. For the SolidFile geometry type this
-      should contain a list with the same number of geometries as were defined
-      using GMS. The order of geometries in the SolidFile should match the
-      names. For IndicatorField types you need to specify the value in the
-      input field which matches the name using GeomInput.geom_input_name.Value.
-    domains:
-      AnyString:
-    handlers:
-      GeomInputUpdater:
-        type: ChildrenHandler
-        className: GeomInputItem
-        location: ..
-      GeomUpdater:
-        type: ChildrenHandler
-        className: GeomItem
-        location: ../../Geom
+    # FileName is for solid files and indicator fields only
+    FileName: # typo: this is capitalized incorrectly in the manual
+      help: >
+        [Type: string] For IndicatorField and SolidFile geometry inputs, this
+        key specifies the input filename which contains the field or solid
+        information.
+      domains:
+        AnyString:
+        ValidFile:
 
-  # FileName is for solid files and indicator fields only
-  FileName: # typo: this is capitalized incorrectly in the manual
-    help: >
-      [Type: string] For IndicatorField and SolidFile geometry inputs, this
-      key specifies the input filename which contains the field or solid
-      information.
-    domains:
-      AnyString:
-      ValidFile:
-
-# Value is for indicator field only
-  Value:
-    help: >
-      [Type: int] For IndicatorField geometry inputs, you need to specify
-      the mapping between values in the input file and the geometry names.
-      The named geometry will be defined wherever the input file is equal
-      to the specified value.
-    domains:
-      IntValue:
+    # Value is for indicator field only
+    Value:
+      help: >
+        [Type: int] For IndicatorField geometry inputs, you need to specify
+        the mapping between values in the input file and the geometry names.
+        The named geometry will be defined wherever the input file is equal
+        to the specified value.
+      domains:
+        IntValue:
 
 # -----------------------------------------------------------------------------
 # Perm.*
@@ -219,25 +219,34 @@ dzScale:
     domains:
       IntValue:
         minValue: 1
+    handlers:
+      nzListNumUpdater:
+        type: ChildrenHandler
+        className: CellnzItem
+        location: ../Cell
 
-CellnzItem:
+Cell:
   __rst__:
-    name: Cell.{nzListNumber}
+    skip:
   __doc__: >
     Setting the Cell.nzListNumber.dzScale.Value
 
-  dzScale:
-    __doc__: >
-      Setting the Cell.nzListNumber.dzScale.Value
+  .{nzListNumber}:
+    __class__: CellnzItem
+    __rst__:
+      name: Cell.{nzListNumber}
+    dzScale:
+      __doc__: >
+        Setting the Cell.nzListNumber.dzScale.Value
 
-    Value:
-      help: >
-        [Type: double] This key assigns the thickness of each layer defined by nzListNumber. ParFlow assigns the layers from the bottom-up
-        (i.e. the bottom of the domain is layer 0, the top is layer NZ-1). The total domain depth (Geom.domain.Upper.Z)
-        does not change with variable dz. The layer thickness is calculated by ComputationalGrid.DZ *dZScale.
-      domains:
-        DoubleValue:
-          minValue: 0.0
+      Value:
+        help: >
+          [Type: double] This key assigns the thickness of each layer defined by nzListNumber. ParFlow assigns the layers from the bottom-up
+          (i.e. the bottom of the domain is layer 0, the top is layer NZ-1). The total domain depth (Geom.domain.Upper.Z)
+          does not change with variable dz. The layer thickness is calculated by ComputationalGrid.DZ *dZScale.
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
 # -----------------------------------------------------------------------------
 # Geom.*
@@ -296,814 +305,819 @@ Geom:
       domains:
         AnyString:
 
-# GeomItems: for keys in the form Geom.geom_name.[]
+  # GeomItems: for keys in the form Geom.geom_name.[]
 
-GeomItem:
-  __rst__:
-    name: Geom.{geom_name}
-  __doc__: >
-    User-defined geometric instance. GeomItem names are taken from either
-    GeomInput.Names or GeomItem.GeomNames.
-
-  _rst:
-    prefix: Geom.{geom_name}
-
-  # Geom.geom_name.FileName
-  FileName:
-    help: >
-      [Type: string] This specifies some sort of filename for the specified geometry.
-    domains:
-      AnyString:
-      ValidFile:
-
-# Lower/Upper for Box geometry only
-  Lower:
+  .{geom_name}:
+    __class__: GeomItem
     __doc__: >
-      This section sets the lower coordinate locations for the
-      box geometry.
+      User-defined geometric instance. GeomItem names are taken from either
+      GeomInput.Names or GeomItem.GeomNames.
 
-    X:
-      help: >
-        [Type: double] This gives the lower X real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
+    _rst:
+      prefix: Geom.{geom_name}
 
-    Y:
-      help: >
-        [Type: double] This gives the lower Y real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
-
-    Z:
-      help: >
-        [Type: double] This gives the lower Z real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
-
-  Upper:
-    __doc__: >
-      This section sets the lower coordinate locations for the
-      box geometry.
-
-    X:
-      help: >
-        [Type: double] This gives the upper X real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
-
-    Y:
-      help: >
-        [Type: double] This gives the upper Y real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
-
-    Z:
-      help: >
-        [Type: double] This gives the upper Z real space coordinate value of
-        the previously specified box geometry of name box_geom_name.
-      domains:
-        DoubleValue:
-
-  # Patches
-  Patches:
-    help: >
-      [Type: string] Patches are defined on the surfaces of geometries. Currently you can only define patches on Box
-      geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back
-      bottom top) but you can name the sides anything you want.
-    domains:
-      AnyString:
-
-  # Permeability
-  Perm:
-    __doc__: >
-      Permeability values
-
-    Type:
-      # typo: ParGauss
-      help: >
-        [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry,
-        geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
-      domains:
-        EnumDomain:
-          enumList:
-            - Constant
-            - TurnBands
-            - ParGauss
-            - PFBFile
-
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in
-        the named geometry, geometry_name, if the type was set to constant.
-      domains:
-        DoubleValue:
-
-    LambdaX:
-      help: >
-        [Type: double] This key specifies the x correlation length of the field
-        generated for the named geometry, geometry_name, if either the Turning
-        Bands or Parallel Gaussian Simulator are chosen.
-      domains:
-        DoubleValue:
-
-    LambdaY:
-      help: >
-        [Type: double] This key specifies the y correlation length of the field
-        generated for the named geometry, geometry_name, if either the Turning
-        Bands or Parallel Gaussian Simulator are chosen.
-      domains:
-        DoubleValue:
-
-    LambdaZ:
-      help: >
-        [Type: double] This key specifies the z correlation length of the field
-        generated for the named geometry, geometry_name, if either the Turning
-        Bands or Parallel Gaussian Simulator are chosen.
-      domains:
-        DoubleValue:
-
-    GeomMean:
-      help: >
-        [Type: double] This key specifies the geometric mean of the log normal
-        field generated for the named geometry, geometry_name, if either the
-        Turning Bands or Parallel Gaussian Simulator are chosen.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    Sigma:
-      help: >
-        [Type: double] This key specifies the standard deviation of the normal
-        field generated for the named geometry, geometry_name, if either the
-        Turning Bands or Parallel Gaussian Simulator are chosen.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    Seed:
-      help: >
-        [Type: int] This key specifies the initial seed for the random number
-        generator used to generate the field for the named geometry,
-        geometry_name, if either the Turning Bands or Parallel Gaussian
-        Simulator are chosen. This number must be positive.
-      default: 1
-      domains:
-        IntValue:
-          minValue: 1
-
-    NumLines:
-      help: >
-        [Type: int] This key specifies the number of lines to be used in the Turning Bands algorithm for the named
-        geometry, geometry_name.
-      default: 100
-      domains:
-        IntValue:
-          minValue: 1
-
-    RZeta:
-      help: >
-        [Type: double] This key specifies the resolution of the line processes, in terms of the minimum grid spacing,
-        to be used in the Turning Bands algorithm for the named geometry, geometry_name. Large values imply high
-        resolution.
-      default: 5.0
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    KMax:
-      help: >
-        [Type: double] This key specifies the the maximum normalized frequency, Kmax, to be used in the Turning Bands
-        algorithm for the named geometry, geometry_name.
-      default: 100.0
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    DelK:
-      help: >
-        [Type: double] This key specifies the normalized frequency increment to be used in the Turning Bands
-        algorithm for the named geometry, geometry_name.
-      default: 0.2
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    MaxNPts:
-      help: >
-        [Type: int] This key sets limits on the number of simulated points in the search neighborhood to be used in the
-        Parallel Gaussian Simulator for the named geometry, geometry_name.
-      domains:
-        IntValue:
-          minValue: 1
-
-    MaxCpts:
-      help: >
-        [Type: int] This key sets limits on the number of external conditioning points in the search neighborhood to be
-        used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
-      domains:
-        IntValue:
-          minValue: 1
-
-    LogNormal:
-      help: >
-        [Type: string] The key specifies when a normal, log normal, truncated normal or truncated log normal field is
-        to be generated by the method for the named geometry, geometry_name. This value must be one of Normal, Log,
-        NormalTruncated or LogTruncated and can be used with either Turning Bands or the Parallel Gaussian Simulator.
-      default: LogTruncated
-      domains:
-        EnumDomain:
-        # typo: LogTruncated is misspelled in the manual
-          enumList:
-            - Normal
-            - Log
-            - NormalTruncated
-            - LogTruncated
-
-    StratType:
-      help: >
-        [Type: string] This key specifies the stratification of the permeability field generated by the method for the
-        named geometry, geometry_name. The value must be one of Horizontal, Bottom or Top and can be used with either
-        the Turning Bands or the Parallel Gaussian Simulator.
-      default: Bottom
-      domains:
-        EnumDomain:
-          enumList:
-            - Horizontal
-            - Bottom
-            - Top
-
-    LowCutoff:
-      help: >
-        [Type: double] This key specifies the low cutoff value for truncating the generated field for the named
-        geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    HighCutoff:
-      help: >
-        [Type: double] This key specifies the high cutoff value for truncating the generated field for the named
-        geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    # MaxSearchRad is missing from the manual. Need to come back to this.
-    MaxSearchRad:
-      help: >
-        [Type: int] A key to improve correlation structure of RF in testing.
-      domains:
-        IntValue:
-          minValue: 1
-
+    # Geom.geom_name.FileName
     FileName:
       help: >
-        [Type: string] This key specifies that permeability values for the specified
-        geometry, geometry_name, are given according to a user-supplied description
-        in the “ParFlow Binary” file whose filename is given as the value.
-        For a description of the ParFlow Binary file format, see the manual.
-        The ParFlow Binary file associated with the named geometry must contain a
-        collection of permeability values corresponding in a one-to-one manner to
-        the entire computational grid. That is to say, when the contents of the file
-        are read into the simulator, a complete permeability description for the entire
-        domain is supplied. Only those values associated with computational cells
-        residing within the geometry (as it is represented on the computational grid)
-        will be copied into data structures used during the course of a simulation.
-        Thus, the values associated with cells outside of the geounit are irrelevant.
-        For clarity, consider a couple of different scenarios. For example, the user may
-        create a file for each geometry such that appropriate permeability values are
-        given for the geometry and “garbage" values (e.g., some flag value) are given for
-        the rest of the computational domain. In this case, a separate binary file is
-        specified for each geometry. Alternatively, one may place all values representing
-        the permeability field on the union of the geometries into a single binary file.
-        Note that the permeability values must be represented in precisely the same
-        configuration as the computational grid. Then, the same file could be specified
-        for each geounit in the input file. Or, the computational domain could be described
-        as a single geouint (in the ParFlow input file) in which case the permeability
-        values would be read in only once.
+        [Type: string] This specifies some sort of filename for the specified geometry.
       domains:
         AnyString:
+        ValidFile:
 
-    TensorValX:
-      help: >
-        [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    TensorValY:
-      help: >
-        [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    TensorValZ:
-      help: >
-        [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    TensorFileX:
-      help: >
-        [Type: string] This key specifies that kx values for the specified geometry, geometry_name, are given according
-        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
-        choice for the value of geometry_name is “domain”.
-      # need to impose this condition
-      domains:
-        AnyString:
-
-    TensorFileY:
-      help: >
-        [Type: string] This key specifies that ky values for the specified geometry, geometry_name, are given according
-        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
-        choice for the value of geometry_name is “domain”.
-      # need to impose this condition
-      domains:
-        AnyString:
-
-    TensorFileZ:
-      help: >
-        [Type: string] This key specifies that kz values for the specified geometry, geometry_name, are given according
-        to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
-        choice for the value of geometry_name is “domain”.
-      # need to impose this condition
-      domains:
-        AnyString:
-
-  # Porosity
-  Porosity:
-    __doc__: >
-      Setting porosity values to elements of domain
-
-    Type:
-      help: >
-        [Type: string] This key specifies which method is to be used to assign porosity data to the named geometry,
-        geometry_name. The only choice currently available is Constant which indicates that a constant is to be
-        assigned to all grid cells within a geometry.
-      domains:
-        EnumDomain:
-          enumList:
-            - Constant
-
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in
-        the named geometry, geometry_name, if the type was set to constant.
-      domains:
-        DoubleValue:
-
-    # FileName is missing from manual
-    FileName:
-      help: >
-        [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given
-        according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The
-        only choice for the value of geometry_name is “domain”.
-      domains:
-        AnyString:
-
-  # Specific Storage
-  SpecificStorage:
-    __doc__: >
-      Setting specific storage values to elements of domain
-
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in
-        the named geometry, geometry_name, if the type was set to constant.
-      domains:
-        DoubleValue:
-
-  # Relative Permeability
-  RelPerm:
-    __doc__: >
-      Setting relative permeability value to geometries
-
-    Value:
-      help: >
-        [Type: double] This key specifies the constant relative permeability value on the specified geometry.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    # Corner case with Alpha as class and field
-    AlphaFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .Alpha.Filename
-
-    Alpha:
-      help: >
-        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    # Corner case with N as class and field
-    NFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .N.Filename
-
-    N:
-      help: >
-        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    NumSamplePoints:
-      help: >
-        [Type: int] This key specifies the number of sample points for a spline base interpolation table for the Van Genuchten
-        function specified on geom_name. If this number is 0 (the default) then the function is evaluated directly. Using the
-        interpolation table is faster but is less accurate.
-      default: 0
-      domains:
-        IntValue:
-          minValue: 0
-
-    MinPressureHead:
-      help: >
-        [Type: int] This key specifies the lower value for a spline base interpolation table for the Van Genuchten function specified
-        on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used
-        (NumSamplePoints is greater than 0).
-      domains:
-        IntValue:
-
-    A:
-      help: >
-        [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
-      domains:
-        DoubleValue:
-
-    Gamma:
-      help: >
-        [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
-      domains:
-        DoubleValue:
-
-    Degree:
-      help: >
-        [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
-      domains:
-        IntValue:
-
-    # Coeff is for setting the key Geom.geom_name.RelPerm.Coeff.coeff_number
-    Coeff:
+    # Lower/Upper for Box geometry only
+    Lower:
       __doc__: >
-        Setting the coefficients for the polynomial relative permeability curve.
+        This section sets the lower coordinate locations for the
+        box geometry.
 
-    CoeffNumber:
-      __rst__:
-        name: Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
-      help: >
-        [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
-      domains:
-        DoubleValue:
+      X:
+        help: >
+          [Type: double] This gives the lower X real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
 
-  # Capillary Pressure
-  CapPressure:
-    __doc__: >
-      Setting capillary pressures for specified geometries
+      Y:
+        help: >
+          [Type: double] This gives the lower Y real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
 
-  CapPressurePhase:
-    __rst__:
-      skip:
-    __doc__: >
-      Setting phase name for capillary pressure of a specified geometry.
-    Value:
-      __rst__:
-        name: Geom.{geom_name}.CapPressure.{phase_name}.Value
-      help: >
-        [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named
-        phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
-      default: 0.0
-      domains:
-        DoubleValue:
+      Z:
+        help: >
+          [Type: double] This gives the lower Z real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
 
-  # Saturation
-  Saturation:
-    __doc__: >
-      Setting saturation values to geometries
-
-    Value:
-      help: >
-        [Type: double] This key specifies the constant saturation value on the specified geometry.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-          maxValue: 1.0
-
-    # Corner case with Alpha as class and field
-    AlphaFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .Alpha.Filename
-
-    Alpha:
-      help: >
-        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    # Corner case with N as class and field
-    NFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .N.Filename
-
-    N:
-      help: >
-        [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    # Corner case with SRes as class and field
-    SResFilename:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .SRes.Filename
-
-    SRes:
-      help: >
-        [Type: double] This key specifies the residual saturation on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-          maxValue: 1.0
-
-    # Corner case with SSat as class and field
-    SSatFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .SSat.Filename
-
-    SSat:
-      help: >
-        [Type: double] This key specifies the saturation at saturated conditions on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-          maxValue: 1.0
-
-    A:
-      help: >
-        [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
-      domains:
-        DoubleValue:
-
-    Gamma:
-      help: >
-        [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
-      domains:
-        DoubleValue:
-
-    Degree:
-      help: >
-        [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
-      domains:
-        IntValue:
-
-    # Coeff is for setting the key Geom.geom_name.Saturation.Coeff.coeff_number
-    Coeff:
+    Upper:
       __doc__: >
-        Setting the coefficients for the polynomial saturation curve.
+        This section sets the lower coordinate locations for the
+        box geometry.
 
-    CoeffNumber:
+      X:
+        help: >
+          [Type: double] This gives the upper X real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
+
+      Y:
+        help: >
+          [Type: double] This gives the upper Y real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
+
+      Z:
+        help: >
+          [Type: double] This gives the upper Z real space coordinate value of
+          the previously specified box geometry of name box_geom_name.
+        domains:
+          DoubleValue:
+
+    # Patches
+    Patches:
       help: >
-        [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
-      domains:
-        DoubleValue:
-
-    FileName:
-      help: >
-        [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name
-        is “domain” for this key.
-      domains:
-        AnyString:
-
-  # dz Scaling
-  dzScale:
-    __doc__: >
-      Setting properties for the dz Scale.
-
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
-        to constant.
-      domains:
-        DoubleValue:
-          minValue: 0.0
-
-    FileName:
-      help: >
-        [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type
-        was set to PFBFile.
+        [Type: string] Patches are defined on the surfaces of geometries. Currently you can only define patches on Box
+        geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back
+        bottom top) but you can name the sides anything you want.
       domains:
         AnyString:
 
-  # Thermal Conductivity - missing from manual
-  ThermalConductivity:
-    __doc__: >
-      Setting thermal conductivity values for various geometries
+    # Permeability
+    Perm:
+      __doc__: >
+        Permeability values
 
-    Value:
-      help: >
-        [Type: double] This key specifies the thermal conductivity value on the specified geometry.
-      domains:
-        DoubleValue:
-          minValue: 0.0 # not sure appropriate range
+      Type:
+        # typo: ParGauss
+        help: >
+          [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry,
+          geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+              - TurnBands
+              - ParGauss
+              - PFBFile
 
-    # Corner case with KDry as class and field
-    KDryFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .KDry.Filename
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in
+          the named geometry, geometry_name, if the type was set to constant.
+        domains:
+          DoubleValue:
 
-    KDry:
-      help: >
-        [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0 # not sure appropriate range
+      LambdaX:
+        help: >
+          [Type: double] This key specifies the x correlation length of the field
+          generated for the named geometry, geometry_name, if either the Turning
+          Bands or Parallel Gaussian Simulator are chosen.
+        domains:
+          DoubleValue:
 
-    # Corner case with KWet as class and field
-    KWetFileName:
-      help: >
-        [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
-        The ONLY option for geom_name is "domain."
-      domains:
-        AnyString:
-      exportName: .KDry.Filename
+      LambdaY:
+        help: >
+          [Type: double] This key specifies the y correlation length of the field
+          generated for the named geometry, geometry_name, if either the Turning
+          Bands or Parallel Gaussian Simulator are chosen.
+        domains:
+          DoubleValue:
 
-    KWet:
-      help: >
-        [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
-      domains:
-        DoubleValue:
-          minValue: 0.0
+      LambdaZ:
+        help: >
+          [Type: double] This key specifies the z correlation length of the field
+          generated for the named geometry, geometry_name, if either the Turning
+          Bands or Parallel Gaussian Simulator are chosen.
+        domains:
+          DoubleValue:
 
-  FBx:
-    __doc__: >
-      Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
-    FileName:
-      help: >
-        [Type: string] This key specifies file to be read in for the X flow barrier values for the domain,
-        if the type was set to PFBFile.
-      domains:
-        AnyString:
+      GeomMean:
+        help: >
+          [Type: double] This key specifies the geometric mean of the log normal
+          field generated for the named geometry, geometry_name, if either the
+          Turning Bands or Parallel Gaussian Simulator are chosen.
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-  FBy:
-    __doc__: >
-      Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
-    FileName:
-      help: >
-        [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain,
-        if the type was set to PFBFile.
-      domains:
-        AnyString:
+      Sigma:
+        help: >
+          [Type: double] This key specifies the standard deviation of the normal
+          field generated for the named geometry, geometry_name, if either the
+          Turning Bands or Parallel Gaussian Simulator are chosen.
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-  FBz:
-    __doc__: >
-      Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
-    FileName:
-      help: >
-        [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain,
-        if the type was set to PFBFile.
-      domains:
-        AnyString:
+      Seed:
+        help: >
+          [Type: int] This key specifies the initial seed for the random number
+          generator used to generate the field for the named geometry,
+          geometry_name, if either the Turning Bands or Parallel Gaussian
+          Simulator are chosen. This number must be positive.
+        default: 1
+        domains:
+          IntValue:
+            minValue: 1
 
-  # HeatCapacity is missing from the manual
-  HeatCapacity:
-    __doc__: >
-      Setting heat capacity properties for specified geometries.
-    Value:
-      help: >
-        [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
-      domains:
-        DoubleValue:
-          minValue: 0.0
+      NumLines:
+        help: >
+          [Type: int] This key specifies the number of lines to be used in the Turning Bands algorithm for the named
+          geometry, geometry_name.
+        default: 100
+        domains:
+          IntValue:
+            minValue: 1
 
-  # Setting keys for Geom.geom_name.ICPressure.{}
-  ICPressure:
-    __rst__:
-      name: Geom.{geom_name}.ICPressure
-    __doc__: >
-      Setting the initial conditions for pressure for specific geometries.
-    FileName:
-      help: >
-        This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name
-        is “domain” for this key.
-      domains:
-        AnyString:
+      RZeta:
+        help: >
+          [Type: double] This key specifies the resolution of the line processes, in terms of the minimum grid spacing,
+          to be used in the Turning Bands algorithm for the named geometry, geometry_name. Large values imply high
+          resolution.
+        default: 5.0
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-    RefElevation:
-      help: >
-        [Type: double] This key specifies the reference elevation on which the reference pressure is given for type HydroStaticDepth
-        initial pressures.
-      domains:
-        DoubleValue:
+      KMax:
+        help: >
+          [Type: double] This key specifies the the maximum normalized frequency, Kmax, to be used in the Turning Bands
+          algorithm for the named geometry, geometry_name.
+        default: 100.0
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-    # type is wrong in manual
-    RefGeom:
-      help: >
-        [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
-      domains:
-        AnyString:
+      DelK:
+        help: >
+          [Type: double] This key specifies the normalized frequency increment to be used in the Turning Bands
+          algorithm for the named geometry, geometry_name.
+        default: 0.2
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-    # type is wrong in manual
-    RefPatch:
-      help: >
-        [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
-      domains:
-        AnyString:
+      MaxNPts:
+        help: >
+          [Type: int] This key sets limits on the number of simulated points in the search neighborhood to be used in the
+          Parallel Gaussian Simulator for the named geometry, geometry_name.
+        domains:
+          IntValue:
+            minValue: 1
 
-    Value:
-      help: >
-        [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value
-        for types HydroStaticDepth and HydroStaticPatch.
-      domains:
-        DoubleValue:
+      MaxCpts:
+        help: >
+          [Type: int] This key sets limits on the number of external conditioning points in the search neighborhood to be
+          used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
+        domains:
+          IntValue:
+            minValue: 1
 
-  # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
-  ICSaturationItem:
-    __rst__:
-      name: Geom.{geom_name}.ICSaturation.{phase_name}
-    __doc__: >
-      Setting Geom.geom_input_name.ICSaturation.phase_name.Value
+      LogNormal:
+        help: >
+          [Type: string] The key specifies when a normal, log normal, truncated normal or truncated log normal field is
+          to be generated by the method for the named geometry, geometry_name. This value must be one of Normal, Log,
+          NormalTruncated or LogTruncated and can be used with either Turning Bands or the Parallel Gaussian Simulator.
+        default: LogTruncated
+        domains:
+          EnumDomain:
+          # typo: LogTruncated is misspelled in the manual
+            enumList:
+              - Normal
+              - Log
+              - NormalTruncated
+              - LogTruncated
 
-    Value:
-      help: >
-        [Type: double] Setting
-      domains:
-        DoubleValue:
+      StratType:
+        help: >
+          [Type: string] This key specifies the stratification of the permeability field generated by the method for the
+          named geometry, geometry_name. The value must be one of Horizontal, Bottom or Top and can be used with either
+          the Turning Bands or the Parallel Gaussian Simulator.
+        default: Bottom
+        domains:
+          EnumDomain:
+            enumList:
+              - Horizontal
+              - Bottom
+              - Top
 
-# Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
-GeomContItem:
-  __rst__:
-    name: Geom.{geom_name}.{contaminant}
+      LowCutoff:
+        help: >
+          [Type: double] This key specifies the low cutoff value for truncating the generated field for the named
+          geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-  __doc__: >
-    Setting retardation properties for specific contaminants and specific geometries.
+      HighCutoff:
+        help: >
+          [Type: double] This key specifies the high cutoff value for truncating the generated field for the named
+          geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
+        domains:
+          DoubleValue:
+            minValue: 0.0
 
-  Type:
-    help: >
-      [Type: string] This key specifies which function is to be used to compute the retardation for the named contaminant, contaminant_
-      name, in the named geometry, geometry_name. The only choice currently available is Linear which indicates
-      that a simple linear retardation function is to be used to compute the retardation.
-    domains:
-      EnumDomain:
-        enumList:
-          - Linear
+      # MaxSearchRad is missing from the manual. Need to come back to this.
+      MaxSearchRad:
+        help: >
+          [Type: int] A key to improve correlation structure of RF in testing.
+        domains:
+          IntValue:
+            minValue: 1
 
-  # Value is in the manual, but not in the grep of PF keys
-  Value:
-    help: >
-      [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
-      named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
-      the density of the material in the geometry.
-    domains:
-      DoubleValue:
-        minValue: 0.0
+      FileName:
+        help: >
+          [Type: string] This key specifies that permeability values for the specified
+          geometry, geometry_name, are given according to a user-supplied description
+          in the “ParFlow Binary” file whose filename is given as the value.
+          For a description of the ParFlow Binary file format, see the manual.
+          The ParFlow Binary file associated with the named geometry must contain a
+          collection of permeability values corresponding in a one-to-one manner to
+          the entire computational grid. That is to say, when the contents of the file
+          are read into the simulator, a complete permeability description for the entire
+          domain is supplied. Only those values associated with computational cells
+          residing within the geometry (as it is represented on the computational grid)
+          will be copied into data structures used during the course of a simulation.
+          Thus, the values associated with cells outside of the geounit are irrelevant.
+          For clarity, consider a couple of different scenarios. For example, the user may
+          create a file for each geometry such that appropriate permeability values are
+          given for the geometry and “garbage" values (e.g., some flag value) are given for
+          the rest of the computational domain. In this case, a separate binary file is
+          specified for each geometry. Alternatively, one may place all values representing
+          the permeability field on the union of the geometries into a single binary file.
+          Note that the permeability values must be represented in precisely the same
+          configuration as the computational grid. Then, the same file could be specified
+          for each geounit in the input file. Or, the computational domain could be described
+          as a single geouint (in the ParFlow input file) in which case the permeability
+          values would be read in only once.
+        domains:
+          AnyString:
 
-  # Rate is missing from the manual. Is this equivalent to value?
-  Rate:
-    help: >
-      [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
-      named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
-      the density of the material in the geometry.
-    domains:
-      DoubleValue:
-        minValue: 0.0
+      TensorValX:
+        help: >
+          [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      TensorValY:
+        help: >
+          [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      TensorValZ:
+        help: >
+          [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      TensorFileX:
+        help: >
+          [Type: string] This key specifies that kx values for the specified geometry, geometry_name, are given according
+          to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+          choice for the value of geometry_name is “domain”.
+        # need to impose this condition
+        domains:
+          AnyString:
+
+      TensorFileY:
+        help: >
+          [Type: string] This key specifies that ky values for the specified geometry, geometry_name, are given according
+          to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+          choice for the value of geometry_name is “domain”.
+        # need to impose this condition
+        domains:
+          AnyString:
+
+      TensorFileZ:
+        help: >
+          [Type: string] This key specifies that kz values for the specified geometry, geometry_name, are given according
+          to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only
+          choice for the value of geometry_name is “domain”.
+        # need to impose this condition
+        domains:
+          AnyString:
+
+    # Porosity
+    Porosity:
+      __doc__: >
+        Setting porosity values to elements of domain
+
+      Type:
+        help: >
+          [Type: string] This key specifies which method is to be used to assign porosity data to the named geometry,
+          geometry_name. The only choice currently available is Constant which indicates that a constant is to be
+          assigned to all grid cells within a geometry.
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in
+          the named geometry, geometry_name, if the type was set to constant.
+        domains:
+          DoubleValue:
+
+      # FileName is missing from manual
+      FileName:
+        help: >
+          [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given
+          according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The
+          only choice for the value of geometry_name is “domain”.
+        domains:
+          AnyString:
+
+    # Specific Storage
+    SpecificStorage:
+      __doc__: >
+        Setting specific storage values to elements of domain
+
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in
+          the named geometry, geometry_name, if the type was set to constant.
+        domains:
+          DoubleValue:
+
+    # Relative Permeability
+    RelPerm:
+      __doc__: >
+        Setting relative permeability value to geometries
+
+      Value:
+        help: >
+          [Type: double] This key specifies the constant relative permeability value on the specified geometry.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      # Corner case with Alpha as class and field
+      AlphaFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .Alpha.Filename
+
+      Alpha:
+        help: >
+          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      # Corner case with N as class and field
+      NFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .N.Filename
+
+      N:
+        help: >
+          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      NumSamplePoints:
+        help: >
+          [Type: int] This key specifies the number of sample points for a spline base interpolation table for the Van Genuchten
+          function specified on geom_name. If this number is 0 (the default) then the function is evaluated directly. Using the
+          interpolation table is faster but is less accurate.
+        default: 0
+        domains:
+          IntValue:
+            minValue: 0
+
+      MinPressureHead:
+        help: >
+          [Type: int] This key specifies the lower value for a spline base interpolation table for the Van Genuchten function specified
+          on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used
+          (NumSamplePoints is greater than 0).
+        domains:
+          IntValue:
+
+      A:
+        help: >
+          [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
+        domains:
+          DoubleValue:
+
+      Gamma:
+        help: >
+          [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
+        domains:
+          DoubleValue:
+
+      Degree:
+        help: >
+          [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
+        domains:
+          IntValue:
+
+      # Coeff is for setting the key Geom.geom_name.RelPerm.Coeff.coeff_number
+      Coeff:
+        __doc__: >
+          Setting the coefficients for the polynomial relative permeability curve.
+
+      CoeffNumber:
+        __rst__:
+          name: Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
+        help: >
+          [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
+        domains:
+          DoubleValue:
+
+    # Capillary Pressure
+    CapPressure:
+      __doc__: >
+        Setting capillary pressures for specified geometries
+
+    CapPressurePhase:
+      __rst__:
+        skip:
+      __doc__: >
+        Setting phase name for capillary pressure of a specified geometry.
+      Value:
+        __rst__:
+          name: Geom.{geom_name}.CapPressure.{phase_name}.Value
+        help: >
+          [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named
+          phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
+        default: 0.0
+        domains:
+          DoubleValue:
+
+    # Saturation
+    Saturation:
+      __doc__: >
+        Setting saturation values to geometries
+
+      Value:
+        help: >
+          [Type: double] This key specifies the constant saturation value on the specified geometry.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+            maxValue: 1.0
+
+      # Corner case with Alpha as class and field
+      AlphaFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .Alpha.Filename
+
+      Alpha:
+        help: >
+          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      # Corner case with N as class and field
+      NFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .N.Filename
+
+      N:
+        help: >
+          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      # Corner case with SRes as class and field
+      SResFilename:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .SRes.Filename
+
+      SRes:
+        help: >
+          [Type: double] This key specifies the residual saturation on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+            maxValue: 1.0
+
+      # Corner case with SSat as class and field
+      SSatFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .SSat.Filename
+
+      SSat:
+        help: >
+          [Type: double] This key specifies the saturation at saturated conditions on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+            maxValue: 1.0
+
+      A:
+        help: >
+          [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
+        domains:
+          DoubleValue:
+
+      Gamma:
+        help: >
+          [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
+        domains:
+          DoubleValue:
+
+      Degree:
+        help: >
+          [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
+        domains:
+          IntValue:
+
+      # Coeff is for setting the key Geom.geom_name.Saturation.Coeff.coeff_number
+      Coeff:
+        __doc__: >
+          Setting the coefficients for the polynomial saturation curve.
+
+      CoeffNumber:
+        help: >
+          [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
+        domains:
+          DoubleValue:
+
+      FileName:
+        help: >
+          [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name
+          is “domain” for this key.
+        domains:
+          AnyString:
+
+    # dz Scaling
+    dzScale:
+      __doc__: >
+        Setting properties for the dz Scale.
+
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+          to constant.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+      FileName:
+        help: >
+          [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type
+          was set to PFBFile.
+        domains:
+          AnyString:
+
+    # Thermal Conductivity - missing from manual
+    ThermalConductivity:
+      __doc__: >
+        Setting thermal conductivity values for various geometries
+
+      Value:
+        help: >
+          [Type: double] This key specifies the thermal conductivity value on the specified geometry.
+        domains:
+          DoubleValue:
+            minValue: 0.0 # not sure appropriate range
+
+      # Corner case with KDry as class and field
+      KDryFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .KDry.Filename
+
+      KDry:
+        help: >
+          [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0 # not sure appropriate range
+
+      # Corner case with KWet as class and field
+      KWetFileName:
+        help: >
+          [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
+          The ONLY option for geom_name is "domain."
+        domains:
+          AnyString:
+        exportName: .KDry.Filename
+
+      KWet:
+        help: >
+          [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+    FBx:
+      __doc__: >
+        Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
+      FileName:
+        help: >
+          [Type: string] This key specifies file to be read in for the X flow barrier values for the domain,
+          if the type was set to PFBFile.
+        domains:
+          AnyString:
+
+    FBy:
+      __doc__: >
+        Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
+      FileName:
+        help: >
+          [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain,
+          if the type was set to PFBFile.
+        domains:
+          AnyString:
+
+    FBz:
+      __doc__: >
+        Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
+      FileName:
+        help: >
+          [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain,
+          if the type was set to PFBFile.
+        domains:
+          AnyString:
+
+    # HeatCapacity is missing from the manual
+    HeatCapacity:
+      __doc__: >
+        Setting heat capacity properties for specified geometries.
+      Value:
+        help: >
+          [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
+        domains:
+          DoubleValue:
+            minValue: 0.0
+
+    # Setting keys for Geom.geom_name.ICPressure.{}
+    ICPressure:
+      __rst__:
+        name: Geom.{geom_name}.ICPressure
+      __doc__: >
+        Setting the initial conditions for pressure for specific geometries.
+      FileName:
+        help: >
+          This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name
+          is “domain” for this key.
+        domains:
+          AnyString:
+
+      RefElevation:
+        help: >
+          [Type: double] This key specifies the reference elevation on which the reference pressure is given for type HydroStaticDepth
+          initial pressures.
+        domains:
+          DoubleValue:
+
+      # type is wrong in manual
+      RefGeom:
+        help: >
+          [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
+        domains:
+          AnyString:
+
+      # type is wrong in manual
+      RefPatch:
+        help: >
+          [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
+        domains:
+          AnyString:
+
+      Value:
+        help: >
+          [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value
+          for types HydroStaticDepth and HydroStaticPatch.
+        domains:
+          DoubleValue:
+
+    # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
+    ICSaturationItem:
+      __rst__:
+        name: Geom.{geom_name}.ICSaturation.{phase_name}
+      __doc__: >
+        Setting Geom.geom_input_name.ICSaturation.phase_name.Value
+
+      Value:
+        help: >
+          [Type: double] Setting
+        domains:
+          DoubleValue:
+
+    # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
+    .{contaminant_name}:
+      __class__: GeomContItem
+      __rst__:
+        name: Geom.{geom_name}.{contaminant}
+
+      __doc__: >
+        Setting retardation properties for specific contaminants and specific geometries.
+
+      Retardation:
+        __rst__:
+          skip:
+        __doc__: ''
+
+        Type:
+          help: >
+            [Type: string] This key specifies which function is to be used to compute the retardation for the named contaminant, contaminant_
+            name, in the named geometry, geometry_name. The only choice currently available is Linear which indicates
+            that a simple linear retardation function is to be used to compute the retardation.
+          domains:
+            EnumDomain:
+              enumList:
+                - Linear
+
+        # Value is in the manual, but not in the grep of PF keys
+        Value:
+          help: >
+            [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
+            named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
+            the density of the material in the geometry.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+
+        # Rate is missing from the manual. Is this equivalent to value?
+        Rate:
+          help: >
+            [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the
+            named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by
+            the density of the material in the geometry.
+          domains:
+            DoubleValue:
+              minValue: 0.0
 
 # -----------------------------------------------------------------------------
 # Initial Conditions

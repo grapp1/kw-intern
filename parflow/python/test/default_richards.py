@@ -218,35 +218,35 @@ drich.Cycle.constant.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-# drich.BCPressure.PatchNames = "left right front back bottom top"
-#
-# drich.Patch.left.BCPressure.Type = 'DirEquilRefPatch'
-# drich.Patch.left.BCPressure.Cycle = "constant"
-# drich.Patch.left.BCPressure.RefGeom = 'domain'
-# drich.Patch.left.BCPressure.RefPatch = 'bottom'
-# drich.Patch.left.BCPressure.alltime.Value = 5.0
-#
-# drich.Patch.right.BCPressure.Type = 'DirEquilRefPatch'
-# drich.Patch.right.BCPressure.Cycle = "constant"
-# drich.Patch.right.BCPressure.RefGeom = 'domain'
-# drich.Patch.right.BCPressure.RefPatch = 'bottom'
-# drich.Patch.right.BCPressure.alltime.Value = 3.0
-#
-# drich.Patch.front.BCPressure.Type = 'FluxConst'
-# drich.Patch.front.BCPressure.Cycle = "constant"
-# drich.Patch.front.BCPressure.alltime.Value = 0.0
-#
-# drich.Patch.back.BCPressure.Type = 'FluxConst'
-# drich.Patch.back.BCPressure.Cycle = "constant"
-# drich.Patch.back.BCPressure.alltime.Value = 0.0
-#
-# drich.Patch.bottom.BCPressure.Type = 'FluxConst'
-# drich.Patch.bottom.BCPressure.Cycle = "constant"
-# drich.Patch.bottom.BCPressure.alltime.Value = 0.0
-#
-# drich.Patch.top.BCPressure.Type = 'FluxConst'
-# drich.Patch.top.BCPressure.Cycle = "constant"
-# drich.Patch.top.BCPressure.alltime.Value = 0.0
+drich.BCPressure.PatchNames = "left right front back bottom top"
+
+drich.Patch.left.BCPressure.Type = 'DirEquilRefPatch'
+drich.Patch.left.BCPressure.Cycle = "constant"
+drich.Patch.left.BCPressure.RefGeom = 'domain'
+drich.Patch.left.BCPressure.RefPatch = 'bottom'
+drich.Patch.left.BCPressure.alltime.Value = 5.0
+
+drich.Patch.right.BCPressure.Type = 'DirEquilRefPatch'
+drich.Patch.right.BCPressure.Cycle = "constant"
+drich.Patch.right.BCPressure.RefGeom = 'domain'
+drich.Patch.right.BCPressure.RefPatch = 'bottom'
+drich.Patch.right.BCPressure.alltime.Value = 3.0
+
+drich.Patch.front.BCPressure.Type = 'FluxConst'
+drich.Patch.front.BCPressure.Cycle = "constant"
+drich.Patch.front.BCPressure.alltime.Value = 0.0
+
+drich.Patch.back.BCPressure.Type = 'FluxConst'
+drich.Patch.back.BCPressure.Cycle = "constant"
+drich.Patch.back.BCPressure.alltime.Value = 0.0
+
+drich.Patch.bottom.BCPressure.Type = 'FluxConst'
+drich.Patch.bottom.BCPressure.Cycle = "constant"
+drich.Patch.bottom.BCPressure.alltime.Value = 0.0
+
+drich.Patch.top.BCPressure.Type = 'FluxConst'
+drich.Patch.top.BCPressure.Cycle = "constant"
+drich.Patch.top.BCPressure.alltime.Value = 0.0
 
 #---------------------------------------------------------
 # Topo slopes in x-direction
@@ -255,7 +255,7 @@ drich.Cycle.constant.Repeat = -1
 drich.TopoSlopesX.Type = "Constant"
 drich.TopoSlopesX.GeomNames = ""
 
-# drich.TopoSlopesX.Geom.domain.Value = 0.0
+drich.TopoSlopesX.Geom.domain.Value = 0.0
 
 #---------------------------------------------------------
 # Topo slopes in y-direction
@@ -264,7 +264,7 @@ drich.TopoSlopesX.GeomNames = ""
 drich.TopoSlopesY.Type = "Constant"
 drich.TopoSlopesY.GeomNames = ""
 
-# drich.TopoSlopesY.Geom.domain.Value = 0.0
+drich.TopoSlopesY.Geom.domain.Value = 0.0
 
 #---------------------------------------------------------
 # Mannings coefficient 
@@ -272,7 +272,7 @@ drich.TopoSlopesY.GeomNames = ""
 
 drich.Mannings.Type = "Constant"
 drich.Mannings.GeomNames = ""
-# drich.Mannings.Geom.domain.Value = 0.
+drich.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
 # Initial conditions: water pressure

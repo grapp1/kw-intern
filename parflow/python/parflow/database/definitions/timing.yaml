@@ -141,6 +141,7 @@ Cycle:
       CycleUpdater:
         type: ChildrenHandler
         className: CycleItem
+        location: .
 
   .{cycle_name}:
     __class__: CycleItem
@@ -159,6 +160,10 @@ Cycle:
         CycleUpdater:
           type: ChildrenHandler
           className: CycleIntItem
+        BCPressUpdater:
+          type: ChildrenHandler
+          className: BCPressIntItem
+          location: ../../.
 
     Repeat:
       help: >
