@@ -160,6 +160,7 @@ Cycle:
         CycleUpdater:
           type: ChildrenHandler
           className: CycleIntItem
+          location: .
         BCPressUpdater:
           type: ChildrenHandler
           className: BCPressIntItem
