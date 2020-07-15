@@ -2,7 +2,7 @@
 
 from parflow import Run
 
-lw = Run(__file__, 'Little Washita')
+lw = Run('Little Washita', __file__)
 
 # -----------------------------------------------------------------------------
 # Setup database keys
@@ -54,6 +54,7 @@ lw.Geom.domain.Perm.Type = 'Constant'
 # Validation process
 # -----------------------------------------------------------------------------
 
-lw.validate(__file__)
-lw.write('./output/demo2_lw.pfidb')
+lw.validate()
+lw.write('../output/demo2_lw.pfidb')
+lw.write('../output/demo2_lw.yaml')
 lw.run()

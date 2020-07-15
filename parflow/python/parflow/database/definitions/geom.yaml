@@ -116,7 +116,7 @@ GeomInputItem:
       information.
     domains:
       AnyString:
-      File:
+      ValidFile:
 
 # Value is for indicator field only
   Value:
@@ -314,7 +314,7 @@ GeomItem:
       [Type: string] This specifies some sort of filename for the specified geometry.
     domains:
       AnyString:
-      File:
+      ValidFile:
 
 # Lower/Upper for Box geometry only
   Lower:

@@ -2,7 +2,7 @@ r'''
 This module aims to provide the core components that are required to build
 a Parflow input deck.
 '''
-
+import os
 from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
 from .handlers import decorateValue
 from . import TerminalColors as term
@@ -10,6 +10,7 @@ from . import TerminalColors as term
 class PFDBObj:
   printLineError = False
   exitOnError = False
+  workingDirectory = os.getcwd()
 
   @staticmethod
   def enableLineError():
@@ -26,6 +27,13 @@ class PFDBObj:
   @staticmethod
   def disableExitError():
     PFDBObj.exitOnError = False
+
+  @staticmethod
+  def setWorkingDirectory(workdir):
+    if workdir:
+      PFDBObj.workingDirectory = workdir
+    else:
+      PFDBObj.workingDirectory = os.getcwd()
 
   def __init__(self, parent=None):
     self._parent = parent
@@ -106,16 +114,10 @@ class PFDBObj:
           print(f'{indentStr}{name}:')
           errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
-        if 'File' in self._details[name]['domains']:
-          self._details[name]['domains']['File'] = workdir
-        if 'history' in self._details[name]:
-          if len(self._details[name]['history']):
-            history = self._details[name]['history']
-            errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], history, indent)
-          else:
-            errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], None, indent)
-        else:
-          errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], None, indent)
+        history = None
+        if 'history' in self._details[name] and len(self._details[name]['history']):
+          history = self._details[name]['history']
+        errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(), history, indent)
       elif name[0] == '_':
         # skip internal variables
         pass
@@ -158,3 +160,9 @@ class PFDBObj:
 
     return current_location
 
+  def getContextSettings(self):
+    return {
+      'printLineError': PFDBObj.printLineError,
+      'exitOnError': PFDBObj.exitOnError,
+      'workingDirectory': PFDBObj.workingDirectory,
+    }

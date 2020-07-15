@@ -131,17 +131,21 @@ class BoolDomain:
 
 # -----------------------------------------------------------------------------
 
-class File:
-  def validate(self, value, workdir=os.getcwd(), **kwargs):
+class ValidFile:
+  def validate(self, value, workingDirectory=None, **kwargs):
     errors = []
 
     if value == None:
       return errors
 
-    if os.path.exists(f'{workdir}{value}'):
+    if workingDirectory == None:
+      errors.append('Working directory is not defined')
       return errors
 
-    errors.append(f'{value} not located in {workdir}')
+    if os.path.exists(os.path.join(workingDirectory, value)):
+      return errors
+
+    errors.append(f'Could not locate file {os.path.abspath(os.path.join(workingDirectory, value))}')
     return errors
 
 # -----------------------------------------------------------------------------
@@ -168,7 +172,7 @@ def getDomain(className):
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
 
-def validateValueWithErrors(value, domainDefinitions=None):
+def validateValueWithErrors(value, domainDefinitions=None, domainAddOnKwargs=None):
   '''
   domainDefinitions = {
     IntRangeDomain: {
@@ -184,20 +188,21 @@ def validateValueWithErrors(value, domainDefinitions=None):
   for domain_classname in domainDefinitions:
     domain = getDomain(domain_classname)
     if domain:
-      domain_kwargs = domainDefinitions[domain_classname]
-      if isinstance(domain_kwargs, str):
-        errors.extend(domain.validate(value))
-      elif domain_kwargs == None:
-        errors.extend(domain.validate(value))
-      else:
-        errors.extend(domain.validate(value, **domain_kwargs))
+      domain_kwargs = {}
+      if domainAddOnKwargs:
+        domain_kwargs.update(domainAddOnKwargs)
+
+      if domainDefinitions[domain_classname]:
+        domain_kwargs.update(domainDefinitions[domain_classname])
+
+      errors.extend(domain.validate(value, **domain_kwargs))
 
   return errors
 
 # -----------------------------------------------------------------------------
 
-def validateValueWithException(value, domainDefinition=None, exitOnError=False):
-  errors = validateValueWithErrors(value, domainDefinition)
+def validateValueWithException(value, domainDefinition=None, domainAddOnKwargs=None, exitOnError=False):
+  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
 
   if len(errors):
     print()
@@ -231,9 +236,9 @@ def duplicateSearch(history):
 
 # -----------------------------------------------------------------------------
 
-def validateValueWithPrint(name, value, domainDefinition=None, history=None, indent=1):
+def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
   indentStr = '  '* (indent - 1)
-  errors = validateValueWithErrors(value, domainDefinition)
+  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
 
   if len(errors):
     print(f'{indentStr}  {term.FAIL}{termSymbol.ko}{term.ENDC} {name}: {value}')

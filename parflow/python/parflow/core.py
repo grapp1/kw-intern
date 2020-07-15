@@ -1,21 +1,24 @@
 import os
 
-from .database.generated import BaseRun
+from .database.generated import BaseRun, PFDBObj
 from .utils import extractKeysFromObject, writeDict
 
-class Run(__file__, BaseRun):
-  def __init__(self, name):
+class Run(BaseRun):
+  def __init__(self, name, basescript=None):
     super().__init__(None)
     self._name = name
+    if basescript:
+      PFDBObj.setWorkingDirectory(os.path.dirname(basescript))
 
   def getKeyDict(self):
     keyDict = {}
     extractKeysFromObject(keyDict, self)
     return keyDict
 
-  def write(self, fileName=None, fileFormat='pfidb', workingDirectory='.'):
-    fName = os.path.join(workingDirectory, f'{self._name}.{fileFormat}')
-    fName = fileName if fileName else fName
+  def write(self, fileName=None, fileFormat='pfidb'):
+    fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}.{fileFormat}')
+    if fileName:
+      fName = os.path.join(PFDBObj.workingDirectory, fileName)
     writeDict(self.getKeyDict(), fName)
 
   def run(self):
