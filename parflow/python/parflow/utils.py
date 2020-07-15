@@ -71,3 +71,20 @@ def writeDict(dictObj, fileName):
     writeDictAsJson(dictObj, fileName)
   else:
     print(f'Could not find writer for {fileName}')
+
+# -----------------------------------------------------------------------------
+
+def mapToParent(pfdbObj):
+  return pfdbObj._parent
+
+
+def mapToSelf(pfdbObj):
+  return pfdbObj
+
+def mapToChild(name):
+  return lambda pfdbObj: getattr(pfdbObj, name)
+
+def mapToChildrenOfType(className):
+  def getChildrenOfType(pfdbObj):
+    return pfdbObj.getChildrenOfType(className)
+  return getChildrenOfType

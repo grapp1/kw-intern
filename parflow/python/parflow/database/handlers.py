@@ -26,7 +26,7 @@ class ValueHandlerException(Exception):
 class ChildrenHandler:
   def decorate(self, value, container, className=None, location='.', **kwargs):
     klass = getattr(generated, className)
-    destination_containers = container.getObjsFromLocation(location)
+    destination_containers = container.getSelectionFromLocation(location)
     # print(container.__class__)
 
     if isinstance(value, str):

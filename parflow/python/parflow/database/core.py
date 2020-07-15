@@ -5,6 +5,7 @@ a Parflow input deck.
 import os
 from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
 from .handlers import decorateValue
+from ..utils import mapToParent, mapToSelf, mapToChildrenOfType, mapToChild
 from . import TerminalColors as term
 
 class PFDBObj:
@@ -182,7 +183,19 @@ class PFDBObj:
 
   # ---------------------------------------------------------------------------
 
-  def getObjsFromLocation(self, location='.'):
+  def getChildrenOfType(self, className):
+    results = []
+    for (key, value) in self.__dict__.items():
+      if key[0] == '_':
+        continue
+      if value.__class__ == className:
+        results.append(value)
+
+    return results
+
+  # ---------------------------------------------------------------------------
+
+  def getSelectionFromLocation(self, location='.'):
     '''
     Return a PFDBObj object based on a location.
 
@@ -191,20 +204,28 @@ class PFDBObj:
       run.Process.Topology.getObjFromLocation('..') => run.Process
       run.Process.Topology.getObjFromLocation('../../Geom') => run.Geom
     '''
-    path_items = location.split('/')
     current_location = self
+    path_items = location.split('/')
     if location[0] == '/':
       while current_location._parent:
         current_location = current_location._parent
-    for path_item in path_items:
-      if current_location and path_item == '..':
-        current_location = current_location._parent
-      elif current_location and path_item == '.':
-        pass
-      elif current_location:
-        current_location = getattr(current_location, path_item)
 
-    return [current_location]
+    nextList = [current_location]
+    for path_item in path_items:
+      currentList = nextList
+      nextList = []
+
+      if path_item == '..':
+        nextList.extend(map(mapToParent, currentList))
+      elif path_item == '.':
+        nextList.extend(map(mapToSelf, currentList))
+      elif path_item[0] == '{':
+        nextList.extend(map(mapToChildrenOfType, path_item[1:-1]))
+        nextList = [item for sublist in nextList for item in sublist]
+      else:
+        nextList.extend(map(mapToChild, path_item))
+
+    return nextList
 
   # ---------------------------------------------------------------------------
 
