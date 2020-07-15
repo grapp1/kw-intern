@@ -147,9 +147,12 @@ class PFDBObj:
 
     return key
 
-  def getObjFromLocation(self, location='.'):
+  def getObjsFromLocation(self, location='.'):
     path_items = location.split('/')
     current_location = self
+    if location[0] == '/':
+      while current_location._parent:
+        current_location = current_location._parent
     for path_item in path_items:
       if path_item == '..':
         current_location = current_location._parent
@@ -158,7 +161,7 @@ class PFDBObj:
       else:
         current_location = getattr(current_location, path_item)
 
-    return current_location
+    return [current_location]
 
   def getContextSettings(self):
     return {

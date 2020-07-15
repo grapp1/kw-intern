@@ -116,6 +116,8 @@ Patch:
       __rst__:
         skip:
       __doc__: ''
+      _dynamic:
+        BCPressIntItem: /Cycle/{CycleItem}/Names
 
       # typo in manual - OverlandFow should be OverlandFlow
       Type:

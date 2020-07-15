@@ -26,7 +26,7 @@ class ValueHandlerException(Exception):
 class ChildrenHandler:
   def decorate(self, value, container, className=None, location='.', **kwargs):
     klass = getattr(generated, className)
-    destination_container = container.getObjFromLocation(location)
+    destination_containers = container.getObjsFromLocation(location)
     # print(container.__class__)
 
     if isinstance(value, str):
@@ -36,7 +36,8 @@ class ChildrenHandler:
         if len(name):
           # print(f' - {name} => {className} in {destination_container.__class__}')
           valideNames.append(name)
-          destination_container.__dict__[name] = klass(destination_container)
+          for destination_container in destination_containers:
+            destination_container.__dict__[name] = klass(destination_container)
 
       return valideNames
 
@@ -46,7 +47,8 @@ class ChildrenHandler:
         if len(name):
           valideNames.append(name)
           # print(f' - {name} => {className} in {destination_container.__class__}')
-          destination_container.__dict__[name] = klass(destination_container)
+          for destination_container in destination_containers:
+            destination_container.__dict__[name] = klass(destination_container)
 
       return valideNames
 

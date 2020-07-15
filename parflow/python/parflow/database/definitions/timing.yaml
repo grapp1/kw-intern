@@ -161,10 +161,10 @@ Cycle:
           type: ChildrenHandler
           className: CycleIntItem
           location: .
-        BCPressUpdater:
-          type: ChildrenHandler
-          className: BCPressIntItem
-          location: ../../.
+#        BCPressUpdater:
+#          type: ChildrenHandler
+#          className: BCPressIntItem
+#          location: /Patch/{BCItem}/BCPressure
 
     Repeat:
       help: >
