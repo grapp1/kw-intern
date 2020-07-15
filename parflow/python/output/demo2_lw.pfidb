@@ -193,8 +193,8 @@ Geom.indi_input.CapPressurePhase.Value
 0.0
 24
 Geom.indi_input.FileName
-29
-IndicatorFile_Gleeson.50z.pfb
+32
+../IndicatorFile_Gleeson.50z.pfb
 21
 Geom.domain.Perm.Type
 8

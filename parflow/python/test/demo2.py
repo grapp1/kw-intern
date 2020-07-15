@@ -23,7 +23,7 @@ lw.GeomInput.box_input.GeomName = 'domain'
 
 lw.GeomInput.indi_input.InputType = 'IndicatorField'
 lw.GeomInput.indi_input.GeomNames = "s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 g1 g2 g3 g4 g5 g6 g7 g8"
-lw.Geom.indi_input.FileName = "IndicatorFile_Gleeson.50z.pfb"
+lw.Geom.indi_input.FileName = "../IndicatorFile_Gleeson.50z.pfb"
 
 lw.GeomInput.s1.Value = 1
 lw.GeomInput.s2.Value = 2

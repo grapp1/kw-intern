@@ -883,7 +883,7 @@ Solver:
 
   # Solver.Linear.{} keys
   # corner case
-  LinKrylovDimension:
+  LinearKrylovDimension:
     help: >
       [Type: int] This key specifies the maximum number of vectors to be used in setting up the Krylov subspace in the GMRES
       iterative solver. These vectors are of problem size and it should be noted that large increases in this parameter can
@@ -895,7 +895,7 @@ Solver:
     exportName: .Linear.KrylovDimension
 
   # corner case
-  LinMaxRestarts:
+  LinearMaxRestarts:
     help: >
       [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the
       Krylov subspace over using the current iterate as the initial iterate for the next pass.
@@ -906,7 +906,7 @@ Solver:
     exportName: .Linear.MaxRestarts
 
   # corner case
-  LinPreconditioner:
+  LinearPreconditioner:
     help: >
       [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG,
       PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi
@@ -926,7 +926,7 @@ Solver:
     exportName: .Linear.Preconditioner
 
   # corner case
-  LinPrecondSym:
+  LinearPrecondSym:
     help: >
       [Type: string] This key specifies whether the preconditioning matrix is symmetric. Choices fo rthis key are Symmetric and
       Nonsymmetric. The choice Symmetric specifies that the symmetric part of the Jacobian will be used as the preconditioning
@@ -955,7 +955,7 @@ Solver:
           minValue: 1
 
   # corner case
-  LinPrecondSMGPreRelax:
+  LinearPrecondSMGPreRelax:
     help: >
       [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method.
       Note that this key is only relevant to the SMG multigrid preconditioner.
@@ -966,7 +966,7 @@ Solver:
     exportName: .Linear.Preconditioner.SMG.NumPreRelax
 
   # corner case
-  LinPrecondSMGPostRelax:
+  LinearPrecondSMGPostRelax:
     help: >
       [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method.
       Note that this key is only relevant to the SMG multigrid preconditioner.
@@ -977,7 +977,7 @@ Solver:
     exportName: .Linear.Preconditioner.SMG.NumPostRelax
 
   # corner case
-  LinPrecondPFMGRAPType:
+  LinearPrecondPFMGRAPType:
     help: >
       [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
     default: NonGalerkin

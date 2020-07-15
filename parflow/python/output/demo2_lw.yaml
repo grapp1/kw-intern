@@ -95,7 +95,7 @@ Geom.indi_input.RelPerm.NumSamplePoints:
 Geom.indi_input.CapPressurePhase.Value:
   0.0
 Geom.indi_input.FileName:
-  IndicatorFile_Gleeson.50z.pfb
+  ../IndicatorFile_Gleeson.50z.pfb
 Geom.domain.Perm.Type:
   Constant
 Geom.domain.Perm.Seed:

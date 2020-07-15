@@ -2907,7 +2907,7 @@ Solver.Linear.KrylovDimension
 
 
 .. warning::
-    In Python we will define *Solver.LinKrylovDimension* which will set    *Solver.Linear.KrylovDimension* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearKrylovDimension* which will set    *Solver.Linear.KrylovDimension* inside the ParFlow .pfidb file.
 
 
 Solver.Linear.MaxRestarts
@@ -2923,7 +2923,7 @@ Solver.Linear.MaxRestarts
 
 
 .. warning::
-    In Python we will define *Solver.LinMaxRestarts* which will set    *Solver.Linear.MaxRestarts* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearMaxRestarts* which will set    *Solver.Linear.MaxRestarts* inside the ParFlow .pfidb file.
 
 
 Solver.Linear.Preconditioner
@@ -2937,7 +2937,7 @@ Solver.Linear.Preconditioner
     The value must be one of the following options: NoPC, MGSemi, PFMG, PFMGOctree, SMG
 
 .. warning::
-    In Python we will define *Solver.LinPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
 
 
 Solver.Linear.Preconditioner.SymmetricMat
@@ -2951,7 +2951,7 @@ Solver.Linear.Preconditioner.SymmetricMat
     The value must be one of the following options: Symmetric, Nonsymmetric
 
 .. warning::
-    In Python we will define *Solver.LinPrecondSym* which will set    *Solver.Linear.Preconditioner.SymmetricMat* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearPrecondSym* which will set    *Solver.Linear.Preconditioner.SymmetricMat* inside the ParFlow .pfidb file.
 
 
 Solver.PrecondItem
@@ -2987,7 +2987,7 @@ Solver.Linear.Preconditioner.SMG.NumPreRelax
 
 
 .. warning::
-    In Python we will define *Solver.LinPrecondSMGPreRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPreRelax* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearPrecondSMGPreRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPreRelax* inside the ParFlow .pfidb file.
 
 
 Solver.Linear.Preconditioner.SMG.NumPostRelax
@@ -3003,7 +3003,7 @@ Solver.Linear.Preconditioner.SMG.NumPostRelax
 
 
 .. warning::
-    In Python we will define *Solver.LinPrecondSMGPostRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPostRelax* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearPrecondSMGPostRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPostRelax* inside the ParFlow .pfidb file.
 
 
 Solver.Linear.Preconditioner.PFMG.RAPType
@@ -3017,7 +3017,7 @@ Solver.Linear.Preconditioner.PFMG.RAPType
     The value must be one of the following options: Galerkin, NonGalerkin
 
 .. warning::
-    In Python we will define *Solver.LinPrecondPFMGRAPType* which will set    *Solver.Linear.Preconditioner.PFMG.RAPType* inside the ParFlow .pfidb file.
+    In Python we will define *Solver.LinearPrecondPFMGRAPType* which will set    *Solver.Linear.Preconditioner.PFMG.RAPType* inside the ParFlow .pfidb file.
 
 
 Solver.NonlinearSolver
@@ -3918,8 +3918,14 @@ Cycle.Names
     The value must be a string
 
 
-Names
+Wells.{well_name}
 --------------------------------------------------------------------------------
+
+
+
+
+Wells.{well_name}.Names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key is used to specify the named time intervals for each cycle. It is a list of names and each name defines a time interval when a specific boundary condition is applied and the number of items determines the total number of intervals in that time cycle.
 
@@ -3928,8 +3934,8 @@ Names
     The value must be a string
 
 
-Repeat
---------------------------------------------------------------------------------
+Wells.{well_name}.Repeat
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key is used to specify the how many times a named time interval repeats. A positive value specifies a number of repeat cycles a value of -1 specifies that the cycle repeat for the entire simulation.
 
@@ -3938,6 +3944,24 @@ Repeat
     The value is required
     The value must be an Integer
       - with a value greater than or equal to -1
+
+
+
+Wells.{well_name}.{interval_name}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+Wells.{well_name}.{interval_name}.Length
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: int] This key is used to specify the length of a named time intervals. It is an integer multiplier of the value set for the TimingInfo.BaseUnit key described above. The total length of a given time cycle is the sum of all the intervals multiplied by the base unit.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
 
 
 
