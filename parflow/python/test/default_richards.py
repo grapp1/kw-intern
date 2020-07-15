@@ -4,7 +4,7 @@
 
 from parflow import Run
 
-drich = Run('Default Richards')
+drich = Run('Default Richards', __file__)
 
 
 drich.Process.Topology.P = 1
@@ -205,7 +205,7 @@ drich.Geom.domain.Saturation.SSat = 0.99
 #-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
-drich.Wells.Names = ""
+drich.Wells.Names = ''
 
 #-----------------------------------------------------------------------------
 # Time Cycles
@@ -218,35 +218,35 @@ drich.Cycle.constant.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-drich.BCPressure.PatchNames = "left right front back bottom top"
-
-drich.Patch.left.BCPressure.Type = 'DirEquilRefPatch'
-drich.Patch.left.BCPressure.Cycle = "constant"
-drich.Patch.left.BCPressure.RefGeom = 'domain'
-drich.Patch.left.BCPressure.RefPatch = 'bottom'
-drich.Patch.left.BCPressure.alltime.Value = 5.0
-
-drich.Patch.right.BCPressure.Type = 'DirEquilRefPatch'
-drich.Patch.right.BCPressure.Cycle = "constant"
-drich.Patch.right.BCPressure.RefGeom = 'domain'
-drich.Patch.right.BCPressure.RefPatch = 'bottom'
-drich.Patch.right.BCPressure.alltime.Value = 3.0
-
-drich.Patch.front.BCPressure.Type = 'FluxConst'
-drich.Patch.front.BCPressure.Cycle = "constant"
-drich.Patch.front.BCPressure.alltime.Value = 0.0
-
-drich.Patch.back.BCPressure.Type = 'FluxConst'
-drich.Patch.back.BCPressure.Cycle = "constant"
-drich.Patch.back.BCPressure.alltime.Value = 0.0
-
-drich.Patch.bottom.BCPressure.Type = 'FluxConst'
-drich.Patch.bottom.BCPressure.Cycle = "constant"
-drich.Patch.bottom.BCPressure.alltime.Value = 0.0
-
-drich.Patch.top.BCPressure.Type = 'FluxConst'
-drich.Patch.top.BCPressure.Cycle = "constant"
-drich.Patch.top.BCPressure.alltime.Value = 0.0
+# drich.BCPressure.PatchNames = "left right front back bottom top"
+#
+# drich.Patch.left.BCPressure.Type = 'DirEquilRefPatch'
+# drich.Patch.left.BCPressure.Cycle = "constant"
+# drich.Patch.left.BCPressure.RefGeom = 'domain'
+# drich.Patch.left.BCPressure.RefPatch = 'bottom'
+# drich.Patch.left.BCPressure.alltime.Value = 5.0
+#
+# drich.Patch.right.BCPressure.Type = 'DirEquilRefPatch'
+# drich.Patch.right.BCPressure.Cycle = "constant"
+# drich.Patch.right.BCPressure.RefGeom = 'domain'
+# drich.Patch.right.BCPressure.RefPatch = 'bottom'
+# drich.Patch.right.BCPressure.alltime.Value = 3.0
+#
+# drich.Patch.front.BCPressure.Type = 'FluxConst'
+# drich.Patch.front.BCPressure.Cycle = "constant"
+# drich.Patch.front.BCPressure.alltime.Value = 0.0
+#
+# drich.Patch.back.BCPressure.Type = 'FluxConst'
+# drich.Patch.back.BCPressure.Cycle = "constant"
+# drich.Patch.back.BCPressure.alltime.Value = 0.0
+#
+# drich.Patch.bottom.BCPressure.Type = 'FluxConst'
+# drich.Patch.bottom.BCPressure.Cycle = "constant"
+# drich.Patch.bottom.BCPressure.alltime.Value = 0.0
+#
+# drich.Patch.top.BCPressure.Type = 'FluxConst'
+# drich.Patch.top.BCPressure.Cycle = "constant"
+# drich.Patch.top.BCPressure.alltime.Value = 0.0
 
 #---------------------------------------------------------
 # Topo slopes in x-direction

@@ -62,7 +62,7 @@ ComputationalGrid:
   # None of these entries have defaults
   Lower:
     __doc__: >
-      [Type: double] This section sets the lower coordinate locations for the
+      This section sets the lower coordinate locations for the
       computational grid (X, Y, Z).
 
     X:

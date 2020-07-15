@@ -1197,6 +1197,10 @@ TopoSlopesX:
       computational domain.
     domains:
       AnyString:
+    handlers:
+      TopoSlopesXUpdater:
+        type: ChildrenHandler
+        className: TopoSlopesXItem
 
   # in manual, need to consolidate duplicates (manual also includes NetCDF file capability, which is included here)
   Type:
@@ -1218,17 +1222,22 @@ TopoSlopesX:
     domains:
       AnyString:
 
-  TopoSlopeXItem:
+  Geom:
     __rst__:
-      name: TopoSlopesX.Geom.{geom_name}
-    __doc__: >
-      Setting value for slopes in the X direction
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
-        to constant.
-      domains:
-        DoubleValue:
+      skip:
+    __doc__: ''
+    .{geom_name}:
+      __class__: TopoSlopesXItem
+      __rst__:
+        name: TopoSlopesX.Geom.{geom_name}
+      __doc__: >
+        Setting value for slopes in the X direction
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+          to constant.
+        domains:
+          DoubleValue:
 
 TopoSlopesY:
   __doc__: >
@@ -1321,6 +1330,10 @@ Mannings:
       surface of the computational domain.
     domains:
       AnyString:
+    handlers:
+      ManningsGeomUpdater:
+        type: ChildrenHandler
+        className: ManningsGeomItem
 
   Type:
     help: >
@@ -1341,10 +1354,10 @@ Mannings:
       AnyString:
 
   .{geom_name}:
+    __class__: ManningsGeomItem
     __rst__:
       skip:
     __doc__: ''
-    __class__: ManningsGeomItem
     Value:
       help: >
         [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set

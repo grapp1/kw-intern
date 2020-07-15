@@ -69,7 +69,7 @@ The computational grid keys set the bottom left corner of the domain to a specif
 ComputationalGrid.Lower
 --------------------------------------------------------------------------------
 
-[Type: double] This section sets the lower coordinate locations for the computational grid (X, Y, Z).
+This section sets the lower coordinate locations for the computational grid (X, Y, Z).
 
 
 
@@ -3562,6 +3562,53 @@ Phase.RelPerm.VanGenuchten
 
 
 
+Phase.Saturation
+--------------------------------------------------------------------------------
+
+This section is only relevant to the Richards’ equation cases. All keys relating to this section will be ignored for other cases. The following keys are used to define the saturation-pressure curve.
+
+
+
+Phase.Saturation.Type
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the type of saturation function that will be used on all specified geometries. Note that only one type of saturation may be used for the entire problem. However, parameters may be different for that type in different geometries. For instance, if the problem consists of three geometries, then VanGenuchten may be specified with three different sets of parameters for the three different goemetries. However, once VanGenuchten is specified, one geometry cannot later be specified to have Data as its saturation. The possible values for this key are Constant, VanGenuchten, Haverkamp, Data, Polynomial and PFBFile.
+
+
+.. note::
+    The value must be one of the following options: Constant, VanGenuchten, Haverkamp, Data, Polynomial, PFBFile
+
+
+Phase.Saturation.GeomNames
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the geometries on which saturation will be given. The union of these geometries must cover the entire computational domain.
+
+
+.. note::
+    The value must be a string
+
+
+Phase.Saturation.VanGenuchten
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+Phase.Saturation.VanGenuchten.File
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: int] This key specifies whether soil parameters for the VanGenuchten function are specified in a pfb file or by region. The options are either 0 for specification by region, or 1 for specification in a file. Note that either all parameters are specified in files (each has their own input file) or none are specified by files. Parameters specified by files are alpha, N, SRes, and SSat.
+
+
+:default: 0
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0
+      - with a value less than or equal to 1
+
+
+
 Type
 --------------------------------------------------------------------------------
 
@@ -3864,6 +3911,16 @@ Setting properties for cycles and intervals within those cycles.
 Cycle.Names
 --------------------------------------------------------------------------------
 
+[Type: string] This key is used to specify the named time cycles to be used in a simulation. It is a list of names and each name defines a time cycle and the number of items determines the total number of time cycles specified. Each named cycle is described using a number of keys defined under Cycle.
+
+
+.. note::
+    The value must be a string
+
+
+Names
+--------------------------------------------------------------------------------
+
 [Type: string] This key is used to specify the named time intervals for each cycle. It is a list of names and each name defines a time interval when a specific boundary condition is applied and the number of items determines the total number of intervals in that time cycle.
 
 
@@ -3871,7 +3928,7 @@ Cycle.Names
     The value must be a string
 
 
-Cycle.Repeat
+Repeat
 --------------------------------------------------------------------------------
 
 [Type: int] This key is used to specify the how many times a named time interval repeats. A positive value specifies a number of repeat cycles a value of -1 specifies that the cycle repeat for the entire simulation.
@@ -3882,16 +3939,6 @@ Cycle.Repeat
     The value must be an Integer
       - with a value greater than or equal to -1
 
-
-
-CycleNames
-================================================================================
-
-[Type: string] This key is used to specify the named time cycles to be used in a simulation. It is a list of names and each name defines a time cycle and the number of items determines the total number of time cycles specified. Each named cycle is described using a number of keys defined under Cycle.
-
-
-.. note::
-    The value must be a string
 
 
 Gravity

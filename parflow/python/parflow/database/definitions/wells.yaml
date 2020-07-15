@@ -18,7 +18,7 @@ Wells:
     handlers:
       WellUpdater:
         type: ChildrenHandler
-        className: WellHandler
+        className: WellItem
 
   .{well_name}:
     __class__: WellItem

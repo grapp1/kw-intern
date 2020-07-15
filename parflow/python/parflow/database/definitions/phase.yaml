@@ -50,6 +50,50 @@ Phase:
     VanGenuchten:
       __doc__: ''
 
+  Saturation:
+    __doc__: >
+      This section is only relevant to the Richards’ equation cases. All keys relating to this section will be ignored for other
+      cases. The following keys are used to define the saturation-pressure curve.
+
+    Type:
+      help: >
+        [Type: string] This key specifies the type of saturation function that will be used on all specified geometries. Note that only one
+        type of saturation may be used for the entire problem. However, parameters may be different for that type in different
+        geometries. For instance, if the problem consists of three geometries, then VanGenuchten may be specified with
+        three different sets of parameters for the three different goemetries. However, once VanGenuchten is specified, one
+        geometry cannot later be specified to have Data as its saturation. The possible values for this key are Constant,
+        VanGenuchten, Haverkamp, Data, Polynomial and PFBFile.
+      domains:
+        EnumDomain:
+          enumList:
+            - Constant
+            - VanGenuchten
+            - Haverkamp
+            - Data
+            - Polynomial
+            - PFBFile
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the geometries on which saturation will be given. The union of these geometries
+        must cover the entire computational domain.
+      domains:
+        AnyString:
+
+    VanGenuchten:
+      __doc__: ''
+      File:
+        help: >
+          [Type: int] This key specifies whether soil parameters for the VanGenuchten function are specified in a pfb file or by region.
+          The options are either 0 for specification by region, or 1 for specification in a file. Note that either all parameters are
+          specified in files (each has their own input file) or none are specified by files. Parameters specified by files are alpha, N,
+          SRes, and SSat.
+        default: 0
+        domains:
+          IntValue:
+            minValue: 0
+            maxValue: 1
+
 
   .{phase_name}:
     __class__: PhaseNameItem
