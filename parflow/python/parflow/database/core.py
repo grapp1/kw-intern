@@ -12,6 +12,10 @@ class PFDBObj:
   exitOnError = False
   workingDirectory = os.getcwd()
 
+  # ---------------------------------------------------------------------------
+  # Global settings
+  # ---------------------------------------------------------------------------
+
   @staticmethod
   def enableLineError():
     PFDBObj.printLineError = True
@@ -35,8 +39,17 @@ class PFDBObj:
     else:
       PFDBObj.workingDirectory = os.getcwd()
 
+  # ---------------------------------------------------------------------------
+  # Instance specific code
+  # ---------------------------------------------------------------------------
+
   def __init__(self, parent=None):
+    '''
+    Create container object while keeping a reference to your parent
+    '''
     self._parent = parent
+
+  # ---------------------------------------------------------------------------
 
   def __setattr__(self, name, value):
     '''
@@ -70,18 +83,15 @@ class PFDBObj:
     # Decorate value if need be (i.e. Geom.names: 'a b c')
     self.__dict__[name] = decorateValue(value, self, handlers)
 
-
-  def help(self, key=None):
-    '''
-    Dynamic help function for runtime evaluation
-    '''
-    if key is not None:
-      if key in self._details and 'help' in self._details[key]:
-        print(self._details[key]['help'])
-      else:
-        print(self.__doc__)
+  # ---------------------------------------------------------------------------
 
   def __len__(self):
+    '''
+    Return the count of nested fields.
+      - If a field is not set but is Mandatory it will count as 1
+      - If a field is not set, it will count as 0
+      - A container does not count. (0)
+    '''
     valueCount = 0
     for name in self.__dict__:
       if name[0] == '_':
@@ -98,7 +108,24 @@ class PFDBObj:
 
     return valueCount
 
+  # ---------------------------------------------------------------------------
+
+  def help(self, key=None):
+    '''
+    Dynamic help function for runtime evaluation
+    '''
+    if key is not None:
+      if key in self._details and 'help' in self._details[key]:
+        print(self._details[key]['help'])
+      else:
+        print(self.__doc__)
+
+  # ---------------------------------------------------------------------------
+
   def validate(self, indent=1, workdir=None):
+    '''
+    Method to validate sub hierarchy
+    '''
     if len(self) == 0:
       return 0
 
@@ -128,7 +155,13 @@ class PFDBObj:
 
     return errorCount
 
+  # ---------------------------------------------------------------------------
+
   def getParFlowKey(self, parentNamespace, key):
+    '''
+    Helper method returning the key to use for Parflow on a given field key.
+    This allow to handle differences between what can be defined in Python vs Parflow key.
+    '''
     if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
       exportKey = self._details[key]['exportName']
       parentTokens = parentNamespace.split('.')
@@ -147,25 +180,57 @@ class PFDBObj:
 
     return key
 
+  # ---------------------------------------------------------------------------
+
   def getObjsFromLocation(self, location='.'):
+    '''
+    Return a PFDBObj object based on a location.
+
+    i.e.:
+      run.Process.Topology.getObjFromLocation('.') => run.Process.Topology
+      run.Process.Topology.getObjFromLocation('..') => run.Process
+      run.Process.Topology.getObjFromLocation('../../Geom') => run.Geom
+    '''
     path_items = location.split('/')
     current_location = self
     if location[0] == '/':
       while current_location._parent:
         current_location = current_location._parent
     for path_item in path_items:
-      if path_item == '..':
+      if current_location and path_item == '..':
         current_location = current_location._parent
-      elif path_item == '.':
+      elif current_location and path_item == '.':
         pass
-      else:
+      elif current_location:
         current_location = getattr(current_location, path_item)
 
     return [current_location]
 
+  # ---------------------------------------------------------------------------
+
   def getContextSettings(self):
+    '''
+    Return global settings for our current parflow run.
+    This is useful when providing global information for domains or else.
+    '''
     return {
       'printLineError': PFDBObj.printLineError,
       'exitOnError': PFDBObj.exitOnError,
       'workingDirectory': PFDBObj.workingDirectory,
     }
+
+  # ---------------------------------------------------------------------------
+
+  def pfset(self, key='', value=None):
+    '''
+    Allow to define any parflow key so it can be exported
+    '''
+    tokens = key.split('.')
+    container = self.getObjFromLocation('/'.join(tokens[:-1]))
+    if container:
+      container[tokens[-1]] = value
+    else:
+      # store key on the side
+      if '_pfstore' not in self.__dict__:
+        self.__dict__['_pfstore'] = {}
+      self.__dict__['_pfstore'][key] = value

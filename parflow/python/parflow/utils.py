@@ -2,6 +2,8 @@ import json
 
 from .database.generated import PFDBObj
 
+# -----------------------------------------------------------------------------
+
 def convertValueForStringDict(value):
   if isinstance(value, str):
     return value
@@ -11,6 +13,7 @@ def convertValueForStringDict(value):
 
   return value
 
+# -----------------------------------------------------------------------------
 
 def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
   for key in instance.__dict__:
@@ -27,6 +30,9 @@ def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
     else:
       dictToFill[fullQualifiedKey] = convertValueForStringDict(value)
 
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
 
 def writeDictAsPfidb(dictObj, fileName):
   with open(fileName, 'w') as out:
@@ -38,6 +44,8 @@ def writeDictAsPfidb(dictObj, fileName):
       out.write(f'{len(str(value))}\n')
       out.write(f'{str(value)}\n')
 
+# -----------------------------------------------------------------------------
+
 def writeDictAsYaml(dictObj, fileName):
   with open(fileName, 'w') as out:
     for key in dictObj:
@@ -45,11 +53,13 @@ def writeDictAsYaml(dictObj, fileName):
       value = dictObj[key]
       out.write(f'  {value}\n')
 
+# -----------------------------------------------------------------------------
 
 def writeDictAsJson(dictObj, fileName):
   with open(fileName, 'w') as out:
     out.write(json.dumps(dictObj, indent=2))
 
+# -----------------------------------------------------------------------------
 
 def writeDict(dictObj, fileName):
   ext = fileName.split('.').pop().lower()

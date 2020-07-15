@@ -15,7 +15,9 @@ lw.Process.Topology.P = -1.5
 lw.GeomInput.Names = "domain s1 s2"
 # lw.GeomInput.Names = ['domain', 's1', 's2']
 # lw.GeomInput.s1.X = 10
-lw.Geom.domain.ThermalConductivity.KDryFileName = 'testfile'
+# lw.Geom.domain.ThermalConductivity.KDryFileName = 'testfile'
+
+lw.pfset('Process.Topology.R', 10)
 
 # -----------------------------------------------------------------------------
 # Validation process
