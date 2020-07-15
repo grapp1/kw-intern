@@ -255,7 +255,7 @@ drich.Cycle.constant.Repeat = -1
 drich.TopoSlopesX.Type = "Constant"
 drich.TopoSlopesX.GeomNames = ""
 
-drich.TopoSlopesX.Geom.domain.Value = 0.0
+# drich.TopoSlopesX.Geom.domain.Value = 0.0
 
 #---------------------------------------------------------
 # Topo slopes in y-direction
@@ -264,7 +264,7 @@ drich.TopoSlopesX.Geom.domain.Value = 0.0
 drich.TopoSlopesY.Type = "Constant"
 drich.TopoSlopesY.GeomNames = ""
 
-drich.TopoSlopesY.Geom.domain.Value = 0.0
+# drich.TopoSlopesY.Geom.domain.Value = 0.0
 
 #---------------------------------------------------------
 # Mannings coefficient 
@@ -272,7 +272,7 @@ drich.TopoSlopesY.Geom.domain.Value = 0.0
 
 drich.Mannings.Type = "Constant"
 drich.Mannings.GeomNames = ""
-drich.Mannings.Geom.domain.Value = 0.
+# drich.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
 # Initial conditions: water pressure

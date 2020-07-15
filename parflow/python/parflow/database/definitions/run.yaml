@@ -14,6 +14,7 @@ BaseRun:
     - Perm
     - SpecificStorage
     - Phase
+    - PhaseSources
     - PhaseConcen
     - Contaminants
     - Domain
@@ -21,6 +22,7 @@ BaseRun:
     - TopoSlopesX
     - TopoSlopesY
     - Mannings
+    - ICPressure
 
 
   # -----------------------------------------------------------------------------

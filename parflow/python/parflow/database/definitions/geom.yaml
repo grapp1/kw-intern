@@ -1271,17 +1271,22 @@ TopoSlopesY:
     domains:
       AnyString:
 
-  TopoSlopeYItem:
+  Geom:
     __rst__:
-      name: TopoSlopesY.Geom.{geom_name}
-    __doc__: >
-      Setting value for slopes in the Y direction
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
-        to constant.
-      domains:
-        DoubleValue:
+      skip:
+    __doc__: ''
+    .{geom_name}:
+      __class__: TopoSlopesYItem
+      __rst__:
+        name: TopoSlopesY.Geom.{geom_name}
+      __doc__: >
+        Setting value for slopes in the Y direction
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+          to constant.
+        domains:
+          DoubleValue:
 
 # -----------------------------------------------------------------------------
 # Capillary Pressure

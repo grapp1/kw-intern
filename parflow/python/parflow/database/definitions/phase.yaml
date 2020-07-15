@@ -17,6 +17,9 @@ Phase:
       PhaseUpdater:
         type: ChildrenHandler
         className: PhaseNameItem
+      PhaseSourceUpdater:
+        type: ChildrenHandler
+        className: PhaseSourceNameItem
 
   RelPerm:
     __doc__: >
@@ -225,6 +228,72 @@ PhaseConcen:
           domains:
             DoubleValue:
 
+# -----------------------------------------------------------------------------
+# PhaseSources
+# -----------------------------------------------------------------------------
+
+PhaseSources:
+  __doc__: >
+    The following keys are used to specify phase source terms. The units of the source term are 1=T . So, for example,
+    to specify a region with constant flux rate of L3=T , one must be careful to convert this rate to the proper units by
+    dividing by the volume of the enclosing region. For Richards’ equation input, the source term must be given as a flux
+    multiplied by density.
+
+  .{phase_name}:
+    __class__: PhaseSourceNameItem
+    __rst__:
+      skip:
+    __doc__: ''
+
+    Type:
+      help: >
+        [Type: string] This key specifies the type of source to use for phase phase_name. Possible values for this key are Constant and
+        PredefinedFunction. Constant type phase sources specify a constant phase source value for a given set of regions.
+        PredefinedFunction type phase sources use a preset function (choices are listed below) to specify the source. Note
+        that the PredefinedFunction type can only be used to set a single source over the entire domain and not separate
+        sources over different regions.
+      domains:
+        EnumDomain:
+          enumList:
+            - Constant
+            - PredefinedFunction
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the names of the geometries on which source terms will be specified. This is used only for
+        Constant type phase sources. Regions listed later “overlay” regions listed earlier.
+      domains:
+        AnyString:
+
+    PredefinedFunction:
+      help: >
+        [Type: string] This key specifies which of the predefined functions will be used for the source. Possible values for this key are
+        X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor.
+      domains:
+        EnumDomain:
+          enumList:
+            - X
+            - XPlusYPlusZ
+            - X3Y2PlusSinXYPlus1
+            - X3Y4PlusX2PlusSinXYCosYPlus1
+            - XYZTPlus1
+            - XYZTPlus1PermTensor
+
+    Geom:
+      __rst__:
+        skip:
+      __doc__: ''
+
+      .{geom_input_name}:
+        __class__: PhaseSourceGeomItem
+        __rst__:
+          skip:
+        __doc__: ''
+        Value:
+          help: >
+            [Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
+          domains:
+            DoubleValue:
 
 # -----------------------------------------------------------------------------
 # Contaminants
