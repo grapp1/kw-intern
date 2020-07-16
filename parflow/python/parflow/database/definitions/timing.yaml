@@ -59,6 +59,7 @@ TimingInfo:
     domains:
       MandatoryValue:
       DoubleValue:
+        negInt: True
 
   DumpIntervalExecutionTimeLimit:
     help: >

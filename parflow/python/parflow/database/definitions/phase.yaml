@@ -266,6 +266,11 @@ PhaseSources:
         Constant type phase sources. Regions listed later “overlay” regions listed earlier.
       domains:
         AnyString:
+      handlers:
+        PhaseSourceGeomUpdater:
+          type: ChildrenHandler
+          className: PhaseSourceGeomItem
+          location: ./Geom
 
     PredefinedFunction:
       help: >

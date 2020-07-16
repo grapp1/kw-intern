@@ -23,6 +23,72 @@ Domain:
       AnyString:
 
 # -----------------------------------------------------------------------------
+# Initial Conditions
+# -----------------------------------------------------------------------------
+
+# Setting ICSaturation
+ICSaturation:
+  __rst__:
+    name: ICSaturation.{phase_name}
+
+  __doc__: >
+    This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards'
+    equation cases.
+
+  Type:
+    help: >
+      [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase,
+      phase_name. The only key currently available is Constant. The choice Constant will apply constants values
+      within geometries for the phase.
+    domains:
+      EnumDomain:
+        enumList:
+          - Constant
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies the geometries on which an initial condition will be given if the type is set to Constant.
+      Note that geometries listed later “overlay” geometries listed earlier.
+    domains:
+      AnyString:
+
+
+
+# Setting ICPressure Type and GeomNames
+ICPressure:
+  __doc__: >
+    The keys in this section are used to specify pressure initial conditions for Richards’ equation cases only. These keys
+    will be ignored if any other case is run.
+
+  GeomNames:
+    help: >
+      [Type: string] This key specifies the geometry names on which the initial pressure data will be given. These geometries must
+      comprise the entire domain. Note that conditions for regions that overlap other regions will have unpredictable
+      results. The regions given must be disjoint.
+    domains:
+      AnyString:
+
+  Type:
+    help: >
+      [Type: string] This key specifies the type of initial condition given. The choices for this key are Constant, HydroStaticDepth,
+      HydroStaticPatch and PFBFile. The choice Constant specifies that the initial pressure will be constant over the
+      regions given. The choice HydroStaticDepth specifies that the initial pressure within a region will be in hydrostatic
+      equilibrium with a given pressure specified at a given depth. The choice HydroStaticPatch specifies that the initial
+      pressure within a region will be in hydrostatic equilibrium with a given pressure on a specified patch. Note that all
+      regions must have the same type of initial data - different regions cannot have different types of initial data. However,
+      the parameters for the type may be different. The PFBFile specification means that the initial pressure will be
+      taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
+    domains:
+      EnumDomain:
+        enumList:
+          - Constant
+          - PFBFile
+          - HydroStaticPatch
+          - NCFile
+
+
+
+# -----------------------------------------------------------------------------
 # GeomInput.*
 # -----------------------------------------------------------------------------
 
@@ -1118,70 +1184,6 @@ Geom:
           domains:
             DoubleValue:
               minValue: 0.0
-
-# -----------------------------------------------------------------------------
-# Initial Conditions
-# -----------------------------------------------------------------------------
-
-# Setting ICSaturation
-ICSaturation:
-  __rst__:
-    name: ICSaturation.{phase_name}
-
-  __doc__: >
-    This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards'
-    equation cases.
-
-  Type:
-    help: >
-      [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase,
-      phase_name. The only key currently available is Constant. The choice Constant will apply constants values
-      within geometries for the phase.
-    domains:
-      EnumDomain:
-        enumList:
-          - Constant
-
-  GeomNames:
-    help: >
-      [Type: string] This key specifies the geometries on which an initial condition will be given if the type is set to Constant.
-      Note that geometries listed later “overlay” geometries listed earlier.
-    domains:
-      AnyString:
-
-
-
-# Setting ICPressure Type and GeomNames
-ICPressure:
-  __doc__: >
-    The keys in this section are used to specify pressure initial conditions for Richards’ equation cases only. These keys
-    will be ignored if any other case is run.
-
-  GeomNames:
-    help: >
-      [Type: string] This key specifies the geometry names on which the initial pressure data will be given. These geometries must
-      comprise the entire domain. Note that conditions for regions that overlap other regions will have unpredictable
-      results. The regions given must be disjoint.
-    domains:
-      AnyString:
-
-  Type:
-    help: >
-      [Type: string] This key specifies the type of initial condition given. The choices for this key are Constant, HydroStaticDepth,
-      HydroStaticPatch and PFBFile. The choice Constant specifies that the initial pressure will be constant over the
-      regions given. The choice HydroStaticDepth specifies that the initial pressure within a region will be in hydrostatic
-      equilibrium with a given pressure specified at a given depth. The choice HydroStaticPatch specifies that the initial
-      pressure within a region will be in hydrostatic equilibrium with a given pressure on a specified patch. Note that all
-      regions must have the same type of initial data - different regions cannot have different types of initial data. However,
-      the parameters for the type may be different. The PFBFile specification means that the initial pressure will be
-      taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
-    domains:
-      EnumDomain:
-        enumList:
-          - Constant
-          - PFBFile
-          - HydroStaticPatch
-          - NCFile
 
 # -----------------------------------------------------------------------------
 # TopoSlopes

@@ -68,13 +68,17 @@ class DoubleValue:
     - minValue: If available the value must be strictly above it
     - maxValue: If available the value must be strictly below it
   '''
-  def validate(self, value, minValue=None, maxValue=None, **kwargs):
+  def validate(self, value, minValue=None, maxValue=None, negInt=None, **kwargs):
     errors = []
 
     if value == None:
       return errors
 
-    if not isinstance(value, float):
+    # added for verification of DumpInterval (double if positive, int if negative)
+    if negInt == True and isinstance(value, int) and value < 0:
+      return errors
+
+    elif not isinstance(value, float):
       errors.append('Needs to be a double')
 
     if minValue != None and value < minValue:
@@ -92,6 +96,9 @@ class EnumDomain:
 
     if value == None:
       return errors
+
+    if isinstance(value, list) and len(value) == 1:
+      value = value[0]
 
     if value not in enumList:
       strList = ', '.join(enumList)
@@ -255,6 +262,7 @@ def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs
           dup_str += str(history[val]) + ' => '
         dup_str += str(history[dupCount-1]) + ')'
         print(f'{indentStr}  {term.MAGENTA}{termSymbol.warning}{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
+      # elif 'default' in name
       else:
         print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
     else:

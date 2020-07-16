@@ -528,6 +528,11 @@ Solver:
           - PPCG
           - PCG
           - CGHS
+    handlers:
+      PhaseSourceGeomUpdater:
+        type: ChildrenHandler
+        className: PhaseSourceGeomItem
+        location: ./Geom
 
   MaxConvergenceFailures:
     help: >
@@ -924,6 +929,11 @@ Solver:
           - PFMGOctree
           - SMG
     exportName: .Linear.Preconditioner
+    handlers:
+      LPreMethodUpdater:
+        type: ChildrenHandler
+        className: PrecondMethodItem
+        location: .
 
   # corner case
   LinearPrecondSym:
@@ -941,15 +951,24 @@ Solver:
     exportName: .Linear.Preconditioner.SymmetricMat
 
   # defining key for Solver.Linear.Preconditioner.precond_method.MaxIter
-  PrecondItem:
+  .{precond_method}:
+    __class__: PrecondMethodItem
     __doc__: >
-      Setting Solver.Linear.Preconditioner.precond_method.MaxIter key
+      Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
 
     MaxIter:
       help: >
         [Type: int] This key specifies the maximum number of iterations to take in solving the preconditioner system with precond_
         method solver.
       default: 1
+      domains:
+        IntValue:
+          minValue: 1
+
+    # not in the manual - check to make sure that it is not the same as the Solver.MaxLevels listed above
+    MaxLevels:
+      help: >
+        [Type: int] Max Levels
       domains:
         IntValue:
           minValue: 1

@@ -72,7 +72,7 @@ def isClassItem(key, definition):
 # -----------------------------------------------------------------------------
 
 def jsonToPython(txt):
-  return txt.replace(' true,', ' True,').replace(' false,', ' False,').replace(' null', ' None')
+  return txt.replace(' true,', ' True,').replace(' false,', ' False,').replace(' null', ' None').replace(': true', ': True')
 
 # -----------------------------------------------------------------------------
 
