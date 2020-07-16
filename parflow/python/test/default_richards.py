@@ -253,7 +253,8 @@ drich.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 drich.TopoSlopesX.Type = "Constant"
-drich.TopoSlopesX.GeomNames = ""
+# seb added domain otherwise failing after
+drich.TopoSlopesX.GeomNames = "domain"
 
 drich.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -262,16 +263,18 @@ drich.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 drich.TopoSlopesY.Type = "Constant"
-drich.TopoSlopesY.GeomNames = ""
+# seb added domain otherwise failing after
+drich.TopoSlopesY.GeomNames = "domain"
 
 drich.TopoSlopesY.Geom.domain.Value = 0.0
 
 #---------------------------------------------------------
-# Mannings coefficient 
+# Mannings coefficient
 #---------------------------------------------------------
 
 drich.Mannings.Type = "Constant"
-drich.Mannings.GeomNames = ""
+# seb added domain otherwise failing after
+drich.Mannings.GeomNames = "domain"
 drich.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------

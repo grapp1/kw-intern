@@ -1215,6 +1215,7 @@ TopoSlopesX:
       TopoSlopesXUpdater:
         type: ChildrenHandler
         className: TopoSlopesXItem
+        location: ./Geom
 
   # in manual, need to consolidate duplicates (manual also includes NetCDF file capability, which is included here)
   Type:
@@ -1264,6 +1265,11 @@ TopoSlopesY:
       computational domain.
     domains:
       AnyString:
+    handlers:
+      TopoSlopesYUpdater:
+        type: ChildrenHandler
+        className: TopoSlopesYItem
+        location: ./Geom
 
   # in manual, need to consolidate duplicates (manual also includes NetCDF file capability, which is included here)
   Type:
@@ -1353,6 +1359,7 @@ Mannings:
       ManningsGeomUpdater:
         type: ChildrenHandler
         className: ManningsGeomItem
+        location: ./Geom
 
   Type:
     help: >
@@ -1372,14 +1379,18 @@ Mannings:
     domains:
       AnyString:
 
-  .{geom_name}:
-    __class__: ManningsGeomItem
+  Geom:
     __rst__:
       skip:
     __doc__: ''
-    Value:
-      help: >
-        [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
-        to constant.
-      domains:
-        DoubleValue:
+    .{geom_name}:
+      __class__: ManningsGeomItem
+      __rst__:
+        skip:
+      __doc__: ''
+      Value:
+        help: >
+          [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set
+          to constant.
+        domains:
+          DoubleValue:
