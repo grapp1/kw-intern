@@ -24,7 +24,7 @@ class ValueHandlerException(Exception):
 
 
 class ChildrenHandler:
-  def decorate(self, value, container, className=None, location='.', **kwargs):
+  def decorate(self, value, container, className=None, location='.', eager=None, **kwargs):
     klass = getattr(generated, className)
     destination_containers = container.getSelectionFromLocation(location)
     # print(container.__class__)
@@ -37,7 +37,11 @@ class ChildrenHandler:
           # print(f' - {name} => {className} in {destination_container.__class__}')
           valideNames.append(name)
           for destination_container in destination_containers:
-            destination_container.__dict__[name] = klass(destination_container)
+            if destination_container != None:
+              if name not in destination_container.__dict__:
+                destination_container.__dict__[name] = klass(destination_container)
+            elif eager:
+              print(f'Error no selection for {location}')
 
       return valideNames
 

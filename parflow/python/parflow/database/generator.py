@@ -59,9 +59,6 @@ def isClass(key, definition):
   if '__field__' in value:
     return False
 
-  if '_dynamic' in value:
-    return False
-
   return True
 
 # -----------------------------------------------------------------------------
@@ -167,7 +164,6 @@ class PythonModule:
       classInstances = []
       classItems = []
       classDetails = {}
-      classDynamicNames = {}
 
       self.addSeparator()
 
@@ -178,12 +174,8 @@ class PythonModule:
       if '__doc__' in classKeys:
         self.addComment(classDefinition['__doc__'], self.strIndent)
 
-      if '_dynamic' in classKeys:
-        classDynamicNames.append(classDefinition['_dynamic'])
-
       for key in classDefinition:
         if isClass(key, classDefinition):
-          print(key)
           classMembers.append(key)
         if isField(key, classDefinition):
           fieldMembers.append(key)
@@ -192,7 +184,7 @@ class PythonModule:
         if isClassItem(key, classDefinition):
           classItems.append(classDefinition[key])
 
-      if len(classMembers) + len(fieldMembers) + len(classInstances) > 0:
+      if len(classMembers) + len(fieldMembers) + len(classInstances) > 0 or '_dynamic' in classDefinition:
         '''
           def __init__(self, parent=None):
             super().__init__(parent)
@@ -211,8 +203,8 @@ class PythonModule:
         for field in fieldMembers:
           self.addField(field, classDefinition[field], classDetails)
 
-        self.addDynamicName(classDynamicNames)
         self.addDetails(classDetails)
+        self.addDynamic(classDefinition)
 
       for classMember in classMembers:
         # Catch error
@@ -236,13 +228,16 @@ class PythonModule:
         lineWithIndent = f'{self.strIndent * 2}{line}'
         self.addLine(jsonToPython(lineWithIndent))
 
-  def addDynamicName(self, classDynamicNames):
-    if len(classDynamicNames):
-      dynamicLines = json.dumps(classDynamicNames, indent=2).splitlines()
+
+  def addDynamic(self, classDetails):
+    if '_dynamic' in classDetails:
+      dynamicLines = json.dumps(
+          classDetails['_dynamic'], indent=2).splitlines()
       self.addLine(f'{self.strIndent * 2}self._dynamic = {dynamicLines[0]}')
       for line in dynamicLines[1:]:
         lineWithIndent = f'{self.strIndent * 2}{line}'
         self.addLine(jsonToPython(lineWithIndent))
+      self.addLine(f'{self.strIndent * 2}self.processDynamic()')
 
   def addField(self, fieldName, fieldDefinition, classDetails):
     self.validationSummary.addField(fieldName)

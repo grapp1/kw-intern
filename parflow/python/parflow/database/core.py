@@ -230,14 +230,21 @@ class PFDBObj:
       run.Process.Topology.getObjFromLocation('..') => run.Process
       run.Process.Topology.getObjFromLocation('../../Geom') => run.Geom
     '''
+    # print(f'getSelectionFromLocation({location})')
     current_location = self
     path_items = location.split('/')
     if location[0] == '/':
-      while current_location._parent:
+      while current_location._parent != None:
         current_location = current_location._parent
 
     nextList = [current_location]
     for path_item in path_items:
+      if path_item == '':
+        continue
+
+      # print(f'>>> List: {nextList}')
+      # print(f'>>> Path: {path_item}')
+
       currentList = nextList
       nextList = []
 
@@ -246,11 +253,14 @@ class PFDBObj:
       elif path_item == '.':
         nextList.extend(map(mapToSelf, currentList))
       elif path_item[0] == '{':
-        nextList.extend(map(mapToChildrenOfType(path_item[1:-1]), currentList))
-        nextList = [item for sublist in nextList for item in sublist]
+        multiList = map(mapToChildrenOfType(path_item[1:-1]), currentList)
+        nextList = [item for sublist in multiList for item in sublist]
       else:
         nextList.extend(map(mapToChild(path_item), currentList))
+        if isinstance(nextList[0], list):
+          nextList = [item for sublist in nextList for item in sublist]
 
+    # print(f'=>{nextList}')
     return nextList
 
   # ---------------------------------------------------------------------------
@@ -273,7 +283,7 @@ class PFDBObj:
     Allow to define any parflow key so it can be exported
     '''
     tokens = key.split('.')
-    container = self.getObjFromLocation('/'.join(tokens[:-1]))
+    container = self.getSelectionFromLocation('/'.join(tokens[:-1]))[0]
     if container:
       container[tokens[-1]] = value
     else:
@@ -281,3 +291,13 @@ class PFDBObj:
       if '_pfstore' not in self.__dict__:
         self.__dict__['_pfstore'] = {}
       self.__dict__['_pfstore'][key] = value
+
+  # ---------------------------------------------------------------------------
+
+  def processDynamic(self):
+    from . import generated
+    for (className, selection) in self._dynamic.items():
+      klass = getattr(generated, className)
+      names = self.getSelectionFromLocation(selection)
+      for name in names:
+        self.__dict__[name] = klass(self)
