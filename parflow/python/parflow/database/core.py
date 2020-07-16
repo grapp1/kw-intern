@@ -5,9 +5,35 @@ a Parflow input deck.
 import os
 from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
 from .handlers import decorateValue
-from ..utils import mapToParent, mapToSelf, mapToChildrenOfType, mapToChild
 from . import TerminalColors as term
 
+# -----------------------------------------------------------------------------
+# Helper functions
+# -----------------------------------------------------------------------------
+
+def mapToParent(pfdbObj):
+  return pfdbObj._parent
+
+# -----------------------------------------------------------------------------
+
+def mapToSelf(pfdbObj):
+  return pfdbObj
+
+# -----------------------------------------------------------------------------
+
+def mapToChild(name):
+  return lambda pfdbObj: getattr(pfdbObj, name)
+
+# -----------------------------------------------------------------------------
+
+def mapToChildrenOfType(className):
+  def getChildrenOfType(pfdbObj):
+    return pfdbObj.getChildrenOfType(className)
+  return getChildrenOfType
+
+# -----------------------------------------------------------------------------
+# Main DB Object
+# -----------------------------------------------------------------------------
 class PFDBObj:
   printLineError = False
   exitOnError = False
@@ -188,7 +214,7 @@ class PFDBObj:
     for (key, value) in self.__dict__.items():
       if key[0] == '_':
         continue
-      if value.__class__ == className:
+      if value.__class__.__name__ == className:
         results.append(value)
 
     return results
@@ -220,10 +246,10 @@ class PFDBObj:
       elif path_item == '.':
         nextList.extend(map(mapToSelf, currentList))
       elif path_item[0] == '{':
-        nextList.extend(map(mapToChildrenOfType, path_item[1:-1]))
+        nextList.extend(map(mapToChildrenOfType(path_item[1:-1]), currentList))
         nextList = [item for sublist in nextList for item in sublist]
       else:
-        nextList.extend(map(mapToChild, path_item))
+        nextList.extend(map(mapToChild(path_item), currentList))
 
     return nextList
 
