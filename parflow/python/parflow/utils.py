@@ -100,3 +100,14 @@ def loadPfidb(filePath):
         action = 'size'
 
   return resultDict
+
+# -----------------------------------------------------------------------------
+
+def sortDict(input):
+  output = {}
+  keys = list(input.keys())
+  keys.sort()
+  for key in keys:
+    output[key] = input[key];
+
+  return output
