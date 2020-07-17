@@ -325,4 +325,5 @@ drich.Solver.LinearPreconditioner = 'PFMG'
 
 drich.validate()
 drich.write('../output/default_richards.pfidb')
+drich.write('../output/default_richards.yaml')
 drich.run()

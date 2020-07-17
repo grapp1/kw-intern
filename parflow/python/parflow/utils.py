@@ -49,9 +49,8 @@ def writeDictAsPfidb(dictObj, fileName):
 def writeDictAsYaml(dictObj, fileName):
   with open(fileName, 'w') as out:
     for key in dictObj:
-      out.write(f'{key}:\n')
       value = dictObj[key]
-      out.write(f'  {value}\n')
+      out.write(f'{key}: {value}\n')
 
 # -----------------------------------------------------------------------------
 
