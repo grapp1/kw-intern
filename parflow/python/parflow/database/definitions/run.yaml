@@ -28,6 +28,22 @@ BaseRun:
     - BCPressure
     - Patch
 
+  # -----------------------------------------------------------------------------
+  # FileVersion
+  # -----------------------------------------------------------------------------
+
+  FileVersion:
+    help: >
+      [Type: int] This gives the value of the input file version number that this
+      file fits. As development of the ParFlow code continues, the input file format
+      may vary. We have thus included an input file format number as a way of verifying
+      that the correct format type is being used. The user can check in the
+      parflow/config/file_versions.h file to verify that the format number specified
+      in the input file matches the defined value of PFIN_VERSION.
+    default: 4
+    domains:
+      MandatoryValue:
+      IntValue:
 
   # -----------------------------------------------------------------------------
   # Gravity
