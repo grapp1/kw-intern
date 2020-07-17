@@ -70,3 +70,33 @@ def writeDict(dictObj, fileName):
     writeDictAsJson(dictObj, fileName)
   else:
     print(f'Could not find writer for {fileName}')
+
+# -----------------------------------------------------------------------------
+
+def loadPfidb(filePath):
+  resultDict = {}
+  action = 'nbLines'  # nbLines, size, string
+  size = 0
+  key = ''
+  value = ''
+  stringTypeCount = 0
+
+  with open(filePath, 'r') as inputFile:
+    for line in inputFile:
+      if action == 'string':
+        if stringTypeCount % 2 == 0:
+          key = line[:size]
+        else:
+          value = line[:size]
+          resultDict[key] = value
+        stringTypeCount += 1
+        action = 'size'
+
+      elif action == 'size':
+        size = int(line)
+        action = 'string'
+
+      elif action == 'nbLines':
+        action = 'size'
+
+  return resultDict
