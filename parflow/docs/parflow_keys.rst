@@ -202,6 +202,60 @@ Domain.GeomName
     The value must be a string
 
 
+ICSaturation.{phase_name}
+================================================================================
+
+This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards' equation cases.
+
+
+
+ICSaturation.{phase_name}.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase, phase_name. The only key currently available is Constant. The choice Constant will apply constants values within geometries for the phase.
+
+
+.. note::
+    The value must be one of the following options: Constant
+
+
+ICSaturation.{phase_name}.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the geometries on which an initial condition will be given if the type is set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
+
+
+.. note::
+    The value must be a string
+
+
+ICPressure
+================================================================================
+
+The keys in this section are used to specify pressure initial conditions for Richards’ equation cases only. These keys will be ignored if any other case is run.
+
+
+
+ICPressure.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the geometry names on which the initial pressure data will be given. These geometries must comprise the entire domain. Note that conditions for regions that overlap other regions will have unpredictable results. The regions given must be disjoint.
+
+
+.. note::
+    The value must be a string
+
+
+ICPressure.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of initial condition given. The choices for this key are Constant, HydroStaticDepth, HydroStaticPatch and PFBFile. The choice Constant specifies that the initial pressure will be constant over the regions given. The choice HydroStaticDepth specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure specified at a given depth. The choice HydroStaticPatch specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure on a specified patch. Note that all regions must have the same type of initial data - different regions cannot have different types of initial data. However, the parameters for the type may be different. The PFBFile specification means that the initial pressure will be taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
+
+
+.. note::
+    The value must be one of the following options: Constant, PFBFile, HydroStaticPatch, NCFile
+
+
 GeomInput
 ================================================================================
 
@@ -220,14 +274,14 @@ GeomInput.Names
 
 
 GeomInput.{geom_name}
-================================================================================
+--------------------------------------------------------------------------------
 
 One of the user-defined names for defining a geometry region
 
 
 
 GeomInput.{geom_name}.InputType
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This defines the type for the geometry input with the given input name. This key must be one of: SolidFile, IndicatorField, or Box.
 
@@ -237,7 +291,7 @@ GeomInput.{geom_name}.InputType
 
 
 GeomInput.{geom_name}.GeomName
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This is a name of a single geometry defined by the geometry input. This should be used for a geometry input type of Box, which only requires a single name.
 
@@ -247,7 +301,7 @@ GeomInput.{geom_name}.GeomName
 
 
 GeomInput.{geom_name}.GeomNames
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This is a list of the names of the geometries defined by the geometry input. For a geometry input type of Box, the singular GeomName should be used. For the SolidFile geometry type this should contain a list with the same number of geometries as were defined using GMS. The order of geometries in the SolidFile should match the names. For IndicatorField types you need to specify the value in the input field which matches the name using GeomInput.geom_input_name.Value.
 
@@ -257,7 +311,7 @@ GeomInput.{geom_name}.GeomNames
 
 
 GeomInput.{geom_name}.FileName
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] For IndicatorField and SolidFile geometry inputs, this key specifies the input filename which contains the field or solid information.
 
@@ -268,7 +322,7 @@ GeomInput.{geom_name}.FileName
 
 
 GeomInput.{geom_name}.Value
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] For IndicatorField geometry inputs, you need to specify the mapping between values in the input file and the geometry names. The named geometry will be defined wherever the input file is equal to the specified value.
 
@@ -374,7 +428,6 @@ dzScale.nzListNumber
 Cell.{nzListNumber}
 ================================================================================
 
-Setting the Cell.nzListNumber.dzScale.Value
 
 
 
@@ -472,15 +525,15 @@ Geom.Retardation.GeomNames
     The value must be a string
 
 
-Geom.{geom_name}
-================================================================================
+Geom..{geom_name}
+--------------------------------------------------------------------------------
 
 User-defined geometric instance. GeomItem names are taken from either GeomInput.Names or GeomItem.GeomNames.
 
 
 
-Geom.{geom_name}.FileName
---------------------------------------------------------------------------------
+Geom..{geom_name}.FileName
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This specifies some sort of filename for the specified geometry.
 
@@ -490,15 +543,15 @@ Geom.{geom_name}.FileName
 
 
 
-Geom.{geom_name}.Lower
---------------------------------------------------------------------------------
+Geom..{geom_name}.Lower
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section sets the lower coordinate locations for the box geometry.
 
 
 
-Geom.{geom_name}.Lower.X
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Lower.X
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the lower X real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -507,8 +560,8 @@ Geom.{geom_name}.Lower.X
     The value must be an Integer
 
 
-Geom.{geom_name}.Lower.Y
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Lower.Y
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the lower Y real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -517,8 +570,8 @@ Geom.{geom_name}.Lower.Y
     The value must be an Integer
 
 
-Geom.{geom_name}.Lower.Z
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Lower.Z
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the lower Z real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -527,15 +580,15 @@ Geom.{geom_name}.Lower.Z
     The value must be an Integer
 
 
-Geom.{geom_name}.Upper
---------------------------------------------------------------------------------
+Geom..{geom_name}.Upper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section sets the lower coordinate locations for the box geometry.
 
 
 
-Geom.{geom_name}.Upper.X
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Upper.X
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the upper X real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -544,8 +597,8 @@ Geom.{geom_name}.Upper.X
     The value must be an Integer
 
 
-Geom.{geom_name}.Upper.Y
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Upper.Y
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the upper Y real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -554,8 +607,8 @@ Geom.{geom_name}.Upper.Y
     The value must be an Integer
 
 
-Geom.{geom_name}.Upper.Z
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Upper.Z
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This gives the upper Z real space coordinate value of the previously specified box geometry of name box_geom_name.
 
@@ -564,8 +617,8 @@ Geom.{geom_name}.Upper.Z
     The value must be an Integer
 
 
-Geom.{geom_name}.Patches
---------------------------------------------------------------------------------
+Geom..{geom_name}.Patches
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] Patches are defined on the surfaces of geometries. Currently you can only define patches on Box geometries and on the the first geometry in a SolidFile. For a Box the order is fixed (left right front back bottom top) but you can name the sides anything you want.
 
@@ -574,15 +627,15 @@ Geom.{geom_name}.Patches
     The value must be a string
 
 
-Geom.{geom_name}.Perm
---------------------------------------------------------------------------------
+Geom..{geom_name}.Perm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Permeability values
 
 
 
-Geom.{geom_name}.Perm.Type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies which method is to be used to assign permeability data to the named geometry, geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
 
@@ -591,8 +644,8 @@ Geom.{geom_name}.Perm.Type
     The value must be one of the following options: Constant, TurnBands, ParGauss, PFBFile
 
 
-Geom.{geom_name}.Perm.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
 
@@ -601,8 +654,8 @@ Geom.{geom_name}.Perm.Value
     The value must be an Integer
 
 
-Geom.{geom_name}.Perm.LambdaX
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.LambdaX
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the x correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
 
@@ -611,8 +664,8 @@ Geom.{geom_name}.Perm.LambdaX
     The value must be an Integer
 
 
-Geom.{geom_name}.Perm.LambdaY
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.LambdaY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the y correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
 
@@ -621,8 +674,8 @@ Geom.{geom_name}.Perm.LambdaY
     The value must be an Integer
 
 
-Geom.{geom_name}.Perm.LambdaZ
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.LambdaZ
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the z correlation length of the field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
 
@@ -631,8 +684,8 @@ Geom.{geom_name}.Perm.LambdaZ
     The value must be an Integer
 
 
-Geom.{geom_name}.Perm.GeomMean
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.GeomMean
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the geometric mean of the log normal field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
 
@@ -643,8 +696,8 @@ Geom.{geom_name}.Perm.GeomMean
 
 
 
-Geom.{geom_name}.Perm.Sigma
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.Sigma
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the standard deviation of the normal field generated for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen.
 
@@ -655,8 +708,8 @@ Geom.{geom_name}.Perm.Sigma
 
 
 
-Geom.{geom_name}.Perm.Seed
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.Seed
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the initial seed for the random number generator used to generate the field for the named geometry, geometry_name, if either the Turning Bands or Parallel Gaussian Simulator are chosen. This number must be positive.
 
@@ -668,8 +721,8 @@ Geom.{geom_name}.Perm.Seed
 
 
 
-Geom.{geom_name}.Perm.NumLines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.NumLines
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the number of lines to be used in the Turning Bands algorithm for the named geometry, geometry_name.
 
@@ -681,8 +734,8 @@ Geom.{geom_name}.Perm.NumLines
 
 
 
-Geom.{geom_name}.Perm.RZeta
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.RZeta
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the resolution of the line processes, in terms of the minimum grid spacing, to be used in the Turning Bands algorithm for the named geometry, geometry_name. Large values imply high resolution.
 
@@ -694,8 +747,8 @@ Geom.{geom_name}.Perm.RZeta
 
 
 
-Geom.{geom_name}.Perm.KMax
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.KMax
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the the maximum normalized frequency, Kmax, to be used in the Turning Bands algorithm for the named geometry, geometry_name.
 
@@ -707,8 +760,8 @@ Geom.{geom_name}.Perm.KMax
 
 
 
-Geom.{geom_name}.Perm.DelK
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.DelK
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the normalized frequency increment to be used in the Turning Bands algorithm for the named geometry, geometry_name.
 
@@ -720,8 +773,8 @@ Geom.{geom_name}.Perm.DelK
 
 
 
-Geom.{geom_name}.Perm.MaxNPts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.MaxNPts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key sets limits on the number of simulated points in the search neighborhood to be used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
 
@@ -732,8 +785,8 @@ Geom.{geom_name}.Perm.MaxNPts
 
 
 
-Geom.{geom_name}.Perm.MaxCpts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.MaxCpts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key sets limits on the number of external conditioning points in the search neighborhood to be used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
 
@@ -744,8 +797,8 @@ Geom.{geom_name}.Perm.MaxCpts
 
 
 
-Geom.{geom_name}.Perm.LogNormal
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.LogNormal
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] The key specifies when a normal, log normal, truncated normal or truncated log normal field is to be generated by the method for the named geometry, geometry_name. This value must be one of Normal, Log, NormalTruncated or LogTruncated and can be used with either Turning Bands or the Parallel Gaussian Simulator.
 
@@ -755,8 +808,8 @@ Geom.{geom_name}.Perm.LogNormal
     The value must be one of the following options: Normal, Log, NormalTruncated, LogTruncated
 
 
-Geom.{geom_name}.Perm.StratType
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.StratType
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies the stratification of the permeability field generated by the method for the named geometry, geometry_name. The value must be one of Horizontal, Bottom or Top and can be used with either the Turning Bands or the Parallel Gaussian Simulator.
 
@@ -766,8 +819,8 @@ Geom.{geom_name}.Perm.StratType
     The value must be one of the following options: Horizontal, Bottom, Top
 
 
-Geom.{geom_name}.Perm.LowCutoff
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.LowCutoff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the low cutoff value for truncating the generated field for the named geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
 
@@ -778,8 +831,8 @@ Geom.{geom_name}.Perm.LowCutoff
 
 
 
-Geom.{geom_name}.Perm.HighCutoff
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.HighCutoff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the high cutoff value for truncating the generated field for the named geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
 
@@ -790,8 +843,8 @@ Geom.{geom_name}.Perm.HighCutoff
 
 
 
-Geom.{geom_name}.Perm.MaxSearchRad
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.MaxSearchRad
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] A key to improve correlation structure of RF in testing.
 
@@ -802,8 +855,8 @@ Geom.{geom_name}.Perm.MaxSearchRad
 
 
 
-Geom.{geom_name}.Perm.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies that permeability values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. For a description of the ParFlow Binary file format, see the manual. The ParFlow Binary file associated with the named geometry must contain a collection of permeability values corresponding in a one-to-one manner to the entire computational grid. That is to say, when the contents of the file are read into the simulator, a complete permeability description for the entire domain is supplied. Only those values associated with computational cells residing within the geometry (as it is represented on the computational grid) will be copied into data structures used during the course of a simulation. Thus, the values associated with cells outside of the geounit are irrelevant. For clarity, consider a couple of different scenarios. For example, the user may create a file for each geometry such that appropriate permeability values are given for the geometry and “garbage" values (e.g., some flag value) are given for the rest of the computational domain. In this case, a separate binary file is specified for each geometry. Alternatively, one may place all values representing the permeability field on the union of the geometries into a single binary file. Note that the permeability values must be represented in precisely the same configuration as the computational grid. Then, the same file could be specified for each geounit in the input file. Or, the computational domain could be described as a single geouint (in the ParFlow input file) in which case the permeability values would be read in only once.
 
@@ -812,8 +865,8 @@ Geom.{geom_name}.Perm.FileName
     The value must be a string
 
 
-Geom.{geom_name}.Perm.TensorValX
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorValX
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
 
@@ -824,8 +877,8 @@ Geom.{geom_name}.Perm.TensorValX
 
 
 
-Geom.{geom_name}.Perm.TensorValY
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorValY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
 
@@ -836,8 +889,8 @@ Geom.{geom_name}.Perm.TensorValY
 
 
 
-Geom.{geom_name}.Perm.TensorValZ
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorValZ
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
 
@@ -848,8 +901,8 @@ Geom.{geom_name}.Perm.TensorValZ
 
 
 
-Geom.{geom_name}.Perm.TensorFileX
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorFileX
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies that kx values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
 
@@ -858,8 +911,8 @@ Geom.{geom_name}.Perm.TensorFileX
     The value must be a string
 
 
-Geom.{geom_name}.Perm.TensorFileY
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorFileY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies that ky values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
 
@@ -868,8 +921,8 @@ Geom.{geom_name}.Perm.TensorFileY
     The value must be a string
 
 
-Geom.{geom_name}.Perm.TensorFileZ
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Perm.TensorFileZ
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies that kz values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
 
@@ -878,15 +931,15 @@ Geom.{geom_name}.Perm.TensorFileZ
     The value must be a string
 
 
-Geom.{geom_name}.Porosity
---------------------------------------------------------------------------------
+Geom..{geom_name}.Porosity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting porosity values to elements of domain
 
 
 
-Geom.{geom_name}.Porosity.Type
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Porosity.Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies which method is to be used to assign porosity data to the named geometry, geometry_name. The only choice currently available is Constant which indicates that a constant is to be assigned to all grid cells within a geometry.
 
@@ -895,8 +948,8 @@ Geom.{geom_name}.Porosity.Type
     The value must be one of the following options: Constant
 
 
-Geom.{geom_name}.Porosity.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Porosity.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
 
@@ -905,8 +958,8 @@ Geom.{geom_name}.Porosity.Value
     The value must be an Integer
 
 
-Geom.{geom_name}.Porosity.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Porosity.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies that porosity values for the specified geometry, geometry_name, are given according to a user-supplied description in the “ParFlow Binary” file whose filename is given as the value. The only choice for the value of geometry_name is “domain”.
 
@@ -915,15 +968,15 @@ Geom.{geom_name}.Porosity.FileName
     The value must be a string
 
 
-Geom.{geom_name}.SpecificStorage
---------------------------------------------------------------------------------
+Geom..{geom_name}.SpecificStorage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting specific storage values to elements of domain
 
 
 
-Geom.{geom_name}.SpecificStorage.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.SpecificStorage.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
 
@@ -932,15 +985,15 @@ Geom.{geom_name}.SpecificStorage.Value
     The value must be an Integer
 
 
-Geom.{geom_name}.RelPerm
---------------------------------------------------------------------------------
+Geom..{geom_name}.RelPerm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting relative permeability value to geometries
 
 
 
-Geom.{geom_name}.RelPerm.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the constant relative permeability value on the specified geometry.
 
@@ -951,8 +1004,8 @@ Geom.{geom_name}.RelPerm.Value
 
 
 
-Geom.{geom_name}.RelPerm.Alpha.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Alpha.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -961,11 +1014,11 @@ Geom.{geom_name}.RelPerm.Alpha.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.RelPerm.AlphaFileName* which will set    *Geom.{geom_name}.RelPerm.Alpha.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.RelPerm.AlphaFileName* which will set    *Geom..{geom_name}.RelPerm.Alpha.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.RelPerm.Alpha
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Alpha
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
 
@@ -976,8 +1029,8 @@ Geom.{geom_name}.RelPerm.Alpha
 
 
 
-Geom.{geom_name}.RelPerm.N.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.N.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -986,11 +1039,11 @@ Geom.{geom_name}.RelPerm.N.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.RelPerm.NFileName* which will set    *Geom.{geom_name}.RelPerm.N.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.RelPerm.NFileName* which will set    *Geom..{geom_name}.RelPerm.N.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.RelPerm.N
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.N
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
 
@@ -1001,8 +1054,8 @@ Geom.{geom_name}.RelPerm.N
 
 
 
-Geom.{geom_name}.RelPerm.NumSamplePoints
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.NumSamplePoints
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the number of sample points for a spline base interpolation table for the Van Genuchten function specified on geom_name. If this number is 0 (the default) then the function is evaluated directly. Using the interpolation table is faster but is less accurate.
 
@@ -1014,8 +1067,8 @@ Geom.{geom_name}.RelPerm.NumSamplePoints
 
 
 
-Geom.{geom_name}.RelPerm.MinPressureHead
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.MinPressureHead
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the lower value for a spline base interpolation table for the Van Genuchten function specified on geom_name. The upper value of the range is 0. This value is used only when the table lookup method is used (NumSamplePoints is greater than 0).
 
@@ -1024,8 +1077,8 @@ Geom.{geom_name}.RelPerm.MinPressureHead
     The value must be an Integer
 
 
-Geom.{geom_name}.RelPerm.A
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.A
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the A parameter for the Haverkamp relative permeability on geom_name.
 
@@ -1034,8 +1087,8 @@ Geom.{geom_name}.RelPerm.A
     The value must be an Integer
 
 
-Geom.{geom_name}.RelPerm.Gamma
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Gamma
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the gamma parameter for the Haverkamp relative permeability on geom_name.
 
@@ -1044,8 +1097,8 @@ Geom.{geom_name}.RelPerm.Gamma
     The value must be an Integer
 
 
-Geom.{geom_name}.RelPerm.Degree
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Degree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the degree of the polynomial for the Polynomial relative permeability given on geom_name.
 
@@ -1054,15 +1107,15 @@ Geom.{geom_name}.RelPerm.Degree
     The value must be an Integer
 
 
-Geom.{geom_name}.RelPerm.Coeff
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.RelPerm.Coeff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Setting the coefficients for the polynomial relative permeability curve.
 
 
 
 Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
 
@@ -1071,15 +1124,15 @@ Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
     The value must be an Integer
 
 
-Geom.{geom_name}.CapPressure
---------------------------------------------------------------------------------
+Geom..{geom_name}.CapPressure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting capillary pressures for specified geometries
 
 
 
 Geom.{geom_name}.CapPressure.{phase_name}.Value
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: double] This key specifies the value of the capillary pressure in the named geometry, geometry_name, for the named phase, phase_name. IMPORTANT NOTE: the code currently works only for capillary pressure equal zero.
 
@@ -1089,15 +1142,15 @@ Geom.{geom_name}.CapPressure.{phase_name}.Value
     The value must be an Integer
 
 
-Geom.{geom_name}.Saturation
---------------------------------------------------------------------------------
+Geom..{geom_name}.Saturation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting saturation values to geometries
 
 
 
-Geom.{geom_name}.Saturation.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the constant saturation value on the specified geometry.
 
@@ -1109,8 +1162,8 @@ Geom.{geom_name}.Saturation.Value
 
 
 
-Geom.{geom_name}.Saturation.Alpha.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Alpha.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1119,11 +1172,11 @@ Geom.{geom_name}.Saturation.Alpha.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.Saturation.AlphaFileName* which will set    *Geom.{geom_name}.Saturation.Alpha.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.Saturation.AlphaFileName* which will set    *Geom..{geom_name}.Saturation.Alpha.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.Saturation.Alpha
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Alpha
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
 
@@ -1134,8 +1187,8 @@ Geom.{geom_name}.Saturation.Alpha
 
 
 
-Geom.{geom_name}.Saturation.N.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.N.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1144,11 +1197,11 @@ Geom.{geom_name}.Saturation.N.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.Saturation.NFileName* which will set    *Geom.{geom_name}.Saturation.N.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.Saturation.NFileName* which will set    *Geom..{geom_name}.Saturation.N.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.Saturation.N
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.N
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
 
@@ -1159,8 +1212,8 @@ Geom.{geom_name}.Saturation.N
 
 
 
-Geom.{geom_name}.Saturation.SRes.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.SRes.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1169,11 +1222,11 @@ Geom.{geom_name}.Saturation.SRes.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.Saturation.SResFilename* which will set    *Geom.{geom_name}.Saturation.SRes.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.Saturation.SResFilename* which will set    *Geom..{geom_name}.Saturation.SRes.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.Saturation.SRes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.SRes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the residual saturation on geom_name.
 
@@ -1185,8 +1238,8 @@ Geom.{geom_name}.Saturation.SRes
 
 
 
-Geom.{geom_name}.Saturation.SSat.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.SSat.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1195,11 +1248,11 @@ Geom.{geom_name}.Saturation.SSat.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.Saturation.SSatFileName* which will set    *Geom.{geom_name}.Saturation.SSat.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.Saturation.SSatFileName* which will set    *Geom..{geom_name}.Saturation.SSat.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.Saturation.SSat
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.SSat
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the saturation at saturated conditions on geom_name.
 
@@ -1211,8 +1264,8 @@ Geom.{geom_name}.Saturation.SSat
 
 
 
-Geom.{geom_name}.Saturation.A
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.A
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the A parameter for the Haverkamp saturation on geom_name.
 
@@ -1221,8 +1274,8 @@ Geom.{geom_name}.Saturation.A
     The value must be an Integer
 
 
-Geom.{geom_name}.Saturation.Gamma
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Gamma
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the gamma parameter for the Haverkamp saturation on geom_name.
 
@@ -1231,8 +1284,8 @@ Geom.{geom_name}.Saturation.Gamma
     The value must be an Integer
 
 
-Geom.{geom_name}.Saturation.Degree
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Degree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the degree of the polynomial for the Polynomial saturation given on geom_name.
 
@@ -1241,15 +1294,15 @@ Geom.{geom_name}.Saturation.Degree
     The value must be an Integer
 
 
-Geom.{geom_name}.Saturation.Coeff
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.Coeff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Setting the coefficients for the polynomial saturation curve.
 
 
 
-Geom.{geom_name}.Saturation.CoeffNumber
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.CoeffNumber
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
 
@@ -1258,8 +1311,8 @@ Geom.{geom_name}.Saturation.CoeffNumber
     The value must be an Integer
 
 
-Geom.{geom_name}.Saturation.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.Saturation.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies the name of the file containing saturation values for the domain. It is assumed that geom_name is “domain” for this key.
 
@@ -1268,15 +1321,15 @@ Geom.{geom_name}.Saturation.FileName
     The value must be a string
 
 
-Geom.{geom_name}.dzScale
---------------------------------------------------------------------------------
+Geom..{geom_name}.dzScale
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting properties for the dz Scale.
 
 
 
-Geom.{geom_name}.dzScale.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.dzScale.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the value assigned to all points in the named geometry, geometry_name, if the type was set to constant.
 
@@ -1287,8 +1340,8 @@ Geom.{geom_name}.dzScale.Value
 
 
 
-Geom.{geom_name}.dzScale.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.dzScale.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies file to be read in for variable dz values for the given geometry, geometry_name, if the type was set to PFBFile.
 
@@ -1297,15 +1350,15 @@ Geom.{geom_name}.dzScale.FileName
     The value must be a string
 
 
-Geom.{geom_name}.ThermalConductivity
---------------------------------------------------------------------------------
+Geom..{geom_name}.ThermalConductivity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting thermal conductivity values for various geometries
 
 
 
-Geom.{geom_name}.ThermalConductivity.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.ThermalConductivity.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the thermal conductivity value on the specified geometry.
 
@@ -1316,8 +1369,8 @@ Geom.{geom_name}.ThermalConductivity.Value
 
 
 
-Geom.{geom_name}.ThermalConductivity.KDry.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.ThermalConductivity.KDry.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1326,11 +1379,11 @@ Geom.{geom_name}.ThermalConductivity.KDry.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.ThermalConductivity.KDryFileName* which will set    *Geom.{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.ThermalConductivity.KDryFileName* which will set    *Geom..{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.ThermalConductivity.KDry
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.ThermalConductivity.KDry
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
 
@@ -1341,8 +1394,8 @@ Geom.{geom_name}.ThermalConductivity.KDry
 
 
 
-Geom.{geom_name}.ThermalConductivity.KDry.Filename
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.ThermalConductivity.KDry.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
 
@@ -1351,11 +1404,11 @@ Geom.{geom_name}.ThermalConductivity.KDry.Filename
     The value must be a string
 
 .. warning::
-    In Python we will define *Geom.{geom_name}.ThermalConductivity.KWetFileName* which will set    *Geom.{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
+    In Python we will define *Geom..{geom_name}.ThermalConductivity.KWetFileName* which will set    *Geom..{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
 
 
-Geom.{geom_name}.ThermalConductivity.KWet
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.ThermalConductivity.KWet
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
 
@@ -1366,15 +1419,15 @@ Geom.{geom_name}.ThermalConductivity.KWet
 
 
 
-Geom.{geom_name}.FBx
---------------------------------------------------------------------------------
+Geom..{geom_name}.FBx
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{geom_name}.FBx.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.FBx.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies file to be read in for the X flow barrier values for the domain, if the type was set to PFBFile.
 
@@ -1383,15 +1436,15 @@ Geom.{geom_name}.FBx.FileName
     The value must be a string
 
 
-Geom.{geom_name}.FBy
---------------------------------------------------------------------------------
+Geom..{geom_name}.FBy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{geom_name}.FBy.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.FBy.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain, if the type was set to PFBFile.
 
@@ -1400,15 +1453,15 @@ Geom.{geom_name}.FBy.FileName
     The value must be a string
 
 
-Geom.{geom_name}.FBz
---------------------------------------------------------------------------------
+Geom..{geom_name}.FBz
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
 
 
 
-Geom.{geom_name}.FBz.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.FBz.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain, if the type was set to PFBFile.
 
@@ -1417,15 +1470,15 @@ Geom.{geom_name}.FBz.FileName
     The value must be a string
 
 
-Geom.{geom_name}.HeatCapacity
---------------------------------------------------------------------------------
+Geom..{geom_name}.HeatCapacity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting heat capacity properties for specified geometries.
 
 
 
-Geom.{geom_name}.HeatCapacity.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Geom..{geom_name}.HeatCapacity.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
 
@@ -1437,14 +1490,14 @@ Geom.{geom_name}.HeatCapacity.Value
 
 
 Geom.{geom_name}.ICPressure
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting the initial conditions for pressure for specific geometries.
 
 
 
 Geom.{geom_name}.ICPressure.FileName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 This key specifies the name of the file containing pressure values for the domain. It is assumed that geom_name is “domain” for this key.
 
@@ -1454,7 +1507,7 @@ This key specifies the name of the file containing pressure values for the domai
 
 
 Geom.{geom_name}.ICPressure.RefElevation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the reference elevation on which the reference pressure is given for type HydroStaticDepth initial pressures.
 
@@ -1464,7 +1517,7 @@ Geom.{geom_name}.ICPressure.RefElevation
 
 
 Geom.{geom_name}.ICPressure.RefGeom
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies the geometry on which the reference patch resides for type HydroStaticPatch initial pressures.
 
@@ -1474,7 +1527,7 @@ Geom.{geom_name}.ICPressure.RefGeom
 
 
 Geom.{geom_name}.ICPressure.RefPatch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies the patch on which the reference pressure is given for type HydorStaticPatch initial pressures.
 
@@ -1484,7 +1537,7 @@ Geom.{geom_name}.ICPressure.RefPatch
 
 
 Geom.{geom_name}.ICPressure.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value for types HydroStaticDepth and HydroStaticPatch.
 
@@ -1494,14 +1547,14 @@ Geom.{geom_name}.ICPressure.Value
 
 
 Geom.{geom_name}.ICSaturation.{phase_name}
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting Geom.geom_input_name.ICSaturation.phase_name.Value
 
 
 
 Geom.{geom_name}.ICSaturation.{phase_name}.Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] Setting
 
@@ -1511,14 +1564,14 @@ Geom.{geom_name}.ICSaturation.{phase_name}.Value
 
 
 Geom.{geom_name}.{contaminant}
-================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Setting retardation properties for specific contaminants and specific geometries.
 
 
 
-Geom.{geom_name}.{contaminant}.Type
---------------------------------------------------------------------------------
+Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] This key specifies which function is to be used to compute the retardation for the named contaminant, contaminant_ name, in the named geometry, geometry_name. The only choice currently available is Linear which indicates that a simple linear retardation function is to be used to compute the retardation.
 
@@ -1527,8 +1580,8 @@ Geom.{geom_name}.{contaminant}.Type
     The value must be one of the following options: Linear
 
 
-Geom.{geom_name}.{contaminant}.Value
---------------------------------------------------------------------------------
+Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by the density of the material in the geometry.
 
@@ -1539,8 +1592,8 @@ Geom.{geom_name}.{contaminant}.Value
 
 
 
-Geom.{geom_name}.{contaminant}.Rate
---------------------------------------------------------------------------------
+Rate
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the distribution coefficient for the linear function used to compute the retardation of the named contaminant, contaminant_name, in the named geometry, geometry_name. The value should be scaled by the density of the material in the geometry.
 
@@ -1549,60 +1602,6 @@ Geom.{geom_name}.{contaminant}.Rate
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
-
-
-ICSaturation.{phase_name}
-================================================================================
-
-This section needs to be defined only for multi-phase flow and should not be defined for single-phase and Richards' equation cases.
-
-
-
-ICSaturation.{phase_name}.Type
---------------------------------------------------------------------------------
-
-[Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase, phase_name. The only key currently available is Constant. The choice Constant will apply constants values within geometries for the phase.
-
-
-.. note::
-    The value must be one of the following options: Constant
-
-
-ICSaturation.{phase_name}.GeomNames
---------------------------------------------------------------------------------
-
-[Type: string] This key specifies the geometries on which an initial condition will be given if the type is set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
-
-
-.. note::
-    The value must be a string
-
-
-ICPressure
-================================================================================
-
-The keys in this section are used to specify pressure initial conditions for Richards’ equation cases only. These keys will be ignored if any other case is run.
-
-
-
-ICPressure.GeomNames
---------------------------------------------------------------------------------
-
-[Type: string] This key specifies the geometry names on which the initial pressure data will be given. These geometries must comprise the entire domain. Note that conditions for regions that overlap other regions will have unpredictable results. The regions given must be disjoint.
-
-
-.. note::
-    The value must be a string
-
-
-ICPressure.Type
---------------------------------------------------------------------------------
-
-[Type: string] This key specifies the type of initial condition given. The choices for this key are Constant, HydroStaticDepth, HydroStaticPatch and PFBFile. The choice Constant specifies that the initial pressure will be constant over the regions given. The choice HydroStaticDepth specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure specified at a given depth. The choice HydroStaticPatch specifies that the initial pressure within a region will be in hydrostatic equilibrium with a given pressure on a specified patch. Note that all regions must have the same type of initial data - different regions cannot have different types of initial data. However, the parameters for the type may be different. The PFBFile specification means that the initial pressure will be taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
-
-
-.. note::
-    The value must be one of the following options: Constant, PFBFile, HydroStaticPatch, NCFile
 
 
 TopoSlopes
@@ -2422,17 +2421,6 @@ Solver.LSM
     The value must be one of the following options: none, CLM
 
 
-Solver.Linear
---------------------------------------------------------------------------------
-
-[Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG, and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient) which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a conjugate gradient solver.
-
-
-:default: PCG
-.. note::
-    The value must be one of the following options: MGSemi, PPCG, PCG, CGHS
-
-
 Solver.MaxConvergenceFailures
 --------------------------------------------------------------------------------
 
@@ -2894,8 +2882,29 @@ Solver.WriteCLMBinary
     The value must be True or False
 
 
-Solver.Linear.KrylovDimension
+Solver.Linear
 --------------------------------------------------------------------------------
+
+Assigning properties to Solver.Linear
+
+
+
+Solver.Linear
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG, and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient) which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a conjugate gradient solver.
+
+
+:default: PCG
+.. note::
+    The value must be one of the following options: MGSemi, PPCG, PCG, CGHS
+
+.. warning::
+    In Python we will define *Solver.Linear.Type* which will set    *Solver.Linear* inside the ParFlow .pfidb file.
+
+
+Solver.Linear.KrylovDimension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the maximum number of vectors to be used in setting up the Krylov subspace in the GMRES iterative solver. These vectors are of problem size and it should be noted that large increases in this parameter can limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
 
@@ -2906,12 +2915,9 @@ Solver.Linear.KrylovDimension
       - with a value greater than or equal to 1
 
 
-.. warning::
-    In Python we will define *Solver.LinearKrylovDimension* which will set    *Solver.Linear.KrylovDimension* inside the ParFlow .pfidb file.
-
 
 Solver.Linear.MaxRestarts
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the Krylov subspace over using the current iterate as the initial iterate for the next pass.
 
@@ -2922,12 +2928,9 @@ Solver.Linear.MaxRestarts
       - with a value greater than or equal to 0
 
 
-.. warning::
-    In Python we will define *Solver.LinearMaxRestarts* which will set    *Solver.Linear.MaxRestarts* inside the ParFlow .pfidb file.
 
 
-Solver.Linear.Preconditioner
---------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG, PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi specifies a semi-coarsening multigrid algorithm which uses a point relaxation method. The choice SMG specifies a semi-coarsening multigrid algorithm which uses plane relaxations. This method is more robust than MGSemi, but generally requires more memory and compute time. The choice PFMGOctree can be more efficient for problems with large numbers of inactive cells.
 
@@ -2937,11 +2940,11 @@ Solver.Linear.Preconditioner
     The value must be one of the following options: NoPC, MGSemi, PFMG, PFMGOctree, SMG
 
 .. warning::
-    In Python we will define *Solver.LinearPreconditioner* which will set    *Solver.Linear.Preconditioner* inside the ParFlow .pfidb file.
+    In Python we will define *Type* which will set    ** inside the ParFlow .pfidb file.
 
 
-Solver.Linear.Preconditioner.SymmetricMat
---------------------------------------------------------------------------------
+SymmetricMat
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies whether the preconditioning matrix is symmetric. Choices fo rthis key are Symmetric and Nonsymmetric. The choice Symmetric specifies that the symmetric part of the Jacobian will be used as the preconditioning matrix. The choice Nonsymmetric specifies that the full Jacobian will be used as the preconditioning matrix. NOTE: ONLY Symmetric CAN BE USED IF MGSemi IS THE SPECIFIED PRECONDITIONER!
 
@@ -2950,19 +2953,16 @@ Solver.Linear.Preconditioner.SymmetricMat
 .. note::
     The value must be one of the following options: Symmetric, Nonsymmetric
 
-.. warning::
-    In Python we will define *Solver.LinearPrecondSym* which will set    *Solver.Linear.Preconditioner.SymmetricMat* inside the ParFlow .pfidb file.
 
-
-Solver.PrecondItem
---------------------------------------------------------------------------------
-
-Setting Solver.Linear.Preconditioner.precond_method.MaxIter key
-
-
-
-Solver.PrecondItem.MaxIter
+.{precond_method}
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
+
+
+
+.{precond_method}.MaxIter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the maximum number of iterations to take in solving the preconditioner system with precond_ method solver.
 
@@ -2974,8 +2974,20 @@ Solver.PrecondItem.MaxIter
 
 
 
-Solver.Linear.Preconditioner.SMG.NumPreRelax
---------------------------------------------------------------------------------
+.{precond_method}.MaxLevels
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: int] Max Levels
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+NumPreRelax
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
 
@@ -2986,12 +2998,9 @@ Solver.Linear.Preconditioner.SMG.NumPreRelax
       - with a value greater than or equal to 1
 
 
-.. warning::
-    In Python we will define *Solver.LinearPrecondSMGPreRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPreRelax* inside the ParFlow .pfidb file.
 
-
-Solver.Linear.Preconditioner.SMG.NumPostRelax
---------------------------------------------------------------------------------
+NumPostRelax
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
 
@@ -3002,12 +3011,9 @@ Solver.Linear.Preconditioner.SMG.NumPostRelax
       - with a value greater than or equal to 1
 
 
-.. warning::
-    In Python we will define *Solver.LinearPrecondSMGPostRelax* which will set    *Solver.Linear.Preconditioner.SMG.NumPostRelax* inside the ParFlow .pfidb file.
 
-
-Solver.Linear.Preconditioner.PFMG.RAPType
---------------------------------------------------------------------------------
+RAPType
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
 
@@ -3015,9 +3021,6 @@ Solver.Linear.Preconditioner.PFMG.RAPType
 :default: NonGalerkin
 .. note::
     The value must be one of the following options: Galerkin, NonGalerkin
-
-.. warning::
-    In Python we will define *Solver.LinearPrecondPFMGRAPType* which will set    *Solver.Linear.Preconditioner.PFMG.RAPType* inside the ParFlow .pfidb file.
 
 
 Solver.NonlinearSolver
@@ -3727,6 +3730,53 @@ Value
     The value must be an Integer
 
 
+PhaseSources
+================================================================================
+
+The following keys are used to specify phase source terms. The units of the source term are 1=T . So, for example, to specify a region with constant flux rate of L3=T , one must be careful to convert this rate to the proper units by dividing by the volume of the enclosing region. For Richards’ equation input, the source term must be given as a flux multiplied by density.
+
+
+
+Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of source to use for phase phase_name. Possible values for this key are Constant and PredefinedFunction. Constant type phase sources specify a constant phase source value for a given set of regions. PredefinedFunction type phase sources use a preset function (choices are listed below) to specify the source. Note that the PredefinedFunction type can only be used to set a single source over the entire domain and not separate sources over different regions.
+
+
+.. note::
+    The value must be one of the following options: Constant, PredefinedFunction
+
+
+GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the names of the geometries on which source terms will be specified. This is used only for Constant type phase sources. Regions listed later “overlay” regions listed earlier.
+
+
+.. note::
+    The value must be a string
+
+
+PredefinedFunction
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies which of the predefined functions will be used for the source. Possible values for this key are X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor.
+
+
+.. note::
+    The value must be one of the following options: X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1, XYZTPlus1PermTensor
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
+
+
+.. note::
+    The value must be an Integer
+
+
 Contaminants
 ================================================================================
 
@@ -3963,6 +4013,18 @@ Wells.{well_name}.{interval_name}.Length
     The value must be an Integer
       - with a value greater than or equal to 1
 
+
+
+FileVersion
+================================================================================
+
+[Type: int] This gives the value of the input file version number that this file fits. As development of the ParFlow code continues, the input file format may vary. We have thus included an input file format number as a way of verifying that the correct format type is being used. The user can check in the parflow/config/file_versions.h file to verify that the format number specified in the input file matches the defined value of PFIN_VERSION.
+
+
+:default: 4
+.. note::
+    The value is required
+    The value must be an Integer
 
 
 Gravity

@@ -302,7 +302,6 @@ drich.PhaseSources.water.Geom.background.Value = 0.0
 
 drich.KnownSolution = 'NoKnownSolution'
 
-
 #-----------------------------------------------------------------------------
 # Set solver parameters
 #-----------------------------------------------------------------------------
