@@ -513,27 +513,6 @@ Solver:
           - none
           - CLM
 
-  Linear:
-    help: >
-      [Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG,
-      and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient)
-      which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient
-      solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a
-      conjugate gradient solver.
-    default: 'PCG'
-    domains:
-      EnumDomain:
-        enumList:
-          - MGSemi
-          - PPCG
-          - PCG
-          - CGHS
-    handlers:
-      PhaseSourceGeomUpdater:
-        type: ChildrenHandler
-        className: PhaseSourceGeomItem
-        location: ./Geom
-
   MaxConvergenceFailures:
     help: >
       [Type: int] This key gives the maximum number of convergence failures allowed. Each convergence failure cuts the timestep
@@ -887,125 +866,153 @@ Solver:
       BoolDomain:
 
   # Solver.Linear.{} keys
-  # corner case
-  LinearKrylovDimension:
-    help: >
-      [Type: int] This key specifies the maximum number of vectors to be used in setting up the Krylov subspace in the GMRES
-      iterative solver. These vectors are of problem size and it should be noted that large increases in this parameter can
-      limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
-    default: 10
-    domains:
-      IntValue:
-        minValue: 1 # check
-    exportName: .Linear.KrylovDimension
-
-  # corner case
-  LinearMaxRestarts:
-    help: >
-      [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the
-      Krylov subspace over using the current iterate as the initial iterate for the next pass.
-    default: 0
-    domains:
-      IntValue:
-        minValue: 0
-    exportName: .Linear.MaxRestarts
-
-  # corner case
-  LinearPreconditioner:
-    help: >
-      [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG,
-      PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi
-      specifies a semi-coarsening multigrid algorithm which uses a point relaxation method. The choice SMG specifies a
-      semi-coarsening multigrid algorithm which uses plane relaxations. This method is more robust than MGSemi, but
-      generally requires more memory and compute time. The choice PFMGOctree can be more efficient for problems
-      with large numbers of inactive cells.
-    default: MGSemi
-    domains:
-      EnumDomain:
-        enumList:
-          - NoPC
-          - MGSemi
-          - PFMG
-          - PFMGOctree
-          - SMG
-    exportName: .Linear.Preconditioner
-    handlers:
-      LPreMethodUpdater:
-        type: ChildrenHandler
-        className: PrecondMethodItem
-        location: .
-
-  # corner case
-  LinearPrecondSym:
-    help: >
-      [Type: string] This key specifies whether the preconditioning matrix is symmetric. Choices fo rthis key are Symmetric and
-      Nonsymmetric. The choice Symmetric specifies that the symmetric part of the Jacobian will be used as the preconditioning
-      matrix. The choice Nonsymmetric specifies that the full Jacobian will be used as the preconditioning
-      matrix. NOTE: ONLY Symmetric CAN BE USED IF MGSemi IS THE SPECIFIED PRECONDITIONER!
-    default: Symmetric
-    domains:
-      EnumDomain:
-        enumList:
-          - Symmetric
-          - Nonsymmetric
-    exportName: .Linear.Preconditioner.SymmetricMat
-
-  # defining key for Solver.Linear.Preconditioner.precond_method.MaxIter
-  .{precond_method}:
-    __class__: PrecondMethodItem
+  Linear:
     __doc__: >
-      Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
+      Assigning properties to Solver.Linear
 
-    MaxIter:
+    # corner case - This is the definition of the solver name
+    Type:
       help: >
-        [Type: int] This key specifies the maximum number of iterations to take in solving the preconditioner system with precond_
-        method solver.
-      default: 1
+        [Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG,
+        and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient)
+        which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient
+        solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a
+        conjugate gradient solver.
+      default: 'PCG'
+      domains:
+        EnumDomain:
+          enumList:
+            - MGSemi
+            - PPCG
+            - PCG
+            - CGHS
+      exportName: ..Linear
+      handlers:
+        PhaseSourceGeomUpdater:
+          type: ChildrenHandler
+          className: PhaseSourceGeomItem
+          location: ./Geom
+
+    KrylovDimension:
+      help: >
+        [Type: int] This key specifies the maximum number of vectors to be used in setting up the Krylov subspace in the GMRES
+        iterative solver. These vectors are of problem size and it should be noted that large increases in this parameter can
+        limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
+      default: 10
       domains:
         IntValue:
-          minValue: 1
+          minValue: 1 # check
 
-    # not in the manual - check to make sure that it is not the same as the Solver.MaxLevels listed above
-    MaxLevels:
+    MaxRestarts:
       help: >
-        [Type: int] Max Levels
+        [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the
+        Krylov subspace over using the current iterate as the initial iterate for the next pass.
+      default: 0
       domains:
         IntValue:
-          minValue: 1
+          minValue: 0
 
-  # corner case
-  LinearPrecondSMGPreRelax:
-    help: >
-      [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method.
-      Note that this key is only relevant to the SMG multigrid preconditioner.
-    default: 1
-    domains:
-      IntValue:
-        minValue: 1
-    exportName: .Linear.Preconditioner.SMG.NumPreRelax
+    Preconditioner:
+      __doc__: >
+        Setting properties for Solver.Linear.Preconditioner
+      __rst__:
+        skip:
 
-  # corner case
-  LinearPrecondSMGPostRelax:
-    help: >
-      [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method.
-      Note that this key is only relevant to the SMG multigrid preconditioner.
-    default: 1
-    domains:
-      IntValue:
-        minValue: 1
-    exportName: .Linear.Preconditioner.SMG.NumPostRelax
+      Type:
+        help: >
+          [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG,
+          PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi
+          specifies a semi-coarsening multigrid algorithm which uses a point relaxation method. The choice SMG specifies a
+          semi-coarsening multigrid algorithm which uses plane relaxations. This method is more robust than MGSemi, but
+          generally requires more memory and compute time. The choice PFMGOctree can be more efficient for problems
+          with large numbers of inactive cells.
+        default: MGSemi
+        domains:
+          EnumDomain:
+            enumList:
+              - NoPC
+              - MGSemi
+              - PFMG
+              - PFMGOctree
+              - SMG
+        exportName: ..Preconditioner
+        handlers:
+          LPreMethodUpdater:
+            type: ChildrenHandler
+            className: PrecondMethodItem
+            location: ..
 
-  # corner case
-  LinearPrecondPFMGRAPType:
-    help: >
-      [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
-    default: NonGalerkin
-    domains:
-      EnumDomain:
-        enumList:
-          - Galerkin
-          - NonGalerkin
-    exportName: .Linear.Preconditioner.PFMG.RAPType
+      SymmetricMat:
+        help: >
+          [Type: string] This key specifies whether the preconditioning matrix is symmetric. Choices fo rthis key are Symmetric and
+          Nonsymmetric. The choice Symmetric specifies that the symmetric part of the Jacobian will be used as the preconditioning
+          matrix. The choice Nonsymmetric specifies that the full Jacobian will be used as the preconditioning
+          matrix. NOTE: ONLY Symmetric CAN BE USED IF MGSemi IS THE SPECIFIED PRECONDITIONER!
+        default: Symmetric
+        domains:
+          EnumDomain:
+            enumList:
+              - Symmetric
+              - Nonsymmetric
+
+      # defining key for Solver.Linear.Preconditioner.{precond_method}.MaxIter
+      .{precond_method}:
+        __class__: PrecondMethodItem
+        __doc__: >
+          Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
+
+        MaxIter:
+          help: >
+            [Type: int] This key specifies the maximum number of iterations to take in solving the preconditioner system with precond_
+            method solver.
+          default: 1
+          domains:
+            IntValue:
+              minValue: 1
+
+        # not in the manual - check to make sure that it is not the same as the Solver.MaxLevels listed above
+        MaxLevels:
+          help: >
+            [Type: int] Max Levels
+          domains:
+            IntValue:
+              minValue: 1
+
+      SMG:
+        __rst__:
+          skip:
+        __doc__: ''
+        NumPreRelax:
+          help: >
+            [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method.
+            Note that this key is only relevant to the SMG multigrid preconditioner.
+          default: 1
+          domains:
+            IntValue:
+              minValue: 1
+
+        NumPostRelax:
+          help: >
+            [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method.
+            Note that this key is only relevant to the SMG multigrid preconditioner.
+          default: 1
+          domains:
+            IntValue:
+              minValue: 1
+
+      PFMG:
+        __rst__:
+          skip:
+        __doc__: ''
+        RAPType:
+          help: >
+            [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
+          default: NonGalerkin
+          domains:
+            EnumDomain:
+              enumList:
+                - Galerkin
+                - NonGalerkin
 
   # Solver.Nonlinear.{} keys
 

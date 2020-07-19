@@ -316,11 +316,11 @@ drich.Solver.Nonlinear.EtaValue = 1e-5
 drich.Solver.Nonlinear.UseJacobian = True
 drich.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 
-drich.Solver.LinearKrylovDimension = 10
+drich.Solver.Linear.KrylovDimension = 10
 
-drich.Solver.LinearPreconditioner = 'PFMG'
-# drich.Solver.LinearPreconditioner.MGSemi.MaxIter  = 1
-# drich.Solver.LinearPreconditioner.MGSemi.MaxLevels = 100
+drich.Solver.Linear.Preconditioner.Type = 'PFMG'
+# drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
+# drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
 
 drich.validate()
