@@ -171,7 +171,7 @@ class PFDBObj:
         history = None
         if 'history' in self._details[name] and len(self._details[name]['history']):
           history = self._details[name]['history']
-        if 'default' in self._details[name] and obj == self._details[name]['default']:
+        if 'default' in self._details[name] and obj == self._details[name]['default'] and 'MandatoryValue' not in self._details[name]['domains']:
           pass
         else:
           errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(),
