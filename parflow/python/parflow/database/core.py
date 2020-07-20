@@ -171,7 +171,11 @@ class PFDBObj:
         history = None
         if 'history' in self._details[name] and len(self._details[name]['history']):
           history = self._details[name]['history']
-        errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(), history, indent)
+        if 'default' in self._details[name] and obj == self._details[name]['default']:
+          pass
+        else:
+          errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(),
+                                               history, indent)
       elif name[0] == '_':
         # skip internal variables
         pass
