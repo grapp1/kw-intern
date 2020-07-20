@@ -2,24 +2,23 @@ from parflow.utils import sortDict, loadPfidb
 import yaml
 
 def searchDict(keyList, existDict, value):
-  new_entry = {}
   for i in range(len(keyList)):
-    if keyList[i] in existDict.items():
-      searchDict(keyList[i+1], existDict.keys())
-    elif i == 0:
-      existDict[keyList[i]] = {}
-      new_entry = existDict[keyList[i]]
+    if len(existDict) and keyList[i] in existDict.keys():
+      print(f'{keyList[i]} already exists')
+      searchDict(keyList[i+1], existDict.keys(), value)
     elif i == len(keyList):
-      new_entry = new_entry[keyList[i]]
+      existDict[keyList[i]] = value
+    else:
+      existDict[keyList[i]] = {}
 
-  return new_entry
+  return existDict
 
 
 def pfidbToNestedYaml(dictObj):
   yamlObj = {}
   for key, value in dictObj.items():
     split_keys = key.split('.')
-    searchDict(split_keys, yamlObj, value)
+    yamlObj = searchDict(split_keys, yamlObj, value)
 
   yamlObj = yaml.dump(yamlObj)
 
