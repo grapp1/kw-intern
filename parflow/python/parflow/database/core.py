@@ -3,9 +3,9 @@ This module aims to provide the core components that are required to build
 a Parflow input deck.
 '''
 import os
-from .domains import validateValueWithException, validateValueWithPrint, duplicateSearch
+from .domains import validateValueWithException, validateValueWithPrint
 from .handlers import decorateValue
-from . import TerminalColors as term
+
 
 # -----------------------------------------------------------------------------
 # Helper functions
