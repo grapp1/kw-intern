@@ -30,5 +30,6 @@ apt-get install -y \
   openssh-server \
   openmpi-bin \
   libopenmpi-dev \
+  python3 \
   tcl-dev \
   tk-dev

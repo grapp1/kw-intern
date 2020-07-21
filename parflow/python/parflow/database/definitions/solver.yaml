@@ -900,6 +900,7 @@ Solver:
         limit problem sizes. However, increasing this parameter can sometimes help nonlinear solver convergence.
       default: 10
       domains:
+        MandatoryValue:
         IntValue:
           minValue: 1 # check
 

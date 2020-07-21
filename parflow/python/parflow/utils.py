@@ -16,9 +16,7 @@ def convertValueForStringDict(value):
 # -----------------------------------------------------------------------------
 
 def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
-  for key in instance.__dict__:
-    if key[0] == '_':
-      continue
+  for key in instance.getKeyNames(skipDefault=True):
 
     value = instance.__dict__[key]
     if value == None:

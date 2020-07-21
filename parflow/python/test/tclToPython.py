@@ -22,6 +22,16 @@ def tclToPython(tclfile, pyfile, runname):
           newline_subs = newline.split()
           if newline_subs[1][0].isalpha():
             newline = newline_subs[0] + ' = ' + "'" + ' '.join(newline_subs[1:]) + "'" + '\n'
+          elif newline_subs[1][0] == '$' and len(newline_subs) == 2:
+            newline = newline_subs[0] + ' = ' + newline_subs[1][1:] + '\n'
+          else:
+            newline = newline_subs[0] + ' = ' + ' '.join(newline_subs[1:]) + '\n'
+
+        if newline[0:4] == 'set ' and 'runname' not in newline:
+          newline = newline.replace('set ', '')
+          newline_subs = newline.split()
+          if newline_subs[1][0].isalpha():
+            newline = newline_subs[0] + ' = ' + "'" + ' '.join(newline_subs[1:]) + "'" + '\n'
           else:
             newline = newline_subs[0] + ' = ' + ' '.join(newline_subs[1:]) + '\n'
 
@@ -45,5 +55,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./comparison/default_richards.tcl', 'default_richards2.py', 'drich')
+tclToPython('./comparison/water_balance_x.tcl', 'water_balance_x.py', 'wbx')
 

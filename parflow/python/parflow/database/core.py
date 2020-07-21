@@ -149,6 +149,35 @@ class PFDBObj:
 
   # ---------------------------------------------------------------------------
 
+  def getKeyNames(self, skipDefault=False):
+    for name in self.__dict__:
+      if name[0] == '_':
+        continue
+
+      obj = self.__dict__[name]
+      if isinstance(obj, PFDBObj):
+        if len(obj):
+          yield name
+      else:
+        hasDetails = hasattr(self, '_details') and name in self._details
+        hasDefault = hasDetails and 'default' in self._details[name]
+        hasDomain = hasDetails and 'domains' in self._details[name]
+        isMandatory = hasDomain and 'MandatoryValue' in self._details[name]['domains']
+        isDefault = hasDefault and obj == self._details[name]['default']
+
+        if obj != None:
+          if skipDefault:
+            if not isDefault or isMandatory:
+              yield name
+          else:
+            yield name
+
+        elif isMandatory:
+          yield name
+
+
+  # ---------------------------------------------------------------------------
+
   def validate(self, indent=1, workdir=None):
     '''
     Method to validate sub hierarchy
@@ -158,16 +187,14 @@ class PFDBObj:
 
     errorCount = 0
     indentStr = '  '*indent
-    for name in self.__dict__:
-      if name[0] == '_':
-        continue
+    for name in self.getKeyNames():
 
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         if len(obj):
           print(f'{indentStr}{name}:')
           errorCount += obj.validate(indent+1)
-      elif hasattr(self, '_details') and name in self._details and 'domains' in self._details[name]:
+      elif hasattr(self, '_details') and name in self._details:
         history = None
         if 'history' in self._details[name] and len(self._details[name]['history']):
           history = self._details[name]['history']
@@ -176,13 +203,8 @@ class PFDBObj:
         else:
           errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(),
                                                history, indent)
-      elif name[0] == '_':
-        # skip internal variables
-        pass
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
-      elif obj == None:
-        pass
 
     return errorCount
 

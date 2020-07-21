@@ -25,6 +25,7 @@ Process:
         [Type: int] P allocates the number of processes to the grid-cells in x.
       default: 1
       domains:
+        MandatoryValue:
         IntValue:
           minValue: 1
 
@@ -33,6 +34,7 @@ Process:
         [Type: int] Q allocates the number of processes to the grid-cells in y.
       default: 1
       domains:
+        MandatoryValue:
         IntValue:
           minValue: 1
 
@@ -43,6 +45,7 @@ Process:
         unless you are running a totally saturated domain (solver IMPES).
       default: 1
       domains:
+        MandatoryValue:
         IntValue:
           minValue: 1
 

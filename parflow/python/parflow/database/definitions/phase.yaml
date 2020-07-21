@@ -153,6 +153,7 @@ Phase:
           [Type: string] This key specifies whether viscosity will be a constant value. Currently, the only choice for this key is Constant.
         default: Constant
         domains:
+          MandatoryValue:
           EnumDomain:
             enumList:
               - Constant
@@ -162,6 +163,7 @@ Phase:
           [Type: double] This specifies the value of density if this phase was specified to have a constant density value for the phase
           phase_name.
         domains:
+          MandatoryValue:
           DoubleValue:
 
 
