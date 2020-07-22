@@ -913,6 +913,16 @@ Solver:
         IntValue:
           minValue: 0
 
+    # missing from manual, but assigned in water_balance_x.tcl example
+    MaxRestart:
+      help: >
+        [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the
+        Krylov subspace over using the current iterate as the initial iterate for the next pass.
+      default: 0
+      domains:
+        IntValue:
+          minValue: 0
+
     Preconditioner:
       __doc__: >
         Setting properties for Solver.Linear.Preconditioner
@@ -941,7 +951,7 @@ Solver:
           LPreMethodUpdater:
             type: ChildrenHandler
             className: PrecondMethodItem
-            location: ..
+            location: .
 
       SymmetricMat:
         help: >
@@ -956,11 +966,11 @@ Solver:
               - Symmetric
               - Nonsymmetric
 
-      # defining key for Solver.Linear.Preconditioner.{precond_method}.MaxIter
+      # defining key for Solver.Linear.Preconditioner.{precond_method}... keys
       .{precond_method}:
         __class__: PrecondMethodItem
         __doc__: >
-          Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
+          Setting Solver.Linear.Preconditioner.{precond_method} keys
 
         MaxIter:
           help: >
@@ -979,10 +989,7 @@ Solver:
             IntValue:
               minValue: 1
 
-      SMG:
-        __rst__:
-          skip:
-        __doc__: ''
+        # missing from manual if applicable to preconditioners other than SMG
         NumPreRelax:
           help: >
             [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method.
@@ -992,6 +999,7 @@ Solver:
             IntValue:
               minValue: 1
 
+        # missing from manual if applicable to preconditioners other than SMG
         NumPostRelax:
           help: >
             [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method.
@@ -1001,10 +1009,14 @@ Solver:
             IntValue:
               minValue: 1
 
-      PFMG:
-        __rst__:
-          skip:
-        __doc__: ''
+        # missing from manual
+        Smoother:
+          help: >
+            [Type: string]
+          domains:
+            AnyString:
+
+        # only for the PFMG solver
         RAPType:
           help: >
             [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin

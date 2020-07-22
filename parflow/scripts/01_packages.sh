@@ -23,6 +23,7 @@ apt-get install -y \
   build-essential \
   curl \
   git \
+  vim \
   gfortran \
   libopenblas-dev \
   liblapack-dev \
@@ -31,5 +32,6 @@ apt-get install -y \
   openmpi-bin \
   libopenmpi-dev \
   python3 \
+  python3-pip \
   tcl-dev \
   tk-dev

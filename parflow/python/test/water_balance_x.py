@@ -60,7 +60,7 @@ wbx.ComputationalGrid.DZ = 0.05
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-wbx.GeomInput.Names = "domaininput leftinput rightinput channelinput"
+wbx.GeomInput.Names = 'domaininput leftinput rightinput channelinput'
 
 wbx.GeomInput.domaininput.GeomName = 'domain'
 wbx.GeomInput.leftinput.GeomName = 'left'
@@ -81,7 +81,7 @@ wbx.Geom.domain.Lower.Z = 0.0
 wbx.Geom.domain.Upper.X = 300.0
 wbx.Geom.domain.Upper.Y = 300.0
 wbx.Geom.domain.Upper.Z = 1.5
-wbx.Geom.domain.Patches = "x-lower x-upper y-lower y-upper z-lower z-upper"
+wbx.Geom.domain.Patches = 'x_lower x_upper y_lower y_upper z_lower z_upper'
 
 #---------------------------------------------------------
 # Left Slope Geometry 
@@ -117,7 +117,7 @@ wbx.Geom.channel.Upper.Z = 1.5
 # Perm
 #-----------------------------------------------------------------------------
 
-wbx.Geom.Perm.Names = "left right channel"
+wbx.Geom.Perm.Names = 'left right channel'
 
 # Values in m/hour
 
@@ -125,7 +125,7 @@ wbx.Geom.Perm.Names = "left right channel"
 # the following is ignored if the perm.type "Constant" settings are not
 # commented out, below.
 
-wbx.Geom.left.Perm.Type = "TurnBands"
+wbx.Geom.left.Perm.Type = 'TurnBands'
 wbx.Geom.left.Perm.LambdaX = 50.
 wbx.Geom.left.Perm.LambdaY = 50.
 wbx.Geom.left.Perm.LambdaZ = 0.5
@@ -141,7 +141,7 @@ wbx.Geom.left.Perm.LogNormal = 'Log'
 wbx.Geom.left.Perm.StratType = 'Bottom'
 
 
-wbx.Geom.right.Perm.Type = "TurnBands"
+wbx.Geom.right.Perm.Type = 'TurnBands'
 wbx.Geom.right.Perm.LambdaX = 50.
 wbx.Geom.right.Perm.LambdaY = 50.
 wbx.Geom.right.Perm.LambdaZ = 0.5
@@ -174,25 +174,25 @@ wbx.Geom.channel.Perm.Value = 0.00001
 
 wbx.Perm.TensorType = 'TensorByGeom'
 
-wbx.Geom.Perm.TensorByGeom.Names = "domain"
+wbx.Geom.Perm.TensorByGeom.Names = 'domain'
 
-wbx.Geom.domain.Perm.TensorValX = 1.0d0
-wbx.Geom.domain.Perm.TensorValY = 1.0d0
-wbx.Geom.domain.Perm.TensorValZ = 1.0d0
+wbx.Geom.domain.Perm.TensorValX = 1.0
+wbx.Geom.domain.Perm.TensorValY = 1.0
+wbx.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
 #-----------------------------------------------------------------------------
 
 wbx.SpecificStorage.Type = 'Constant'
-wbx.SpecificStorage.GeomNames = "domain"
+wbx.SpecificStorage.GeomNames = 'domain'
 wbx.Geom.domain.SpecificStorage.Value = 1.0e-4
 
 #-----------------------------------------------------------------------------
 # Phases
 #-----------------------------------------------------------------------------
 
-wbx.Phase.Names = "water"
+wbx.Phase.Names = 'water'
 
 wbx.Phase.water.Density.Type = 'Constant'
 wbx.Phase.water.Density.Value = 1.0
@@ -204,13 +204,13 @@ wbx.Phase.water.Viscosity.Value = 1.0
 # Contaminants
 #-----------------------------------------------------------------------------
 
-wbx.Contaminants.Names = ""
+wbx.Contaminants.Names = ''
 
 #-----------------------------------------------------------------------------
 # Retardation
 #-----------------------------------------------------------------------------
 
-wbx.Geom.Retardation.GeomNames = ""
+wbx.Geom.Retardation.GeomNames = ''
 
 #-----------------------------------------------------------------------------
 # Gravity
@@ -233,7 +233,7 @@ wbx.TimeStep.Value = 0.1
 # Porosity
 #-----------------------------------------------------------------------------
 
-wbx.Geom.Porosity.GeomNames = "left right channel"
+wbx.Geom.Porosity.GeomNames = 'left right channel'
 
 wbx.Geom.left.Porosity.Type = 'Constant'
 wbx.Geom.left.Porosity.Value = 0.25
@@ -255,7 +255,7 @@ wbx.Domain.GeomName = 'domain'
 #-----------------------------------------------------------------------------
 
 wbx.Phase.RelPerm.Type = 'VanGenuchten'
-wbx.Phase.RelPerm.GeomNames = "domain"
+wbx.Phase.RelPerm.GeomNames = 'domain'
 
 wbx.Geom.domain.RelPerm.Alpha = 0.5
 wbx.Geom.domain.RelPerm.N = 3.
@@ -265,7 +265,7 @@ wbx.Geom.domain.RelPerm.N = 3.
 #---------------------------------------------------------
 
 wbx.Phase.Saturation.Type = 'VanGenuchten'
-wbx.Phase.Saturation.GeomNames = "domain"
+wbx.Phase.Saturation.GeomNames = 'domain'
 
 wbx.Geom.domain.Saturation.Alpha = 0.5
 wbx.Geom.domain.Saturation.N = 3.
@@ -277,85 +277,102 @@ wbx.Geom.domain.Saturation.SSat = 1.0
 #-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
-wbx.Wells.Names = ""
+wbx.Wells.Names = ''
 
 #-----------------------------------------------------------------------------
 # Time Cycles
 #-----------------------------------------------------------------------------
-wbx.Cycle.Names = "constant rainrec"
-wbx.Cycle.constant.Names = "alltime"
+wbx.Cycle.Names = 'constant rainrec'
+wbx.Cycle.constant.Names = 'alltime'
 wbx.Cycle.constant.alltime.Length = 1
 wbx.Cycle.constant.Repeat = -1
 
 # rainfall and recession time periods are defined here
 # rain for 1 hour, recession for 2 hours
 
-wbx.Cycle.rainrec.Names = "0 1 2 3 4 5 6"
-wbx.Cycle.rainrec.0.Length = 1
-wbx.Cycle.rainrec.1.Length = 1
-wbx.Cycle.rainrec.2.Length = 1
-wbx.Cycle.rainrec.3.Length = 1
-wbx.Cycle.rainrec.4.Length = 1
-wbx.Cycle.rainrec.5.Length = 1
-wbx.Cycle.rainrec.6.Length = 1
+wbx.Cycle.rainrec.Names = 'r0 r1 r2 r3 r4 r5 r6'
+wbx.Cycle.rainrec.r0.Length = 1
+wbx.Cycle.rainrec.r1.Length = 1
+wbx.Cycle.rainrec.r2.Length = 1
+wbx.Cycle.rainrec.r3.Length = 1
+wbx.Cycle.rainrec.r4.Length = 1
+wbx.Cycle.rainrec.r5.Length = 1
+wbx.Cycle.rainrec.r6.Length = 1
 
 wbx.Cycle.rainrec.Repeat = 1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-wbx.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+wbx.BCPressure.PatchNames = wbx.Geom.domain.Patches
 
-wbx.Patch.x-lower.BCPressure.Type = 'FluxConst'
-wbx.Patch.x-lower.BCPressure.Cycle = "constant"
-wbx.Patch.x-lower.BCPressure.alltime.Value = 0.0
+wbx.Patch.x_lower.BCPressure.Type = 'FluxConst'
+wbx.Patch.x_lower.BCPressure.Cycle = 'constant'
+wbx.Patch.x_lower.BCPressure.alltime.Value = 0.0
 
-wbx.Patch.y-lower.BCPressure.Type = 'FluxConst'
-wbx.Patch.y-lower.BCPressure.Cycle = "constant"
-wbx.Patch.y-lower.BCPressure.alltime.Value = 0.0
+wbx.Patch.y_lower.BCPressure.Type = 'FluxConst'
+wbx.Patch.y_lower.BCPressure.Cycle = 'constant'
+wbx.Patch.y_lower.BCPressure.alltime.Value = 0.0
 
-wbx.Patch.z-lower.BCPressure.Type = 'FluxConst'
-wbx.Patch.z-lower.BCPressure.Cycle = "constant"
-wbx.Patch.z-lower.BCPressure.alltime.Value = 0.0
+wbx.Patch.z_lower.BCPressure.Type = 'FluxConst'
+wbx.Patch.z_lower.BCPressure.Cycle = 'constant'
+wbx.Patch.z_lower.BCPressure.alltime.Value = 0.0
 
-wbx.Patch.x-upper.BCPressure.Type = 'FluxConst'
-wbx.Patch.x-upper.BCPressure.Cycle = "constant"
-wbx.Patch.x-upper.BCPressure.alltime.Value = 0.0
+wbx.Patch.x_upper.BCPressure.Type = 'FluxConst'
+wbx.Patch.x_upper.BCPressure.Cycle = 'constant'
+wbx.Patch.x_upper.BCPressure.alltime.Value = 0.0
 
-wbx.Patch.y-upper.BCPressure.Type = 'FluxConst'
-wbx.Patch.y-upper.BCPressure.Cycle = "constant"
-wbx.Patch.y-upper.BCPressure.alltime.Value = 0.0
+wbx.Patch.y_upper.BCPressure.Type = 'FluxConst'
+wbx.Patch.y_upper.BCPressure.Cycle = 'constant'
+wbx.Patch.y_upper.BCPressure.alltime.Value = 0.0
 
 
-wbx.Patch.z-upper.BCPressure.Type = 'OverlandFlow'
-wbx.Patch.z-upper.BCPressure.Cycle = "rainrec"
-wbx.Patch.z-upper.BCPressure.0.Value = rec_flux
-wbx.Patch.z-upper.BCPressure.1.Value = rec_flux
-wbx.Patch.z-upper.BCPressure.2.Value = rain_flux
-wbx.Patch.z-upper.BCPressure.3.Value = rain_flux
-wbx.Patch.z-upper.BCPressure.4.Value = rec_flux
-wbx.Patch.z-upper.BCPressure.5.Value = rec_flux
-wbx.Patch.z-upper.BCPressure.6.Value = rec_flux
+wbx.Patch.z_upper.BCPressure.Type = 'OverlandFlow'
+wbx.Patch.z_upper.BCPressure.Cycle = 'rainrec'
+wbx.Patch.z_upper.BCPressure.r0.Value = rec_flux
+wbx.Patch.z_upper.BCPressure.r1.Value = rec_flux
+wbx.Patch.z_upper.BCPressure.r2.Value = rain_flux
+wbx.Patch.z_upper.BCPressure.r3.Value = rain_flux
+wbx.Patch.z_upper.BCPressure.r4.Value = rec_flux
+wbx.Patch.z_upper.BCPressure.r5.Value = rec_flux
+wbx.Patch.z_upper.BCPressure.r6.Value = rec_flux
 
 
 #---------------------------------------------------------
 # Topo slopes in x-direction
 #---------------------------------------------------------
 
-wbx.TopoSlopesX.Type = "Constant"
-wbx.TopoSlopesX.GeomNames = "left right channel"
+wbx.TopoSlopesX.Type = 'Constant'
+wbx.TopoSlopesX.GeomNames = 'left right channel'
+if use_slopes > 0:
+  wbx.TopoSlopesX.Geom.left.Value = 0.000
+  wbx.TopoSlopesX.Geom.right.Value = 0.000
+  wbx.TopoSlopesX.Geom.channel.Value = 0.001*use_slopes
+else:
+  wbx.TopoSlopesX.Geom.left.Value = 0.000
+  wbx.TopoSlopesX.Geom.right.Value = 0.000
+  wbx.TopoSlopesX.Geom.channel.Value = 0.000
+
 
 #---------------------------------------------------------
 # Topo slopes in y-direction
 #---------------------------------------------------------
-wbx.TopoSlopesY.Type = "Constant"
-wbx.TopoSlopesY.GeomNames = "left right channel"
+wbx.TopoSlopesY.Type = 'Constant'
+wbx.TopoSlopesY.GeomNames = 'left right channel'
+if use_slopes > 0:
+  wbx.TopoSlopesY.Geom.left.Value = 0.000
+  wbx.TopoSlopesY.Geom.right.Value = 0.000
+  wbx.TopoSlopesY.Geom.channel.Value = 0.001*use_slopes
+else:
+  wbx.TopoSlopesY.Geom.left.Value = 0.000
+  wbx.TopoSlopesY.Geom.right.Value = 0.000
+  wbx.TopoSlopesY.Geom.channel.Value = 0.000
 
 #---------------------------------------------------------
 # Mannings coefficient 
 #---------------------------------------------------------
 
-wbx.Mannings.Type = "Constant"
-wbx.Mannings.GeomNames = "left right channel"
+wbx.Mannings.Type = 'Constant'
+wbx.Mannings.GeomNames = 'left right channel'
 wbx.Mannings.Geom.left.Value = 5.e-6
 wbx.Mannings.Geom.right.Value = 5.e-6
 wbx.Mannings.Geom.channel.Value = 1.e-6
@@ -379,7 +396,7 @@ wbx.KnownSolution = 'NoKnownSolution'
 # Set solver parameters
 #-----------------------------------------------------------------------------
 
-wbx.Solver = 'Richards'
+wbx.Solver.Type = 'Richards'
 wbx.Solver.MaxIter = 100
 
 wbx.Solver.AbsTol = 1E-10
@@ -388,31 +405,31 @@ wbx.Solver.Nonlinear.ResidualTol = 1e-9
 wbx.Solver.Nonlinear.EtaChoice = 'Walker1'
 wbx.Solver.Nonlinear.EtaChoice = 'EtaConstant'
 wbx.Solver.Nonlinear.EtaValue = 0.01
-wbx.Solver.Nonlinear.UseJacobian = 'False'
+wbx.Solver.Nonlinear.UseJacobian = False
 wbx.Solver.Nonlinear.DerivativeEpsilon = 1e-8
 wbx.Solver.Nonlinear.StepTol = 1e-30
 wbx.Solver.Nonlinear.Globalization = 'LineSearch'
 wbx.Solver.Linear.KrylovDimension = 20
 wbx.Solver.Linear.MaxRestart = 2
 
-wbx.Solver.Linear.Preconditioner = 'PFMG'
+wbx.Solver.Linear.Preconditioner.Type = 'PFMG'
 wbx.Solver.Linear.Preconditioner.PFMG.MaxIter = 1
 wbx.Solver.Linear.Preconditioner.PFMG.Smoother = 'RBGaussSeidelNonSymmetric'
 wbx.Solver.Linear.Preconditioner.PFMG.NumPreRelax = 1
 wbx.Solver.Linear.Preconditioner.PFMG.NumPostRelax = 1
 
 
-wbx.Solver.WriteSiloSubsurfData = 'True'
-wbx.Solver.WriteSiloPressure = 'True'
-wbx.Solver.WriteSiloSaturation = 'True'
-wbx.Solver.WriteSiloConcentration = 'True'
-wbx.Solver.WriteSiloSlopes = 'True'
-wbx.Solver.WriteSiloMask = 'True'
-wbx.Solver.WriteSiloEvapTrans = 'True'
-wbx.Solver.WriteSiloEvapTransSum = 'True'
-wbx.Solver.WriteSiloOverlandSum = 'True'
-wbx.Solver.WriteSiloMannings = 'True'
-wbx.Solver.WriteSiloSpecificStorage = 'True'
+# wbx.Solver.WriteSiloSubsurfData = True
+# wbx.Solver.WriteSiloPressure = True
+# wbx.Solver.WriteSiloSaturation = True
+# wbx.Solver.WriteSiloConcentration = True
+# wbx.Solver.WriteSiloSlopes = True
+# wbx.Solver.WriteSiloMask = True
+# wbx.Solver.WriteSiloEvapTrans = True
+# wbx.Solver.WriteSiloEvapTransSum = True
+# wbx.Solver.WriteSiloOverlandSum = True
+# wbx.Solver.WriteSiloMannings = True
+# wbx.Solver.WriteSiloSpecificStorage = True
 
 #---------------------------------------------------------
 # Initial conditions: water pressure
@@ -425,47 +442,13 @@ wbx.ICPressure.GeomNames = 'domain'
 wbx.Geom.domain.ICPressure.Value = -3.0
 
 wbx.Geom.domain.ICPressure.RefGeom = 'domain'
-wbx.Geom.domain.ICPressure.RefPatch = 'z-upper'
+wbx.Geom.domain.ICPressure.RefPatch = 'z_upper'
 
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-#pfwritedb $runname
 #exec ../opf $runname
-
-#
-# Tests 
-#
-passed = 1
-
-
-top = [pfcomputetop $mask]
-
-surface_area_of_domain = [expr [pfget ComputationalGrid.DX] * [pfget ComputationalGrid.DY] * [pfget ComputationalGrid.NX] * [pfget ComputationalGrid.NY]]
-
-prev_total_water_balance = 0.0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 wbx.validate()
 wbx.write("../output/water_balance_x.pfidb")
 wbx.write("../output/water_balance_x.yaml")

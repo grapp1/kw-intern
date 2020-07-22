@@ -35,7 +35,4 @@ ENV HYPRE_BRANCH ${HYPRE_VERSION}
 RUN bash /02_parflow.sh
 RUN bash /03_python.sh
 
-FROM python:3
-
-RUN pip install --upgrade pip && \
-    pip install pyyaml
+RUN pip3 install pyyaml
