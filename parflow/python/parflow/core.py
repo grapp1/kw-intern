@@ -21,5 +21,8 @@ class Run(BaseRun):
       fName = os.path.join(PFDBObj.workingDirectory, fileName)
     writeDict(self.getKeyDict(), fName)
 
-  def run(self):
-    pass
+  def run(self, fileName=None):
+    fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}')
+    if fileName:
+      fName = os.path.join(PFDBObj.workingDirectory, fileName)
+    os.system(f'./run_parflow.sh {fName}')

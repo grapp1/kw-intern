@@ -359,9 +359,9 @@ else:
 wbx.TopoSlopesY.Type = 'Constant'
 wbx.TopoSlopesY.GeomNames = 'left right channel'
 if use_slopes > 0:
-  wbx.TopoSlopesY.Geom.left.Value = 0.000
-  wbx.TopoSlopesY.Geom.right.Value = 0.000
-  wbx.TopoSlopesY.Geom.channel.Value = 0.001*use_slopes
+  wbx.TopoSlopesY.Geom.left.Value = -0.005
+  wbx.TopoSlopesY.Geom.right.Value = 0.005
+  wbx.TopoSlopesY.Geom.channel.Value = 0.000
 else:
   wbx.TopoSlopesY.Geom.left.Value = 0.000
   wbx.TopoSlopesY.Geom.right.Value = 0.000

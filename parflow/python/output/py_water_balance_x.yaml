@@ -174,8 +174,14 @@ TimingInfo.DumpInterval: 0.1
 TimingInfo.StartCount: 0
 TimingInfo.StartTime: 0.0
 TimingInfo.StopTime: 2.0
+TopoSlopesX.Geom.channel.Value: 0.001
+TopoSlopesX.Geom.left.Value: 0.0
+TopoSlopesX.Geom.right.Value: 0.0
 TopoSlopesX.GeomNames: left right channel
 TopoSlopesX.Type: Constant
+TopoSlopesY.Geom.channel.Value: 0.001
+TopoSlopesY.Geom.left.Value: 0.0
+TopoSlopesY.Geom.right.Value: 0.0
 TopoSlopesY.GeomNames: left right channel
 TopoSlopesY.Type: Constant
 Wells.Names: 

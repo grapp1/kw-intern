@@ -145,9 +145,9 @@ TopoSlopesX.Geom.right.Value: 0.0
 TopoSlopesX.Geom.channel.Value: 0.001
 TopoSlopesX.GeomNames: left right channel
 TopoSlopesX.Type: Constant
-TopoSlopesY.Geom.left.Value: 0.0
-TopoSlopesY.Geom.right.Value: 0.0
-TopoSlopesY.Geom.channel.Value: 0.001
+TopoSlopesY.Geom.left.Value: -0.005
+TopoSlopesY.Geom.right.Value: 0.005
+TopoSlopesY.Geom.channel.Value: 0.0
 TopoSlopesY.GeomNames: left right channel
 TopoSlopesY.Type: Constant
 Mannings.Geom.left.Value: 5e-06

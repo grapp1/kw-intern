@@ -1,7 +1,7 @@
 #!/bin/bash
 # -----------------------------------------------------------------------------
 # Usage:
-#   ./run_parflow.sh ./test/default_richards
+#   ./run_parflow.sh ./output/default_richards
 # -----------------------------------------------------------------------------
 
 $PARFLOW_DIR/bin/parflow $1

@@ -2,17 +2,15 @@
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
 
-#
-# Import the ParFlow TCL package
-#
 from parflow import Run
-drich = Run("drich", __file__)
 
-drich.FileVersion = 4
+drich = Run('Default Richards', __file__)
 
-drich.Process.Topology.P = [lindex $argv 0]
-drich.Process.Topology.Q = [lindex $argv 1]
-drich.Process.Topology.R = [lindex $argv 2]
+
+drich.Process.Topology.P = 1
+drich.Process.Topology.Q = -1.5
+drich.Process.Topology.R = 1
+drich.Process.Topology.P = 4
 
 #---------------------------------------------------------
 # Computational Grid
@@ -32,8 +30,7 @@ drich.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-drich.GeomInput.Names = "domain_input background_input source_region_input \
-		       concen_region_input"
+drich.GeomInput.Names = "domain_input background_input source_region_input concen_region_input"
 
 
 #---------------------------------------------------------
@@ -209,7 +206,7 @@ drich.Geom.domain.Saturation.SSat = 0.99
 #-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
-drich.Wells.Names = ""
+drich.Wells.Names = ''
 
 #-----------------------------------------------------------------------------
 # Time Cycles
@@ -257,7 +254,8 @@ drich.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 drich.TopoSlopesX.Type = "Constant"
-drich.TopoSlopesX.GeomNames = ""
+# seb added domain otherwise failing after
+drich.TopoSlopesX.GeomNames = "domain"
 
 drich.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -266,7 +264,8 @@ drich.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 drich.TopoSlopesY.Type = "Constant"
-drich.TopoSlopesY.GeomNames = ""
+# seb added domain otherwise failing after
+drich.TopoSlopesY.GeomNames = "domain"
 
 drich.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -275,7 +274,8 @@ drich.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 drich.Mannings.Type = "Constant"
-drich.Mannings.GeomNames = ""
+# seb added domain otherwise failing after
+drich.Mannings.GeomNames = "domain"
 drich.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -303,30 +303,27 @@ drich.PhaseSources.water.Geom.background.Value = 0.0
 
 drich.KnownSolution = 'NoKnownSolution'
 
-
 #-----------------------------------------------------------------------------
 # Set solver parameters
 #-----------------------------------------------------------------------------
-drich.Solver = 'Richards'
+drich.Solver.Type = 'Richards'
 drich.Solver.MaxIter = 5
 
 drich.Solver.Nonlinear.MaxIter = 10
 drich.Solver.Nonlinear.ResidualTol = 1e-9
 drich.Solver.Nonlinear.EtaChoice = 'EtaConstant'
 drich.Solver.Nonlinear.EtaValue = 1e-5
-drich.Solver.Nonlinear.UseJacobian = 'True'
+drich.Solver.Nonlinear.UseJacobian = True
 drich.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 
 drich.Solver.Linear.KrylovDimension = 10
 
-drich.Solver.Linear.Preconditioner = 'PFMG'
-drich.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
-drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+drich.Solver.Linear.Preconditioner.Type = 'PFMG'
+# drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
+# drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
-#-----------------------------------------------------------------------------
-# Run and Unload the ParFlow output files
-#-----------------------------------------------------------------------------
+
 drich.validate()
-drich.write("../output/default_richards2.pfidb")
-drich.write("../output/default_richards2.yaml")
+drich.write('../output/default_richards.pfidb')
+drich.write('../output/default_richards.yaml')
 drich.run()

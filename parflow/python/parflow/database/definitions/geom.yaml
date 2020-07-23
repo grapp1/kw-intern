@@ -197,10 +197,10 @@ GeomInput:
 # -----------------------------------------------------------------------------
 # Perm.*
 # -----------------------------------------------------------------------------
-# Only key for this is defining Perm.TensorType
+# Only keys for this are TensorType and Conditioning
 Perm:
   __doc__: >
-    run.Perm input options are: TensorType
+    run.Perm input options are: TensorType, Conditioning
 
   TensorType:
     help: >
