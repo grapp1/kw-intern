@@ -305,7 +305,7 @@ drich.KnownSolution = 'NoKnownSolution'
 #-----------------------------------------------------------------------------
 # Set solver parameters
 #-----------------------------------------------------------------------------
-drich.Solver.Type = 'Richards'
+drich.Solver = 'Richards'
 drich.Solver.MaxIter = 5
 
 drich.Solver.Nonlinear.MaxIter = 10
@@ -325,4 +325,6 @@ drich.Solver.Linear.Preconditioner.Type = 'PFMG'
 drich.validate()
 drich.write('../output/default_richards.pfidb')
 drich.write('../output/default_richards.yaml')
-drich.run('../output/default_richards')
+
+# uncomment the following line if you want to run ParFlow with the validation
+# drich.run('../output/default_richards')

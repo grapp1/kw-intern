@@ -2,11 +2,11 @@
 18
 Process.Topology.P
 1
-4
+1
 18
 Process.Topology.Q
-4
--1.5
+1
+1
 18
 Process.Topology.R
 1
@@ -267,6 +267,10 @@ Geom.concen_region.Upper.Y
 Geom.concen_region.Upper.Z
 3
 6.0
+6
+Solver
+8
+Richards
 28
 Solver.Linear.Preconditioner
 4
@@ -299,10 +303,6 @@ True
 Solver.Nonlinear.DerivativeEpsilon
 4
 0.01
-6
-Solver
-8
-Richards
 14
 Solver.MaxIter
 1
