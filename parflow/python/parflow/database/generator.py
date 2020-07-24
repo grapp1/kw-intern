@@ -109,7 +109,7 @@ class ValidationSummary:
       return f'{className}_{self.classNameCount[className]}'
     return className
 
-  def addField(self):
+  def addField(self, fieldName):
     self.fieldCount += 1
 
   def getSummary(self, lineSeparator='\n'):
