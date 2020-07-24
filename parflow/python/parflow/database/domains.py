@@ -271,13 +271,14 @@ def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs
   return len(errors)
 
 def validateValueToString(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
-  # indentStr = '  '* (indent - 1)
+  indentStr = '  '* (indent - 1)
   errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  validationString = []
 
   if len(errors):
-    validationString = f'{value} {term.FAIL}{termSymbol.ko}{term.ENDC}'
-    # for error in errors:
-    #   print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
+    validationString.append(f'{value} {term.FAIL}{termSymbol.ko}{term.ENDC}')
+    for error in errors:
+      validationString.append(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
   elif value != None:
     # checking for duplicates and changing print statement
     if history != None:
@@ -288,23 +289,11 @@ def validateValueToString(name, value, domainDefinition=None, domainAddOnKwargs=
         for val in range(dupCount-1):
           dup_str += str(history[val]) + ' => '
         dup_str += str(history[dupCount-1]) + ')'
-        validationString = f'{term.MAGENTA}{termSymbol.warning}{term.ENDC} {value}  \
-          {term.MAGENTA}{dup_str}{term.ENDC}'
+        validationString.append(f'{term.MAGENTA}{termSymbol.warning}{term.ENDC} {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
       # elif 'default' in name
       else:
-        validationString = f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}'
+        validationString.append(f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
     else:
-      validationString = f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}'
+      validationString.append(f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
 
-  return validationString
-
-def validateValueToErrors(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
-  indentStr = '  '* (indent - 1)
-  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
-  errorString = ''
-
-  if len(errors):
-    for error in errors:
-      errorString = f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}'
-
-  return errorString
+  return len(errors), '\n'.join(validationString)
