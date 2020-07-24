@@ -36,7 +36,8 @@ def mapToChildrenOfType(className):
 # -----------------------------------------------------------------------------
 
 def validateHelper(containerObj, name, obj, indent, errorCount):
-  validationString = []
+  nbErrors = 0
+  validationString = ''
   history = None
   if 'history' in containerObj._details[name] and len(containerObj._details[name]['history']):
     history = containerObj._details[name]['history']
@@ -44,9 +45,10 @@ def validateHelper(containerObj, name, obj, indent, errorCount):
           'MandatoryValue' not in containerObj._details[name]['domains']:
     pass
   else:
-    validationString = validateValueToString(name, obj, containerObj._details[name]['domains'],
+    nbErrors, validationString = validateValueToString(name, obj, containerObj._details[name]['domains'],
                                              containerObj.getContextSettings(), history, indent)
-    return validationString
+
+  return nbErrors, validationString
 
 
 # -----------------------------------------------------------------------------
