@@ -84,6 +84,7 @@ class PFDBObj:
     '''
     domains = None
     handlers = None
+    valueObjectAssignment = False
     if name[0] != '_' and hasattr(self, '_details'):
       if name in self._details:
         if 'domains' in self._details[name]:
@@ -95,7 +96,20 @@ class PFDBObj:
         else:
           self._details[name]['history'] = []
           self._details[name]['history'].append(value)
-
+      elif hasattr(self, name) and isinstance(self.__dict__[name], PFDBObj):
+        # Handle value object assignment
+        valueObjectAssignment = True
+        valueObj = self.__dict__[name]
+        valueDetails = valueObj._details['_value']
+        if 'domains' in valueDetails:
+          domains = valueDetails['domains']
+        if 'handlers' in valueDetails:
+          handlers = valueDetails['handlers']
+        if 'history' in valueDetails:
+          valueDetails['history'].append(value)
+        else:
+          valueDetails['history'] = []
+          valueDetails['history'].append(value)
       else:
         print(self._details)
         print(f'Field {name} is not part of the expected schema {self.__class__}')
@@ -107,8 +121,11 @@ class PFDBObj:
     if PFDBObj.printLineError:
       validateValueWithException(value, domains, PFDBObj.exitOnError)
 
-    # Decorate value if need be (i.e. Geom.names: 'a b c')
-    self.__dict__[name] = decorateValue(value, self, handlers)
+    if valueObjectAssignment:
+      self.__dict__[name].__dict__['_value'] = decorateValue(value, self, handlers)
+    else:
+      # Decorate value if need be (i.e. Geom.names: 'a b c')
+      self.__dict__[name] = decorateValue(value, self, handlers)
 
   # ---------------------------------------------------------------------------
 
@@ -192,7 +209,10 @@ class PFDBObj:
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         if len(obj):
-          print(f'{indentStr}{name}:')
+          value = ''
+          if hasattr(obj, '_value'):
+            value = obj._value
+          print(f'{indentStr}{name}: {value}')
           errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details:
         history = None

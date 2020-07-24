@@ -24,6 +24,8 @@ def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
 
     fullQualifiedKey = instance.getParFlowKey(parentNamespace, key)
     if isinstance(value, PFDBObj):
+      if hasattr(value, '_value'):
+        dictToFill[fullQualifiedKey] = convertValueForStringDict(value._value)
       extractKeysFromObject(dictToFill, value, fullQualifiedKey)
     else:
       dictToFill[fullQualifiedKey] = convertValueForStringDict(value)
