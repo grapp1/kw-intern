@@ -41,6 +41,7 @@ def isField(key, definition):
 
 # -----------------------------------------------------------------------------
 
+
 def isClass(key, definition):
   if key[0] == '_':
     return False
@@ -60,6 +61,14 @@ def isClass(key, definition):
     return False
 
   return True
+
+# -----------------------------------------------------------------------------
+
+def hasValue(key, definition):
+  if key[0] == '_':
+    return False
+
+  return '__value__' in definition
 
 # -----------------------------------------------------------------------------
 
@@ -192,6 +201,9 @@ class PythonModule:
         '''
         self.addLine(f'{self.strIndent}def __init__(self, parent=None):')
         self.addLine(f'{self.strIndent*2}super().__init__(parent)')
+
+        if hasValue(className, classDefinition):
+          self.addField('_value', classDefinition['__value__'], classDetails)
 
         for instance in classMembers:
           self.addLine(

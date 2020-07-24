@@ -10,9 +10,7 @@
 Solver:
   __doc__: >
     Assigning properties to solver
-
-  # corner case - This is the definition of the solver name
-  Type:
+  __value__:
     help: >
       [Type: string] This is the Impes or Richards
     domains:
@@ -20,7 +18,6 @@ Solver:
         enumList:
           - Impes
           - Richards
-    exportName: ..Solver
 
   AbsTol:
     help: >
