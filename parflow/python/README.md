@@ -15,7 +15,7 @@ be used to query the help and constraints associated to each keys.
 ```
 ./run_test.sh default_richards.py
 ```
-3. If the validation doe not return any errors, ParFlow can be run with the following command:
+3. If the validation does not return any errors, ParFlow can be run with the following command:
 ```
 ./run_parflow.sh ./output/default_richards
 ```
