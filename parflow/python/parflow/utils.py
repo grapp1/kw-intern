@@ -36,7 +36,7 @@ def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
 
 def writeDictAsPfidb(dictObj, fileName):
   with open(fileName, 'w') as out:
-    out.write(f'{len(dictObj) * 4 + 1}\n')
+    out.write(f'{len(dictObj)}\n')
     for key in dictObj:
       out.write(f'{len(key)}\n')
       out.write(f'{key}\n')

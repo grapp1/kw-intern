@@ -318,6 +318,8 @@ drich.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 drich.Solver.Linear.KrylovDimension = 10
 
 drich.Solver.Linear.Preconditioner.Type = 'PFMG'
+
+# These keys are set in the ParFlow example file but are apparently not used
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
