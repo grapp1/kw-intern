@@ -269,3 +269,42 @@ def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs
       print(f'{indentStr}  {name}: {value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
 
   return len(errors)
+
+def validateValueToString(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
+  # indentStr = '  '* (indent - 1)
+  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+
+  if len(errors):
+    validationString = f'{value} {term.FAIL}{termSymbol.ko}{term.ENDC}'
+    # for error in errors:
+    #   print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
+  elif value != None:
+    # checking for duplicates and changing print statement
+    if history != None:
+      dupCount = duplicateSearch(history)
+      if dupCount != None and dupCount >= 1:
+        # offset = 1 if 'default' in name else 1
+        dup_str = '('
+        for val in range(dupCount-1):
+          dup_str += str(history[val]) + ' => '
+        dup_str += str(history[dupCount-1]) + ')'
+        validationString = f'{term.MAGENTA}{termSymbol.warning}{term.ENDC} {value}  \
+          {term.MAGENTA}{dup_str}{term.ENDC}'
+      # elif 'default' in name
+      else:
+        validationString = f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}'
+    else:
+      validationString = f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}'
+
+  return validationString
+
+def validateValueToErrors(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
+  indentStr = '  '* (indent - 1)
+  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  errorString = ''
+
+  if len(errors):
+    for error in errors:
+      errorString = f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}'
+
+  return errorString

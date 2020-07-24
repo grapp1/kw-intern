@@ -3,8 +3,10 @@ This module aims to provide the core components that are required to build
 a Parflow input deck.
 '''
 import os
-from .domains import validateValueWithException, validateValueWithPrint
+from .domains import validateValueWithException, validateValueWithPrint, validateValueToString, validateValueToErrors
 from .handlers import decorateValue
+from . import TerminalColors as term
+from . import TerminalSymbols as termSymbol
 
 
 # -----------------------------------------------------------------------------
@@ -34,6 +36,8 @@ def mapToChildrenOfType(className):
   # ---------------------------------------------------------------------------
 
 def validateHelper(containerObj, name, obj, indent, errorCount):
+  validationString = ''
+  errorString = ''
   history = None
   if 'history' in containerObj._details[name] and len(containerObj._details[name]['history']):
     history = containerObj._details[name]['history']
@@ -41,9 +45,11 @@ def validateHelper(containerObj, name, obj, indent, errorCount):
       'MandatoryValue' not in containerObj._details[name]['domains']:
     pass
   else:
-    errorCount += validateValueWithPrint(name, obj, containerObj._details[name]['domains'],
+    validationString = validateValueToString(name, obj, containerObj._details[name]['domains'],
                                          containerObj.getContextSettings(), history, indent)
-  return errorCount
+    errorString = validateValueToErrors(name, obj, containerObj._details[name]['domains'],
+                                         containerObj.getContextSettings(), history, indent)
+  return validationString, errorString
 
 # -----------------------------------------------------------------------------
 # Main DB Object
@@ -224,13 +230,21 @@ class PFDBObj:
           value = ''
           if hasattr(obj, '_value'):
             value = obj._value
-            print(obj)
-            errorCount += validateHelper(obj, '_value', value, indent, errorCount)
+            validationString, errorString = validateHelper(obj, '_value', value, indent, errorCount)
+            print(f'{indentStr}{name}: {validationString}')
+            if len(errorString):
+              for error in range(len(errorString)):
+                print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {error}')
+            errorCount += len(errorString)
           else:
             print(f'{indentStr}{name}: {value}')
           errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details:
-        errorCount += validateHelper(self, name, obj, indent, errorCount)
+        validationString, errorString = validateHelper(self, name, obj, indent, errorCount)
+        print(f'{indentStr}{name}: {validationString}')
+        if len(errorString):
+          print(f'{indentStr}    {term.WARNING}{termSymbol.errorItem}{term.ENDC} {errorString}')
+        errorCount += len(errorString)
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
 

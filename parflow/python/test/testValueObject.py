@@ -6,6 +6,8 @@ lw = Run('Little Washita')
 # Required for validation
 # -----------------------------------------------------------------------------
 
+lw.Process.Topology.P = -9
+
 lw.ComputationalGrid.Lower.X = 1.0
 lw.ComputationalGrid.Lower.Y = 1.0
 lw.ComputationalGrid.Lower.Z = 1.0
