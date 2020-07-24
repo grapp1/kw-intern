@@ -166,6 +166,52 @@ Phase:
           MandatoryValue:
           DoubleValue:
 
+    Mobility:
+      __rst__:
+        skip:
+      __doc__: >
+        Here we define phase mobilities by specifying the relative permeability function. Input is specified differently depending
+        on what problem is being specified. For full multi-phase problems, the following input keys are used. See the
+        next section for the correct Richards’ equation input format.
+
+      Type:
+        help: >
+          [Type: string] This key specifies whether the mobility for phase_name will be a given constant or a polynomial of the form,
+          (S-So)^a, where S is saturation, So is irreducible saturation, and a is some exponent. The possibilities for this key
+          are Constant and Polynomial.
+        default: Constant
+        domains:
+          EnumDomain:
+            enumList:
+              - Constant
+              - Polynomial
+
+      Value:
+        help: >
+          [Type: double] This key specifies the constant mobility value for phase phase_name.
+        domains:
+          DoubleValue:
+
+      Exponent:
+        help: >
+          [Type: double] This key specifies the exponent used in a polynomial representation of the relative permeability. Currently, only
+          a value of 2.0 is allowed for this key.
+        default: 2.0
+        domains:
+          DoubleValue:
+            minValue: 2.0
+            maxValue: 2.0
+
+      IrreducibleSaturation:
+        help: >
+          [Type: double] This key specifies the irreducible saturation used in a polynomial representation of the relative permeability.
+          Currently, only a value of 0.0 is allowed for this key.
+        default: 0.0
+        domains:
+          DoubleValue:
+            minValue: 0.0
+            maxValue: 0.0
+
 
 # -----------------------------------------------------------------------------
 # PhaseConcen
@@ -316,6 +362,15 @@ Contaminants:
       [Type: string] This specifies the names of contaminants to be advected.
     domains:
       AnyString:
+    handlers:
+      ContaminantNameUpdater:
+        type: ChildrenHandler
+        className: ContNameItem
+        location: .
+      ContaminantGeomNameUpdater:
+        type: ChildrenHandler
+        className: GeomContItem
+        location: ../Geom/{geom_name}
 
   .{contaminant_name}:
     __class__: ContNameItem

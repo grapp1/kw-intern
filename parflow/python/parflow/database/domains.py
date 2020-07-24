@@ -264,8 +264,8 @@ def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs
         print(f'{indentStr}  {term.MAGENTA}{termSymbol.warning}{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
       # elif 'default' in name
       else:
-        print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
+        print(f'{indentStr} {name}: {value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
     else:
-      print(f'{indentStr}  {term.OKGREEN}{termSymbol.ok}{term.ENDC} {name}: {value}')
+      print(f'{indentStr}  {name}: {value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
 
   return len(errors)

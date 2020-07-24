@@ -31,6 +31,20 @@ def mapToChildrenOfType(className):
     return pfdbObj.getChildrenOfType(className)
   return getChildrenOfType
 
+  # ---------------------------------------------------------------------------
+
+def validateHelper(containerObj, name, obj, indent, errorCount):
+  history = None
+  if 'history' in containerObj._details[name] and len(containerObj._details[name]['history']):
+    history = containerObj._details[name]['history']
+  if 'default' in containerObj._details[name] and obj == containerObj._details[name]['default'] and \
+      'MandatoryValue' not in containerObj._details[name]['domains']:
+    pass
+  else:
+    errorCount += validateValueWithPrint(name, obj, containerObj._details[name]['domains'],
+                                         containerObj.getContextSettings(), history, indent)
+  return errorCount
+
 # -----------------------------------------------------------------------------
 # Main DB Object
 # -----------------------------------------------------------------------------
@@ -192,7 +206,6 @@ class PFDBObj:
         elif isMandatory:
           yield name
 
-
   # ---------------------------------------------------------------------------
 
   def validate(self, indent=1, workdir=None):
@@ -205,24 +218,19 @@ class PFDBObj:
     errorCount = 0
     indentStr = '  '*indent
     for name in self.getKeyNames():
-
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         if len(obj):
           value = ''
           if hasattr(obj, '_value'):
             value = obj._value
-          print(f'{indentStr}{name}: {value}')
+            print(obj)
+            errorCount += validateHelper(obj, '_value', value, indent, errorCount)
+          else:
+            print(f'{indentStr}{name}: {value}')
           errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details:
-        history = None
-        if 'history' in self._details[name] and len(self._details[name]['history']):
-          history = self._details[name]['history']
-        if 'default' in self._details[name] and obj == self._details[name]['default'] and 'MandatoryValue' not in self._details[name]['domains']:
-          pass
-        else:
-          errorCount += validateValueWithPrint(name, obj, self._details[name]['domains'], self.getContextSettings(),
-                                               history, indent)
+        errorCount += validateHelper(self, name, obj, indent, errorCount)
       elif obj != None:
         print(f'{indentStr}{name}: {obj}')
 
