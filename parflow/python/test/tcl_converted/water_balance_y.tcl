@@ -11,9 +11,9 @@ set verbose 0
 
 #---------------------------------------------------------
 # Control slopes 
-#-1 = slope to lower-x
+#-1 = slope to lower-y
 # 0 = flat top (no overland flow)
-# 1 = slope to upper-x
+# 1 = slope to upper-y 
 #---------------------------------------------------------
 set use_slopes 1
 
@@ -93,15 +93,15 @@ pfset Geom.left.Lower.X                        0.0
 pfset Geom.left.Lower.Y                        0.0
 pfset Geom.left.Lower.Z                        0.0
  
-pfset Geom.left.Upper.X                        300.0
-pfset Geom.left.Upper.Y                        140.0
+pfset Geom.left.Upper.X                        140.0
+pfset Geom.left.Upper.Y                        300.0
 pfset Geom.left.Upper.Z                          1.5
 
 #---------------------------------------------------------
 # Right Slope Geometry 
 #---------------------------------------------------------
-pfset Geom.right.Lower.X                        0.0
-pfset Geom.right.Lower.Y                        160.0
+pfset Geom.right.Lower.X                        160.0
+pfset Geom.right.Lower.Y                        0.0
 pfset Geom.right.Lower.Z                        0.0
  
 pfset Geom.right.Upper.X                        300.0
@@ -111,12 +111,12 @@ pfset Geom.right.Upper.Z                          1.5
 #---------------------------------------------------------
 # Channel Geometry 
 #---------------------------------------------------------
-pfset Geom.channel.Lower.X                        0.0
-pfset Geom.channel.Lower.Y                        140.0
+pfset Geom.channel.Lower.X                        140.0
+pfset Geom.channel.Lower.Y                        0.0
 pfset Geom.channel.Lower.Z                        0.0
  
-pfset Geom.channel.Upper.X                        300.0
-pfset Geom.channel.Upper.Y                        160.0
+pfset Geom.channel.Upper.X                        160.0
+pfset Geom.channel.Upper.Y                        300.0
 pfset Geom.channel.Upper.Z                          1.5
 
 #-----------------------------------------------------------------------------
@@ -264,8 +264,8 @@ pfset Domain.GeomName domain
 pfset Phase.RelPerm.Type               VanGenuchten
 pfset Phase.RelPerm.GeomNames          "domain"
 
-pfset Geom.domain.RelPerm.Alpha         0.5
-pfset Geom.domain.RelPerm.N             3. 
+pfset Geom.domain.RelPerm.Alpha         6.0
+pfset Geom.domain.RelPerm.N             2. 
 
 #---------------------------------------------------------
 # Saturation
@@ -274,8 +274,8 @@ pfset Geom.domain.RelPerm.N             3.
 pfset Phase.Saturation.Type              VanGenuchten
 pfset Phase.Saturation.GeomNames         "domain"
 
-pfset Geom.domain.Saturation.Alpha        0.5
-pfset Geom.domain.Saturation.N            3.
+pfset Geom.domain.Saturation.Alpha        6.0
+pfset Geom.domain.Saturation.N            2.
 pfset Geom.domain.Saturation.SRes         0.2
 pfset Geom.domain.Saturation.SSat         1.0
 
@@ -344,7 +344,6 @@ pfset Patch.z-upper.BCPressure.4.Value	              $rec_flux
 pfset Patch.z-upper.BCPressure.5.Value	              $rec_flux
 pfset Patch.z-upper.BCPressure.6.Value	              $rec_flux
 
-
 #---------------------------------------------------------
 # Topo slopes in x-direction
 #---------------------------------------------------------
@@ -352,9 +351,9 @@ pfset Patch.z-upper.BCPressure.6.Value	              $rec_flux
 pfset TopoSlopesX.Type "Constant"
 pfset TopoSlopesX.GeomNames "left right channel"
 if $use_slopes {
-    pfset TopoSlopesX.Geom.left.Value    0.000
-    pfset TopoSlopesX.Geom.right.Value   0.000
-    pfset TopoSlopesX.Geom.channel.Value [expr 0.001 * $use_slopes]
+    pfset TopoSlopesX.Geom.left.Value -0.005
+    pfset TopoSlopesX.Geom.right.Value 0.005
+    pfset TopoSlopesX.Geom.channel.Value 0.00
 } {
     pfset TopoSlopesX.Geom.left.Value    0.00
     pfset TopoSlopesX.Geom.right.Value   0.00
@@ -364,12 +363,14 @@ if $use_slopes {
 #---------------------------------------------------------
 # Topo slopes in y-direction
 #---------------------------------------------------------
+
+
 pfset TopoSlopesY.Type "Constant"
 pfset TopoSlopesY.GeomNames "left right channel"
 if $use_slopes {
-    pfset TopoSlopesY.Geom.left.Value    -0.005
-    pfset TopoSlopesY.Geom.right.Value   0.005
-    pfset TopoSlopesY.Geom.channel.Value 0.0
+    pfset TopoSlopesY.Geom.left.Value    0.000
+    pfset TopoSlopesY.Geom.right.Value   0.000
+    pfset TopoSlopesY.Geom.channel.Value [expr 0.001 * $use_slopes]
 } {
     pfset TopoSlopesY.Geom.left.Value    0.000
     pfset TopoSlopesY.Geom.right.Value   0.000
@@ -406,16 +407,16 @@ pfset KnownSolution                                    NoKnownSolution
 #-----------------------------------------------------------------------------
 
 pfset Solver                                             Richards
-pfset Solver.MaxIter                                     100
+pfset Solver.MaxIter                                     2500
 
-pfset Solver.AbsTol                                      1E-10
-pfset Solver.Nonlinear.MaxIter                           20
-pfset Solver.Nonlinear.ResidualTol                       1e-9
+pfset Solver.AbsTol                                      1E-12
+pfset Solver.Nonlinear.MaxIter                           300
+pfset Solver.Nonlinear.ResidualTol                       1e-12
 pfset Solver.Nonlinear.EtaChoice                         Walker1 
 pfset Solver.Nonlinear.EtaChoice                         EtaConstant
-pfset Solver.Nonlinear.EtaValue                          0.01
+pfset Solver.Nonlinear.EtaValue                          0.001
 pfset Solver.Nonlinear.UseJacobian                       False
-pfset Solver.Nonlinear.DerivativeEpsilon                 1e-8
+pfset Solver.Nonlinear.DerivativeEpsilon                 1e-16
 pfset Solver.Nonlinear.StepTol				 1e-30
 pfset Solver.Nonlinear.Globalization                     LineSearch
 pfset Solver.Linear.KrylovDimension                      20
@@ -457,7 +458,144 @@ pfset Geom.domain.ICPressure.RefPatch                   z-upper
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-pfwritedb $runname
-#exec ../opf $runname
 pfrun $runname
 pfundist $runname
+
+#
+# Tests 
+#
+source pftest.tcl
+set passed 1
+
+set slope_x          [pfload $runname.out.slope_x.silo]
+set slope_y          [pfload $runname.out.slope_y.silo]
+set mannings         [pfload $runname.out.mannings.silo]
+set specific_storage [pfload $runname.out.specific_storage.silo]
+set porosity         [pfload $runname.out.porosity.silo]
+
+set mask             [pfload $runname.out.mask.silo]
+set top              [pfcomputetop $mask]
+
+set surface_area_of_domain [expr [pfget ComputationalGrid.DX] * [pfget ComputationalGrid.DY] * [pfget ComputationalGrid.NX] * [pfget ComputationalGrid.NY]]
+
+set prev_total_water_balance 0.0
+
+for {set i 0} {$i <= 19} {incr i} {
+    if $verbose {
+	puts "======================================================"
+	puts "Timestep $i"
+	puts "======================================================"
+    }
+    set total_water_in_domain 0.0
+
+    set filename [format "%s.out.press.%05d.pfb" $runname $i]
+    set pressure [pfload $filename]
+    set surface_storage [pfsurfacestorage $top $pressure]
+    pfsave $surface_storage -silo "surface_storage.$i.silo"
+    set total_surface_storage [pfsum $surface_storage]
+    if $verbose {
+	puts [format "Surface storage\t\t\t\t\t : %.16e" $total_surface_storage]
+    }
+    set total_water_in_domain [expr $total_water_in_domain + $total_surface_storage]
+
+    set filename [format "%s.out.satur.%05d.pfb" $runname $i]
+    set saturation [pfload $filename]
+
+    set water_table_depth [pfwatertabledepth $top $saturation]
+    pfsave $water_table_depth -silo "water_table_depth.$i.silo"
+
+    set subsurface_storage [pfsubsurfacestorage $mask $porosity $pressure $saturation $specific_storage]
+    pfsave $subsurface_storage -silo "subsurface_storage.$i.silo"
+    set total_subsurface_storage [pfsum $subsurface_storage]
+    if $verbose {
+	puts [format "Subsurface storage\t\t\t\t : %.16e" $total_subsurface_storage]
+    }
+    set total_water_in_domain [expr $total_water_in_domain + $total_subsurface_storage]
+
+    if $verbose {
+	puts [format "Total water in domain\t\t\t\t : %.16e" $total_water_in_domain]
+	puts ""
+    }
+
+    set total_surface_runoff 0.0
+    if { $i > 0} {
+	set surface_runoff [pfsurfacerunoff $top $slope_x $slope_y $mannings $pressure]
+	pfsave $surface_runoff -silo "surface_runoff.$i.silo"
+	set total_surface_runoff [expr [pfsum $surface_runoff] * [pfget TimeStep.Value]]
+	if $verbose {
+	    puts [format "Surface runoff from pftools\t\t\t : %.16e" $total_surface_runoff]
+	}
+
+	set filename [format "%s.out.overlandsum.%05d.silo" $runname $i]
+	set surface_runoff2 [pfload $filename]
+	set total_surface_runoff2 [pfsum $surface_runoff2]
+	if $verbose {
+	    puts [format "Surface runoff from pfsimulator\t\t\t : %.16e" $total_surface_runoff2]
+	}
+	
+	if ![pftestIsEqual $total_surface_runoff $total_surface_runoff2 "Surface runoff comparison" ] {
+	    puts "FAILED: Surface runoff comparison"
+	    set passed 0
+	}
+    }
+
+    if [expr $i < 1] {
+	set bc_index 0
+    } elseif [expr $i > 0 && $i < 7] {
+	set bc_index [expr $i - 1]
+    } {
+	set bc_index 6
+    }
+    set bc_flux [pfget Patch.z-upper.BCPressure.$bc_index.Value]
+
+    set boundary_flux [expr $bc_flux * $surface_area_of_domain * [pfget TimeStep.Value]]
+    if $verbose {
+	puts [format "BC flux\t\t\t\t\t\t : %.16e" $boundary_flux]
+    }
+
+    # Note flow into domain is negative
+    set expected_difference [expr $boundary_flux + $total_surface_runoff]
+    if $verbose {
+	puts [format "Total Flux\t\t\t\t\t : %.16e" $expected_difference]
+    }
+
+    if { $i > 0 } {
+
+	if $verbose {
+	    puts ""
+	    puts [format "Diff from prev total\t\t\t\t : %.16e" [expr $total_water_in_domain - $prev_total_water_balance]]
+	}
+
+	if [expr $expected_difference != 0.0] {
+	    set percent_diff [expr (abs(($prev_total_water_balance - $total_water_in_domain) - $expected_difference)) / abs($expected_difference) * 100]
+	    if $verbose {
+		puts [format "Percent diff from expected difference\t\t : %.12e" $percent_diff]
+	    }
+	}
+
+	set expected_water_balance [expr $prev_total_water_balance - $expected_difference]
+	set percent_diff [expr abs(($total_water_in_domain - $expected_water_balance)) / $expected_water_balance * 100]
+	if $verbose {
+	    puts [format "Percent diff from expected total water sum\t : %.12e" $percent_diff]
+	}
+
+	if [expr $percent_diff > 0.005] {
+	    puts "FAILED: Water balance is not correct"
+	    set passed 0
+	}
+
+    }
+
+    set prev_total_water_balance [expr $total_water_in_domain]
+}
+
+if $verbose {
+    puts "\n\n"
+}
+
+if $passed {
+    puts "$runname : PASSED"
+} {
+    puts "$runname : FAILED"
+}
+

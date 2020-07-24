@@ -43,7 +43,7 @@ def tclToPython(tclfile, pyfile, runname):
           if len(prevLine) >= 2 and prevLine[-2] == "\\":
             pass
           else:
-            newline[0:1] = '#'
+            newline = '# ' + newline
 
         prevLine = newline
 
@@ -57,5 +57,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./comparison/water_balance_x.tcl', 'water_balance_x.py', 'wbx')
+tclToPython('./tcl_converted/default_single.tcl', './tcl_converted/default_single.py', 'dsingle')
 

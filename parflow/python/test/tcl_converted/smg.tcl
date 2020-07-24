@@ -1,19 +1,19 @@
-#  This runs the basic default_richards test case.
+#  This runs the basic smg test case based off of default richards
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
 
 #
 # Import the ParFlow TCL package
 #
-lappend auto_path $env(PARFLOW_DIR)/bin
+lappend auto_path $env(PARFLOW_DIR)/bin 
 package require parflow
 namespace import Parflow::*
 
 pfset FileVersion 4
 
-pfset Process.Topology.P        [lindex $argv 0]
-pfset Process.Topology.Q        [lindex $argv 1]
-pfset Process.Topology.R        [lindex $argv 2]
+pfset Process.Topology.P 1
+pfset Process.Topology.Q 1
+pfset Process.Topology.R 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -46,7 +46,7 @@ pfset GeomInput.domain_input.GeomName             domain
 #---------------------------------------------------------
 # Domain Geometry
 #---------------------------------------------------------
-pfset Geom.domain.Lower.X                        -10.0
+pfset Geom.domain.Lower.X                        -10.0 
 pfset Geom.domain.Lower.Y                         10.0
 pfset Geom.domain.Lower.Z                          1.0
 
@@ -194,7 +194,7 @@ pfset Domain.GeomName domain
 pfset Phase.RelPerm.Type               VanGenuchten
 pfset Phase.RelPerm.GeomNames          domain
 pfset Geom.domain.RelPerm.Alpha        0.005
-pfset Geom.domain.RelPerm.N            2.0
+pfset Geom.domain.RelPerm.N            2.0    
 
 #---------------------------------------------------------
 # Saturation
@@ -272,7 +272,7 @@ pfset TopoSlopesY.GeomNames ""
 pfset TopoSlopesY.Geom.domain.Value 0.0
 
 #---------------------------------------------------------
-# Mannings coefficient
+# Mannings coefficient 
 #---------------------------------------------------------
 
 pfset Mannings.Type "Constant"
@@ -320,13 +320,42 @@ pfset Solver.Nonlinear.DerivativeEpsilon                 1e-2
 
 pfset Solver.Linear.KrylovDimension                      10
 
-pfset Solver.Linear.Preconditioner                       PFMG
-pfset Solver.Linear.Preconditioner.MGSemi.MaxIter        1
-pfset Solver.Linear.Preconditioner.MGSemi.MaxLevels      100
+pfset Solver.Linear.Preconditioner                       SMG
 
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-pfrun default_richards
-pfwritedb default_richards
-pfundist default_richards
+pfrun smg
+pfundist smg
+
+#
+# Tests 
+#
+source pftest.tcl
+set passed 1
+
+if ![pftestFile smg.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
+    set passed 0
+}
+if ![pftestFile smg.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
+    set passed 0
+}
+if ![pftestFile smg.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
+    set passed 0
+}
+
+foreach i "00000 00001 00002 00003 00004 00005" {
+    if ![pftestFile smg.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
+    set passed 0
+}
+    if ![pftestFile smg.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
+    set passed 0
+}
+}
+
+
+if $passed {
+    puts "smg : PASSED"
+} {
+    puts "smg : FAILED"
+}
