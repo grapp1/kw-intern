@@ -37,8 +37,9 @@ lw.KnownSolution = 'Constant'
 # Setup database keys
 # -----------------------------------------------------------------------------
 
-lw.Solver = 'Richards'
-lw.Solver = 'Impes'
+lw.Solver = 'test'
+# lw.Solver = 'Impes'
+# lw.Solver = 'Richards'
 
 # -----------------------------------------------------------------------------
 # Validation process

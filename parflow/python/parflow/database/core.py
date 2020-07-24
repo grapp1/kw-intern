@@ -33,7 +33,7 @@ def mapToChildrenOfType(className):
     return pfdbObj.getChildrenOfType(className)
   return getChildrenOfType
 
-  # ---------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def validateHelper(containerObj, name, obj, indent, errorCount):
   validationString = []
@@ -41,12 +41,35 @@ def validateHelper(containerObj, name, obj, indent, errorCount):
   if 'history' in containerObj._details[name] and len(containerObj._details[name]['history']):
     history = containerObj._details[name]['history']
   if 'default' in containerObj._details[name] and obj == containerObj._details[name]['default'] and \
-      'MandatoryValue' not in containerObj._details[name]['domains']:
+          'MandatoryValue' not in containerObj._details[name]['domains']:
     pass
   else:
     validationString = validateValueToString(name, obj, containerObj._details[name]['domains'],
-                                         containerObj.getContextSettings(), history, indent)
+                                             containerObj.getContextSettings(), history, indent)
     return validationString
+
+
+# -----------------------------------------------------------------------------
+
+def detailHelper(container, name, value):
+  domains = None
+  handlers = None
+  history = None
+  if name in container._details:
+    if 'domains' in container._details[name]:
+      domains = container._details[name]['domains']
+
+    if 'handlers' in container._details[name]:
+      handlers = container._details[name]['handlers']
+
+    if 'history' in container._details[name]:
+      history = container._details[name]['history']
+    else:
+      history = []
+      container._details[name]['history'] = history
+    history.append(value)
+
+  return domains, handlers, history
 
 # -----------------------------------------------------------------------------
 # Main DB Object
@@ -101,32 +124,16 @@ class PFDBObj:
     '''
     domains = None
     handlers = None
+    history = None
     valueObjectAssignment = False
     if name[0] != '_' and hasattr(self, '_details'):
       if name in self._details:
-        if 'domains' in self._details[name]:
-          domains = self._details[name]['domains']
-        if 'handlers' in self._details[name]:
-          handlers = self._details[name]['handlers']
-        if 'history' in self._details[name]:
-          self._details[name]['history'].append(value)
-        else:
-          self._details[name]['history'] = []
-          self._details[name]['history'].append(value)
+        domains, handlers, history = detailHelper(self, name, value)
       elif hasattr(self, name) and isinstance(self.__dict__[name], PFDBObj):
         # Handle value object assignment
         valueObjectAssignment = True
         valueObj = self.__dict__[name]
-        valueDetails = valueObj._details['_value']
-        if 'domains' in valueDetails:
-          domains = valueDetails['domains']
-        if 'handlers' in valueDetails:
-          handlers = valueDetails['handlers']
-        if 'history' in valueDetails:
-          valueDetails['history'].append(value)
-        else:
-          valueDetails['history'] = []
-          valueDetails['history'].append(value)
+        domains, handlers, history = detailHelper(valueObj, '_value', value)
       else:
         print(self._details)
         print(f'Field {name} is not part of the expected schema {self.__class__}')
