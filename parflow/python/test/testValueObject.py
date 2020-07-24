@@ -41,7 +41,9 @@ lw.Solver = 'test'
 lw.Solver = 'Impes'
 # lw.Solver = 'Richards'
 
-# print(len(lw.Solver.AbsTol))
+lw.Solver.help()
+print('+'*10)
+lw.help('Solver')
 
 # -----------------------------------------------------------------------------
 # Validation process
