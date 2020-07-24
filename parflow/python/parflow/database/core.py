@@ -163,10 +163,7 @@ class PFDBObj:
       - A container does not count. (0)
     '''
     valueCount = 0
-    for name in self.__dict__:
-      if name[0] == '_':
-        continue
-
+    for name in self.getKeyNames(True):
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         valueCount += len(obj)

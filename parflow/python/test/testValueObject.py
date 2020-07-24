@@ -41,6 +41,10 @@ lw.Solver = 'test'
 lw.Solver = 'Impes'
 # lw.Solver = 'Richards'
 
+print(len(lw.Perm));
+print(len(lw.Perm.Conditioning))
+print(len(lw.Perm.Conditioning.FileName))
+
 # -----------------------------------------------------------------------------
 # Validation process
 # -----------------------------------------------------------------------------
