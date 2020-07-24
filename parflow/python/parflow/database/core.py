@@ -226,19 +226,19 @@ class PFDBObj:
 
     errorCount = 0
     indentStr = '  '*indent
-    for name in self.getKeyNames():
+    for name in self.getKeyNames(skipDefault=True):
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
         if len(obj):
           if hasattr(obj, '_value'):
-            value = ''
             value = obj._value
             addErrors, validationString = validateHelper(obj, '_value', value, indent, errorCount)
             print(f'{indentStr}{name}: {validationString}')
             errorCount += addErrors
           else:
             print(f'{indentStr}{name}:')
-            errorCount += obj.validate(indent+1)
+
+          errorCount += obj.validate(indent+1)
       elif hasattr(self, '_details') and name in self._details:
         addErrors, validationString = validateHelper(self, name, obj, indent, errorCount)
         print(f'{indentStr}{name}: {validationString}')

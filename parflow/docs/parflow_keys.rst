@@ -12,11 +12,11 @@ run.Process input options are: Topology
 Process.Topology
 --------------------------------------------------------------------------------
 
-[Type: int] This section describes how processors are assigned in order to solve the domain in parallel.
+This section describes how processors are assigned in order to solve the domain in parallel.
   - P allocates the number of processes to the grid-cells in x.
   - Q allocates the number of processes to the grid-cells in y.
   - R allocates the number of processes to the grid-cells in z.
-Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).'
+Please note R should always be 1 if you are running with Solver Richards unless you are running a totally saturated domain (solver IMPES).
 
 
 
@@ -28,6 +28,7 @@ Process.Topology.P
 
 :default: 1
 .. note::
+    The value is required
     The value must be an Integer
       - with a value greater than or equal to 1
 
@@ -41,6 +42,7 @@ Process.Topology.Q
 
 :default: 1
 .. note::
+    The value is required
     The value must be an Integer
       - with a value greater than or equal to 1
 
@@ -54,6 +56,7 @@ Process.Topology.R
 
 :default: 1
 .. note::
+    The value is required
     The value must be an Integer
       - with a value greater than or equal to 1
 
@@ -154,7 +157,7 @@ ComputationalGrid.DX
 .. note::
     The value is required
     The value must be an Integer
-      - with a value greater than or equal to 1.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -167,7 +170,7 @@ ComputationalGrid.DY
 .. note::
     The value is required
     The value must be an Integer
-      - with a value greater than or equal to 1.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -180,7 +183,7 @@ ComputationalGrid.DZ
 .. note::
     The value is required
     The value must be an Integer
-      - with a value greater than or equal to 1.0
+      - with a value greater than or equal to 0.0
 
 
 
@@ -334,7 +337,7 @@ GeomInput.{geom_name}.Value
 Perm
 ================================================================================
 
-run.Perm input options are: TensorType
+run.Perm input options are: TensorType, Conditioning
 
 
 
@@ -1825,19 +1828,6 @@ Assigning properties to solver
 
 
 
-Solver
---------------------------------------------------------------------------------
-
-[Type: string] This is the Impes or Richards
-
-
-.. note::
-    The value must be one of the following options: Impes, Richards
-
-.. warning::
-    In Python we will define *Solver.Type* which will set    *Solver* inside the ParFlow .pfidb file.
-
-
 Solver.AbsTol
 --------------------------------------------------------------------------------
 
@@ -2911,12 +2901,26 @@ Solver.Linear.KrylovDimension
 
 :default: 10
 .. note::
+    The value is required
     The value must be an Integer
       - with a value greater than or equal to 1
 
 
 
 Solver.Linear.MaxRestarts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the Krylov subspace over using the current iterate as the initial iterate for the next pass.
+
+
+:default: 0
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0
+
+
+
+Solver.Linear.MaxRestart
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: int] This key specifies the number of restarts allowed to the GMRES solver. Restarts start the development of the Krylov subspace over using the current iterate as the initial iterate for the next pass.
@@ -2957,7 +2961,7 @@ SymmetricMat
 .{precond_method}
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevels)
+Setting Solver.Linear.Preconditioner.{precond_method} keys
 
 
 
@@ -2986,8 +2990,8 @@ Setting Solver.Linear.Preconditioner.{precond_method} keys (MaxIter and MaxLevel
 
 
 
-NumPreRelax
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.{precond_method}.NumPreRelax
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the number of relaxations to take before coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
 
@@ -2999,8 +3003,8 @@ NumPreRelax
 
 
 
-NumPostRelax
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.{precond_method}.NumPostRelax
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: int] This key specifies the number of relaxations to take after coarsening in the specified preconditioner method. Note that this key is only relevant to the SMG multigrid preconditioner.
 
@@ -3012,8 +3016,18 @@ NumPostRelax
 
 
 
-RAPType
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.{precond_method}.Smoother
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string]
+
+
+.. note::
+    The value must be a string
+
+
+.{precond_method}.RAPType
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: string] For the PFMG solver, this key specifies the Hypre RAP type. Valid values are Galerkin or NonGalerkin
 
@@ -3660,6 +3674,7 @@ Type
 
 :default: Constant
 .. note::
+    The value is required
     The value must be one of the following options: Constant
 
 
@@ -3670,7 +3685,57 @@ Value
 
 
 .. note::
+    The value is required
     The value must be an Integer
+
+
+Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies whether the mobility for phase_name will be a given constant or a polynomial of the form, (S-So)^a, where S is saturation, So is irreducible saturation, and a is some exponent. The possibilities for this key are Constant and Polynomial.
+
+
+:default: Constant
+.. note::
+    The value must be one of the following options: Constant, Polynomial
+
+
+Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the constant mobility value for phase phase_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+Exponent
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the exponent used in a polynomial representation of the relative permeability. Currently, only a value of 2.0 is allowed for this key.
+
+
+:default: 2.0
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 2.0
+      - with a value less than or equal to 2.0
+
+
+
+IrreducibleSaturation
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the irreducible saturation used in a polynomial representation of the relative permeability. Currently, only a value of 0.0 is allowed for this key.
+
+
+:default: 0.0
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 0.0
+
 
 
 PhaseConcen
