@@ -22,7 +22,9 @@ class Run(BaseRun):
     writeDict(self.getKeyDict(), fName)
 
   def run(self, fileName=None):
-    fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}')
-    if fileName:
-      fName = os.path.join(PFDBObj.workingDirectory, fileName)
-    os.system(f'./run_parflow.sh {fName}')
+    P = self.Process.Topology.P
+    Q = self.Process.Topology.Q
+    R = self.Process.Topology.R
+    NumProcs = P * Q * R
+    os.system('sh $PARFLOW_DIR/bin/run ' + fileName + ' ' + str(NumProcs))
+

@@ -329,4 +329,4 @@ drich.write('../output/default_richards.pfidb')
 drich.write('../output/default_richards.yaml')
 
 # uncomment the following line if you want to run ParFlow with the validation
-# drich.run('../output/default_richards')
+drich.run('./output/default_richards')
