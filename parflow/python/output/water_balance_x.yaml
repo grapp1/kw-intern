@@ -33,12 +33,6 @@ Geom.domain.Perm.TensorValX: 1.0
 Geom.domain.Perm.TensorValY: 1.0
 Geom.domain.Perm.TensorValZ: 1.0
 Geom.domain.SpecificStorage.Value: 0.0001
-Geom.domain.RelPerm.Alpha: 0.5
-Geom.domain.RelPerm.N: 3.0
-Geom.domain.Saturation.Alpha: 0.5
-Geom.domain.Saturation.N: 3.0
-Geom.domain.Saturation.SRes: 0.2
-Geom.domain.Saturation.SSat: 1.0
 Geom.domain.ICPressure.RefGeom: domain
 Geom.domain.ICPressure.RefPatch: z_upper
 Geom.domain.ICPressure.Value: -3.0
@@ -89,6 +83,9 @@ Geom.channel.Perm.Type: Constant
 Geom.channel.Perm.Value: 1e-05
 Geom.channel.Porosity.Type: Constant
 Geom.channel.Porosity.Value: 0.01
+Solver: Richards
+Solver.TerrainFollowingGrid: False
+Solver.Linear: PCG
 Solver.Linear.Preconditioner: PFMG
 Solver.Linear.Preconditioner.PFMG.Smoother: RBGaussSeidelNonSymmetric
 Solver.Linear.KrylovDimension: 20
@@ -99,8 +96,8 @@ Solver.Nonlinear.MaxIter: 20
 Solver.Nonlinear.EtaChoice: EtaConstant
 Solver.Nonlinear.EtaValue: 0.01
 Solver.Nonlinear.DerivativeEpsilon: 1e-08
-Solver: Richards
 Solver.AbsTol: 1e-10
+Solver.LSM: none
 Solver.MaxIter: 100
 TimingInfo.BaseUnit: 0.1
 TimingInfo.StartCount: 0

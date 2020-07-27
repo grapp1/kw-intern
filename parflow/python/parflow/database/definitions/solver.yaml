@@ -956,7 +956,7 @@ Solver:
           LPreMethodUpdater:
             type: ChildrenHandler
             className: PrecondMethodItem
-            location: ..
+            location: ./Preconditioner
 
       SymmetricMat:
         help: >

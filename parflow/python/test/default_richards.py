@@ -317,16 +317,15 @@ drich.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 
 drich.Solver.Linear.KrylovDimension = 10
 
-drich.Solver.Linear.Preconditioner.Type = 'PFMG'
+drich.Solver.Linear.Preconditioner = 'PFMG'
 
 # These keys are set in the ParFlow example file but are apparently not used
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
-
 
 drich.validate()
 drich.write('../output/default_richards.pfidb')
 drich.write('../output/default_richards.yaml')
 
 # uncomment the following line if you want to run ParFlow with the validation
-drich.run('./output/default_richards')
+#drich.run('../output/default_richards')

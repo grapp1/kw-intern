@@ -396,7 +396,7 @@ wbx.KnownSolution = 'NoKnownSolution'
 # Set solver parameters
 #-----------------------------------------------------------------------------
 
-wbx.Solver.Type = 'Richards'
+wbx.Solver = 'Richards'
 wbx.Solver.MaxIter = 100
 
 wbx.Solver.AbsTol = 1E-10
@@ -412,7 +412,7 @@ wbx.Solver.Nonlinear.Globalization = 'LineSearch'
 wbx.Solver.Linear.KrylovDimension = 20
 wbx.Solver.Linear.MaxRestart = 2
 
-wbx.Solver.Linear.Preconditioner.Type = 'PFMG'
+wbx.Solver.Linear.Preconditioner = 'PFMG'
 wbx.Solver.Linear.Preconditioner.PFMG.MaxIter = 1
 wbx.Solver.Linear.Preconditioner.PFMG.Smoother = 'RBGaussSeidelNonSymmetric'
 wbx.Solver.Linear.Preconditioner.PFMG.NumPreRelax = 1
@@ -452,4 +452,4 @@ wbx.Geom.domain.ICPressure.RefPatch = 'z_upper'
 wbx.validate()
 wbx.write("../output/water_balance_x.pfidb")
 wbx.write("../output/water_balance_x.yaml")
-wbx.run()
+wbx.run("./output/water_balance_x")
