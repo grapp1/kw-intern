@@ -99,12 +99,9 @@ class RSTModule:
         title = subSection['__rst__']['name']
       if 'skip' in subSection['__rst__']:
         for subKey in subSection:
-          if subKey[0] != '_':
-            self.addSection(level, '', subKey, subSection[subKey])
+          if subKey[0] != '_' or subKey == '__value__':
+            self.addSection(level, title, subKey, subSection[subKey])
         return
-
-    if '__value__' in subSection:
-      self.addSection(level, title, '__value__', subSection['__value__'])
 
     self.addLine()
     self.addLine(title)
@@ -138,9 +135,8 @@ class RSTModule:
     else:
       # Keep adding sections
       for subKey in subSection:
-        if subKey[0] != '_':
+        if subKey[0] != '_' or subKey == '__value__':
           self.addSection(level + 1, title, subKey, subSection[subKey])
-
 
 
   def getContent(self,  lineSeparator='\n'):

@@ -8,8 +8,10 @@
 # -----------------------------------------------------------------------------
 
 Solver:
-  __doc__: >
-    Assigning properties to solver
+  __doc__: ''
+  __rst__:
+    skip:
+
   __value__:
     help: >
       [Type: string] ParFlow can operate using a number of different solvers. Two of these solvers, IMPES
