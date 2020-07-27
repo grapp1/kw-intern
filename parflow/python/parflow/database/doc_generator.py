@@ -91,6 +91,9 @@ class RSTModule:
   def addSection(self, level, prefix, key, subSection):
     title = f'{prefix}.{key}' if prefix else key
 
+    if key == '__value__':
+      title = prefix
+
     if '__rst__' in subSection:
       if 'name' in subSection['__rst__']:
         title = subSection['__rst__']['name']
@@ -100,12 +103,8 @@ class RSTModule:
             self.addSection(level, '', subKey, subSection[subKey])
         return
 
-    if 'exportName' in subSection:
-      py_title = title
-      if subSection["exportName"][1] == '.':
-        title = prefix
-      else:
-        title = f'{prefix}{subSection["exportName"]}'
+    if '__value__' in subSection:
+      self.addSection(level, title, '__value__', subSection['__value__'])
 
     self.addLine()
     self.addLine(title)
@@ -134,12 +133,6 @@ class RSTModule:
         self.addLine('.. note::')
         for domain in subSection['domains']:
           self.addLine(handleDomain(domain, subSection['domains'][domain]))
-        self.addLine()
-
-      if 'exportName' in subSection:
-        self.addLine('.. warning::')
-        self.addLine(f'    In Python we will define *{py_title}* which will set'
-                     f'    *{title}* inside the ParFlow .pfidb file.')
         self.addLine()
 
     else:

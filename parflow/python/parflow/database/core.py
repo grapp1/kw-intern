@@ -263,31 +263,6 @@ class PFDBObj:
 
   # ---------------------------------------------------------------------------
 
-  def getParFlowKey(self, parentNamespace, key):
-    '''
-    Helper method returning the key to use for Parflow on a given field key.
-    This allow to handle differences between what can be defined in Python vs Parflow key.
-    '''
-    if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
-      exportKey = self._details[key]['exportName']
-      parentTokens = parentNamespace.split('.')
-      parentOffset = 0
-
-      while exportKey[parentOffset] == '.':
-        parentOffset += 1
-
-      if len(parentTokens[:1-parentOffset]):
-        return f'{".".join(parentTokens[:1-parentOffset])}.{exportKey[parentOffset:]}'
-
-      return exportKey[parentOffset:]
-
-    if parentNamespace:
-      return f'{parentNamespace}.{key}'
-
-    return key
-
-  # ---------------------------------------------------------------------------
-
   def getChildrenOfType(self, className):
     results = []
     for (key, value) in self.__dict__.items():

@@ -15,20 +15,19 @@ def convertValueForStringDict(value):
 
 # -----------------------------------------------------------------------------
 
-def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
+def extractKeysFromObject(dictToFill, instance):
   for key in instance.getKeyNames(skipDefault=True):
 
     value = instance.__dict__[key]
     if value == None:
       continue
 
-    fullQualifiedKey = instance.getParFlowKey(parentNamespace, key)
     if isinstance(value, PFDBObj):
       if hasattr(value, '_value'):
-        dictToFill[fullQualifiedKey] = convertValueForStringDict(value._value)
-      extractKeysFromObject(dictToFill, value, fullQualifiedKey)
+        dictToFill[key] = convertValueForStringDict(value._value)
+      extractKeysFromObject(dictToFill, value)
     else:
-      dictToFill[fullQualifiedKey] = convertValueForStringDict(value)
+      dictToFill[key] = convertValueForStringDict(value)
 
 # -----------------------------------------------------------------------------
 

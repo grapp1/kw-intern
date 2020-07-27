@@ -12,8 +12,18 @@ Solver:
     Assigning properties to solver
   __value__:
     help: >
-      [Type: string] This is the Impes or Richards
+      [Type: string] ParFlow can operate using a number of different solvers. Two of these solvers, IMPES
+      (running in single-phase, fully-saturated mode, not multiphase) and RICHARDS (running in variably-saturated mode, not
+      multiphase, with the options of land surface processes and coupled overland flow) are detailed below. This is
+      a brief summary of solver settings used to simulate under three sets of conditions, fully-saturated, variably saturated
+      and variably-saturated with overland flow. To simulate fully saturated, steady-state conditions set
+      the solver to IMPES. This is also the default solver in ParFlow, so if no solver is specified, the code solves using IMPES.
+      To simulate variably-saturated, transient conditions, using Richards’ equation, variably/fully saturated,
+      transient with compressible storage set the solver to RICHARDS. This is also the
+      solver used to simulate surface flow or coupled surface-subsurface flow.
+    default: Impes
     domains:
+      MandatoryValue:
       EnumDomain:
         enumList:
           - Impes
@@ -505,6 +515,7 @@ Solver:
       key include none and CLM. Note that CLM must be compiled and linked at runtime for this option to be active.
     default: none
     domains:
+      MandatoryValue:
       EnumDomain:
         enumList:
           - none
@@ -809,36 +820,38 @@ Solver:
       DoubleValue:
 
   TerrainFollowingGrid:
-    help: >
-      [Type: boolean/string] This key specifies that a terrain-following coordinate transform is used for solver Richards. This key sets x and
-      y subsurface slopes to be the same as the Topographic slopes (a value of False sets these subsurface slopes to zero).
-      These slopes are used in the Darcy fluxes to add a density, gravity -dependent term. This key will not change the
-      output files (that is the output is still orthogonal) or the geometries (they will still follow the computational grid)–
-      these two things are both to do items. This key only changes solver Richards, not solver Impes.
-    default: False
-    domains:
-      BoolDomain:
+    __doc__: >
+      Assigning properties to TerrainFollowingGrid and TerrainFollowingGrid.SlopeUpwindFormulation
+    __value__:
+      help: >
+        [Type: boolean/string] This key specifies that a terrain-following coordinate transform is used for solver Richards. This key sets x and
+        y subsurface slopes to be the same as the Topographic slopes (a value of False sets these subsurface slopes to zero).
+        These slopes are used in the Darcy fluxes to add a density, gravity -dependent term. This key will not change the
+        output files (that is the output is still orthogonal) or the geometries (they will still follow the computational grid)–
+        these two things are both to do items. This key only changes solver Richards, not solver Impes.
+      default: False
+      domains:
+        BoolDomain:
 
-  TerrainFolSlopeUpwind:
-    help: >
-      [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for
-      this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8
-      in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two
-      adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of
-      a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as
-      the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental
-      purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal
-      formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The
-      upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is
-      consistent with OverlandFlow.
-    default: Original
-    domains:
-      EnumDomain:
-        enumList:
-          - Original
-          - Upwind
-          - UpwindSine
-    exportName: TerrainFollowingGrid.SlopeUpwindFormulation
+    SlopeUpwindFormulation:
+      help: >
+        [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for
+        this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8
+        in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two
+        adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of
+        a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as
+        the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental
+        purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal
+        formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The
+        upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is
+        consistent with OverlandFlow.
+      default: Original
+      domains:
+        EnumDomain:
+          enumList:
+            - Original
+            - Upwind
+            - UpwindSine
 
   # missing from manual
   TwoNorm:
@@ -867,8 +880,8 @@ Solver:
     __doc__: >
       Assigning properties to Solver.Linear
 
-    # corner case - This is the definition of the solver name
-    Type:
+    # Setting Linear.Solver
+    __value__:
       help: >
         [Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG,
         and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient)
@@ -883,12 +896,6 @@ Solver:
             - PPCG
             - PCG
             - CGHS
-      exportName: ..Linear
-      handlers:
-        PhaseSourceGeomUpdater:
-          type: ChildrenHandler
-          className: PhaseSourceGeomItem
-          location: ./Geom
 
     KrylovDimension:
       help: >
@@ -926,7 +933,7 @@ Solver:
       __rst__:
         skip:
 
-      Type:
+      __value__:
         help: >
           [Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG,
           PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi
@@ -943,12 +950,11 @@ Solver:
               - PFMG
               - PFMGOctree
               - SMG
-        exportName: ..Preconditioner
         handlers:
           LPreMethodUpdater:
             type: ChildrenHandler
             className: PrecondMethodItem
-            location: .
+            location: ..
 
       SymmetricMat:
         help: >

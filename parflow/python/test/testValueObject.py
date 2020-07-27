@@ -6,7 +6,7 @@ lw = Run('Little Washita')
 # Required for validation
 # -----------------------------------------------------------------------------
 
-lw.Process.Topology.P = -9
+lw.Process.Topology.P = 1
 
 lw.ComputationalGrid.Lower.X = 1.0
 lw.ComputationalGrid.Lower.Y = 1.0
@@ -33,17 +33,48 @@ lw.Gravity = 9.8
 
 lw.KnownSolution = 'Constant'
 
+#---------------------------------------------------------
+# The Names of the GeomInputs
+#---------------------------------------------------------
+lw.GeomInput.Names = "domain_input"
+
+
+#---------------------------------------------------------
+# Domain Geometry Input
+#---------------------------------------------------------
+lw.GeomInput.domain_input.InputType = 'Box'
+lw.GeomInput.domain_input.GeomName = 'domain'
+
+#---------------------------------------------------------
+# Domain Geometry
+#---------------------------------------------------------
+lw.Geom.domain.Lower.X = -10.0
+lw.Geom.domain.Lower.Y = 10.0
+lw.Geom.domain.Lower.Z = 1.0
+
+lw.Geom.domain.Upper.X = 150.0
+lw.Geom.domain.Upper.Y = 170.0
+lw.Geom.domain.Upper.Z = 9.0
+
+lw.Geom.domain.Patches = "left right front back bottom top"
+
 # -----------------------------------------------------------------------------
 # Setup database keys
 # -----------------------------------------------------------------------------
 
-lw.Solver = 'test'
-lw.Solver = 'Impes'
-# lw.Solver = 'Richards'
+lw.Solver = 'Richards'
+lw.Solver.Linear = 'MGSemi'
+lw.Solver.Linear.Preconditioner = 'SMG'
 
-lw.Solver.help()
-print('+'*10)
-lw.help('Solver')
+lw.Solver.TerrainFollowingGrid = True
+lw.Solver.TerrainFollowingGrid.SlopeUpwindFormulation = 'Upwind'
+
+lw.Geom.domain.RelPerm.Alpha.FileName = 'alpha_file.pfb'
+lw.Geom.domain.RelPerm.Alpha = 3.5
+
+# lw.Solver.help()
+# print('+'*10)
+# lw.help('Solver')
 
 # -----------------------------------------------------------------------------
 # Validation process

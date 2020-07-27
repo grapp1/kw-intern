@@ -766,37 +766,39 @@ Geom:
           DoubleValue:
             minValue: 0.0
 
-      # Corner case with Alpha as class and field
-      AlphaFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .Alpha.Filename
-
       Alpha:
-        help: >
-          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
 
-      # Corner case with N as class and field
-      NFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .N.Filename
+        # Corner case with Alpha as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       N:
-        help: >
-          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+
+        # Corner case with N as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       NumSamplePoints:
         help: >
@@ -880,71 +882,75 @@ Geom:
             minValue: 0.0
             maxValue: 1.0
 
-      # Corner case with Alpha as class and field
-      AlphaFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .Alpha.Filename
-
       Alpha:
-        help: >
-          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
 
-      # Corner case with N as class and field
-      NFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .N.Filename
+        # Corner case with Alpha as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       N:
-        help: >
-          [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
 
-      # Corner case with SRes as class and field
-      SResFilename:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .SRes.Filename
+        # Corner case with N as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       SRes:
-        help: >
-          [Type: double] This key specifies the residual saturation on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
-            maxValue: 1.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the residual saturation on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+              maxValue: 1.0
 
-      # Corner case with SSat as class and field
-      SSatFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .SSat.Filename
+        # Corner case with SRes as class and field
+        Filename:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       SSat:
-        help: >
-          [Type: double] This key specifies the saturation at saturated conditions on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
-            maxValue: 1.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the saturation at saturated conditions on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+              maxValue: 1.0
+
+        # Corner case with SSat as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       A:
         help: >
@@ -1014,37 +1020,39 @@ Geom:
           DoubleValue:
             minValue: 0.0 # not sure appropriate range
 
-      # Corner case with KDry as class and field
-      KDryFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .KDry.Filename
-
       KDry:
-        help: >
-          [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0 # not sure appropriate range
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0 # not sure appropriate range
 
-      # Corner case with KWet as class and field
-      KWetFileName:
-        help: >
-          [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
-          The ONLY option for geom_name is "domain."
-        domains:
-          AnyString:
-        exportName: .KDry.Filename
+        # Corner case with KDry as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
       KWet:
-        help: >
-          [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
-        domains:
-          DoubleValue:
-            minValue: 0.0
+        __doc__: ''
+        __value__:
+          help: >
+            [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
+          domains:
+            DoubleValue:
+              minValue: 0.0
+
+        # Corner case with KWet as class and field
+        FileName:
+          help: >
+            [Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell.
+            The ONLY option for geom_name is "domain."
+          domains:
+            AnyString:
 
     FBx:
       __doc__: >

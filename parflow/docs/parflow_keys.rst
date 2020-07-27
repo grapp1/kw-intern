@@ -1007,19 +1007,6 @@ Geom..{geom_name}.RelPerm.Value
 
 
 
-Geom..{geom_name}.RelPerm.Alpha.Filename
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-[Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
-
-
-.. note::
-    The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.RelPerm.AlphaFileName* which will set    *Geom..{geom_name}.RelPerm.Alpha.Filename* inside the ParFlow .pfidb file.
-
-
 Geom..{geom_name}.RelPerm.Alpha
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1032,17 +1019,20 @@ Geom..{geom_name}.RelPerm.Alpha
 
 
 
-Geom..{geom_name}.RelPerm.N.Filename
+Geom..{geom_name}.RelPerm.Alpha
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-[Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+
+Geom..{geom_name}.RelPerm.Alpha.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
 
 .. note::
     The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.RelPerm.NFileName* which will set    *Geom..{geom_name}.RelPerm.N.Filename* inside the ParFlow .pfidb file.
 
 
 Geom..{geom_name}.RelPerm.N
@@ -1055,6 +1045,22 @@ Geom..{geom_name}.RelPerm.N
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+
+
+Geom..{geom_name}.RelPerm.N
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
+Geom..{geom_name}.RelPerm.N.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+.. note::
+    The value must be a string
 
 
 Geom..{geom_name}.RelPerm.NumSamplePoints
@@ -1165,19 +1171,6 @@ Geom..{geom_name}.Saturation.Value
 
 
 
-Geom..{geom_name}.Saturation.Alpha.Filename
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-[Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
-
-
-.. note::
-    The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.Saturation.AlphaFileName* which will set    *Geom..{geom_name}.Saturation.Alpha.Filename* inside the ParFlow .pfidb file.
-
-
 Geom..{geom_name}.Saturation.Alpha
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1190,17 +1183,20 @@ Geom..{geom_name}.Saturation.Alpha
 
 
 
-Geom..{geom_name}.Saturation.N.Filename
+Geom..{geom_name}.Saturation.Alpha
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-[Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+
+Geom..{geom_name}.Saturation.Alpha.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the alpha parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
 
 .. note::
     The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.Saturation.NFileName* which will set    *Geom..{geom_name}.Saturation.N.Filename* inside the ParFlow .pfidb file.
 
 
 Geom..{geom_name}.Saturation.N
@@ -1215,17 +1211,20 @@ Geom..{geom_name}.Saturation.N
 
 
 
-Geom..{geom_name}.Saturation.SRes.Filename
+Geom..{geom_name}.Saturation.N
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-[Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+
+Geom..{geom_name}.Saturation.N.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the N parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
 
 .. note::
     The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.Saturation.SResFilename* which will set    *Geom..{geom_name}.Saturation.SRes.Filename* inside the ParFlow .pfidb file.
 
 
 Geom..{geom_name}.Saturation.SRes
@@ -1241,17 +1240,20 @@ Geom..{geom_name}.Saturation.SRes
 
 
 
-Geom..{geom_name}.Saturation.SSat.Filename
+Geom..{geom_name}.Saturation.SRes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-[Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+
+Geom..{geom_name}.Saturation.SRes.Filename
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the residual saturation parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
 
 
 .. note::
     The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.Saturation.SSatFileName* which will set    *Geom..{geom_name}.Saturation.SSat.Filename* inside the ParFlow .pfidb file.
 
 
 Geom..{geom_name}.Saturation.SSat
@@ -1265,6 +1267,22 @@ Geom..{geom_name}.Saturation.SSat
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
+
+
+Geom..{geom_name}.Saturation.SSat
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
+Geom..{geom_name}.Saturation.SSat.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the SSat parameters for the VanGenuchten function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+.. note::
+    The value must be a string
 
 
 Geom..{geom_name}.Saturation.A
@@ -1372,19 +1390,6 @@ Geom..{geom_name}.ThermalConductivity.Value
 
 
 
-Geom..{geom_name}.ThermalConductivity.KDry.Filename
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-[Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
-
-
-.. note::
-    The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.ThermalConductivity.KDryFileName* which will set    *Geom..{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
-
-
 Geom..{geom_name}.ThermalConductivity.KDry
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1397,17 +1402,20 @@ Geom..{geom_name}.ThermalConductivity.KDry
 
 
 
-Geom..{geom_name}.ThermalConductivity.KDry.Filename
+Geom..{geom_name}.ThermalConductivity.KDry
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-[Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+
+Geom..{geom_name}.ThermalConductivity.KDry.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the dry thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
 
 
 .. note::
     The value must be a string
-
-.. warning::
-    In Python we will define *Geom..{geom_name}.ThermalConductivity.KWetFileName* which will set    *Geom..{geom_name}.ThermalConductivity.KDry.Filename* inside the ParFlow .pfidb file.
 
 
 Geom..{geom_name}.ThermalConductivity.KWet
@@ -1420,6 +1428,22 @@ Geom..{geom_name}.ThermalConductivity.KWet
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+
+
+Geom..{geom_name}.ThermalConductivity.KWet
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
+Geom..{geom_name}.ThermalConductivity.KWet.FileName
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] This key specifies a pfb filename containing the wet thermal conductivity function cell-by-cell. The ONLY option for geom_name is "domain."
+
+
+.. note::
+    The value must be a string
 
 
 Geom..{geom_name}.FBx
@@ -1819,6 +1843,18 @@ Value
 
 .. note::
     The value must be an Integer
+
+
+Solver
+================================================================================
+
+[Type: string] ParFlow can operate using a number of different solvers. Two of these solvers, IMPES (running in single-phase, fully-saturated mode, not multiphase) and RICHARDS (running in variably-saturated mode, not multiphase, with the options of land surface processes and coupled overland flow) are detailed below. This is a brief summary of solver settings used to simulate under three sets of conditions, fully-saturated, variably saturated and variably-saturated with overland flow. To simulate fully saturated, steady-state conditions set the solver to IMPES. This is also the default solver in ParFlow, so if no solver is specified, the code solves using IMPES. To simulate variably-saturated, transient conditions, using Richards’ equation, variably/fully saturated, transient with compressible storage set the solver to RICHARDS. This is also the solver used to simulate surface flow or coupled surface-subsurface flow.
+
+
+:default: Impes
+.. note::
+    The value is required
+    The value must be one of the following options: Impes, Richards
 
 
 Solver
@@ -2408,6 +2444,7 @@ Solver.LSM
 
 :default: none
 .. note::
+    The value is required
     The value must be one of the following options: none, CLM
 
 
@@ -2827,8 +2864,15 @@ Solver.TerrainFollowingGrid
     The value must be True or False
 
 
-SolverTerrainFollowingGrid.SlopeUpwindFormulation
+Solver.TerrainFollowingGrid
 --------------------------------------------------------------------------------
+
+Assigning properties to TerrainFollowingGrid and TerrainFollowingGrid.SlopeUpwindFormulation
+
+
+
+Solver.TerrainFollowingGrid.SlopeUpwindFormulation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 [Type: string] This key specifies optional modifications to the terrain following grid formulation (Equation 5.8) . Choices for this key are Original, Upwind, UpwindSine. Original is the original TFG formulation shown in Equation 5.8 in the manual. The Original option calculates the theta-x and theta-y for a cell face as the average of the two adjacent cell slopes (i.e. assuming a cell centered slope calculation). The Upwind option uses the the theta-x and theta-y of a cell directly without averaging (i.e. assuming a face centered slope calculation). The UpwindSine is the same as the Upwind option but it also removes the Sine term from 5.8. Note the UpwindSine option is for experimental purposes only and should not be used in standard simulations. Also note that the choice of upwind orOriginal formulation should consistent with the choice of overland flow boundary condition if overland flow is being used. The upwind and UpwindSine are consistent with OverlandDiffusive and OverlandKinematic while Original is consistent with OverlandFlow.
 
@@ -2836,9 +2880,6 @@ SolverTerrainFollowingGrid.SlopeUpwindFormulation
 :default: Original
 .. note::
     The value must be one of the following options: Original, Upwind, UpwindSine
-
-.. warning::
-    In Python we will define *Solver.TerrainFolSlopeUpwind* which will set    *SolverTerrainFollowingGrid.SlopeUpwindFormulation* inside the ParFlow .pfidb file.
 
 
 Solver.TwoNorm
@@ -2875,13 +2916,6 @@ Solver.WriteCLMBinary
 Solver.Linear
 --------------------------------------------------------------------------------
 
-Assigning properties to Solver.Linear
-
-
-
-Solver.Linear
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 [Type: string] This key specifies the linear solver used for solver IMPES. Choices for this key are MGSemi, PPCG, PCG, and CGHS. The choice MGSemi is an algebraic mulitgrid linear solver (not a preconditioned conjugate gradient) which may be less robust than PCG as described in [3]. The choice PPCG is a preconditioned conjugate gradient solver. The choice PCG is a conjugate gradient solver with a multigrid preconditioner. The choice CGHS is a conjugate gradient solver.
 
 
@@ -2889,8 +2923,12 @@ Solver.Linear
 .. note::
     The value must be one of the following options: MGSemi, PPCG, PCG, CGHS
 
-.. warning::
-    In Python we will define *Solver.Linear.Type* which will set    *Solver.Linear* inside the ParFlow .pfidb file.
+
+Solver.Linear
+--------------------------------------------------------------------------------
+
+Assigning properties to Solver.Linear
+
 
 
 Solver.Linear.KrylovDimension
@@ -2931,20 +2969,6 @@ Solver.Linear.MaxRestart
     The value must be an Integer
       - with a value greater than or equal to 0
 
-
-
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[Type: string] This key specifies which preconditioner to use. Currently, the three choices are NoPC, MGSemi, PFMG, PFMGOctree and SMG. The choice NoPC specifies that no preconditioner should be used. The choice MGSemi specifies a semi-coarsening multigrid algorithm which uses a point relaxation method. The choice SMG specifies a semi-coarsening multigrid algorithm which uses plane relaxations. This method is more robust than MGSemi, but generally requires more memory and compute time. The choice PFMGOctree can be more efficient for problems with large numbers of inactive cells.
-
-
-:default: MGSemi
-.. note::
-    The value must be one of the following options: NoPC, MGSemi, PFMG, PFMGOctree, SMG
-
-.. warning::
-    In Python we will define *Type* which will set    ** inside the ParFlow .pfidb file.
 
 
 SymmetricMat
