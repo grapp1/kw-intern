@@ -370,7 +370,7 @@ Contaminants:
       ContaminantGeomNameUpdater:
         type: ChildrenHandler
         className: GeomContItem
-        location: ../Geom/{geom_name}
+        location: ../Geom/{geom_name}/
 
   .{contaminant_name}:
     __class__: ContNameItem

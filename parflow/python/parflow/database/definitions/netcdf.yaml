@@ -1,0 +1,172 @@
+# netcdf.yaml
+# Definitions of NetCDF outputs
+
+# -----------------------------------------------------------------------------
+# NetCDF
+# -----------------------------------------------------------------------------
+
+NetCDF:
+  __doc__: >
+    NetCDF4 parallel I/O is being implemented in ParFlow. As of now only output capability is implemented. Input
+    functionality will be added in later version. Currently user has option of printing 3-D time varying pressure or
+    saturation or both in a single NetCDF file containing multiple time steps. User should configure ParFlow
+    (pfsimulator part) "- -with-netcdf" option and link the appropriate NetCDF4 library. Naming convention of output
+    files is analogues to binary file names. Following options are available for NetCDF4 output along with various
+    performance tuning options. User is advised to explore NetCDF4 chunking and ROMIO hints option for better I/O
+    performance. HDF5 Library version 1.8.16 or higher is required for NetCDF4 parallel I/O
+
+  NumStepsPerFile:
+    help: >
+      [Type: int] This key sets number of time steps user wishes to output in a NetCDF4 file. Once the time step count increases
+      beyond this number, a new file is automatically created.
+    domains:
+      IntValue:
+
+  WritePressure:
+    help: >
+      [Type: boolean/string] This key sets pressure variable to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteSaturation:
+    help: >
+      [Type: boolean/string] This key sets saturation variable to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteMannings:
+    help: >
+      [Type: boolean/string] This key sets Mannings coefficients to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteSubsurface:
+    help: >
+      [Type: boolean/string] This key sets subsurface data(permeabilities, porosity, specific storage) to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteSlopes:
+    help: >
+      [Type: boolean/string] This key sets x and y slopes to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteMask:
+    help: >
+      [Type: boolean/string] This key sets mask to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteDZMultiplier:
+    help: >
+      [Type: boolean/string] This key sets DZ multipliers to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteEvapTrans:
+    help: >
+      [Type: boolean/string] This key sets Evaptrans to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteEvapTransSum:
+    help: >
+      [Type: boolean/string] This key sets Evaptrans sum to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteOverlandSum:
+    help: >
+      [Type: boolean/string] This key sets overland sum to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  WriteOverlandBCFlux:
+    help: >
+      [Type: boolean/string] This key sets overland bc flux to be written in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  Chunking:
+    help: >
+      [Type: boolean/string] This key sets chunking for each time varying 3-D variable in NetCDF4 file.
+    default: False
+    domains:
+      BoolDomain:
+
+  ChunkX:
+    help: >
+      [Type: int] This key sets chunking size in x-direction.
+    domains:
+      IntValue:
+        minValue: 1
+
+  ChunkY:
+    help: >
+      [Type: int] This key sets chunking size in y-direction.
+    domains:
+      IntValue:
+        minValue: 1
+
+  ChunkZ:
+    help: >
+      [Type: int] This key sets chunking size in z-direction.
+    domains:
+      IntValue:
+        minValue: 1
+
+  ROMIOhints:
+    help: >
+      [Type: string] This key sets ROMIO hints file to be passed on to NetCDF4 interface.If this key is set, the file must be present
+      and readable in experiment directory.
+    domains:
+      AnyString:
+
+  NodeLevelIO:
+    help: >
+      [Type: boolean/string] This key sets flag for node level collective I/O.
+    domains:
+      BoolDomain:
+
+  EvapTransFileTransient:
+    help: >
+      [Type: boolean/string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
+    domains:
+      BoolDomain:
+
+  EvapTrans:
+    __doc__: ''
+    __rst__:
+      skip:
+
+    FileName:
+      help: >
+        [Type: string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
+      domains:
+        AnyString:
+
+  CLMNumStepsPerFile:
+    help: >
+      [Type: int] This key sets number of time steps to be written to a single NetCDF file.
+    domains:
+      IntValue:
+        minValue: 1
+
+  WriteCLM:
+    help: >
+      [Type: boolean/string] This key sets CLM variables to be written in a NetCDF file.
+    default: False
+    domains:
+      BoolDomain:

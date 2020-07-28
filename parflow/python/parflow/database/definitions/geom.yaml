@@ -370,6 +370,11 @@ Geom:
         contaminants will have a retardation function applied.
       domains:
         AnyString:
+      handlers:
+        ContRetNameUpdater:
+          type: ChildrenHandler
+          className: GeomItem
+          location: ..
 
   # GeomItems: for keys in the form Geom.geom_name.[]
 
@@ -1174,7 +1179,7 @@ Geom:
       __doc__: >
         Setting retardation properties for specific contaminants and specific geometries.
       _dynamic:
-        BCPressIntItem: /Cycle/{CycleItem}/Names
+        Names: /Contaminants.Names
 
       Retardation:
         __rst__:

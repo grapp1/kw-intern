@@ -27,7 +27,6 @@ class ChildrenHandler:
   def decorate(self, value, container, className=None, location='.', eager=None, **kwargs):
     klass = getattr(generated, className)
     destination_containers = container.getSelectionFromLocation(location)
-    # print(container.__class__)
 
     if isinstance(value, str):
       names = value.split(' ')

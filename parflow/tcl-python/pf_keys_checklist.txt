@@ -240,25 +240,30 @@ InternalBC.%s.X
 InternalBC.%s.Y						
 InternalBC.%s.Z						
 Mannings.Geom.%s.Value						
-NetCDF.Chunking						
-NetCDF.EvapTrans.FileName						
-NetCDF.EvapTransFileTransient						
-NetCDF.NodeLevelIO						
-NetCDF.ROMIOhints						
-NetCDF.WriteCLM						
-NetCDF.WriteDZMultiplier						
-NetCDF.WriteEvapTrans						
-NetCDF.WriteEvapTransSum						
-NetCDF.WriteMannings						
-NetCDF.WriteMask						
-NetCDF.WriteOverlandBCFlux						
-NetCDF.WriteOverlandSum						
-NetCDF.WritePressure						
-NetCDF.WriteSaturation						
-NetCDF.WriteSlopes						
-NetCDF.WriteSubsurface						
-OverlandSpinupDampP1						
-OverlandSpinupDampP2						
+* NetCDF.Chunking	
+> * NetCDF.ChunkX
+> * NetCDF.ChunkY
+> * NetCDF.ChunkZ				
+* NetCDF.EvapTrans.FileName						
+* NetCDF.EvapTransFileTransient						
+* NetCDF.NodeLevelIO						
+* NetCDF.ROMIOhints						
+* NetCDF.WriteCLM						
+* NetCDF.WriteDZMultiplier						
+* NetCDF.WriteEvapTrans						
+* NetCDF.WriteEvapTransSum						
+* NetCDF.WriteMannings						
+* NetCDF.WriteMask						
+* NetCDF.WriteOverlandBCFlux						
+* NetCDF.WriteOverlandSum						
+* NetCDF.WritePressure						
+* NetCDF.WriteSaturation						
+* NetCDF.WriteSlopes						
+* NetCDF.WriteSubsurface
+> * NetCDF.CLMNumStepsPerFile		
+> * NetCDF.NumStepsPerFile			
+* OverlandSpinupDampP1						
+* OverlandSpinupDampP2						
 * Patch.%s.BCPressure.%s.%d.Location		
 * Patch.%s.BCPressure.%s.%d.Value
 * Patch.%s.BCPressure.%s.%s.IntValue
