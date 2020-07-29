@@ -2,7 +2,7 @@
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
 
-from parflow import Run
+from parflow import Run, Visual
 
 drich = Run('Default Richards', __file__)
 
@@ -10,6 +10,8 @@ drich = Run('Default Richards', __file__)
 drich.Process.Topology.P = 1
 drich.Process.Topology.Q = 1
 drich.Process.Topology.R = 1
+
+drich.Process.help()
 
 #---------------------------------------------------------
 # Computational Grid
@@ -326,6 +328,9 @@ drich.Solver.Linear.Preconditioner = 'PFMG'
 drich.validate()
 drich.write('../output/default_richards.pfidb')
 drich.write('../output/default_richards.yaml')
+
+Visual.plotCompGrid(drich)
+Visual.plotDomGrid(drich, domain='source_region')
 
 # uncomment the following line if you want to run ParFlow with the validation
 #drich.run('../output/default_richards')

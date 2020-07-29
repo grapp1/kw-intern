@@ -94,6 +94,9 @@ TimeStep:
       taken.
     domains:
       DoubleValue:
+    crosscheck:
+      MandatoryIf:
+        TimeStep.Type: Constant
 
   InitialStep:
     help: >

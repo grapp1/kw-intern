@@ -4,6 +4,7 @@
 *.xlsx
 *.Rhistory
 slimin_1.txt
+/parflow/working/*
 
 # Editor directories and files
 .idea
