@@ -111,7 +111,7 @@ class RSTModule:
     self.addLine(LEVELS[level]*80)
     self.addLine()
     if warning:
-      self.addLine('.. warning::\n')
+      self.addLine('.. warning::')
       self.addLine(warning)
 
     leaf = False
