@@ -432,7 +432,7 @@ Cell.{nzListNumber}
 ================================================================================
 
 .. warning::
-This should be set in the Python script in the format l#, where # is the integer number of the layer number.
+    This should be set in the Python script in the format l#, where # is the integer number of the layer.
 
 
 

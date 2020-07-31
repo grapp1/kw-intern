@@ -112,7 +112,7 @@ class RSTModule:
     self.addLine()
     if warning:
       self.addLine('.. warning::')
-      self.addLine(warning)
+      self.addLine(f'    {warning}')
 
     leaf = False
     description = ''
