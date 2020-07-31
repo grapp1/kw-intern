@@ -57,5 +57,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./test/tcl_converted/LW_var_dz.tcl', './test/LW_var_dz.py', 'LWvdz')
+tclToPython('./test/tcl_converted/default_overland.tcl', './test/default_overland.py', 'dover')
 

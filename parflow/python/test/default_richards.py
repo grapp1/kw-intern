@@ -2,7 +2,7 @@
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
 
-from parflow import Run # Visual
+from parflow import Run, Visual
 
 drich = Run('Default Richards', __file__)
 
@@ -328,8 +328,8 @@ drich.validate()
 drich.write('../output/default_richards.pfidb')
 drich.write('../output/default_richards.yaml')
 
-# Visual.plotCompGrid(drich)
-# Visual.plotDomGrid(drich, domain='source_region')
+Visual.plotCompGrid(drich)
+Visual.plotDomGrid(drich, domain='source_region')
 
 # uncomment the following line if you want to run ParFlow with the validation
 drich.run('./output/default_richards')
