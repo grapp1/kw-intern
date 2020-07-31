@@ -57,5 +57,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./test/tcl_converted/crater2D.tcl', './test/crater2D.py', 'crater')
+tclToPython('./test/tcl_converted/LW_var_dz.tcl', './test/LW_var_dz.py', 'LWvdz')
 

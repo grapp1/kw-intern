@@ -94,9 +94,12 @@ class RSTModule:
     if key == '__value__':
       title = prefix
 
+    warning = ''
     if '__rst__' in subSection:
       if 'name' in subSection['__rst__']:
         title = subSection['__rst__']['name']
+      if 'warning' in subSection['__rst__']:
+        warning = subSection['__rst__']['warning']
       if 'skip' in subSection['__rst__']:
         for subKey in subSection:
           if subKey[0] != '_' or subKey == '__value__':
@@ -107,6 +110,9 @@ class RSTModule:
     self.addLine(title)
     self.addLine(LEVELS[level]*80)
     self.addLine()
+    if warning:
+      self.addLine('.. warning::\n')
+      self.addLine(warning)
 
     leaf = False
     description = ''

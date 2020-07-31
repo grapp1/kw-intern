@@ -431,6 +431,10 @@ dzScale.nzListNumber
 Cell.{nzListNumber}
 ================================================================================
 
+.. warning::
+
+This should be set in the Python script in the format l#, where # is the integer number of the layer number.
+
 
 
 
@@ -2497,16 +2501,6 @@ Solver.OverlandKinematic.Epsilon
 
 
 
-Solver.PCMatrixType
-================================================================================
-
-[Type: int]
-
-
-.. note::
-    The value must be an Integer
-
-
 Solver.PolyDegree
 ================================================================================
 
@@ -2781,11 +2775,11 @@ Solver.Smoother
 Solver.Spinup
 ================================================================================
 
-[Type: int]
+[Type: boolean]
 
 
 .. note::
-    The value must be an Integer
+    The value must be True or False
 
 
 Solver.Symmetric
@@ -2936,6 +2930,16 @@ Solver.Linear.Preconditioner.SymmetricMat
 :default: Symmetric
 .. note::
     The value must be one of the following options: Symmetric, Nonsymmetric
+
+
+Solver.Linear.Preconditioner.PCMatrixType
+--------------------------------------------------------------------------------
+
+[Type: string]
+
+
+.. note::
+    The value must be one of the following options: FullJacobian
 
 
 Solver.Linear.Preconditioner..{precond_method}
@@ -3211,6 +3215,371 @@ Solver.Nonlinear.Globalization
 :default: LineSearch
 .. note::
     The value must be one of the following options: LineSearch, InexactNewton
+
+
+Solver.WriteSiloCLM
+================================================================================
+
+[Type: boolean/string] This key specifies whether the CLM writes two dimensional binary output files to a silo binary format. This data may be read in by VisIT and other visualization packages. Note that CLM and silo must be compiled and linked at runtime for this option to be active. These files are all written according to the standard format used for all ParFlow variables, using the runname, and istep. Variables are either two-dimensional or over the number of CLM layers (default of ten).
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloConcentration
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the concentration data in silo binary format. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloDZMultiplier
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloEvapTrans
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the evaporation and rainfall flux data using silo binary format. This data comes from either clm or from external calls to ParFlow such as WRF. This data is in units of [L3T-1]. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloEvapTransSum
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the evaporation and rainfall flux data using silo binary format as a running, cumulative amount. This data comes from either clm or from external calls to ParFlow such as WRF. This data is in units of [L3]. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloMannings
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the Manning’s roughness data in silo binary format. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloMask
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the mask data using silo binary format. The mask contains values equal to one for active cells and zero for inactive cells. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloOverlandBCFlux
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloOverlandSum
+================================================================================
+
+[Type: boolean/string] This key is used to specify calculation and printing of the total overland outflow from the domain using silo binary format as a running cumulative amount. This is integrated along all domain boundaries and is calculated any location that slopes at the edge of the domain point outward. This data is in units of [L3]. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOConcentration
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIODZMultiplier
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOEvapTrans
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOEvapTransSum
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOMannings
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOMask
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOOverlandBCFlux
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOOverlandSum
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOPressure
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOSaturation
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOSlopes
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOSpecificStorage
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOSubsurfData
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOTop
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPMPIOVelocities
+================================================================================
+
+[Type: boolean/string]
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloPressure
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the pressure data in silo binary format. The printing of the data is controlled by values in the timing information section. This data may be read in by VisIT and other visualization packages.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloSaturation
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the saturation data using silo binary format. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloSlopes
+================================================================================
+
+[Type: boolean/string] This key is used to turn on printing of the x adn y slope data in silo binary format. The printing of the data is controlled by values in the timing information section. The data is written as a PFB file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloSpecificStorage
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the specific storage data in silo binary format. The printing of the data is controlled by values in the timing information section.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloSubsurfData
+================================================================================
+
+[Type: boolean/string] This key is used to specify printing of the subsurface data, Permeability and Porosity in silo binary file format. The data is printed after it is generated and before the main time stepping loop - only once during the run. This data may be read in by VisIT and other visualization packages.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloTop
+================================================================================
+
+[Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data. The printing of the data is controlled by values in the timing information section. The data is written as a PFB file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+Solver.WriteSiloVelocities
+================================================================================
+
+[Type: boolean/string] This key is used to turn on printing of the x,y, and z velocity data in silo binary format. The printing of the data is controlled by values in the timing information section. The data is written as a PFB file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+SILO
+================================================================================
+
+These keys are used to control how SILO writes data. SILO allows writing to PDB and HDF5 file formats. SILO also allows data compression to be used, which can save significant amounts of disk space for some problems.
+
+
+
+SILO.Filetype
+--------------------------------------------------------------------------------
+
+[Type: string] This key is used to specify the SILO filetype. Allowed values are PDB and HDF5. Note that you must have configured SILO with HDF5 in order to use that option.
+
+
+:default: PDB
+.. note::
+
+
+
+SILO.CompressionOptions
+--------------------------------------------------------------------------------
+
+[Type: string] This key is used to specify the SILO compression options. See the SILO manual for the DB_SetCompression command for information on available options. NOTE: the options available are highly dependent on the configure options when building SILO.
 
 
 Wells

@@ -597,13 +597,6 @@ Solver:
         DoubleValue:
           minValue: 0.0
 
-  # missing from manual - part of Linear.Preconditioner
-  PCMatrixType:
-    help: >
-      [Type: int]
-    domains:
-      DoubleValue:
-
   # missing from manual
   PolyDegree:
     help: >
@@ -807,12 +800,12 @@ Solver:
     domains:
       DoubleValue:
 
-  # missing from manual
+  # missing from manual, but is in grep and set in LW_var_dz example (as False)
   Spinup:
     help: >
-      [Type: int]
+      [Type: boolean]
     domains:
-      DoubleValue:
+      BoolDomain:
 
   # missing from manual
   Symmetric:
@@ -970,6 +963,15 @@ Solver:
             enumList:
               - Symmetric
               - Nonsymmetric
+
+      # missing from manual
+      PCMatrixType:
+        help: >
+          [Type: string]
+        domains:
+          EnumDomain:
+            enumList:
+              - FullJacobian
 
       # defining key for Solver.Linear.Preconditioner.{precond_method}... keys
       .{precond_method}:

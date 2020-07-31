@@ -285,6 +285,7 @@ dzScale:
     domains:
       IntValue:
         minValue: 1
+        intoList: True
     handlers:
       nzListNumUpdater:
         type: ChildrenHandler
@@ -301,6 +302,8 @@ Cell:
     __class__: CellnzItem
     __rst__:
       name: Cell.{nzListNumber}
+      warning: >
+        This should be set in the Python script in the format l#, where # is the integer number of the layer number.
     dzScale:
       __doc__: >
         Setting the Cell.nzListNumber.dzScale.Value

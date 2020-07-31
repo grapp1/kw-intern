@@ -44,6 +44,21 @@ class ChildrenHandler:
 
       return valideNames
 
+    # for handling variable DZ setting
+    elif isinstance(value, int):
+      valideNames = []
+      for i in range(value):
+        name = f'l{i}'
+        valideNames.append(name)
+        for destination_container in destination_containers:
+          if destination_container != None:
+            if name not in destination_container.__dict__:
+              destination_container.__dict__[name] = klass(destination_container)
+          elif eager:
+            print(f'Error no selection for {location}')
+
+      return valideNames
+
     if hasattr(value, '__iter__'):
       valideNames = []
       for name in value:
@@ -120,5 +135,9 @@ def decorateValue(value, container=None, handlers=None):
         return_value = handler.decorate(value, container)
       else:
         return_value = handler.decorate(value, container, **handler_kwargs)
+
+  # added to handle variable DZ
+  if isinstance(value, int):
+    return value
 
   return return_value
