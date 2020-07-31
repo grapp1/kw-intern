@@ -57,6 +57,7 @@ def detailHelper(container, name, value):
   domains = None
   handlers = None
   history = None
+  crosscheck = None
   if name in container._details:
     if 'domains' in container._details[name]:
       domains = container._details[name]['domains']
@@ -66,12 +67,16 @@ def detailHelper(container, name, value):
 
     if 'history' in container._details[name]:
       history = container._details[name]['history']
+
     else:
       history = []
       container._details[name]['history'] = history
     history.append(value)
 
-  return domains, handlers, history
+    if 'crosscheck' in container._details[name]:
+      crosscheck = container._details[name]['crosscheck']
+
+  return domains, handlers, history, crosscheck
 
 # -----------------------------------------------------------------------------
 # Main DB Object
@@ -130,12 +135,12 @@ class PFDBObj:
     valueObjectAssignment = False
     if name[0] != '_' and hasattr(self, '_details'):
       if name in self._details:
-        domains, handlers, history = detailHelper(self, name, value)
+        domains, handlers, history, crosscheck = detailHelper(self, name, value)
       elif hasattr(self, name) and isinstance(self.__dict__[name], PFDBObj):
         # Handle value object assignment
         valueObjectAssignment = True
         valueObj = self.__dict__[name]
-        domains, handlers, history = detailHelper(valueObj, '_value', value)
+        domains, handlers, history, crosscheck = detailHelper(valueObj, '_value', value)
       else:
         print(f'Field {name} is not part of the expected schema {self.__class__}')
         if PFDBObj.exitOnError:
@@ -269,6 +274,7 @@ class PFDBObj:
     This allow to handle differences between what can be defined in Python vs Parflow key.
     '''
     if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
+    # if hasattr(self, '_details') and key in self._details and 'exportName' in self._details[key]:
       exportKey = self._details[key]['exportName']
       parentTokens = parentNamespace.split('.')
       parentOffset = 0

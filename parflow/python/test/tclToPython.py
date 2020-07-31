@@ -57,5 +57,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./tcl_converted/default_single.tcl', './tcl_converted/default_single.py', 'dsingle')
+tclToPython('./test/tcl_converted/crater2D.tcl', './test/crater2D.py', 'crater')
 

@@ -309,10 +309,10 @@ dsingle.PhaseConcen.water.tce.GeomNames = 'concen_region'
 dsingle.PhaseConcen.water.tce.Geom.concen_region.Value = 0.8
 
 
-# dsingle.Solver.WriteSiloSubsurfData = True
-# dsingle.Solver.WriteSiloPressure = True
-# dsingle.Solver.WriteSiloSaturation = True
-# dsingle.Solver.WriteSiloConcentration = True
+dsingle.Solver.WriteSiloSubsurfData = True
+dsingle.Solver.WriteSiloPressure = True
+dsingle.Solver.WriteSiloSaturation = True
+dsingle.Solver.WriteSiloConcentration = True
 
 
 #-----------------------------------------------------------------------------

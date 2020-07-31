@@ -21,10 +21,31 @@ class Run(BaseRun):
       fName = os.path.join(PFDBObj.workingDirectory, fileName)
     writeDict(self.getKeyDict(), fName)
 
+  def printOut(self, runName):
+    print('\n', "*"*80, '\n')
+    outFile = f'{runName}.out.txt'
+    if os.path.exists(outFile):
+      with open(outFile, "rt") as f:
+        contents = f.read()
+        if 'Problem solved' in contents:
+          print('ParFlow ran successfully')
+        else:
+          print('ParFlow run failed. Contents of error output file: \n')
+          f.close()
+          print(contents)
+    else:
+      print(f'Cannot find {outFile} in {os.getcwd()}')
+
   def run(self, fileName=None):
     P = self.Process.Topology.P
     Q = self.Process.Topology.Q
     R = self.Process.Topology.R
     NumProcs = P * Q * R
+    if fileName:
+      filePath = fileName.split('/')
+      for path in filePath[0:-1]:
+        os.chdir(path)
+      fileName = filePath[-1]
     os.system('sh $PARFLOW_DIR/bin/run ' + fileName + ' ' + str(NumProcs))
+    self.printOut(fileName)
 

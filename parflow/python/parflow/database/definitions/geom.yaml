@@ -456,6 +456,11 @@ Geom:
         bottom top) but you can name the sides anything you want.
       domains:
         AnyString:
+      handlers:
+        GeomPatchNameUpdater:
+          type: ChildrenHandler
+          className: GeomItem
+          location: ..
 
     # Permeability
     Perm:

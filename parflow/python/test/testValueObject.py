@@ -69,7 +69,7 @@ lw.Solver.Linear.Preconditioner = 'SMG'
 lw.Solver.TerrainFollowingGrid = True
 lw.Solver.TerrainFollowingGrid.SlopeUpwindFormulation = 'Upwind'
 
-lw.Geom.domain.RelPerm.Alpha.FileName = 'alpha_file.pfb'
+# lw.Geom.domain.RelPerm.Alpha.FileName = 'alpha_file.pfb'
 lw.Geom.domain.RelPerm.Alpha = 3.5
 
 # lw.Solver.help()
