@@ -15,7 +15,7 @@ class Run(BaseRun):
     extractKeysFromObject(keyDict, self)
     return keyDict
 
-  def write(self, fileFormat='pfidb', fileName=None):
+  def write(self, fileName=None, fileFormat='pfidb'):
     fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}.{fileFormat}')
     if fileName:
       fName = os.path.join(PFDBObj.workingDirectory, f'{fileName}.{fileFormat}')
@@ -36,10 +36,11 @@ class Run(BaseRun):
     else:
       print(f'Cannot find {outFile} in {os.getcwd()}')
 
-  def run(self):
+  def run(self, fileName=None):
     self.validate()
-    fileName = f'./output/{self._name}'
-    self.write(fileFormat='pfidb', fileName=fileName)
+    fileName = f'./output/{self._name}' if not fileName else fileName
+    print(fileName)
+    self.write(fileName)
     P = self.Process.Topology.P
     Q = self.Process.Topology.Q
     R = self.Process.Topology.R
