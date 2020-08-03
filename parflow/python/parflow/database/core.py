@@ -167,6 +167,10 @@ class PFDBObj:
       - A container does not count. (0)
     '''
     valueCount = 0
+
+    if hasattr(self, '_value') and self._value != None:
+      valueCount += 1
+
     for name in self.getKeyNames(True):
       obj = self.__dict__[name]
       if isinstance(obj, PFDBObj):
@@ -206,6 +210,10 @@ class PFDBObj:
 
   def getKeyNames(self, skipDefault=False):
     for name in self.__dict__:
+      if name == None:
+        print('need to fix the children instantiator')
+        continue
+
       if name[0] == '_':
         continue
 
@@ -213,8 +221,7 @@ class PFDBObj:
       if isinstance(obj, PFDBObj):
         if len(obj):
           yield name
-        elif hasattr(obj, '_value') and obj._value != None:
-          yield name
+
       else:
         hasDetails = hasattr(self, '_details') and name in self._details
         hasDefault = hasDetails and 'default' in self._details[name]
@@ -255,7 +262,8 @@ class PFDBObj:
           else:
             print(f'{indentStr}{name}:')
 
-          errorCount += obj.validate(indent+1)
+          errorCount += obj.validate(indent + 1)
+
       elif hasattr(self, '_details') and name in self._details:
         addErrors, validationString = validateHelper(self, name, obj, indent, errorCount)
         print(f'{indentStr}{name}: {validationString}')
@@ -264,6 +272,29 @@ class PFDBObj:
         print(f'{indentStr}{name}: {obj}')
 
     return errorCount
+
+  # ---------------------------------------------------------------------------
+
+
+  def getFullKeyName(self):
+    fullPath = []
+    currentLocation = self
+    count = 0
+    while currentLocation._parent != None:
+      count += 1
+      parent = currentLocation._parent
+      for name in parent.__dict__:
+        value = parent.__dict__[name]
+        if value == currentLocation:
+          fullPath.append(name)
+      currentLocation = parent
+      if count > len(fullPath):
+        return f'not found {count}: {".".join(fullPath)}'
+
+
+    fullPath.reverse()
+    return '.'.join(fullPath)
+
 
   # ---------------------------------------------------------------------------
 
@@ -373,4 +404,5 @@ class PFDBObj:
       klass = getattr(generated, className)
       names = self.getSelectionFromLocation(selection)
       for name in names:
-        self.__dict__[name] = klass(self)
+        if name is not None:
+          self.__dict__[name] = klass(self)

@@ -226,20 +226,8 @@ PhaseConcen:
     __rst__:
       skip:
     __doc__: ''
-
-    GeomNames:
-      help: >
-        [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
-        Note that geometries listed later “overlay” geometries listed earlier.
-      domains:
-        AnyString:
-
-    # PredefinedFunction is missing from the manual
-    PredefinedFunction:
-      help: >
-        [Type: string]
-      domains:
-        AnyString:
+    _dynamic:
+      PhaseConcenContItem: /Contaminants/Names
 
     .{contaminant_name}:
       __class__: PhaseConcenContItem
@@ -277,6 +265,20 @@ PhaseConcen:
             if the type was set to Constant.
           domains:
             DoubleValue:
+
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
+        Note that geometries listed later “overlay” geometries listed earlier.
+      domains:
+        AnyString:
+
+    # PredefinedFunction is missing from the manual
+    PredefinedFunction:
+      help: >
+        [Type: string]
+      domains:
+        AnyString:
 
 # -----------------------------------------------------------------------------
 # PhaseSources
@@ -370,7 +372,7 @@ Contaminants:
       ContaminantGeomNameUpdater:
         type: ChildrenHandler
         className: GeomContItem
-        location: ../Geom/{geom_name}/
+        location: /Geom/{GeomItem}/
 
   .{contaminant_name}:
     __class__: ContNameItem

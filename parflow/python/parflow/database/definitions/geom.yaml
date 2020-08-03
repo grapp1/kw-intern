@@ -112,7 +112,7 @@ GeomInput:
       GeomUpdater:
         type: ChildrenHandler
         className: GeomItem
-        location: ../Geom
+        location: /Geom
 
   # user-defined entries in GeomInput.Names are passed to .
   .{geom_input_name}:
@@ -151,7 +151,7 @@ GeomInput:
         GeomUpdater:
           type: ChildrenHandler
           className: GeomItem
-          location: ../../Geom
+          location: /Geom
 
     GeomNames:
       help: >
@@ -172,7 +172,7 @@ GeomInput:
         GeomUpdater:
           type: ChildrenHandler
           className: GeomItem
-          location: ../../Geom
+          location: /Geom
 
     # FileName is for solid files and indicator fields only
     FileName: # typo: this is capitalized incorrectly in the manual
@@ -390,6 +390,8 @@ Geom:
 
     _rst:
       prefix: Geom.{geom_name}
+    _dynamic:
+      GeomContItem: /Contaminants/Names
 
     # Geom.geom_name.FileName
     FileName:
@@ -1167,17 +1169,17 @@ Geom:
           DoubleValue:
 
     # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
-    ICSaturationItem:
-      __rst__:
-        name: Geom.{geom_name}.ICSaturation.{phase_name}
-      __doc__: >
-        Setting Geom.geom_input_name.ICSaturation.phase_name.Value
-
-      Value:
-        help: >
-          [Type: double] Setting
-        domains:
-          DoubleValue:
+#    ICSaturationItem:
+#      __rst__:
+#        name: Geom.{geom_name}.ICSaturation.{phase_name}
+#      __doc__: >
+#        Setting Geom.geom_input_name.ICSaturation.phase_name.Value
+#
+#      Value:
+#        help: >
+#          [Type: double] Setting
+#        domains:
+#          DoubleValue:
 
     # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
     .{contaminant_name}:
@@ -1186,9 +1188,7 @@ Geom:
         name: Geom.{geom_name}.{contaminant}
 
       __doc__: >
-        Setting retardation properties for specific contaminants and specific geometries.
-      _dynamic:
-        Names: /Contaminants.Names
+        Setting retardation properties for specific contaminants and specific geometries
 
       Retardation:
         __rst__:

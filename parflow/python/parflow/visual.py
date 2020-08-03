@@ -23,7 +23,6 @@ def plotUniformGrid(lower_x, lower_y, lower_z, dx, dy, dz, nx, ny, nz, plot_text
   # Add the data values to the cell data
   # grid.cell_arrays["values"] = values.flatten(order="F")  # Flatten the array!
   grid.cell_arrays["values"] = 1
-  print(grid.cell_arrays["values"].shape)
 
   p = pv.Plotter()
   p.add_mesh(grid, show_edges=True, color='white')
@@ -75,7 +74,7 @@ class Visual(BaseRun):
 
     plotUniformGrid(lower_x, lower_y, lower_z, dx, dy, dz, nx, ny, nz, domain)
 
-# # testing different configurations
+# testing different configurations
 #
 # nx = 10
 # ny = 10
@@ -122,6 +121,11 @@ class Visual(BaseRun):
 # p = pv.Plotter()
 # p.add_mesh(grid, style='wireframe', show_edges=True, color='black')
 # p.add_mesh(subgrid, show_edges=True, color='red')
+# p.add_text('domain and subgrid')
+# legend_entries = []
+# legend_entries.append(['domain', 'k'])
+# legend_entries.append(['subgrid', 'r'])
+# p.add_legend(legend_entries)
 # # Now plot the grid!
 # # grid.plot(show_edges=True, show_axes=True, text=plot_text)
 # p.show()

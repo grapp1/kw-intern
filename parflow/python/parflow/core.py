@@ -15,10 +15,10 @@ class Run(BaseRun):
     extractKeysFromObject(keyDict, self)
     return keyDict
 
-  def write(self, fileName=None, fileFormat='pfidb'):
+  def write(self, fileFormat='pfidb', fileName=None):
     fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}.{fileFormat}')
     if fileName:
-      fName = os.path.join(PFDBObj.workingDirectory, fileName)
+      fName = os.path.join(PFDBObj.workingDirectory, f'{fileName}.{fileFormat}')
     writeDict(self.getKeyDict(), fName)
 
   def printOut(self, runName):
@@ -36,16 +36,13 @@ class Run(BaseRun):
     else:
       print(f'Cannot find {outFile} in {os.getcwd()}')
 
-  def run(self, fileName=None):
+  def run(self, runName=None):
+    fileName = f'./output/{runName}'
+    self.write(fileFormat='pfidb', fileName=fileName)
     P = self.Process.Topology.P
     Q = self.Process.Topology.Q
     R = self.Process.Topology.R
     NumProcs = P * Q * R
-    if fileName:
-      filePath = fileName.split('/')
-      for path in filePath[0:-1]:
-        os.chdir(path)
-      fileName = filePath[-1]
     os.system('sh $PARFLOW_DIR/bin/run ' + fileName + ' ' + str(NumProcs))
     self.printOut(fileName)
 
