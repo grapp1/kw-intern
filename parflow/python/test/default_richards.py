@@ -1,6 +1,8 @@
 #  This runs the basic default_richards test case.
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
+import sys
+sys.path.append("..")
 
 from parflow import Run
 
@@ -324,15 +326,8 @@ drich.Solver.Linear.Preconditioner = 'PFMG'
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
-drich.validate()
-print('*'*80)
-# drich.write('./output/default_richards.pfidb')
-print('*'*80)
-# drich.write('./output/default_richards.yaml')
-print('*'*80)
 
 # Visual.plotCompGrid(drich)
 # Visual.plotDomGrid(drich, domain='source_region')
 
-# uncomment the following line if you want to run ParFlow with the validation
-drich.run('default_richards')
+drich.run()

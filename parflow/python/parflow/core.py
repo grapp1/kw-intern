@@ -36,8 +36,9 @@ class Run(BaseRun):
     else:
       print(f'Cannot find {outFile} in {os.getcwd()}')
 
-  def run(self, runName=None):
-    fileName = f'./output/{runName}'
+  def run(self):
+    self.validate()
+    fileName = f'./output/{self._name}'
     self.write(fileFormat='pfidb', fileName=fileName)
     P = self.Process.Topology.P
     Q = self.Process.Topology.Q
