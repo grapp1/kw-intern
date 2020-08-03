@@ -12,22 +12,23 @@ def plotUniformGrid(lower_x, lower_y, lower_z, dx, dy, dz, nx, ny, nz, plot_text
   # Create the spatial reference
   grid = pv.UniformGrid()
 
-  # Set the grid dimensions: shape + 1 because we want to inject our values on
-  #   the CELL data
+  # Set the grid dimensions: shape + 1 because we want to inject our values on the CELL data
   grid.dimensions = np.array(values.shape) + 1
 
   # Edit the spatial reference
   grid.origin = (lower_x, lower_y, lower_z)  # The bottom left corner of the data set
   grid.spacing = (dx, dy, dz)  # These are the cell sizes along each axis
 
-  # Add the data values to the cell data
-  # grid.cell_arrays["values"] = values.flatten(order="F")  # Flatten the array!
+  # Add the data values to the cell data - assigning all to 1 as example
   grid.cell_arrays["values"] = 1
 
   p = pv.Plotter()
   p.add_mesh(grid, show_edges=True, color='white')
-  # Now plot the grid!
-  # grid.plot(show_edges=True, show_axes=True, text=plot_text)
+  p.add_text(plot_text)
+  # legend_entries = []
+  # legend_entries.append(['domain', 'k'])
+  # legend_entries.append(['subgrid', 'r'])
+  # p.add_legend(legend_entries)
   p.show()
 
 
@@ -73,59 +74,3 @@ class Visual(BaseRun):
     nz = int(upper_z / dz)
 
     plotUniformGrid(lower_x, lower_y, lower_z, dx, dy, dz, nx, ny, nz, domain)
-
-# testing different configurations
-#
-# nx = 10
-# ny = 10
-# nz = 5
-# lower_x = 0.0
-# lower_y = 0.0
-# lower_z = 0.0
-# dx = 2
-# dy = 2
-# dz = 1
-#
-#
-# values = np.linspace(0, 10, nx * ny * nz).reshape((nx, ny, nz))
-# values.shape
-#
-# grid = pv.UniformGrid()
-# grid.dimensions = np.array(values.shape) + 1
-# grid.origin = (lower_x, lower_y, lower_z)
-# grid.spacing = (dx, dy, dz)
-# grid.cell_arrays["values"] = 1
-#
-# sub_nx = 5
-# sub_ny = 5
-# sub_nz = 5
-# sub_values = np.linspace(0, 10, sub_nx * sub_ny * sub_nz).reshape((sub_nx, sub_ny, sub_nz))
-# sub_values.shape
-#
-# # Create the spatial reference
-# subgrid = pv.UniformGrid()
-#
-# # Set the grid dimensions: shape + 1 because we want to inject our values on
-# #   the CELL data
-# subgrid.dimensions = np.array(sub_values.shape) + 1
-#
-# # Edit the spatial reference
-# subgrid.origin = (lower_x, lower_y, lower_z)  # The bottom left corner of the data set
-# subgrid.spacing = (dx, dy, dz)  # These are the cell sizes along each axis
-#
-# # Add the data values to the cell data
-# # grid.cell_arrays["values"] = values.flatten(order="F")  # Flatten the array!
-# subgrid.cell_arrays["values"] = 1
-# print(subgrid.cell_arrays["values"].shape)
-#
-# p = pv.Plotter()
-# p.add_mesh(grid, style='wireframe', show_edges=True, color='black')
-# p.add_mesh(subgrid, show_edges=True, color='red')
-# p.add_text('domain and subgrid')
-# legend_entries = []
-# legend_entries.append(['domain', 'k'])
-# legend_entries.append(['subgrid', 'r'])
-# p.add_legend(legend_entries)
-# # Now plot the grid!
-# # grid.plot(show_edges=True, show_axes=True, text=plot_text)
-# p.show()

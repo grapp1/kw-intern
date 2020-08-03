@@ -361,8 +361,10 @@ class PFDBObj:
         nextList = [item for sublist in multiList for item in sublist]
       else:
         nextList.extend(map(mapToChild(path_item), currentList))
-        if isinstance(nextList[0], list):
+        if len(nextList) and isinstance(nextList[0], list):
           nextList = [item for sublist in nextList for item in sublist]
+        else:
+          print(nextList)
 
     # print(f'=>{nextList}')
     return nextList

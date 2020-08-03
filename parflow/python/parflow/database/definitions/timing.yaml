@@ -150,7 +150,7 @@ Cycle:
   .{cycle_name}:
     __class__: CycleItem
     __rst__:
-      name: Wells.{well_name}
+      name: Cycle.{cycle_name}
     __doc__: ''
 
     Names:
@@ -165,10 +165,6 @@ Cycle:
           type: ChildrenHandler
           className: CycleIntItem
           location: .
-#        BCPressUpdater:
-#          type: ChildrenHandler
-#          className: BCPressIntItem
-#          location: /Patch/{BCItem}/BCPressure
 
     Repeat:
       help: >
@@ -182,7 +178,7 @@ Cycle:
     .{interval_name}:
       __class__: CycleIntItem
       __rst__:
-        name: Wells.{well_name}.{interval_name}
+        name: Cycle.{cycle_name}.{interval_name}
       __doc__: ''
 
       Length:

@@ -4,7 +4,7 @@
 import sys
 sys.path.append("..")
 
-from parflow import Run
+from parflow import Run, Visual
 
 drich = Run('default_richards', __file__)
 

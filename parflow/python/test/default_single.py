@@ -1,7 +1,11 @@
 #
 # Import the ParFlow TCL package
 #
+import sys
+sys.path.append("..")
 from parflow import Run
+
+
 dsingle = Run("dsingle", __file__)
 
 
@@ -325,7 +329,5 @@ dsingle.Solver.MaxIter = 5
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-dsingle.validate()
-dsingle.write("../output/default_single.pfidb")
-dsingle.write("../output/default_single.yaml")
+# dsingle.write("../output/default_single.yaml")
 dsingle.run()

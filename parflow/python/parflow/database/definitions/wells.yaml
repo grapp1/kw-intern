@@ -26,184 +26,12 @@ Wells:
       name: Wells.{well_name}
     __doc__: >
       Specifying properties for wells
-
-    InputType:
-      help: >
-        [Type: string] This key specifies the type of well to be defined for the given well, well_name. This key can be either Vertical or
-        Recirc. The value Vertical indicates that this is a single segmented well whose action will be specified by the user.
-        The value Recirc indicates that this is a dual segmented, recirculating, well with one segment being an extraction
-        well and another being an injection well. The extraction well filters out a specified fraction of each contaminant and
-        recirculates the remainder to the injection well where the diluted fluid is injected back in. The phase saturations at
-        the extraction well are passed without modification to the injection well.
-        Note with the recirculating well, several input options are not needed as the extraction well will provide these
-        values to the injection well.
-      domains:
-        EnumDomain:
-          enumList:
-            - Vertical
-            - Recirc
-
-    Action:
-      help: >
-        [Type: string] This key specifies the pumping action of the well. This key can be either Injection or Extraction. A value of
-        Injection indicates that this is an injection well. A value of Extraction indicates that this is an extraction well.
-      domains:
-        EnumDomain:
-          enumList:
-            - Injection
-            - Extraction
-
-    Type:
-      # type is wrong in manual (should be string). Also, multiple typos
-      help: >
-        [Type: string] This key specifies the mechanism by which the well works (how ParFlow works with the well data) if the input
-        type key is set to Vertical. This key can be either Pressure or Flux. A value of Pressure indicates that the
-        data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed pressure
-        field satisfies this condition in the computational cells which define the well. A value of Flux indicates that the data
-        provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this condition in
-        the computational cells which define the well.
-      domains:
-        EnumDomain:
-          enumList:
-            - Pressure
-            - Flux
-
-    ExtractionType:
-      help: >
-        [Type: string] This key specifies the mechanism by which the extraction well works (how ParFlow works with the well data)
-        if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates
-        that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed
-        pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates
-        that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this
-        condition in the computational cells which define the well.
-      domains:
-        EnumDomain:
-          enumList:
-            - Pressure
-            - Flux
-
-    InjectionType:
-      help: >
-        [Type: string] This key specifies the mechanism by which the injection well works (how ParFlow works with the well data)
-        if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates
-        that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed
-        pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates
-        that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this
-        condition in the computational cells which define the well.
-      domains:
-        EnumDomain:
-          enumList:
-            - Pressure
-            - Flux
-
-    X:
-      # typos - vertical
-      help: >
-        [Type: double] This key specifies the x location of the vertical well if the input type is set to Vertical or of both the extraction
-        and injection wells if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    Y:
-      # typos - vertical
-      help: >
-        [Type: double] This key specifies the y location of the vertical well if the input type is set to Vertical or of both the extraction
-        and injection wells if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    ZUpper:
-      # typos - vertical
-      help: >
-        [Type: double] This key specifies the z location of the upper extent of a vertical well if the input type is set to Vertical.
-      domains:
-        DoubleValue:
-
-    ExtractionZUpper:
-      help: >
-        [Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    InjectionZUpper:
-      help: >
-        [Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    ZLower:
-      # typos - vertical
-      help: >
-        [Type: double] This key specifies the z location of the lower extent of a vertical well if the input type is set to Vertical.
-      domains:
-        DoubleValue:
-
-    ExtractionZLower:
-      help: >
-        [Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    InjectionZLower:
-      help: >
-        [Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
-      domains:
-        DoubleValue:
-
-    Method:
-      help: >
-        [Type: string] This key specifies a method by which pressure or flux for a vertical well will be weighted before assignment to
-        computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be either
-        Standard,Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the pressure
-        or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the cells
-        permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
-        implemented.
-      domains:
-        EnumDomain:
-          enumList:
-            - Standard
-            - Weighted
-            - Patterned
-
-    ExtractionMethod:
-      help: >
-        [Type: string] This key specifies a method by which pressure or flux for an extraction well will be weighted before assignment
-        to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be
-        either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the
-        pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the
-        cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
-        implemented.
-      domains:
-        EnumDomain:
-          enumList:
-            - Standard
-            - Weighted
-            - Patterned
-
-    InjectionMethod:
-      help: >
-        [Type: string] This key specifies a method by which pressure or flux for an injection well will be weighted before assignment
-        to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be
-        either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the
-        pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the
-        cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
-        implemented.
-      domains:
-        EnumDomain:
-          enumList:
-            - Standard
-            - Weighted
-            - Patterned
-
-    Cycle:
-      help: >
-        [Type: string] This key specifies the time cycles to which data for the well well_name corresponds.
-      domains:
-        AnyString:
+    _dynamic:
+      WellIntervalItem: /Cycle/{CycleItem}/Names
 
     # Setting key Wells.{well_name}.{interval_name}...
     .{interval_name}:
-      __class__: WellIntItem
+      __class__: WellIntervalItem
       __rst__:
         skip:
       __doc__: >
@@ -387,5 +215,179 @@ Wells:
                   DoubleValue:
                     minValue: 0.0
                     maxValue: 1.0
+
+    InputType:
+      help: >
+        [Type: string] This key specifies the type of well to be defined for the given well, well_name. This key can be either Vertical or
+        Recirc. The value Vertical indicates that this is a single segmented well whose action will be specified by the user.
+        The value Recirc indicates that this is a dual segmented, recirculating, well with one segment being an extraction
+        well and another being an injection well. The extraction well filters out a specified fraction of each contaminant and
+        recirculates the remainder to the injection well where the diluted fluid is injected back in. The phase saturations at
+        the extraction well are passed without modification to the injection well.
+        Note with the recirculating well, several input options are not needed as the extraction well will provide these
+        values to the injection well.
+      domains:
+        EnumDomain:
+          enumList:
+            - Vertical
+            - Recirc
+
+    Action:
+      help: >
+        [Type: string] This key specifies the pumping action of the well. This key can be either Injection or Extraction. A value of
+        Injection indicates that this is an injection well. A value of Extraction indicates that this is an extraction well.
+      domains:
+        EnumDomain:
+          enumList:
+            - Injection
+            - Extraction
+
+    Type:
+      # type is wrong in manual (should be string). Also, multiple typos
+      help: >
+        [Type: string] This key specifies the mechanism by which the well works (how ParFlow works with the well data) if the input
+        type key is set to Vertical. This key can be either Pressure or Flux. A value of Pressure indicates that the
+        data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed pressure
+        field satisfies this condition in the computational cells which define the well. A value of Flux indicates that the data
+        provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this condition in
+        the computational cells which define the well.
+      domains:
+        EnumDomain:
+          enumList:
+            - Pressure
+            - Flux
+
+    ExtractionType:
+      help: >
+        [Type: string] This key specifies the mechanism by which the extraction well works (how ParFlow works with the well data)
+        if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates
+        that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed
+        pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates
+        that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this
+        condition in the computational cells which define the well.
+      domains:
+        EnumDomain:
+          enumList:
+            - Pressure
+            - Flux
+
+    InjectionType:
+      help: >
+        [Type: string] This key specifies the mechanism by which the injection well works (how ParFlow works with the well data)
+        if the input type key is set to Recirc. This key can be either Pressure or Flux. A value of Pressure indicates
+        that the data provided for the well is in terms of hydrostatic pressure and ParFlow will ensure that the computed
+        pressure field satisfies this condition in the computational cells which define the well. A value of Flux indicates
+        that the data provided is in terms of volumetric flux rates and ParFlow will ensure that the flux field satisfies this
+        condition in the computational cells which define the well.
+      domains:
+        EnumDomain:
+          enumList:
+            - Pressure
+            - Flux
+
+    X:
+      # typos - vertical
+      help: >
+        [Type: double] This key specifies the x location of the vertical well if the input type is set to Vertical or of both the extraction
+        and injection wells if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    Y:
+      # typos - vertical
+      help: >
+        [Type: double] This key specifies the y location of the vertical well if the input type is set to Vertical or of both the extraction
+        and injection wells if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    ZUpper:
+      # typos - vertical
+      help: >
+        [Type: double] This key specifies the z location of the upper extent of a vertical well if the input type is set to Vertical.
+      domains:
+        DoubleValue:
+
+    ExtractionZUpper:
+      help: >
+        [Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    InjectionZUpper:
+      help: >
+        [Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    ZLower:
+      # typos - vertical
+      help: >
+        [Type: double] This key specifies the z location of the lower extent of a vertical well if the input type is set to Vertical.
+      domains:
+        DoubleValue:
+
+    ExtractionZLower:
+      help: >
+        [Type: double] This key specifies the z location of the upper extent of a extraction well if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    InjectionZLower:
+      help: >
+        [Type: double] This key specifies the z location of the upper extent of an injection well if the input type is set to Recirc.
+      domains:
+        DoubleValue:
+
+    Method:
+      help: >
+        [Type: string] This key specifies a method by which pressure or flux for a vertical well will be weighted before assignment to
+        computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be either
+        Standard,Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the pressure
+        or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the cells
+        permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
+        implemented.
+      domains:
+        EnumDomain:
+          enumList:
+            - Standard
+            - Weighted
+            - Patterned
+
+    ExtractionMethod:
+      help: >
+        [Type: string] This key specifies a method by which pressure or flux for an extraction well will be weighted before assignment
+        to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be
+        either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the
+        pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the
+        cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
+        implemented.
+      domains:
+        EnumDomain:
+          enumList:
+            - Standard
+            - Weighted
+            - Patterned
+
+    InjectionMethod:
+      help: >
+        [Type: string] This key specifies a method by which pressure or flux for an injection well will be weighted before assignment
+        to computational cells. This key can only be Standard if the type key is set to Pressure; or this key can be
+        either Standard, Weighted or Patterned if the type key is set to Flux. A value of Standard indicates that the
+        pressure or flux data will be used as is. A value of Weighted indicates that the flux data is to be weighted by the
+        cells permeability divided by the sum of all cell permeabilities which define the well. The value of Patterned is not
+        implemented.
+      domains:
+        EnumDomain:
+          enumList:
+            - Standard
+            - Weighted
+            - Patterned
+
+    Cycle:
+      help: >
+        [Type: string] This key specifies the time cycles to which data for the well well_name corresponds.
+      domains:
+        AnyString:
 
 

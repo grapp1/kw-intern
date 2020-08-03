@@ -39,7 +39,6 @@ class Run(BaseRun):
   def run(self, fileName=None):
     self.validate()
     fileName = f'./output/{self._name}' if not fileName else fileName
-    print(fileName)
     self.write(fileName)
     P = self.Process.Topology.P
     Q = self.Process.Topology.Q
