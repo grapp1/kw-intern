@@ -16,3 +16,5 @@ class TerminalSymbols:
   errorItem = u'\u2605'
   warning = u'\u26A0'
   default = u'\u2622'
+  droplet = u'\U0001F4A7'
+  splash = u'\U0001F4A6'
