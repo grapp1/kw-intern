@@ -26,6 +26,18 @@ Phase:
         type: ChildrenHandler
         className: PhaseConcenNameItem
         location: /PhaseConcen
+      ExtractionFluxPhaseUpdater:
+        type: ChildrenHandler
+        className: ExtractionFluxPhaseItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Extraction/Flux
+      InjectionFluxPhaseUpdater:
+        type: ChildrenHandler
+        className: InjectionFluxPhaseItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Flux
+      InjectionConcentrationPhaseUpdater:
+        type: ChildrenHandler
+        className: InjectionConcentrationPhaseItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration
 
   RelPerm:
     __doc__: >
@@ -239,6 +251,37 @@ PhaseConcen:
         skip:
       __doc__: ''
 
+      GeomNames:
+        help: >
+          [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
+          Note that geometries listed later “overlay” geometries listed earlier.
+        domains:
+          AnyString:
+        handlers:
+          PhaseConcenContaminantGeomItemUpdater:
+            type: ChildrenHandler
+            className: PhaseConcenContaminantGeomItem
+            location: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/Geom
+
+      Geom:
+        __doc__: ''
+        __rst__:
+          skip:
+        _dynamic:
+          PhaseConcenContaminantGeomItem: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/GeomNames
+
+        .{geom_input_name}:
+          __class__: PhaseConcenContaminantGeomItem
+          __rst__:
+            skip:
+          __doc__: ''
+          Value:
+            help: >
+              [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
+              if the type was set to Constant.
+            domains:
+              DoubleValue:
+
       Type:
         help: >
           [Type: string] This key specifies the type of initial condition that will be applied to different geometries for given phase,
@@ -257,25 +300,6 @@ PhaseConcen:
           was set to PFBFile.
         domains:
           AnyString:
-
-      .{geom_input_name}:
-        __class__: PhaseConcenContaminantGeomItem
-        __rst__:
-          skip:
-        __doc__: ''
-        Value:
-          help: >
-            [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
-            if the type was set to Constant.
-          domains:
-            DoubleValue:
-
-    GeomNames:
-      help: >
-        [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
-        Note that geometries listed later “overlay” geometries listed earlier.
-      domains:
-        AnyString:
 
     # PredefinedFunction is missing from the manual
     PredefinedFunction:
@@ -377,6 +401,14 @@ Contaminants:
         type: ChildrenHandler
         className: GeomContItem
         location: /Geom/{GeomItem}/
+      InjectionConcentrationPhaseContaminantUpdater:
+        type: ChildrenHandler
+        className: InjectionConcentrationPhaseContaminantItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration/{InjectionConcentrationPhaseItem}
+      PhaseConcenContNameItemUpdater:
+        type: ChildrenHandler
+        className: PhaseConcenContaminantItem
+        location: /PhaseConcen/{PhaseConcenNameItem}/
 
   .{contaminant_name}:
     __class__: ContNameItem

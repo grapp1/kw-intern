@@ -224,9 +224,9 @@ dsingle.Wells.snoopy.InjectionZUpper = 2.0
 dsingle.Wells.snoopy.ExtractionMethod = 'Standard'
 dsingle.Wells.snoopy.InjectionMethod = 'Standard'
 
-dsingle.Wells.snoopy.alltime.Extraction.Flux.water.Value = 5.0
-dsingle.Wells.snoopy.alltime.Injection.Flux.water.Value = 7.5
-dsingle.Wells.snoopy.alltime.Injection.Concentration.water.tce.Fraction = 0.1
+# dsingle.Wells.snoopy.alltime.Extraction.Flux.water.Value = 5.0
+# dsingle.Wells.snoopy.alltime.Injection.Flux.water.Value = 7.5
+# dsingle.Wells.snoopy.alltime.Injection.Concentration.water.tce.Fraction = 0.1
 
 #-----------------------------------------------------------------------------
 # Time Cycles
@@ -235,6 +235,14 @@ dsingle.Cycle.Names = 'constant'
 dsingle.Cycle.constant.Names = 'alltime'
 dsingle.Cycle.constant.alltime.Length = 1
 dsingle.Cycle.constant.Repeat = -1
+
+#-----------------------------------------------------------------------------
+# Assigning well with newly assigned interval name
+#-----------------------------------------------------------------------------
+
+dsingle.Wells.snoopy.alltime.Extraction.Flux.water.Value = 5.0
+dsingle.Wells.snoopy.alltime.Injection.Flux.water.Value = 7.5
+dsingle.Wells.snoopy.alltime.Injection.Concentration.water.tce.Fraction = 0.1
 
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure

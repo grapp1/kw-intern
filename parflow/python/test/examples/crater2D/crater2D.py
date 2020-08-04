@@ -463,7 +463,4 @@ crater.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-crater.validate()
-crater.write("../output/crater2D.pfidb")
-crater.write("../output/crater2D.yaml")
-crater.run('./output/crater2D')
+crater.run()

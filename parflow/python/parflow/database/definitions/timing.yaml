@@ -165,6 +165,10 @@ Cycle:
           type: ChildrenHandler
           className: CycleIntItem
           location: .
+        WellIntervalItemUpdater:
+          type: ChildrenHandler
+          className: WellIntervalItem
+          location: /Wells/{WellItem}
 
     Repeat:
       help: >

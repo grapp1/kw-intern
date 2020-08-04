@@ -419,17 +419,17 @@ wbx.Solver.Linear.Preconditioner.PFMG.NumPreRelax = 1
 wbx.Solver.Linear.Preconditioner.PFMG.NumPostRelax = 1
 
 
-# wbx.Solver.WriteSiloSubsurfData = True
-# wbx.Solver.WriteSiloPressure = True
-# wbx.Solver.WriteSiloSaturation = True
-# wbx.Solver.WriteSiloConcentration = True
-# wbx.Solver.WriteSiloSlopes = True
-# wbx.Solver.WriteSiloMask = True
-# wbx.Solver.WriteSiloEvapTrans = True
-# wbx.Solver.WriteSiloEvapTransSum = True
-# wbx.Solver.WriteSiloOverlandSum = True
-# wbx.Solver.WriteSiloMannings = True
-# wbx.Solver.WriteSiloSpecificStorage = True
+wbx.Solver.WriteSiloSubsurfData = True
+wbx.Solver.WriteSiloPressure = True
+wbx.Solver.WriteSiloSaturation = True
+wbx.Solver.WriteSiloConcentration = True
+wbx.Solver.WriteSiloSlopes = True
+wbx.Solver.WriteSiloMask = True
+wbx.Solver.WriteSiloEvapTrans = True
+wbx.Solver.WriteSiloEvapTransSum = True
+wbx.Solver.WriteSiloOverlandSum = True
+wbx.Solver.WriteSiloMannings = True
+wbx.Solver.WriteSiloSpecificStorage = True
 
 #---------------------------------------------------------
 # Initial conditions: water pressure
@@ -448,8 +448,4 @@ wbx.Geom.domain.ICPressure.RefPatch = 'z_upper'
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-#exec ../opf $runname
-wbx.validate()
-wbx.write("../output/water_balance_x.pfidb")
-wbx.write("../output/water_balance_x.yaml")
-wbx.run("./output/water_balance_x")
+wbx.run()

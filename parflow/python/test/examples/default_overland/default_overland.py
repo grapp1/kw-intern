@@ -390,8 +390,4 @@ dover.Geom.domain.ICPressure.RefPatch = 'z_upper'
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-
-dover.validate()
-dover.write("../output/default_overland.pfidb")
-dover.write("../output/default_overland.yaml")
-dover.run('./output/default_overland')
+dover.run()

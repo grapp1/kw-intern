@@ -133,8 +133,11 @@ Wells:
             skip:
           __doc__: >
             Setting flux for a named well within a specified cycle for a specific phase in an extraction well.
+          _dynamic:
+            ExtractionFluxPhaseItem: /Phase/Names
+
           .{phase_name}:
-            __class__: ExtFluxPhaseItem
+            __class__: ExtractionFluxPhaseItem
             __rst__:
               skip:
             __doc__: ''
@@ -174,9 +177,11 @@ Wells:
             skip:
           __doc__: >
             Setting flux for a named well within a specified cycle for a specific phase in an injection well.
+          _dynamic:
+            InjectionFluxPhaseItem: /Phase/Names
 
           .{phase_name}:
-            __class__: InjFluxPhaseItem
+            __class__: InjectionFluxPhaseItem
             __rst__:
               skip:
             __doc__: ''
@@ -197,14 +202,19 @@ Wells:
             skip:
           __doc__: >
             Setting the fraction of the extracted contaminant which gets resupplied to the injection well.
+          _dynamic:
+            InjectionConcentrationPhaseItem: /Phase/Names
 
           .{phase_name}:
-            __class__: InjConcPhaseItem
+            __class__: InjectionConcentrationPhaseItem
             __rst__:
               skip:
             __doc__: ''
+            _dynamic:
+              InjectionConcentrationPhaseContaminantItem: /Contaminants/Names
+
             .{contaminant_name}:
-              __class__: InjConcPhaseContItem
+              __class__: InjectionConcentrationPhaseContaminantItem
               __rst__:
                 skip:
               __doc__: ''

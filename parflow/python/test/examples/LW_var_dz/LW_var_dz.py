@@ -379,8 +379,4 @@ LWvdz.Solver.Spinup = False
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-
-LWvdz.validate()
-LWvdz.write("../output/LW_var_dz.pfidb")
-# LWvdz.write("../output/LW_var_dz.yaml")
-LWvdz.run("./output/LW_var_dz")
+LWvdz.run()

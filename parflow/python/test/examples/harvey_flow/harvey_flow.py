@@ -298,7 +298,7 @@ hflow.Patch.top.BCPressure.alltime.Value = 0.0
 # need keys for them
 
 hflow.TopoSlopesX.Type = 'Constant'
-hflow.TopoSlopesX.GeomNames = ''
+hflow.TopoSlopesX.GeomNames = 'domain'
 
 hflow.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -307,7 +307,7 @@ hflow.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 hflow.TopoSlopesY.Type = 'Constant'
-hflow.TopoSlopesY.GeomNames = ''
+hflow.TopoSlopesY.GeomNames = 'domain'
 
 hflow.TopoSlopesY.Geom.domain.Value = 0.0
 
