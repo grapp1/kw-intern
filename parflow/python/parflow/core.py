@@ -34,10 +34,10 @@ class Run(BaseRun):
         if 'Problem solved' in contents:
           print(f'# ParFlow ran successfully {termSymbol.splash*3}')
         else:
-          print('# ParFlow run failed. Contents of error output file:')
+          print(f'# ParFlow run failed. {termSymbol.x} {termSymbol.x} {termSymbol.x} Contents of error output file:')
           print("-"*80)
           print(contents)
-          print("-" * 80)
+          print("-"*80)
     else:
       print(f'# Cannot find {outFile} in {os.getcwd()}')
     print(f'# {"=" * 78}')

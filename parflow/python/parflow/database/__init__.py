@@ -18,3 +18,4 @@ class TerminalSymbols:
   default = u'\u2622'
   droplet = u'\U0001F4A7'
   splash = u'\U0001F4A6'
+  x = u'\u274C'

@@ -1,6 +1,20 @@
 # Script to convert tcl scripts to python format
+import os
 
 def tclToPython(tclfile, pyfile, runname):
+  tclfile = os.path.abspath(tclfile)
+
+  pyfilePath = pyfile.split('/')
+  for path in pyfilePath[:-1]:
+    try:
+      os.chdir(path)
+    except OSError:
+      print(f'Directory {path} does not exist within {os.getcwd()}. Creating directory.')
+      os.mkdir(path)
+      os.chdir(path)
+
+  pyfile = pyfilePath[-1]
+
   runstr = str(runname) + '.'
   with open(tclfile, 'r') as fin:
     with open(pyfile, 'w') as fout:
@@ -49,13 +63,9 @@ def tclToPython(tclfile, pyfile, runname):
 
         fout.write(newline)
 
-      outfile_string = str(pyfile[:-3])
-      fout.write(f'{runname}.validate()\n')
-      fout.write(f'{runname}.write("../output/{outfile_string}.pfidb")\n')
-      fout.write(f'{runname}.write("../output/{outfile_string}.yaml")\n')
       fout.write(f'{runname}.run()\n')
 
   return
 
-tclToPython('./test/tcl_converted/default_overland.tcl', './test/default_overland.py', 'dover')
+tclToPython('./tcl_original/harvey.flow.tcl', './examples/harvey_flow/harvey_flow.py', 'hflow')
 
