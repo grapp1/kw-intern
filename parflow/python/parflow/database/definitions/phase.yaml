@@ -21,7 +21,11 @@ Phase:
       PhaseSourceUpdater:
         type: ChildrenHandler
         className: PhaseSourceNameItem
-        location: ../PhaseSources
+        location: /PhaseSources
+      PhaseConcenUpdater:
+        type: ChildrenHandler
+        className: PhaseConcenNameItem
+        location: /PhaseConcen
 
   RelPerm:
     __doc__: >
@@ -227,10 +231,10 @@ PhaseConcen:
       skip:
     __doc__: ''
     _dynamic:
-      PhaseConcenContItem: /Contaminants/Names
+      PhaseConcenContaminantItem: /Contaminants/Names
 
     .{contaminant_name}:
-      __class__: PhaseConcenContItem
+      __class__: PhaseConcenContaminantItem
       __rst__:
         skip:
       __doc__: ''
@@ -255,7 +259,7 @@ PhaseConcen:
           AnyString:
 
       .{geom_input_name}:
-        __class__: PhaseConContGeomItem
+        __class__: PhaseConcenContaminantGeomItem
         __rst__:
           skip:
         __doc__: ''
