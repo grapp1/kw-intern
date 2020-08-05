@@ -12,6 +12,55 @@ from . import TerminalColors as term
 from . import TerminalSymbols as termSymbol
 
 # -----------------------------------------------------------------------------
+# Validation helper functions
+# -----------------------------------------------------------------------------
+
+def filterErrorsByType(msgType, errors):
+  filterList = []
+  for error in errors:
+    if error['type'] == msgType:
+      filterList.append(error['message'])
+
+  return filterList
+
+
+# -----------------------------------------------------------------------------
+
+def error(message):
+  return {
+    'type': 'ERROR',
+    'message': message
+  }
+
+# -----------------------------------------------------------------------------
+
+def warning(message):
+  return {
+    'type': 'WARNING',
+    'message': message
+  }
+# -----------------------------------------------------------------------------
+
+def duplicateSearch(history):
+  if len(history) > 1:
+    dup_count = len(history)
+    return dup_count
+  else:
+    pass
+
+# -----------------------------------------------------------------------------
+
+def getComparableVersion(version):
+  cVersion = 0
+  versionTokens = version.split('.')
+  for versionToken in versionTokens:
+    cVersion *= 1000
+    cVersion += int(versionToken)
+  return cVersion
+
+# -----------------------------------------------------------------------------
+# Validation classes
+# -----------------------------------------------------------------------------
 
 class ValidationException(Exception):
   '''
@@ -25,7 +74,7 @@ class MandatoryValue:
     errors = []
 
     if value == None:
-      errors.append('Needs to be set')
+      errors.append(error('Needs to be set'))
       return errors
 
     return errors
@@ -49,15 +98,15 @@ class IntValue:
       return errors
 
     if not isinstance(value, int):
-      errors.append('Needs to be an integer')
+      errors.append(error('Needs to be an integer'))
 
     if intoList:
       return errors
 
     if minValue != None and value < minValue:
-      errors.append(f'Is smaller than min: {minValue}')
+      errors.append(error(f'Is smaller than min: {minValue}'))
     if maxValue != None and value > maxValue:
-      errors.append(f'Is greater than max: {maxValue}')
+      errors.append(error(f'Is greater than max: {maxValue}'))
 
     return errors
 
@@ -83,12 +132,12 @@ class DoubleValue:
       return errors
 
     elif not isinstance(value, float):
-      errors.append('Needs to be a double')
+      errors.append(error('Needs to be a double'))
 
     if minValue != None and value < minValue:
-      errors.append(f'Is smaller than min: {minValue}')
+      errors.append(error(f'Is smaller than min: {minValue}'))
     if maxValue != None and value > maxValue:
-      errors.append(f'Is greater than max: {maxValue}')
+      errors.append(error(f'Is greater than max: {maxValue}'))
 
     return errors
 
@@ -106,7 +155,7 @@ class EnumDomain:
 
     if value not in enumList:
       strList = ', '.join(enumList)
-      errors.append(f'{value} must be one of [{strList}]')
+      errors.append(error(f'{value} must be one of [{strList}]'))
 
     return errors
 
@@ -122,7 +171,7 @@ class AnyString:
     if isinstance(value, list) or isinstance(value, str):
       return errors
 
-    errors.append(f'{value} ({type(value)} must be a string')
+    errors.append(error(f'{value} ({type(value)} must be a string'))
     return errors
 
 # -----------------------------------------------------------------------------
@@ -137,7 +186,7 @@ class BoolDomain:
     if isinstance(value, bool):
       return errors
 
-    errors.append(f'{value} ({type(value)} must be True/False)')
+    errors.append(error(f'{value} ({type(value)} must be True/False)'))
     return errors
 
 # -----------------------------------------------------------------------------
@@ -150,38 +199,52 @@ class ValidFile:
       return errors
 
     if workingDirectory == None:
-      errors.append('Working directory is not defined')
+      errors.append(error('Working directory is not defined'))
       return errors
 
     if os.path.exists(os.path.join(workingDirectory, value)):
       return errors
 
-    errors.append(f'Could not locate file {os.path.abspath(os.path.join(workingDirectory, value))}')
+    errors.append(error(f'Could not locate file {os.path.abspath(os.path.join(workingDirectory, value))}'))
     return errors
 
 # -----------------------------------------------------------------------------
 
-class DeprecatedKey:
-  def validate(self, value, deprecatedAfter=None, **kwargs):
+class Deprecated:
+  def validate(self, value, arg, pfVersion=None, **kwargs):
     errors = []
 
     if value == None:
       return errors
 
-    # TODO: function should return list of separated version values (e.g. [3, 7, 0] for v3.7.0)
-    # version = getParFlowVersion()
-    version = '3.6.0'
-    versionList = version.split('.')
+    version = getComparableVersion(arg)
+    currentVersion = getComparableVersion(pfVersion)
 
-    if deprecatedAfter:
-      depList = deprecatedAfter.split('.')
-      for num in range(len(depList)):
-        if int(depList[num]) > int(versionList[num]):
-          print(f'  {term.CYAN}{termSymbol.warning} The following key will be deprecated after ParFlow version {deprecatedAfter}{term.ENDC}')
-          break
-        elif int(depList[num]) < int(versionList[num]):
-          errors.append(f'Key was deprecated after ParFlow version {deprecatedAfter}')
-          break
+    if version <= currentVersion:
+      errors.append(error(f'Deprecated in v{arg}'))
+
+    if version > currentVersion:
+      errors.append(warning(f'Will be deprecated in v{arg}'))
+
+    return errors
+
+# -----------------------------------------------------------------------------
+
+class Removed:
+  def validate(self, value, arg, pfVersion=None, **kwargs):
+    errors = []
+
+    if value == None:
+      return errors
+
+    version = getComparableVersion(arg)
+    currentVersion = getComparableVersion(pfVersion)
+
+    if version <= currentVersion:
+      errors.append(error(f'Removed in v{arg}'))
+
+    if version > currentVersion:
+      errors.append(warning(f'Will be removed in v{arg}'))
 
     return errors
 
@@ -230,7 +293,10 @@ def validateValueWithErrors(value, domainDefinitions=None, domainAddOnKwargs=Non
         domain_kwargs.update(domainAddOnKwargs)
 
       if domainDefinitions[domain_classname]:
-        domain_kwargs.update(domainDefinitions[domain_classname])
+        if isinstance(domainDefinitions[domain_classname], str):
+          domain_kwargs['arg'] = domainDefinitions[domain_classname]
+        else:
+          domain_kwargs.update(domainDefinitions[domain_classname])
 
       errors.extend(domain.validate(value, **domain_kwargs))
 
@@ -239,7 +305,8 @@ def validateValueWithErrors(value, domainDefinitions=None, domainAddOnKwargs=Non
 # -----------------------------------------------------------------------------
 
 def validateValueWithException(value, domainDefinition=None, domainAddOnKwargs=None, exitOnError=False):
-  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  allMessages = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  errors = filterErrorsByType('ERROR', allMessages)
 
   if len(errors):
     print()
@@ -261,21 +328,14 @@ def validateValueWithException(value, domainDefinition=None, domainAddOnKwargs=N
     if exitOnError:
       sys.exit(1)
 
-# -----------------------------------------------------------------------------
-
-def duplicateSearch(history):
-  if len(history) > 1:
-    dup_count = len(history)
-    return dup_count
-  else:
-    pass
-
 
 # -----------------------------------------------------------------------------
 
 def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
   indentStr = '  '* (indent - 1)
-  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  allMessages = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  errors = filterErrorsByType('ERROR', allMessages)
+  warnings = filterErrorsByType('WARNING', allMessages)
 
   if len(errors):
     print(f'{indentStr}  {term.FAIL}{termSymbol.ko}{term.ENDC} {name}: {value}')
@@ -298,11 +358,17 @@ def validateValueWithPrint(name, value, domainDefinition=None, domainAddOnKwargs
     else:
       print(f'{indentStr}  {name}: {value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
 
+  if len(warnings):
+    for warning in warnings:
+      print(f'{indentStr}    {term.CYAN}{termSymbol.warning}{term.ENDC} {warning}')
+
   return len(errors)
 
 def validateValueToString(name, value, domainDefinition=None, domainAddOnKwargs=None, history=None, indent=1):
   indentStr = '  '* (indent - 1)
-  errors = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  allMessages = validateValueWithErrors(value, domainDefinition, domainAddOnKwargs)
+  errors = filterErrorsByType('ERROR', allMessages)
+  warnings = filterErrorsByType('WARNING', allMessages)
   validationString = []
 
   if len(errors):
@@ -326,4 +392,8 @@ def validateValueToString(name, value, domainDefinition=None, domainAddOnKwargs=
     else:
       validationString.append(f'{value} {term.OKGREEN}{termSymbol.ok}{term.ENDC}')
 
-  return len(errors), '\n'.join(validationString)
+  if len(warnings):
+    for warning in warnings:
+      validationString.append(f'{indentStr}    {term.CYAN}{termSymbol.warning}{term.ENDC} {warning}')
+
+  return len(allMessages), '\n'.join(validationString)

@@ -85,6 +85,7 @@ class PFDBObj:
   printLineError = False
   exitOnError = False
   workingDirectory = os.getcwd()
+  pfVersion = '3.6.0'
 
   # ---------------------------------------------------------------------------
   # Global settings
@@ -115,7 +116,7 @@ class PFDBObj:
 
   @staticmethod
   def setParFlowVersion(version):
-      PFDBObj.ParFlowVersion = version
+      PFDBObj.pfVersion = version
 
   # ---------------------------------------------------------------------------
   # Instance specific code
@@ -382,6 +383,7 @@ class PFDBObj:
       'printLineError': PFDBObj.printLineError,
       'exitOnError': PFDBObj.exitOnError,
       'workingDirectory': PFDBObj.workingDirectory,
+      'pfVersion': PFDBObj.pfVersion
     }
 
   # ---------------------------------------------------------------------------

@@ -68,7 +68,7 @@ class Run(BaseRun):
     print(f'# ParFlow directory')
     print(f'#  - {os.getenv("PARFLOW_DIR")}')
     print(f'# ParFlow version')
-    print(f'#  - {self.ParFlowVersion}')
+    print(f'#  - {PFDBObj.pfVersion}')
     print(f'# Working directory')
     print(f'#  - {os.path.dirname(fileName)}')
     print(f'# ParFlow database')

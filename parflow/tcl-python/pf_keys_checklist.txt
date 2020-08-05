@@ -140,10 +140,13 @@ CapPressure.%s.Type
 > * ComputationalGrid.DX
 > * ComputationalGrid.DY
 > * ComputationalGrid.DZ					
-Contaminants.%s.Degradation.Value						
-Cycle.%s.%s.Length						
-Cycle.%s.Names						
-Cycle.%s.Repeat						
+Contaminants.%s.Degradation.Value
+> * Cycle.Names						
+* Cycle.%s.%s.Length						
+* Cycle.%s.Names						
+* Cycle.%s.Repeat	
+> * Domain.GeomName	
+> * FileVersion				
 + * Geom.%s.%s.Retardation.Rate						
 * Geom.%s.%s.Retardation.Type						
 * Geom.%s.CapPressure.%s.Value						
@@ -232,7 +235,8 @@ Cycle.%s.Repeat
 + * GeomInput.%s.GeomName						
 * GeomInput.%s.GeomNames						
 * GeomInput.%s.InputType						
-* GeomInput.%s.Value						
+* GeomInput.%s.Value	
+> * GeomInput.Names					
 * ICSaturation.%s.GeomNames						
 * ICSaturation.%s.Type						
 InternalBC.%s.Value						
@@ -331,6 +335,18 @@ PhaseConcen.%s.%s.Type
 * Solver.Nonlinear.StepTol	
 * Solver.Nonlinear.UseJacobian						
 * Solver.TerrainFollowingGrid.SlopeUpwindFormulation
+> * TimingInfo.BaseUnit
+> * TimingInfo.StartCount
+> * TimingInfo.StartTime
+> * TimingInfo.StopTime
+> * TimingInfo.DumpInterval
+> * TimingInfo.DumpIntervalExecutionTimeLimit
+> * TimeStep.Type
+> * TimeStep.Value
+> * TimeStep.InitialStep
+> * TimeStep.GrowthFactor
+> * TimeStep.MaxStep
+> * TimeStep.MinStep
 > * TopoSlopes.Elevation.FileName					
 * TopoSlopesX.Geom.%s.Value				
 * TopoSlopesY.Geom.%s.Value						
