@@ -12,6 +12,25 @@ class Run(BaseRun):
     if basescript:
       PFDBObj.setWorkingDirectory(os.path.dirname(basescript))
 
+  def getCurrentParFlowVersion(self):
+    versionFile = f'{os.getenv("PARFLOW_DIR")}/config/pf-cmake-env.sh'
+    if os.path.exists(os.path.abspath(versionFile)):
+      with open(versionFile, "rt") as f:
+        for line in f.readlines():
+          if 'PARFLOW_VERSION=' in line:
+            version = line[17:22]
+        if not version:
+          print(f'Cannot find version in {versionFile}')
+    else:
+      print(f'Cannot find environment file in {os.path.abspath(versionFile)}.')
+    return version
+
+  def setParflowVersion(self, version=None):
+    if not version:
+      self.ParFlowVersion = self.getCurrentParFlowVersion()
+    else:
+      self.ParFlowVersion = version
+
   def getKeyDict(self):
     keyDict = {}
     extractKeysFromObject(keyDict, self)
@@ -48,14 +67,14 @@ class Run(BaseRun):
 
     fileName, runFile = self.write()
 
-    PFDBObj.setParFlowVersion("3.5.0")
+    self.setParflowVersion(self.getCurrentParFlowVersion())
 
     print()
     print(f'# {"="*78}')
     print(f'# ParFlow directory')
     print(f'#  - {os.getenv("PARFLOW_DIR")}')
     print(f'# ParFlow version')
-    print(f'#  - {PFDBObj.getParFlowVersion}')
+    print(f'#  - {self.ParFlowVersion}')
     print(f'# Working directory')
     print(f'#  - {os.path.dirname(fileName)}')
     print(f'# ParFlow database')

@@ -113,22 +113,6 @@ class PFDBObj:
     else:
       PFDBObj.workingDirectory = os.getcwd()
 
-  @staticmethod
-  def setParFlowVersion(version=None):
-    # if version is specified (which it normally shouldn't be), it should be input as string, e.g. "3.6.0"
-    if not version:
-      versionFile = f'{os.getenv("PARFLOW_DIR")}/config/pf-cmake-env.sh'
-      if os.path.exists(os.path.abspath(versionFile)):
-        with open(versionFile, "rt") as f:
-          for line in f.readlines():
-            if 'PARFLOW_VERSION=' in line:
-              version = line[17:22]
-          if not version:
-            print(f'Cannot find version in {versionFile}')
-      else:
-        print(f'Cannot find environment file in {os.path.abspath(versionFile)}.')
-    PFDBObj.getParFlowVersion = version
-
   # ---------------------------------------------------------------------------
   # Instance specific code
   # ---------------------------------------------------------------------------
