@@ -160,6 +160,23 @@ class ValidFile:
     return errors
 
 # -----------------------------------------------------------------------------
+
+class DeprecatedKey:
+  def validate(self, value, deprecatedAfter=None, **kwargs):
+    errors = []
+
+    if value == None:
+      return errors
+
+    # TODO: function should return list of separated version values (e.g. [3, 7, 0] for v3.7.0)
+    # version = getParFlowVersion()
+
+    if deprecatedAfter:
+      errors.append(f'Key will be deprecated after {deprecatedAfter}')
+
+    return errors
+
+# -----------------------------------------------------------------------------
 # Helper map with an instance of each domain type
 # -----------------------------------------------------------------------------
 

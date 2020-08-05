@@ -48,10 +48,14 @@ class Run(BaseRun):
 
     fileName, runFile = self.write()
 
+    PFDBObj.setParFlowVersion("3.5.0")
+
     print()
     print(f'# {"="*78}')
     print(f'# ParFlow directory')
     print(f'#  - {os.getenv("PARFLOW_DIR")}')
+    print(f'# ParFlow version')
+    print(f'#  - {PFDBObj.getParFlowVersion}')
     print(f'# Working directory')
     print(f'#  - {os.path.dirname(fileName)}')
     print(f'# ParFlow database')
