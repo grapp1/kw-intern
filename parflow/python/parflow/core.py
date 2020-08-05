@@ -25,12 +25,6 @@ class Run(BaseRun):
       print(f'Cannot find environment file in {os.path.abspath(versionFile)}.')
     return version
 
-  def setParflowVersion(self, version=None):
-    if not version:
-      self.ParFlowVersion = self.getCurrentParFlowVersion()
-    else:
-      self.ParFlowVersion = version
-
   def getKeyDict(self):
     keyDict = {}
     extractKeysFromObject(keyDict, self)
@@ -67,7 +61,7 @@ class Run(BaseRun):
 
     fileName, runFile = self.write()
 
-    self.setParflowVersion(self.getCurrentParFlowVersion())
+    PFDBObj.setParFlowVersion(self.getCurrentParFlowVersion())
 
     print()
     print(f'# {"="*78}')

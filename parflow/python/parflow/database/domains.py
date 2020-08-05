@@ -170,9 +170,18 @@ class DeprecatedKey:
 
     # TODO: function should return list of separated version values (e.g. [3, 7, 0] for v3.7.0)
     # version = getParFlowVersion()
+    version = '3.6.0'
+    versionList = version.split('.')
 
     if deprecatedAfter:
-      errors.append(f'Key will be deprecated after {deprecatedAfter}')
+      depList = deprecatedAfter.split('.')
+      for num in range(len(depList)):
+        if int(depList[num]) > int(versionList[num]):
+          print(f'  {term.CYAN}{termSymbol.warning} The following key will be deprecated after ParFlow version {deprecatedAfter}{term.ENDC}')
+          break
+        elif int(depList[num]) < int(versionList[num]):
+          errors.append(f'Key was deprecated after ParFlow version {deprecatedAfter}')
+          break
 
     return errors
 

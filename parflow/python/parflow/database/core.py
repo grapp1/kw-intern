@@ -113,6 +113,10 @@ class PFDBObj:
     else:
       PFDBObj.workingDirectory = os.getcwd()
 
+  @staticmethod
+  def setParFlowVersion(version):
+      PFDBObj.ParFlowVersion = version
+
   # ---------------------------------------------------------------------------
   # Instance specific code
   # ---------------------------------------------------------------------------

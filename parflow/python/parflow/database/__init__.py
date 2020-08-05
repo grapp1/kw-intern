@@ -9,6 +9,7 @@ class TerminalColors:
   UNDERLINE = '\033[4m'
   BLUE = '\033[34m'
   MAGENTA = '\033[35m'
+  CYAN = '\033[36m'
 
 class TerminalSymbols:
   ok = u'\u2714'

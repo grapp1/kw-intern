@@ -46,6 +46,8 @@ BaseRun:
     domains:
       MandatoryValue:
       IntValue:
+      DeprecatedKey:
+        deprecatedAfter: '4.0.0'
 
   # -----------------------------------------------------------------------------
   # Gravity
