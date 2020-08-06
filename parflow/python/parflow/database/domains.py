@@ -271,9 +271,9 @@ class RequiresModule:
     if value == None:
       return errors
 
-    arg = arg.split() if isinstance(arg, str) else arg
+    argList = arg.split() if isinstance(arg, str) else arg
 
-    for module in arg:
+    for module in argList:
       if not getInstalledParFlowModule(module):
         errors.append(error(f'Need to install {module} module'))
 
@@ -325,6 +325,8 @@ def validateValueWithErrors(value, domainDefinitions=None, domainAddOnKwargs=Non
 
       if domainDefinitions[domain_classname]:
         if isinstance(domainDefinitions[domain_classname], str):
+          domain_kwargs['arg'] = domainDefinitions[domain_classname]
+        elif isinstance(domainDefinitions[domain_classname], list):
           domain_kwargs['arg'] = domainDefinitions[domain_classname]
         else:
           domain_kwargs.update(domainDefinitions[domain_classname])

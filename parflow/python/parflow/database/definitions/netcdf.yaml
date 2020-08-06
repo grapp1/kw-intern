@@ -21,7 +21,7 @@ NetCDF:
       beyond this number, a new file is automatically created.
     domains:
       IntValue:
-      RequiresModule: 'NETCDF'
+      RequiresModule: ['NETCDF', 'SILO']
 
   WritePressure:
     help: >

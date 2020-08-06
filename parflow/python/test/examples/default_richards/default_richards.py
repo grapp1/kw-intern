@@ -324,8 +324,6 @@ drich.Solver.Linear.Preconditioner = 'PFMG'
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
-drich.NetCDF.NumStepsPerFile = 2
-
 # Visual.plotCompGrid(drich)
 # Visual.plotDomGrid(drich, domain='source_region')
 
