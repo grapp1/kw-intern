@@ -21,7 +21,7 @@ NetCDF:
       beyond this number, a new file is automatically created.
     domains:
       IntValue:
-      RequiresModule: ['NETCDF', 'SILO']
+      RequiresModule: 'NETCDF'
 
   WritePressure:
     help: >
@@ -183,7 +183,9 @@ NetCDF:
     domains:
       IntValue:
         minValue: 1
-      RequiresModule: 'NETCDF'
+      RequiresModule:
+        - NETCDF
+        - CLM
 
   WriteCLM:
     help: >
@@ -191,4 +193,6 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
-      RequiresModule: ['NETCDF', 'CLM']
+      RequiresModule:
+        - NETCDF
+        - CLM

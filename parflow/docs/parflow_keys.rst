@@ -1899,6 +1899,7 @@ Solver.CLM.BinaryOutDir
 :default: True
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.CLMDumpInterval
@@ -1912,6 +1913,7 @@ Solver.CLM.CLMDumpInterval
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.CLMFileDir
@@ -1922,6 +1924,7 @@ Solver.CLM.CLMFileDir
 
 .. note::
     The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.DailyRST
@@ -1933,6 +1936,7 @@ Solver.CLM.DailyRST
 :default: True
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.EvapBeta
@@ -1944,6 +1948,7 @@ Solver.CLM.EvapBeta
 :default: Linear
 .. note::
     The value must be one of the following options: None, Linear, Cosine
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.FieldCapacity
@@ -1958,6 +1963,7 @@ Solver.CLM.FieldCapacity
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.ForceVegetation
@@ -1969,6 +1975,7 @@ Solver.CLM.ForceVegetation
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.FstepStart
@@ -1979,6 +1986,7 @@ Solver.CLM.FstepStart
 
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationCycle
@@ -1990,6 +1998,7 @@ Solver.CLM.IrrigationCycle
 :default: Constant
 .. note::
     The value must be one of the following options: Constant, Deficit
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationRate
@@ -2002,6 +2011,7 @@ Solver.CLM.IrrigationRate
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationStartTime
@@ -2015,6 +2025,7 @@ Solver.CLM.IrrigationStartTime
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 2400.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationStopTime
@@ -2028,6 +2039,7 @@ Solver.CLM.IrrigationStopTime
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 2400.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationThreshold
@@ -2041,6 +2053,7 @@ Solver.CLM.IrrigationThreshold
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationThresholdType
@@ -2051,6 +2064,7 @@ Solver.CLM.IrrigationThresholdType
 
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IrrigationType
@@ -2062,6 +2076,7 @@ Solver.CLM.IrrigationType
 :default: none
 .. note::
     The value must be one of the following options: none, Spray, Drip, Instant
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.IstepStart
@@ -2073,6 +2088,7 @@ Solver.CLM.IstepStart
 :default: 1
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.MetFileNT
@@ -2083,6 +2099,7 @@ Solver.CLM.MetFileNT
 
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.MetFileName
@@ -2093,6 +2110,7 @@ Solver.CLM.MetFileName
 
 .. note::
     The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.MetFilePath
@@ -2103,6 +2121,7 @@ Solver.CLM.MetFilePath
 
 .. note::
     The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.MetFileSubdir
@@ -2113,6 +2132,7 @@ Solver.CLM.MetFileSubdir
 
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.MetForcing
@@ -2123,6 +2143,7 @@ Solver.CLM.MetForcing
 
 .. note::
     The value must be one of the following options: 1D, 2D, 3D
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.Print1dOut
@@ -2134,6 +2155,7 @@ Solver.CLM.Print1dOut
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.ResSat
@@ -2147,6 +2169,7 @@ Solver.CLM.ResSat
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.ReuseCount
@@ -2160,6 +2183,7 @@ Solver.CLM.ReuseCount
     The value must be an Integer
       - with a value greater than or equal to 0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.RootZoneNZ
@@ -2173,6 +2197,7 @@ Solver.CLM.RootZoneNZ
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.SingleFile
@@ -2184,6 +2209,7 @@ Solver.CLM.SingleFile
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.SoiLayer
@@ -2197,6 +2223,7 @@ Solver.CLM.SoiLayer
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.VegWaterStress
@@ -2208,6 +2235,7 @@ Solver.CLM.VegWaterStress
 :default: Saturation
 .. note::
     The value must be one of the following options: None, Saturation, Pressure
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.WiltingPoint
@@ -2221,6 +2249,7 @@ Solver.CLM.WiltingPoint
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.WriteLastRST
@@ -2232,6 +2261,7 @@ Solver.CLM.WriteLastRST
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CLM.WriteLogs
@@ -2243,6 +2273,7 @@ Solver.CLM.WriteLogs
 :default: True
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.CoarseSolve
@@ -2512,6 +2543,7 @@ Solver.PrintCLM
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: CLM
 
 
 Solver.PrintConcentration
@@ -3208,6 +3240,7 @@ Solver.WriteSiloCLM
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloConcentration
@@ -3219,6 +3252,7 @@ Solver.WriteSiloConcentration
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloDZMultiplier
@@ -3230,6 +3264,7 @@ Solver.WriteSiloDZMultiplier
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloEvapTrans
@@ -3241,6 +3276,7 @@ Solver.WriteSiloEvapTrans
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloEvapTransSum
@@ -3252,6 +3288,7 @@ Solver.WriteSiloEvapTransSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloMannings
@@ -3263,6 +3300,7 @@ Solver.WriteSiloMannings
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloMask
@@ -3274,6 +3312,7 @@ Solver.WriteSiloMask
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloOverlandBCFlux
@@ -3285,6 +3324,7 @@ Solver.WriteSiloOverlandBCFlux
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloOverlandSum
@@ -3296,6 +3336,7 @@ Solver.WriteSiloOverlandSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOConcentration
@@ -3307,6 +3348,7 @@ Solver.WriteSiloPMPIOConcentration
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIODZMultiplier
@@ -3318,6 +3360,7 @@ Solver.WriteSiloPMPIODZMultiplier
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOEvapTrans
@@ -3329,6 +3372,7 @@ Solver.WriteSiloPMPIOEvapTrans
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOEvapTransSum
@@ -3340,6 +3384,7 @@ Solver.WriteSiloPMPIOEvapTransSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOMannings
@@ -3351,6 +3396,7 @@ Solver.WriteSiloPMPIOMannings
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOMask
@@ -3362,6 +3408,7 @@ Solver.WriteSiloPMPIOMask
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOOverlandBCFlux
@@ -3373,6 +3420,7 @@ Solver.WriteSiloPMPIOOverlandBCFlux
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOOverlandSum
@@ -3384,6 +3432,7 @@ Solver.WriteSiloPMPIOOverlandSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOPressure
@@ -3395,6 +3444,7 @@ Solver.WriteSiloPMPIOPressure
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOSaturation
@@ -3406,6 +3456,7 @@ Solver.WriteSiloPMPIOSaturation
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOSlopes
@@ -3417,6 +3468,7 @@ Solver.WriteSiloPMPIOSlopes
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOSpecificStorage
@@ -3428,6 +3480,7 @@ Solver.WriteSiloPMPIOSpecificStorage
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOSubsurfData
@@ -3439,6 +3492,7 @@ Solver.WriteSiloPMPIOSubsurfData
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOTop
@@ -3450,6 +3504,7 @@ Solver.WriteSiloPMPIOTop
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPMPIOVelocities
@@ -3461,6 +3516,7 @@ Solver.WriteSiloPMPIOVelocities
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloPressure
@@ -3472,6 +3528,7 @@ Solver.WriteSiloPressure
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloSaturation
@@ -3483,6 +3540,7 @@ Solver.WriteSiloSaturation
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloSlopes
@@ -3494,6 +3552,7 @@ Solver.WriteSiloSlopes
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloSpecificStorage
@@ -3505,6 +3564,7 @@ Solver.WriteSiloSpecificStorage
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloSubsurfData
@@ -3516,6 +3576,7 @@ Solver.WriteSiloSubsurfData
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloTop
@@ -3527,6 +3588,7 @@ Solver.WriteSiloTop
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Solver.WriteSiloVelocities
@@ -3538,6 +3600,7 @@ Solver.WriteSiloVelocities
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 SILO
@@ -3556,12 +3619,18 @@ SILO.Filetype
 :default: PDB
 .. note::
 
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 SILO.CompressionOptions
 --------------------------------------------------------------------------------
 
 [Type: string] This key is used to specify the SILO compression options. See the SILO manual for the DB_SetCompression command for information on available options. NOTE: the options available are highly dependent on the configure options when building SILO.
+
+
+.. note::
+    The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: SILO
 
 
 Wells
@@ -4426,6 +4495,7 @@ NetCDF.NumStepsPerFile
 
 .. note::
     The value must be an Integer
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WritePressure
@@ -4437,6 +4507,7 @@ NetCDF.WritePressure
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteSaturation
@@ -4448,6 +4519,7 @@ NetCDF.WriteSaturation
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteMannings
@@ -4459,6 +4531,7 @@ NetCDF.WriteMannings
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteSubsurface
@@ -4470,6 +4543,7 @@ NetCDF.WriteSubsurface
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteSlopes
@@ -4481,6 +4555,7 @@ NetCDF.WriteSlopes
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteMask
@@ -4492,6 +4567,7 @@ NetCDF.WriteMask
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteDZMultiplier
@@ -4503,6 +4579,7 @@ NetCDF.WriteDZMultiplier
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteEvapTrans
@@ -4514,6 +4591,7 @@ NetCDF.WriteEvapTrans
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteEvapTransSum
@@ -4525,6 +4603,7 @@ NetCDF.WriteEvapTransSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteOverlandSum
@@ -4536,6 +4615,7 @@ NetCDF.WriteOverlandSum
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.WriteOverlandBCFlux
@@ -4547,6 +4627,7 @@ NetCDF.WriteOverlandBCFlux
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.Chunking
@@ -4558,6 +4639,7 @@ NetCDF.Chunking
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.ChunkX
@@ -4570,6 +4652,7 @@ NetCDF.ChunkX
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.ChunkY
@@ -4582,6 +4665,7 @@ NetCDF.ChunkY
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.ChunkZ
@@ -4594,6 +4678,7 @@ NetCDF.ChunkZ
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.ROMIOhints
@@ -4604,6 +4689,7 @@ NetCDF.ROMIOhints
 
 .. note::
     The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.NodeLevelIO
@@ -4614,6 +4700,7 @@ NetCDF.NodeLevelIO
 
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.EvapTransFileTransient
@@ -4624,6 +4711,7 @@ NetCDF.EvapTransFileTransient
 
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.EvapTrans.FileName
@@ -4634,6 +4722,7 @@ NetCDF.EvapTrans.FileName
 
 .. note::
     The value must be a string
+    This key requires the availability of the following module(s) in ParFlow: NETCDF
 
 
 NetCDF.CLMNumStepsPerFile
@@ -4646,6 +4735,7 @@ NetCDF.CLMNumStepsPerFile
     The value must be an Integer
       - with a value greater than or equal to 1
 
+    This key requires the availability of the following module(s) in ParFlow: ['NETCDF', 'CLM']
 
 
 NetCDF.WriteCLM
@@ -4657,6 +4747,7 @@ NetCDF.WriteCLM
 :default: False
 .. note::
     The value must be True or False
+    This key requires the availability of the following module(s) in ParFlow: ['NETCDF', 'CLM']
 
 
 InternalBC
@@ -4981,12 +5072,6 @@ FileVersion
 .. note::
     The value is required
     The value must be an Integer
-
-.. warning::
-    This key will be deprecated in v3.6.0
-
-.. warning::
-    This key will be removed in v5.1.0
 
 
 Gravity

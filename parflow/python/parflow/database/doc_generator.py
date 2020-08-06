@@ -73,6 +73,9 @@ def handleDomain(name, definition):
   if name == 'BoolDomain':
     lines.append(f'{indentStr}The value must be True or False')
 
+  if name == 'RequiresModule':
+    lines.append(f'{indentStr}This key requires the availability of the following module(s) in ParFlow: {definition}')
+
   if name == 'Deprecated':
     lines.append('')
     lines.append('.. warning::')
