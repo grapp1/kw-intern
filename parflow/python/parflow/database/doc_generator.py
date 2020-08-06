@@ -17,6 +17,8 @@ YAML_MODULES_TO_PROCESS = [
     'wells',
     'phase',
     'timing',
+    'netcdf',
+    'bconditions',
     'run'
 ]
 # -----------------------------------------------------------------------------
@@ -74,12 +76,12 @@ def handleDomain(name, definition):
   if name == 'Deprecated':
     lines.append('')
     lines.append('.. warning::')
-    lines.append(f'This key will be deprecated in v{definition}')
+    lines.append(f'    This key will be deprecated in v{definition}')
 
   if name == 'Removed':
     lines.append('')
     lines.append('.. warning::')
-    lines.append(f'This key will be removed in v{definition}')
+    lines.append(f'    This key will be removed in v{definition}')
 
   if listCount:
     lines.append('')
@@ -99,7 +101,10 @@ class RSTModule:
     self.content.append(content)
 
   def addSection(self, level, prefix, key, subSection):
-    title = f'{prefix}.{key}' if prefix else key
+    if prefix and prefix != 'BaseRun':
+      title = f'{prefix}.{key}'
+    else:
+      title = key
 
     if key == '__value__':
       title = prefix

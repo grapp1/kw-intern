@@ -4411,7 +4411,567 @@ Cycle.{cycle_name}.{interval_name}.Length
 
 
 
-BaseRun.FileVersion
+NetCDF
+================================================================================
+
+NetCDF4 parallel I/O is being implemented in ParFlow. As of now only output capability is implemented. Input functionality will be added in later version. Currently user has option of printing 3-D time varying pressure or saturation or both in a single NetCDF file containing multiple time steps. User should configure ParFlow (pfsimulator part) "- -with-netcdf" option and link the appropriate NetCDF4 library. Naming convention of output files is analogues to binary file names. Following options are available for NetCDF4 output along with various performance tuning options. User is advised to explore NetCDF4 chunking and ROMIO hints option for better I/O performance. HDF5 Library version 1.8.16 or higher is required for NetCDF4 parallel I/O
+
+
+
+NetCDF.NumStepsPerFile
+--------------------------------------------------------------------------------
+
+[Type: int] This key sets number of time steps user wishes to output in a NetCDF4 file. Once the time step count increases beyond this number, a new file is automatically created.
+
+
+.. note::
+    The value must be an Integer
+
+
+NetCDF.WritePressure
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets pressure variable to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteSaturation
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets saturation variable to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteMannings
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets Mannings coefficients to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteSubsurface
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets subsurface data(permeabilities, porosity, specific storage) to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteSlopes
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets x and y slopes to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteMask
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets mask to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteDZMultiplier
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets DZ multipliers to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteEvapTrans
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets Evaptrans to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteEvapTransSum
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets Evaptrans sum to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteOverlandSum
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets overland sum to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.WriteOverlandBCFlux
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets overland bc flux to be written in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.Chunking
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets chunking for each time varying 3-D variable in NetCDF4 file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+NetCDF.ChunkX
+--------------------------------------------------------------------------------
+
+[Type: int] This key sets chunking size in x-direction.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+NetCDF.ChunkY
+--------------------------------------------------------------------------------
+
+[Type: int] This key sets chunking size in y-direction.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+NetCDF.ChunkZ
+--------------------------------------------------------------------------------
+
+[Type: int] This key sets chunking size in z-direction.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+NetCDF.ROMIOhints
+--------------------------------------------------------------------------------
+
+[Type: string] This key sets ROMIO hints file to be passed on to NetCDF4 interface.If this key is set, the file must be present and readable in experiment directory.
+
+
+.. note::
+    The value must be a string
+
+
+NetCDF.NodeLevelIO
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets flag for node level collective I/O.
+
+
+.. note::
+    The value must be True or False
+
+
+NetCDF.EvapTransFileTransient
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
+
+
+.. note::
+    The value must be True or False
+
+
+NetCDF.EvapTrans.FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
+
+
+.. note::
+    The value must be a string
+
+
+NetCDF.CLMNumStepsPerFile
+--------------------------------------------------------------------------------
+
+[Type: int] This key sets number of time steps to be written to a single NetCDF file.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+NetCDF.WriteCLM
+--------------------------------------------------------------------------------
+
+[Type: boolean/string] This key sets CLM variables to be written in a NetCDF file.
+
+
+:default: False
+.. note::
+    The value must be True or False
+
+
+InternalBC
+================================================================================
+
+In this section, we define internal Dirichlet boundary conditions by setting the pressure at points in the domain.
+
+
+
+InternalBC.Names
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the names for the internal boundary conditions. At each named point, x, y and z will specify the coordinate locations and h will specify the hydraulic head value of the condition. This real location is “snapped” to the nearest gridpoint in ParFlow. NOTE: Currently, ParFlow assumes that internal boundary conditions and pressure wells are separated by at least one cell from any external boundary. The user should be careful of this when defining the input file and grid.
+
+
+.. note::
+    The value must be a string
+
+
+InternalBC..{internal_bc_name}.X
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the x-coordinate, x, of the named, internal_bc_name, condition.
+
+
+.. note::
+    The value must be an Integer
+
+
+InternalBC..{internal_bc_name}.Y
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the y-coordinate, y, of the named, internal_bc_name, condition.
+
+
+.. note::
+    The value must be an Integer
+
+
+InternalBC..{internal_bc_name}.Z
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the z-coordinate, z, of the named, internal_bc_name, condition.
+
+
+.. note::
+    The value must be an Integer
+
+
+InternalBC..{internal_bc_name}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the value of the named, internal_bc_name, condition.
+
+
+.. note::
+    The value must be an Integer
+
+
+BCPressure
+================================================================================
+
+Here we define the pressure boundary conditions. The Dirichlet conditions below are hydrostatic conditions, and it is assumed that at each phase interface the pressure is constant. It is also assumed here that all phases are distributed within the domain at all times such that the lighter phases are vertically higher than the heavier phases. Boundary condition input is associated with domain patches. Note that different patches may have different types of boundary conditions on them.
+
+
+
+BCPressure.PatchNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the names of patches on which pressure boundary conditions will be specified. Note that these must all be patches on the external boundary of the domain and these patches must “cover” that external boundary.
+
+
+.. note::
+    The value must be a string
+
+
+BCSaturation
+================================================================================
+
+Note: this section needs to be defined only for multi-phase flow and should not be defined for the single phase and Richards’ equation cases. Here we define the boundary conditions for the saturations. Boundary condition input is associated with domain patches. Note that different patches may have different types of boundary conditions on them.
+
+
+
+BCSaturation.PatchNames
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the names of patches on which saturation boundary conditions will be specified. Note that these must all be patches on the external boundary of the domain and these patches must “cover” that external boundary.
+
+
+.. note::
+    The value must be a string
+
+
+Patch
+================================================================================
+
+
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the reference pressure value for the DirEquilRefPatch boundary condition or the constant flux value for the FluxConst boundary condition, or the constant volumetric flux for the FluxVolumetric boundary condition.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.XLower
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the lower x coordinate of a line in the xy-plane.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.YLower
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the lower y coordinate of a line in the xy-plane.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.XUpper
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the upper x coordinate of a line in the xy-plane.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.YUpper
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the upper y coordinate of a line in the xy-plane.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.NumPoints
+--------------------------------------------------------------------------------
+
+[Type: int] This key specifies the number of points on which pressure data is given along the line used in the type DirEquilPLinear boundary conditions.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.FileName
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the name of a properly distributed .pfb file that contains boundary data to be read for types PressureFile and FluxFile. For flux data, the data must be defined over a grid consistent with the pressure field. In both cases, only the values needed for the patch will be used. The rest of the data is ignored.
+
+
+.. note::
+    The value must be a string
+
+
+Patch..{patch_name}.BCPressure..{interval_name}.PredefinedFunction
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the predefined function that will be used to specify Dirichlet boundary conditions on patch patch_name. Note that this does not change according to any cycle. Instead, time dependence is handled by evaluating at the time the boundary condition value is desired. Choices for this key include X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor.
+
+
+.. note::
+    The value must be one of the following options: X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1, XYZTPlus1PermTensor
+
+
+Patch..{patch_name}.BCPressure..{interval_name}..{phase_name}.IntValue
+--------------------------------------------------------------------------------
+
+[Type: double] Note that the reference conditions for types DirEquilPLinear and DirEquilRefPatch boundary conditions are for phase 0 only. This key specifies the constant pressure value along the interface with phase phase_name for cases with two phases present.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure..{interval_name}..{point_number}.Location
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies a number between 0 and 1 which represents the location of a point on the line on which data is given for type DirEquilPLinear boundary conditions. Here 0 corresponds to the lower end of the line, and 1 corresponds to the upper end.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
+
+
+
+Patch..{patch_name}.BCPressure..{interval_name}..{point_number}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the pressure value for phase 0 at point number point_number and z = 0 for type DirEquilPLinear boundary conditions. All pressure values on the patch are determined by first projecting the boundary condition coordinate onto the line, then linearly interpolating between the neighboring point pressure values on the line.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCPressure.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of boundary condition data given for patch patch_name. Possible values for this key are DirEquilRefPatch, DirEquilPLinear, FluxConst, FluxVolumetric, PressureFile, FluxFile, OverlandFlow, OverlandFlowPFB, SeepageFace, OverlandKinematic, OverlandDiffusive and ExactSolution. The choice DirEquilRefPatch specifies that the pressure on the specified patch will be in hydrostatic equilibrium with a constant reference pressure given on a reference patch. The choice DirEquilPLinear specifies that the pressure on the specified patch will be in hydrostatic equilibrium with pressure given along a piecewise line at elevation z = 0. The choice FluxConst defines a constant normal flux boundary condition through the domain patch. This flux must be specified in units of [L]=[T]. For Richards’ equation, fluxes must be specified as a mass flux and given as the above flux multiplied by the density. Thus, this choice of input type for a Richards’ equation problem has units of ([L]=[T])([M]=[L]3). The choice FluxVolumetric defines a volumetric flux boundary condition through the domain patch. The units should be consistent with all other user input for the problem. For Richards’ equation fluxes must be specified as a mass flux and given as the above flux multiplied by the density. The choice PressureFile defines a hydraulic head boundary condition that is read from a properly distributed .pfb file. Only the values needed for the patch are used. The choice FluxFile defines a flux boundary condition that is read form a properly distributed .pfb file defined on a grid consistent with the pressure field grid. Only the values needed for the patch are used. The choices OverlandFlow and OverlandFlowPFB both turn on fully-coupled overland flow routing as described in [40] and in § 5.5. The key OverlandFlow corresponds to a Value key with a positive or negative value, to indicate uniform fluxes (such as rainfall or evapotranspiration) over the entire domain while the key OverlandFlowPFB allows a .pfb file to contain grid-based, spatially-variable fluxes. The OverlandKinematic and OverlandDiffusive both turn on an kinematic and diffusive wave overland flow routing boundary that solve equation 5.18 and do the upwinding internally (i.e. assuming that the user provides cell face slopes, as opposed to the traditional cell centered slopes). The key SeepageFace simulates a boundary that allows flow to exit but keeps the surface pressure at zero. The choice ExactSolution specifies that an exact known solution is to be applied as a Dirichlet boundary condition on the respective patch. Note that this does not change according to any cycle. Instead, time dependence is handled by evaluating at the time the boundary condition value is desired. The solution is specified by using a predefined function (choices are described below). NOTE: These last six types of boundary condition input is for Richards’ equation cases only!
+
+
+.. note::
+    The value must be one of the following options: DirEquilRefPatch, DirEquilPLinear, FluxConst, FluxVolumetric, PressureFile, FluxFile, OverlandFlow, OverlandFlowPFB, SeepageFace, OverlandKinematic, OverlandDiffusive, ExactSolution
+
+
+Patch..{patch_name}.BCPressure.Cycle
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the time cycle to which boundary condition data for patch patch_name corresponds.
+
+
+.. note::
+    The value must be a string
+
+
+Patch..{patch_name}.BCPressure.RefGeom
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the name of the solid on which the reference patch for the DirEquilRefPatch boundary condition data is given. Care should be taken to make sure the correct solid is specified in cases of layered domains.
+
+
+.. note::
+    The value must be a string
+
+
+Patch..{patch_name}.BCPressure.RefPatch
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the reference patch on which the DirEquilRefPatch boundary condition data is given. This patch must be on the reference solid specified by the Patch.patch_name.BCPressure.RefGeom key.
+
+
+.. note::
+    The value must be a string
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This key specifies the type of boundary condition data given for the given phase, phase_name, on the given patch patch_name. Possible values for this key are DirConstant, ConstantWTHeight and PLinearWTHeight. The choice DirConstant specifies that the saturation is constant on the whole patch. The choice ConstantWTHeight specifies a constant height of the water-table on the whole patch. The choice PLinearWTHeight specifies that the height of the water-table on the patch will be given by a piecewise linear function. Note: the types ConstantWTHeight and PLinearWTHeight assume we are running a 2-phase problem where phase 0 is the water phase.
+
+
+.. note::
+    The value must be one of the following options: DirConstant, ConstantWTHeight, PLinearWTHeight
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies either the constant saturation value if DirConstant is selected or the constant water-table height if ConstantWTHeight is selected.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.XLower
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the lower x coordinate of a line in the xy-plane if type PLinearWTHeight boundary conditions are specified.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.YLower
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the lower y coordinate of a line in the xy-plane if type PLinearWTHeight boundary conditions are specified.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.XUpper
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the upper x coordinate of a line in the xy-plane if type PLinearWTHeight boundary conditions are specified.
+
+
+.. note::
+    The value must be an Integer
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}.YUpper
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the upper y coordinate of a line in the xy-plane if type PLinearWTHeight boundary conditions are specified.
+
+
+.. note::
+    The value must be an Integer
+
+
+FileVersion
 ================================================================================
 
 [Type: int] This gives the value of the input file version number that this file fits. As development of the ParFlow code continues, the input file format may vary. We have thus included an input file format number as a way of verifying that the correct format type is being used. The user can check in the parflow/config/file_versions.h file to verify that the format number specified in the input file matches the defined value of PFIN_VERSION.
@@ -4423,13 +4983,13 @@ BaseRun.FileVersion
     The value must be an Integer
 
 .. warning::
-This key will be deprecated in v3.6.0
+    This key will be deprecated in v3.6.0
 
 .. warning::
-This key will be removed in v5.1.0
+    This key will be removed in v5.1.0
 
 
-BaseRun.Gravity
+Gravity
 ================================================================================
 
 [Type: double] Specifies the gravity constant to be used.
@@ -4442,7 +5002,7 @@ BaseRun.Gravity
 
 
 
-BaseRun.OverlandFlowSpinUp
+OverlandFlowSpinUp
 ================================================================================
 
 [Type: int] This key specifies that a simplified form of the overland flow boundary condition (Equation 5.17) be used in place of the full equation. This formulation removes lateral flow and drives and ponded water pressures to zero using a SeepageFace boundary condition. While this can be helpful in spinning up the subsurface, this is no longer coupled subsurface-surface flow. If set to zero (the default) this key behaves normally.
@@ -4456,7 +5016,7 @@ BaseRun.OverlandFlowSpinUp
 
 
 
-BaseRun.OverlandFlowSpinUpDampP1
+OverlandFlowSpinUpDampP1
 ================================================================================
 
 This key sets P1 and provides exponential dampening to the pressure relationship in the overland flow equation by adding the following term: P2*exp[(pressure)*P2]
@@ -4469,7 +5029,7 @@ This key sets P1 and provides exponential dampening to the pressure relationship
 
 
 
-BaseRun.OverlandFlowSpinUpDampP2
+OverlandFlowSpinUpDampP2
 ================================================================================
 
 This key sets P2 and provides exponential dampening to the pressure relationship in the overland flow equation by adding the following term: P2*exp[(pressure)*P2]
@@ -4482,7 +5042,7 @@ This key sets P2 and provides exponential dampening to the pressure relationship
 
 
 
-BaseRun.KnownSolution
+KnownSolution
 ================================================================================
 
 [Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No- KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor. Choices for this key correspond to solutions as follows: NoKnownSolution: No solution is known for this problem. Constant: p = constant X: p = x XPlusYPlusZ: p = x + y + z X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1 X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1 XYZTPlus1: p = xyzt + 1 XYZTPlus1: p = xyzt + 1
