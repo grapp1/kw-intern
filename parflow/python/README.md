@@ -34,4 +34,5 @@ to Python.
 
 ### parflow
 
-Python scripts and yaml files to build the structure to load and generate the Python library of ParFlow keys.
+Python scripts and yaml files to build the structure to load and generate the Python library of ParFlow keys. This
+folder includes documentation on how to add a key to the Python ParFlow library.

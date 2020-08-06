@@ -29,6 +29,7 @@ BaseRun:
     - BCSaturation
     - BCPressure
     - Patch
+    - NetCDF
 
   # -----------------------------------------------------------------------------
   # FileVersion
@@ -46,8 +47,8 @@ BaseRun:
     domains:
       MandatoryValue:
       IntValue:
-      Deprecated: '3.6.0'
-      Removed: '5.1.0'
+#      Deprecated: '3.6.0'
+#      Removed: '5.1.0'
 
   # -----------------------------------------------------------------------------
   # Gravity

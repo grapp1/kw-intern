@@ -59,6 +59,20 @@ def getComparableVersion(version):
   return cVersion
 
 # -----------------------------------------------------------------------------
+
+def getInstalledParFlowModule(module):
+  moduleFile = f'{os.getenv("PARFLOW_DIR")}/config/Makefile.config'
+  hasModuleInstalled = False
+  if os.path.exists(os.path.abspath(moduleFile)):
+    with open(moduleFile, "rt") as f:
+      for line in f.readlines():
+        if f'PARFLOW_HAVE_{module}' in line and 'yes' in line:
+          hasModuleInstalled = True
+  else:
+    print(f'Cannot find Makefile.config in {os.path.abspath(moduleFile)}.')
+  return hasModuleInstalled
+
+# -----------------------------------------------------------------------------
 # Validation classes
 # -----------------------------------------------------------------------------
 
@@ -245,6 +259,23 @@ class Removed:
 
     if version > currentVersion:
       errors.append(warning(f'Will be removed in v{arg}'))
+
+    return errors
+
+# -----------------------------------------------------------------------------
+
+class RequiresModule:
+  def validate(self, value, arg, **kwargs):
+    errors = []
+
+    if value == None:
+      return errors
+
+    arg = arg.split() if isinstance(arg, str) else arg
+
+    for module in arg:
+      if not getInstalledParFlowModule(module):
+        errors.append(error(f'Need to install {module} module'))
 
     return errors
 

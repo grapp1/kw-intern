@@ -21,6 +21,7 @@ NetCDF:
       beyond this number, a new file is automatically created.
     domains:
       IntValue:
+      RequiresModule: 'NETCDF'
 
   WritePressure:
     help: >
@@ -28,6 +29,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteSaturation:
     help: >
@@ -35,6 +37,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteMannings:
     help: >
@@ -42,6 +45,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteSubsurface:
     help: >
@@ -49,6 +53,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteSlopes:
     help: >
@@ -56,6 +61,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteMask:
     help: >
@@ -63,6 +69,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteDZMultiplier:
     help: >
@@ -70,6 +77,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteEvapTrans:
     help: >
@@ -77,6 +85,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteEvapTransSum:
     help: >
@@ -84,6 +93,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteOverlandSum:
     help: >
@@ -91,6 +101,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   WriteOverlandBCFlux:
     help: >
@@ -98,6 +109,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   Chunking:
     help: >
@@ -105,6 +117,7 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   ChunkX:
     help: >
@@ -112,6 +125,7 @@ NetCDF:
     domains:
       IntValue:
         minValue: 1
+      RequiresModule: 'NETCDF'
 
   ChunkY:
     help: >
@@ -119,6 +133,7 @@ NetCDF:
     domains:
       IntValue:
         minValue: 1
+      RequiresModule: 'NETCDF'
 
   ChunkZ:
     help: >
@@ -126,6 +141,7 @@ NetCDF:
     domains:
       IntValue:
         minValue: 1
+      RequiresModule: 'NETCDF'
 
   ROMIOhints:
     help: >
@@ -133,18 +149,21 @@ NetCDF:
       and readable in experiment directory.
     domains:
       AnyString:
+      RequiresModule: 'NETCDF'
 
   NodeLevelIO:
     help: >
       [Type: boolean/string] This key sets flag for node level collective I/O.
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   EvapTransFileTransient:
     help: >
       [Type: boolean/string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
     domains:
       BoolDomain:
+      RequiresModule: 'NETCDF'
 
   EvapTrans:
     __doc__: ''
@@ -156,6 +175,7 @@ NetCDF:
         [Type: string] This key sets flag for transient evaptrans forcing to be read from a NetCDF file.
       domains:
         AnyString:
+        RequiresModule: 'NETCDF'
 
   CLMNumStepsPerFile:
     help: >
@@ -163,6 +183,7 @@ NetCDF:
     domains:
       IntValue:
         minValue: 1
+      RequiresModule: 'NETCDF'
 
   WriteCLM:
     help: >
@@ -170,3 +191,4 @@ NetCDF:
     default: False
     domains:
       BoolDomain:
+      RequiresModule: ['NETCDF', 'CLM']
