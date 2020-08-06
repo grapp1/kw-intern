@@ -71,6 +71,16 @@ def handleDomain(name, definition):
   if name == 'BoolDomain':
     lines.append(f'{indentStr}The value must be True or False')
 
+  if name == 'Deprecated':
+    lines.append('')
+    lines.append('.. warning::')
+    lines.append(f'This key will be deprecated in v{definition}')
+
+  if name == 'Removed':
+    lines.append('')
+    lines.append('.. warning::')
+    lines.append(f'This key will be removed in v{definition}')
+
   if listCount:
     lines.append('')
 
