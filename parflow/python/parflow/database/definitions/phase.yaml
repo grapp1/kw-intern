@@ -38,6 +38,11 @@ Phase:
         type: ChildrenHandler
         className: InjectionConcentrationPhaseItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration
+      ICSaturationPhaseUpdater:
+        type: ChildrenHandler
+        className: GeomICSaturationPhaseItem
+        location: /Geom/{GeomItem}/ICSaturation
+
 
   RelPerm:
     __doc__: >

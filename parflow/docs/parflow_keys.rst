@@ -1124,6 +1124,16 @@ Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
     The value must be an Integer
 
 
+Geom..{geom_name}.RelPerm.InterpolationMethod
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: string] Specify the interpolation method for the relative permeability.
+
+
+.. note::
+    The value must be a string
+
+
 Geom..{geom_name}.CapPressure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1289,7 +1299,7 @@ Setting the coefficients for the polynomial saturation curve.
 
 
 
-Geom..{geom_name}.Saturation.CoeffNumber
+Geom.{geom_name}.Saturation.Coeff.{coeff_number}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
@@ -1404,7 +1414,7 @@ Geom..{geom_name}.ThermalConductivity.KWet.FileName
 Geom..{geom_name}.FBx
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
+Setting file name for flow barriers in X. FBx.Type must equal PFBFile.
 
 
 
@@ -1421,7 +1431,7 @@ Geom..{geom_name}.FBx.FileName
 Geom..{geom_name}.FBy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
+Setting file name for flow barriers in Y. FBy.Type must equal PFBFile.
 
 
 
@@ -1438,7 +1448,7 @@ Geom..{geom_name}.FBy.FileName
 Geom..{geom_name}.FBz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
+Setting file name for flow barriers in Z. FBz.Type must equal PFBFile.
 
 
 
@@ -1522,6 +1532,22 @@ Geom.{geom_name}.ICPressure.Value
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 [Type: double] This key specifies the initial pressure value for type Constant initial pressures and the reference pressure value for types HydroStaticDepth and HydroStaticPatch.
+
+
+.. note::
+    The value must be an Integer
+
+
+Geom.{geom_name}.ICSaturation.{phase_name}
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+Geom.{geom_name}.ICSaturation.{phase_name}.Value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+[Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name, if the type was set to Constant.
 
 
 .. note::
@@ -1781,6 +1807,36 @@ Mannings.Geom..{geom_name}.Value
 
 .. note::
     The value must be an Integer
+
+
+FBx.Type
+================================================================================
+
+[Type: string] This key specifies which method is to be used to assign flow barriers in X. The only choice currently available is PFBFile which reads in values from a distributed pfb file.
+
+
+.. note::
+    The value must be one of the following options: PFBFile
+
+
+FBy.Type
+================================================================================
+
+[Type: string] This key specifies which method is to be used to assign flow barriers in Y. The only choice currently available is PFBFile which reads in values from a distributed pfb file.
+
+
+.. note::
+    The value must be one of the following options: PFBFile
+
+
+FBz.Type
+================================================================================
+
+[Type: string] This key specifies which method is to be used to assign flow barriers in Z. The only choice currently available is PFBFile which reads in values from a distributed pfb file.
+
+
+.. note::
+    The value must be one of the following options: PFBFile
 
 
 Solver
@@ -3633,6 +3689,27 @@ SILO.CompressionOptions
     This key requires the availability of the following module(s) in ParFlow: SILO
 
 
+KnownSolution
+================================================================================
+
+[Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No- KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor. Choices for this key correspond to solutions as follows: NoKnownSolution: No solution is known for this problem. Constant: p = constant X: p = x XPlusYPlusZ: p = x + y + z X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1 X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1 XYZTPlus1: p = xyzt + 1 XYZTPlus1: p = xyzt + 1
+
+
+.. note::
+    The value is required
+    The value must be one of the following options: NoKnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1, XYZTPlus1
+
+
+KnownSolution.Value
+================================================================================
+
+[Type: double] This key specifies the constant value of the known solution for type Constant known solutions.
+
+
+.. note::
+    The value must be an Integer
+
+
 Wells
 ================================================================================
 
@@ -5125,14 +5202,3 @@ This key sets P2 and provides exponential dampening to the pressure relationship
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
-
-
-KnownSolution
-================================================================================
-
-[Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No- KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor. Choices for this key correspond to solutions as follows: NoKnownSolution: No solution is known for this problem. Constant: p = constant X: p = x XPlusYPlusZ: p = x + y + z X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1 X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1 XYZTPlus1: p = xyzt + 1 XYZTPlus1: p = xyzt + 1
-
-
-.. note::
-    The value is required
-    The value must be one of the following options: NoKnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1, XYZTPlus1

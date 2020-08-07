@@ -861,13 +861,20 @@ Geom:
         __doc__: >
           Setting the coefficients for the polynomial relative permeability curve.
 
-      CoeffNumber:
-        __rst__:
-          name: Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
+        # TODO: need to deal with this corner case similar to how we deal with the variable DZ
+        Coeff_number:
+          __rst__:
+            name: Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
+          help: >
+            [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
+          domains:
+            DoubleValue:
+
+      InterpolationMethod:
         help: >
-          [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial relative permeability given on geom_name.
+          [Type: string] Specify the interpolation method for the relative permeability.
         domains:
-          DoubleValue:
+          AnyString:
 
     # Capillary Pressure
     CapPressure:
@@ -1003,11 +1010,14 @@ Geom:
         __doc__: >
           Setting the coefficients for the polynomial saturation curve.
 
-      CoeffNumber:
-        help: >
-          [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
-        domains:
-          DoubleValue:
+        # TODO: need to deal with this corner case similar to how we deal with the variable DZ
+        Coeff_number:
+          __rst__:
+            name: Geom.{geom_name}.Saturation.Coeff.{coeff_number}
+          help: >
+            [Type: double] This key specifies the 'coeff_number'th coefficient of the Polynomial saturation given on geom_name.
+          domains:
+            DoubleValue:
 
       FileName:
         help: >
@@ -1088,7 +1098,7 @@ Geom:
 
     FBx:
       __doc__: >
-        Setting file name for flow barriers in X. FBx.Type must equal PFBFile (see solvers.py).
+        Setting file name for flow barriers in X. FBx.Type must equal PFBFile.
       FileName:
         help: >
           [Type: string] This key specifies file to be read in for the X flow barrier values for the domain,
@@ -1098,7 +1108,7 @@ Geom:
 
     FBy:
       __doc__: >
-        Setting file name for flow barriers in Y. FBy.Type must equal PFBFile (see solvers.py).
+        Setting file name for flow barriers in Y. FBy.Type must equal PFBFile.
       FileName:
         help: >
           [Type: string] This key specifies file to be read in for the Y flow barrier values for the domain,
@@ -1108,7 +1118,7 @@ Geom:
 
     FBz:
       __doc__: >
-        Setting file name for flow barriers in Z. FBz.Type must equal PFBFile (see solvers.py).
+        Setting file name for flow barriers in Z. FBz.Type must equal PFBFile.
       FileName:
         help: >
           [Type: string] This key specifies file to be read in for the Z flow barrier values for the domain,
@@ -1169,17 +1179,23 @@ Geom:
           DoubleValue:
 
     # Setting key Geom.geom_input_name.ICSaturation.phase_name.Value
-#    ICSaturationItem:
-#      __rst__:
-#        name: Geom.{geom_name}.ICSaturation.{phase_name}
-#      __doc__: >
-#        Setting Geom.geom_input_name.ICSaturation.phase_name.Value
-#
-#      Value:
-#        help: >
-#          [Type: double] Setting
-#        domains:
-#          DoubleValue:
+    ICSaturation:
+      __rst__:
+        skip:
+      __doc__: ''
+
+      .{phase_name}:
+        __class__: GeomICSaturationPhaseItem
+        __rst__:
+          name: Geom.{geom_name}.ICSaturation.{phase_name}
+        __doc__: ''
+
+        Value:
+          help: >
+            [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
+            if the type was set to Constant.
+          domains:
+            DoubleValue:
 
     # Setting Geom.geometry_name.contaminant_name.Retardation.Type, Value, and Rate
     .{contaminant_name}:
@@ -1436,3 +1452,52 @@ Mannings:
           to constant.
         domains:
           DoubleValue:
+
+# -----------------------------------------------------------------------------
+# Flow Barriers
+# -----------------------------------------------------------------------------
+
+FBx:
+  __doc__: >
+    Setting FBx.Type
+  __rst__:
+    skip:
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign flow barriers in X. The only choice currently available is
+      PFBFile which reads in values from a distributed pfb file.
+    domains:
+      EnumDomain:
+        enumList:
+          - PFBFile
+
+FBy:
+  __doc__: >
+    Setting FBy.Type
+  __rst__:
+    skip:
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign flow barriers in Y. The only choice currently available is
+      PFBFile which reads in values from a distributed pfb file.
+    domains:
+      EnumDomain:
+        enumList:
+          - PFBFile
+
+FBz:
+  __doc__: >
+    Setting FBz.Type
+  __rst__:
+    skip:
+
+  Type:
+    help: >
+      [Type: string] This key specifies which method is to be used to assign flow barriers in Z. The only choice currently available is
+      PFBFile which reads in values from a distributed pfb file.
+    domains:
+      EnumDomain:
+        enumList:
+          - PFBFile

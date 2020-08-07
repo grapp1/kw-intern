@@ -30,6 +30,10 @@ BaseRun:
     - BCPressure
     - Patch
     - NetCDF
+    - FBx
+    - FBy
+    - FBz
+    - KnownSolution
 
   # -----------------------------------------------------------------------------
   # FileVersion
@@ -97,34 +101,3 @@ BaseRun:
     domains:
       DoubleValue:
         minValue: 0.0
-
-  # -----------------------------------------------------------------------------
-  # KnownSolution
-  # -----------------------------------------------------------------------------
-
-  KnownSolution:
-    help: >
-      [Type: string] This specifies the predefined function that will be used as the known solution. Possible choices for this key are No-
-      KnownSolution, Constant, X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1,
-      XYZTPlus1 and XYZTPlus1PermTensor.
-      Choices for this key correspond to solutions as follows:
-      NoKnownSolution: No solution is known for this problem.
-      Constant: p = constant
-      X: p = x
-      XPlusYPlusZ: p = x + y + z
-      X3Y2PlusSinXYPlus1: p = x3y2 + sin(xy) + 1
-      X3Y4PlusX2PlusSinXYCosYPlus1: p = x3y4 + x2 + sin(xy) cos y + 1
-      XYZTPlus1: p = xyzt + 1
-      XYZTPlus1: p = xyzt + 1
-    domains:
-      MandatoryValue:
-      EnumDomain:
-        enumList:
-          - NoKnownSolution
-          - Constant
-          - X
-          - XPlusYPlusZ
-          - X3Y2PlusSinXYPlus1
-          - X3Y4PlusX2PlusSinXYCosYPlus1
-          - XYZTPlus1
-          - XYZTPlus1
