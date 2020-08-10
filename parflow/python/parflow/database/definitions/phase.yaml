@@ -75,6 +75,20 @@ Phase:
 
     VanGenuchten:
       __doc__: ''
+      __rst__:
+        skip:
+
+      File:
+        help: >
+          [Type: int] This key specifies whether soil parameters for the VanGenuchten function are specified in a pfb file or by region.
+          The options are either 0 for specification by region, or 1 for specification in a file. Note that either all parameters
+          are specified in files (each has their own input file) or none are specified by files. Parameters specified by files are: alpha
+          and N.
+        default: 0
+        domains:
+          IntValue:
+            minValue: 0
+            maxValue: 1
 
   Saturation:
     __doc__: >
@@ -120,6 +134,21 @@ Phase:
             minValue: 0
             maxValue: 1
 
+  ThermalConductivity:
+    __doc__: ''
+    __rst__:
+      skip:
+
+    Function1:
+      __doc__: ''
+      __rst__:
+        skip:
+
+      File:
+        help: >
+          [Type: string] This specifies the file name for the thermal conductivity function.
+        domains:
+          AnyString:
 
   .{phase_name}:
     __class__: PhaseNameItem
@@ -233,6 +262,63 @@ Phase:
             minValue: 0.0
             maxValue: 0.0
 
+    # missing from manual
+    HeatCapacity:
+      __doc__: ''
+      __rst__:
+        skip:
+
+      GeomNames:
+        help: >
+          [Type: string] This specifies the geometry names for setting the heat capacity.
+        domains:
+          AnyString:
+
+      Type:
+        help: >
+          [Type: string] This specifies the type of heat capacity.
+        domains:
+          AnyString:
+
+    # missing from manual
+    InternalEnergy:
+      __doc__: ''
+      __rst__:
+        skip:
+
+      Type:
+        help: >
+          [Type: string] This specifies the type of internal energy.
+        domains:
+          AnyString:
+
+      Value:
+        help: >
+          [Type: double] This specifies the value for the internal energy.
+        domains:
+          DoubleValue:
+
+    Geom:
+      __rst__:
+        skip:
+      __doc__: ''
+
+      .{geom_name}:
+        __rst__:
+          skip:
+        __doc__: ''
+
+        HeatCapacity:
+          __rst__:
+            skip:
+          __doc__: ''
+
+          Value:
+            help: >
+              [Type: double] This specifies the heat capacity value for the specified geometric unit.
+            domains:
+              DoubleValue:
+
 
 # -----------------------------------------------------------------------------
 # PhaseConcen
@@ -250,23 +336,23 @@ PhaseConcen:
     _dynamic:
       PhaseConcenContaminantItem: /Contaminants/Names
 
+    GeomNames:
+      help: >
+        [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
+        Note that geometries listed later “overlay” geometries listed earlier.
+      domains:
+        AnyString:
+      handlers:
+        PhaseConcenContaminantGeomItemUpdater:
+          type: ChildrenHandler
+          className: PhaseConcenContaminantGeomItem
+          location: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/Geom
+
     .{contaminant_name}:
       __class__: PhaseConcenContaminantItem
       __rst__:
         skip:
       __doc__: ''
-
-      GeomNames:
-        help: >
-          [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant.
-          Note that geometries listed later “overlay” geometries listed earlier.
-        domains:
-          AnyString:
-        handlers:
-          PhaseConcenContaminantGeomItemUpdater:
-            type: ChildrenHandler
-            className: PhaseConcenContaminantGeomItem
-            location: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/Geom
 
       Geom:
         __doc__: ''
@@ -280,6 +366,7 @@ PhaseConcen:
           __rst__:
             skip:
           __doc__: ''
+
           Value:
             help: >
               [Type: double] This key specifies the initial condition value assigned to all points in the named geometry, geom_input_name,
@@ -305,13 +392,6 @@ PhaseConcen:
           was set to PFBFile.
         domains:
           AnyString:
-
-    # PredefinedFunction is missing from the manual
-    PredefinedFunction:
-      help: >
-        [Type: string]
-      domains:
-        AnyString:
 
 # -----------------------------------------------------------------------------
 # PhaseSources
@@ -352,7 +432,7 @@ PhaseSources:
       handlers:
         PhaseSourceGeomUpdater:
           type: ChildrenHandler
-          className: PhaseSourceGeomItem
+          className: PhaseSourcePhaseGeomItem
           location: ./Geom
 
     PredefinedFunction:
@@ -375,15 +455,33 @@ PhaseSources:
       __doc__: ''
 
       .{geom_input_name}:
-        __class__: PhaseSourceGeomItem
+        __class__: PhaseSourcePhaseGeomItem
         __rst__:
           skip:
         __doc__: ''
+
         Value:
           help: >
             [Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
           domains:
             DoubleValue:
+
+  Geom:
+    __rst__:
+      skip:
+    __doc__: ''
+
+    .{geom_input_name}:
+      __class__: PhaseSourceGeomItem
+      __rst__:
+        skip:
+      __doc__: ''
+
+      Value:
+        help: >
+          [Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
+        domains:
+          DoubleValue:
 
 # -----------------------------------------------------------------------------
 # Contaminants

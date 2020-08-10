@@ -106,11 +106,16 @@ BCSaturation:
 
 Patch:
   __doc__: ''
+
   .{patch_name}:
     __class__: BCItem
     __rst__:
       skip:
     __doc__: ''
+
+    # -----------------------------------------------------------------------------
+    # Patch.{patch_name}.BCPressure
+    # -----------------------------------------------------------------------------
 
     BCPressure:
       __rst__:
@@ -295,7 +300,9 @@ Patch:
         domains:
           AnyString:
 
-
+    # -----------------------------------------------------------------------------
+    # Patch.{patch_name}.BCSaturation
+    # -----------------------------------------------------------------------------
 
     BCSaturation:
       __rst__:
@@ -358,4 +365,41 @@ Patch:
             conditions are specified.
           domains:
             DoubleValue:
+
+        # NumPoints, {point_number} key names say BCPressure instead of BCSaturation
+        NumPoints:
+          help: >
+            [Type: int] This key specifies the number of points on which saturation data is given along the line used in the type DirEquilPLinear
+            boundary conditions.
+          domains:
+            IntValue:
+              minValue: 1
+          handlers:
+            BCSatPhasePointItemUpdater:
+              type: ChildrenHandler
+              className: BCSatPhasePointItem
+
+        .{point_number}:
+          __class__: BCSatPhasePointItem
+          __doc__: ''
+          __rst__:
+            skip:
+
+          Location:
+            help: >
+              [Type: double] This key specifies a number between 0 and 1 which represents the location of a point on the line for which data is
+              given in type DirEquilPLinear boundary conditions. The line is parameterized so that 0 corresponds to the lower
+              end of the line, and 1 corresponds to the upper end.
+            domains:
+              DoubleValue:
+                minValue: 0.0
+                maxValue: 1.0
+
+          Value:
+            help: >
+              [Type: double] This key specifies the water-table height for the given point if type DirEquilPLinear boundary conditions are
+              selected. All saturation values on the patch are determined by first projecting the water-table height value onto the
+              line, then linearly interpolating between the neighboring water-table height values onto the line.
+            domains:
+              DoubleValue:
 

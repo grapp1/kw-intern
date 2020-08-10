@@ -2256,6 +2256,16 @@ Solver.CLM.RootZoneNZ
     This key requires the availability of the following module(s) in ParFlow: CLM
 
 
+Solver.CLM.RZWaterStress
+--------------------------------------------------------------------------------
+
+[Type: ???]
+
+
+.. note::
+    This key requires the availability of the following module(s) in ParFlow: CLM
+
+
 Solver.CLM.SingleFile
 --------------------------------------------------------------------------------
 
@@ -4050,9 +4060,17 @@ Phase.RelPerm.GeomNames
     The value must be a string
 
 
-Phase.RelPerm.VanGenuchten
+Phase.RelPerm.VanGenuchten.File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+[Type: int] This key specifies whether soil parameters for the VanGenuchten function are specified in a pfb file or by region. The options are either 0 for specification by region, or 1 for specification in a file. Note that either all parameters are specified in files (each has their own input file) or none are specified by files. Parameters specified by files are: alpha and N.
+
+
+:default: 0
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0
+      - with a value less than or equal to 1
 
 
 
@@ -4101,6 +4119,16 @@ Phase.Saturation.VanGenuchten.File
       - with a value greater than or equal to 0
       - with a value less than or equal to 1
 
+
+
+Phase.ThermalConductivity.Function1.File
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the file name for the thermal conductivity function.
+
+
+.. note::
+    The value must be a string
 
 
 Phase..{phase_name}.Density.Type
@@ -4215,6 +4243,56 @@ Phase..{phase_name}.Mobility.IrreducibleSaturation
 
 
 
+Phase..{phase_name}.HeatCapacity.GeomNames
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the geometry names for setting the heat capacity.
+
+
+.. note::
+    The value must be a string
+
+
+Phase..{phase_name}.HeatCapacity.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the type of heat capacity.
+
+
+.. note::
+    The value must be a string
+
+
+Phase..{phase_name}.InternalEnergy.Type
+--------------------------------------------------------------------------------
+
+[Type: string] This specifies the type of internal energy.
+
+
+.. note::
+    The value must be a string
+
+
+Phase..{phase_name}.InternalEnergy.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This specifies the value for the internal energy.
+
+
+.. note::
+    The value must be an Integer
+
+
+Phase..{phase_name}.Geom..{geom_name}.HeatCapacity.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This specifies the heat capacity value for the specified geometric unit.
+
+
+.. note::
+    The value must be an Integer
+
+
 PhaseConcen
 ================================================================================
 
@@ -4222,7 +4300,7 @@ Here we define initial concentration conditions for contaminants.
 
 
 
-PhaseConcen..{phase_name}..{contaminant_name}.GeomNames
+PhaseConcen..{phase_name}.GeomNames
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
@@ -4256,16 +4334,6 @@ PhaseConcen..{phase_name}..{contaminant_name}.FileName
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies the name of the “ParFlow Binary” file which contains the initial condition values if the type was set to PFBFile.
-
-
-.. note::
-    The value must be a string
-
-
-PhaseConcen..{phase_name}.PredefinedFunction
---------------------------------------------------------------------------------
-
-[Type: string]
 
 
 .. note::
@@ -4310,6 +4378,16 @@ PhaseSources..{phase_name}.PredefinedFunction
 
 
 PhaseSources..{phase_name}.Geom..{geom_input_name}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
+
+
+.. note::
+    The value must be an Integer
+
+
+PhaseSources.Geom..{geom_input_name}.Value
 --------------------------------------------------------------------------------
 
 [Type: double] This key specifies the value of a constant source term applied to phase phase _name on geometry geom_name.
@@ -5139,6 +5217,41 @@ Patch..{patch_name}.BCSaturation..{phase_name}.YUpper
     The value must be an Integer
 
 
+Patch..{patch_name}.BCSaturation..{phase_name}.NumPoints
+--------------------------------------------------------------------------------
+
+[Type: int] This key specifies the number of points on which saturation data is given along the line used in the type DirEquilPLinear boundary conditions.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 1
+
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}..{point_number}.Location
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies a number between 0 and 1 which represents the location of a point on the line for which data is given in type DirEquilPLinear boundary conditions. The line is parameterized so that 0 corresponds to the lower end of the line, and 1 corresponds to the upper end.
+
+
+.. note::
+    The value must be an Integer
+      - with a value greater than or equal to 0.0
+      - with a value less than or equal to 1.0
+
+
+
+Patch..{patch_name}.BCSaturation..{phase_name}..{point_number}.Value
+--------------------------------------------------------------------------------
+
+[Type: double] This key specifies the water-table height for the given point if type DirEquilPLinear boundary conditions are selected. All saturation values on the patch are determined by first projecting the water-table height value onto the line, then linearly interpolating between the neighboring water-table height values onto the line.
+
+
+.. note::
+    The value must be an Integer
+
+
 FileVersion
 ================================================================================
 
@@ -5162,6 +5275,17 @@ Gravity
     The value must be an Integer
       - with a value greater than or equal to 0.0
 
+
+
+UseClustering
+================================================================================
+
+[Type: string/boolean] Run a clustering algorithm to create boxes in index space for iteration. By default an octree representation is used for iteration, this may result in iterating over many nodes in the octree. Th UseClustering key will run a clustering algorithm to build a set of boxes for iteration. This does not always have a significant impact on performance and the clustering algorithm can be expensive to compute. For small problems and short running problems clustering is not recommended. Long running problems may or may not see a benefit. The result varies significantly based on the geometries in the problem. The Berger-Rigoutsos algorithm is currently used for clustering.
+
+
+:default: False
+.. note::
+    The value must be True or False
 
 
 OverlandFlowSpinUp
