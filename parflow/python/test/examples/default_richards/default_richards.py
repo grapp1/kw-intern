@@ -36,6 +36,7 @@ drich.GeomInput.Names = "domain_input background_input source_region_input conce
 # Domain Geometry Input
 #---------------------------------------------------------
 drich.GeomInput.domain_input.InputType = 'Box'
+# drich.readExternalFile()
 drich.GeomInput.domain_input.GeomName = 'domain'
 
 #---------------------------------------------------------
@@ -327,4 +328,5 @@ drich.Solver.Linear.Preconditioner = 'PFMG'
 # Visual.plotCompGrid(drich)
 # Visual.plotDomGrid(drich, domain='source_region')
 
+# print(drich.__dict__)
 drich.run()

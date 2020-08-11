@@ -32,6 +32,12 @@ def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
 
 # -----------------------------------------------------------------------------
 
+def externalFileToDict(fileName, fileFormat):
+  externalFileDict = {}
+  externalFileDict['GeomInput.Names.domain_input.InputType'] = 'Box'
+  print(externalFileDict)
+  return externalFileDict
+
 # -----------------------------------------------------------------------------
 
 def writeDictAsPfidb(dictObj, fileName):

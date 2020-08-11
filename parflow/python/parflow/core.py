@@ -1,7 +1,7 @@
 import os
 
 from .database.generated import BaseRun, PFDBObj
-from .utils import extractKeysFromObject, writeDict
+from .utils import extractKeysFromObject, writeDict, externalFileToDict
 from .database import TerminalColors as term
 from .database import TerminalSymbols as termSymbol
 
@@ -29,6 +29,14 @@ class Run(BaseRun):
     keyDict = {}
     extractKeysFromObject(keyDict, self)
     return keyDict
+
+  def readExternalFile(self, fileName=None, fileFormat='yaml'):
+    inputDict = externalFileToDict(fileName, fileFormat)
+    for key, value in inputDict.items():
+      if not value == 'NA':
+        # extKeyList =
+        extKey = '.'.join(self, key)
+        # print(extKey)
 
   def write(self, fileName=None, fileFormat='pfidb'):
     fName = os.path.join(PFDBObj.workingDirectory, f'{self._name}.{fileFormat}')
