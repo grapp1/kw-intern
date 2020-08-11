@@ -2,8 +2,8 @@ import os
 
 from .database.generated import BaseRun, PFDBObj
 from .utils import extractKeysFromObject, writeDict, externalFileToDict
-from .database import TerminalColors as term
-from .database import TerminalSymbols as termSymbol
+from .terminal import Colors as term
+from .terminal import Symbols as termSymbol
 
 class Run(BaseRun):
   def __init__(self, name, basescript=None):

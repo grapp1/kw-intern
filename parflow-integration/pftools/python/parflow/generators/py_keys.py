@@ -308,9 +308,9 @@ def generateModuleFromDefinitions(definitions):
 if __name__ == "__main__":
   coreDefinitions = YAML_MODULES_TO_PROCESS
   basePath = os.path.dirname(os.path.abspath(__file__))
-  defPath = os.path.join(basePath, 'definitions')
+  defPath = os.path.join(basePath, '../definitions')
   definitionFiles = [os.path.join(defPath, f'{module}.yaml') for module in coreDefinitions]
-  outputFilePath = os.path.join(basePath, 'generated.py')
+  outputFilePath = os.path.join(basePath, '../tools/database/generated.py')
 
   print('-'*80)
   print('Generate Parflow database module')

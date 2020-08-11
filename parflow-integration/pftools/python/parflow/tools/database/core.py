@@ -5,8 +5,6 @@ a Parflow input deck.
 import os
 from .domains import validateValueWithException, validateValueWithPrint, validateValueToString
 from .handlers import decorateValue
-from . import TerminalColors as term
-from . import TerminalSymbols as termSymbol
 
 
 # -----------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 #  This run, as written in this input file, should take
 #  3 nonlinear iterations.
 
-from parflow import Run, Visual
+from parflow import Run
 
 drich = Run('default_richards', __file__)
 
@@ -36,7 +36,6 @@ drich.GeomInput.Names = "domain_input background_input source_region_input conce
 # Domain Geometry Input
 #---------------------------------------------------------
 drich.GeomInput.domain_input.InputType = 'Box'
-# drich.readExternalFile()
 drich.GeomInput.domain_input.GeomName = 'domain'
 
 #---------------------------------------------------------
@@ -325,8 +324,5 @@ drich.Solver.Linear.Preconditioner = 'PFMG'
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxIter  = 1
 # drich.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
-# Visual.plotCompGrid(drich)
-# Visual.plotDomGrid(drich, domain='source_region')
 
-# print(drich.__dict__)
 drich.run()

@@ -9,8 +9,8 @@ object along the way.
 
 import sys
 from . import generated
-from . import TerminalColors as term
-from . import TerminalSymbols as termSymbol
+from ..terminal import Colors as term
+from ..terminal import Symbols as termSymbol
 
 # -----------------------------------------------------------------------------
 

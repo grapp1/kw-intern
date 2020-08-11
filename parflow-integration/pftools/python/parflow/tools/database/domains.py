@@ -8,8 +8,8 @@ import types
 import traceback
 import os
 
-from . import TerminalColors as term
-from . import TerminalSymbols as termSymbol
+from ..terminal import Colors as term
+from ..terminal import Symbols as termSymbol
 
 # -----------------------------------------------------------------------------
 # Validation helper functions
