@@ -1,4 +1,4 @@
-class TerminalColors:
+class Colors:
   HEADER = '\033[95m'
   OKBLUE = '\033[94m'
   OKGREEN = '\033[92m'
@@ -11,7 +11,8 @@ class TerminalColors:
   MAGENTA = '\033[35m'
   CYAN = '\033[36m'
 
-class TerminalSymbols:
+
+class Symbols:
   ok = u'\u2714'
   ko = u'\u2718'
   errorItem = u'\u2605'
