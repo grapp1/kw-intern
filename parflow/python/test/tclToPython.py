@@ -67,5 +67,5 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./tcl_original/harvey.flow.tcl', './examples/harvey_flow/harvey_flow.py', 'hflow')
+tclToPython('./examples/forsyth2/forsyth2.tcl', './examples/forsyth2/forsyth2.py', 'forsyth2')
 

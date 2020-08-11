@@ -103,11 +103,11 @@ hflow.Geom.lower_aquifer.Upper.Z = 1.5
 hflow.Geom.Perm.Names = 'upper_aquifer lower_aquifer'
 # we open a file, in this case from PEST to set upper and lower kg and sigma
 #
-fileId = [open stats4.txt r 0600]
-kgu = [gets $fileId]
-varu = [gets $fileId]
-kgl = [gets $fileId]
-varl = [gets $fileId]
+# fileId = [open stats4.txt r 0600]
+kgu = 83
+varu = 0.31
+kgl = 87.3
+varl = 0.22
 # close $fileId
 
 
@@ -318,7 +318,7 @@ hflow.TopoSlopesY.Geom.domain.Value = 0.0
 # need a key for them
 
 hflow.Mannings.Type = 'Constant'
-hflow.Mannings.GeomNames = ''
+hflow.Mannings.GeomNames = 'domain'
 hflow.Mannings.Geom.domain.Value = 0.
 
 #-----------------------------------------------------------------------------

@@ -147,7 +147,7 @@ class PFDBObj:
         valueObj = self.__dict__[name]
         domains, handlers, history, crosscheck = detailHelper(valueObj, '_value', value)
       else:
-        print(f'Field {name} is not part of the expected schema {self.__class__}')
+        print(f'Field {name} is not part of the expected {value} schema {self.__class__}')
         if PFDBObj.exitOnError:
           raise ValueError(
               f'Field "{name}" is not part of the expected schema {self.__class__}')
