@@ -3,8 +3,7 @@
 # Setting up ParFlow and Python environment in docker
 # -----------------------------------------------------------------------------
 
-source ~/parflow/env.sh
-
+export PARFLOW_DIR=~/parflow/install
 export LC_ALL=C.UTF-8
 export PYTHONPATH=~/kw-intern/parflow/python/
 
