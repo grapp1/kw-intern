@@ -24,7 +24,7 @@ Phase:
         location: /PhaseSources
       PhaseConcenUpdater:
         type: ChildrenHandler
-        className: PhaseConcenNameItem
+        className: PhaseConcenPhaseNameItem
         location: /PhaseConcen
       ExtractionFluxPhaseUpdater:
         type: ChildrenHandler
@@ -273,6 +273,11 @@ Phase:
           [Type: string] This specifies the geometry names for setting the heat capacity.
         domains:
           AnyString:
+        handlers:
+          PhaseNameHeatGeomItemUpdater:
+            type: ChildrenHandler
+            className: PhaseNameHeatGeomItem
+            location: /Phase/{PhaseNameItem}/Geom
 
       Type:
         help: >
@@ -302,8 +307,11 @@ Phase:
       __rst__:
         skip:
       __doc__: ''
+      _dynamic:
+        PhaseNameHeatGeomItem: /Phase/{PhaseNameItem}/HeatCapacity/GeomNames
 
       .{geom_name}:
+        __class__: PhaseNameHeatGeomItem
         __rst__:
           skip:
         __doc__: ''
@@ -329,7 +337,7 @@ PhaseConcen:
     Here we define initial concentration conditions for contaminants.
 
   .{phase_name}:
-    __class__: PhaseConcenNameItem
+    __class__: PhaseConcenPhaseNameItem
     __rst__:
       skip:
     __doc__: ''
@@ -346,7 +354,7 @@ PhaseConcen:
         PhaseConcenContaminantGeomItemUpdater:
           type: ChildrenHandler
           className: PhaseConcenContaminantGeomItem
-          location: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/Geom
+          location: /PhaseConcen/{PhaseConcenPhaseNameItem}/{PhaseConcenContaminantItem}/Geom
 
     .{contaminant_name}:
       __class__: PhaseConcenContaminantItem
@@ -359,7 +367,7 @@ PhaseConcen:
         __rst__:
           skip:
         _dynamic:
-          PhaseConcenContaminantGeomItem: /PhaseConcen/{PhaseConcenNameItem}/{PhaseConcenContaminantItem}/GeomNames
+          PhaseConcenContaminantGeomItem: /PhaseConcen/{PhaseConcenPhaseNameItem}/GeomNames
 
         .{geom_input_name}:
           __class__: PhaseConcenContaminantGeomItem
@@ -453,6 +461,8 @@ PhaseSources:
       __rst__:
         skip:
       __doc__: ''
+      _dynamic:
+        PhaseSourcePhaseGeomItem: /PhaseSources/{PhaseSourceNameItem}/GeomNames
 
       .{geom_input_name}:
         __class__: PhaseSourcePhaseGeomItem
@@ -511,7 +521,7 @@ Contaminants:
       PhaseConcenContNameItemUpdater:
         type: ChildrenHandler
         className: PhaseConcenContaminantItem
-        location: /PhaseConcen/{PhaseConcenNameItem}/
+        location: /PhaseConcen/{PhaseConcenPhaseNameItem}/
 
   .{contaminant_name}:
     __class__: ContNameItem
