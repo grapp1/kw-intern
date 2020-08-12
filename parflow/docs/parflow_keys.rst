@@ -4300,7 +4300,7 @@ Here we define initial concentration conditions for contaminants.
 
 
 
-PhaseConcen..{phase_name}.GeomNames
+PhaseConcen..{phase_name}..{contaminant_name}.GeomNames
 --------------------------------------------------------------------------------
 
 [Type: string] This key specifies the geometries on which an initial condition will be given, if the type was set to Constant. Note that geometries listed later “overlay” geometries listed earlier.
