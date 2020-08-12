@@ -10,134 +10,143 @@ object along the way.
 import sys
 from . import generated
 from ..terminal import Colors as term
-from ..terminal import Symbols as termSymbol
+from ..terminal import Symbols as term_symbol
 
 # -----------------------------------------------------------------------------
 
+
 class ValueHandlerException(Exception):
-  '''
-  Basic parflow exception used for ValueHandlers to report error
-  '''
-  pass
+    '''
+    Basic parflow exception used for ValueHandlers to report error
+    '''
+    pass
 
 # -----------------------------------------------------------------------------
 
 
 class ChildrenHandler:
-  def decorate(self, value, container, className=None, location='.', eager=None, **kwargs):
-    klass = getattr(generated, className)
-    destination_containers = container.getSelectionFromLocation(location)
+    def decorate(self, value, container, class_name=None, location='.', eager=None, **kwargs):
+        klass = getattr(generated, class_name)
+        destination_containers = container.get_selection_from_location(location)
 
-    if isinstance(value, str):
-      names = value.split(' ')
-      valideNames = []
-      for name in names:
-        if len(name):
-          # print(f' - {name} => {className} in {destination_container.__class__}')
-          valideNames.append(name)
-          for destination_container in destination_containers:
-            if destination_container != None:
-              if name not in destination_container.__dict__:
-                destination_container.__dict__[name] = klass(destination_container)
-            elif eager:
-              print(f'Error no selection for {location}')
+        if isinstance(value, str):
+            names = value.split(' ')
+            valid_names = []
+            for name in names:
+                if len(name):
+                    # print(f' - {name} => {class_name} in {destination_container.__class__}')
+                    valid_names.append(name)
+                    for destination_container in destination_containers:
+                        if destination_container is not None:
+                            if name not in destination_container.__dict__:
+                                destination_container.__dict__[
+                                    name] = klass(destination_container)
+                        elif eager:
+                            print(f'Error no selection for {location}')
 
-      return valideNames
+            return valid_names
 
-    # for handling variable DZ setting
-    elif isinstance(value, int):
-      valideNames = []
-      for i in range(value):
-        name = f'l{i}'
-        valideNames.append(name)
-        for destination_container in destination_containers:
-          if destination_container != None:
-            if name not in destination_container.__dict__:
-              destination_container.__dict__[name] = klass(destination_container)
-          elif eager:
-            print(f'Error no selection for {location}')
+        # for handling variable DZ setting
+        elif isinstance(value, int):
+            valid_names = []
+            for i in range(value):
+                name = f'l{i}'
+                valid_names.append(name)
+                for destination_container in destination_containers:
+                    if destination_container is not None:
+                        if name not in destination_container.__dict__:
+                            destination_container.__dict__[
+                                name] = klass(destination_container)
+                    elif eager:
+                        print(f'Error no selection for {location}')
 
-      return valideNames
+            return valid_names
 
-    if hasattr(value, '__iter__'):
-      valideNames = []
-      for name in value:
-        if len(name):
-          valideNames.append(name)
-          # print(f' - {name} => {className} in {destination_container.__class__}')
-          for destination_container in destination_containers:
-            destination_container.__dict__[name] = klass(destination_container)
+        if hasattr(value, '__iter__'):
+            valid_names = []
+            for name in value:
+                if len(name):
+                    valid_names.append(name)
+                    # print(f' - {name} => {class_name} in {destination_container.__class__}')
+                    for destination_container in destination_containers:
+                        destination_container.__dict__[
+                            name] = klass(destination_container)
 
-      return valideNames
+            return valid_names
 
-    raise ValueHandlerException(
-        f'{value} is not of the expected type for GeometryNameHandler')
+        raise ValueHandlerException(
+            f'{value} is not of the expected type for GeometryNameHandler')
 
 # -----------------------------------------------------------------------------
 # Helper map with an instance of each Value handler
 # -----------------------------------------------------------------------------
 
+
 AVAILABLE_HANDLERS = {}
 
-def getHandler(className, printError=True):
-  if className in AVAILABLE_HANDLERS:
-    return AVAILABLE_HANDLERS[className]
 
-  if hasattr(sys.modules[__name__], className):
-    klass = getattr(sys.modules[__name__], className)
-    instance = klass()
-    AVAILABLE_HANDLERS[className] = instance
-    return instance
+def get_handler(class_name, print_error=True):
+    if class_name in AVAILABLE_HANDLERS:
+        return AVAILABLE_HANDLERS[class_name]
 
-  if printError:
-    print(f'{term.FAIL}{termSymbol.ko}{term.ENDC} Could not find handler: "{className}"')
+    if hasattr(sys.modules[__name__], class_name):
+        klass = getattr(sys.modules[__name__], class_name)
+        instance = klass()
+        AVAILABLE_HANDLERS[class_name] = instance
+        return instance
 
-  return None
+    if print_error:
+        print(
+            f'{term.FAIL}{term_symbol.ko}{term.ENDC} Could not find handler: "{class_name}"')
+
+    return None
 
 # -----------------------------------------------------------------------------
 # API meant to be used outside of this module
 # -----------------------------------------------------------------------------
 
-def decorateValue(value, container=None, handlers=None):
-  '''
-  handlers = {
-      GeomInputUpdater: {
-        type: 'ChildrenHandler',
-        className: 'GeomInputItemValue',
-        location: '../..'
-      },
-      GeomUpdater: {
-        type: 'ChildrenHandler',
-        className: 'GeomItem',
-        location: '../../Geom'
-      },
-      ChildrenHandler: {
-        className: 'GeomInputLocal'
-      }
-  }
-  '''
-  if handlers == None:
-    return value
 
-  return_value = value
+def decorate_value(value, container=None, handlers=None):
+    '''
+    handlers = {
+        GeomInputUpdater: {
+          type: 'ChildrenHandler',
+          className: 'GeomInputItemValue',
+          location: '../..'
+        },
+        GeomUpdater: {
+          type: 'ChildrenHandler',
+          className: 'GeomItem',
+          location: '../../Geom'
+        },
+        ChildrenHandler: {
+          className: 'GeomInputLocal'
+        }
+    }
+    '''
+    if handlers is None:
+        return value
 
-  for handler_classname in handlers:
-    handler = getHandler(handler_classname, False)
+    return_value = value
 
-    if not handler and 'type' in handlers[handler_classname]:
-      handler = getHandler(handlers[handler_classname]['type'])
-    else:
-      getHandler(handler_classname)
+    for handler_classname in handlers:
+        handler = get_handler(handler_classname, False)
 
-    if handler:
-      handler_kwargs = handlers[handler_classname]
-      if isinstance(handler_kwargs, str):
-        return_value = handler.decorate(value, container)
-      else:
-        return_value = handler.decorate(value, container, **handler_kwargs)
+        if not handler and 'type' in handlers[handler_classname]:
+            handler = get_handler(handlers[handler_classname]['type'])
+        else:
+            get_handler(handler_classname)
 
-  # added to handle variable DZ
-  if isinstance(value, int):
-    return value
+        if handler:
+            handler_kwargs = handlers[handler_classname]
+            if isinstance(handler_kwargs, str):
+                return_value = handler.decorate(value, container)
+            else:
+                return_value = handler.decorate(
+                    value, container, **handler_kwargs)
 
-  return return_value
+    # added to handle variable DZ
+    if isinstance(value, int):
+        return value
+
+    return return_value

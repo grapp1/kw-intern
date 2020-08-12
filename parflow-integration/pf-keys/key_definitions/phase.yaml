@@ -16,31 +16,31 @@ Phase:
     handlers:
       PhaseUpdater:
         type: ChildrenHandler
-        className: PhaseNameItem
+        class_name: PhaseNameItem
         location: .
       PhaseSourceUpdater:
         type: ChildrenHandler
-        className: PhaseSourceNameItem
+        class_name: PhaseSourceNameItem
         location: /PhaseSources
       PhaseConcenUpdater:
         type: ChildrenHandler
-        className: PhaseConcenPhaseNameItem
+        class_name: PhaseConcenPhaseNameItem
         location: /PhaseConcen
       ExtractionFluxPhaseUpdater:
         type: ChildrenHandler
-        className: ExtractionFluxPhaseItem
+        class_name: ExtractionFluxPhaseItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Extraction/Flux
       InjectionFluxPhaseUpdater:
         type: ChildrenHandler
-        className: InjectionFluxPhaseItem
+        class_name: InjectionFluxPhaseItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Flux
       InjectionConcentrationPhaseUpdater:
         type: ChildrenHandler
-        className: InjectionConcentrationPhaseItem
+        class_name: InjectionConcentrationPhaseItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration
       ICSaturationPhaseUpdater:
         type: ChildrenHandler
-        className: GeomICSaturationPhaseItem
+        class_name: GeomICSaturationPhaseItem
         location: /Geom/{GeomItem}/ICSaturation
 
 
@@ -59,7 +59,7 @@ Phase:
         this key are Constant, VanGenuchten, Haverkamp, Data, and Polynomial.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Constant
             - VanGenuchten
             - Haverkamp
@@ -87,8 +87,8 @@ Phase:
         default: 0
         domains:
           IntValue:
-            minValue: 0
-            maxValue: 1
+            min_value: 0
+            max_value: 1
 
   Saturation:
     __doc__: >
@@ -105,7 +105,7 @@ Phase:
         VanGenuchten, Haverkamp, Data, Polynomial and PFBFile.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Constant
             - VanGenuchten
             - Haverkamp
@@ -131,8 +131,8 @@ Phase:
         default: 0
         domains:
           IntValue:
-            minValue: 0
-            maxValue: 1
+            min_value: 0
+            max_value: 1
 
   ThermalConductivity:
     __doc__: ''
@@ -168,7 +168,7 @@ Phase:
           constant. This key must be either Constant or EquationOfState.
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
               - EquationOfState
 
@@ -205,7 +205,7 @@ Phase:
         domains:
           MandatoryValue:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
 
       Value:
@@ -232,7 +232,7 @@ Phase:
         default: Constant
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
               - Polynomial
 
@@ -249,8 +249,8 @@ Phase:
         default: 2.0
         domains:
           DoubleValue:
-            minValue: 2.0
-            maxValue: 2.0
+            min_value: 2.0
+            max_value: 2.0
 
       IrreducibleSaturation:
         help: >
@@ -259,8 +259,8 @@ Phase:
         default: 0.0
         domains:
           DoubleValue:
-            minValue: 0.0
-            maxValue: 0.0
+            min_value: 0.0
+            max_value: 0.0
 
     # missing from manual
     HeatCapacity:
@@ -276,7 +276,7 @@ Phase:
         handlers:
           PhaseNameHeatGeomItemUpdater:
             type: ChildrenHandler
-            className: PhaseNameHeatGeomItem
+            class_name: PhaseNameHeatGeomItem
             location: /Phase/{PhaseNameItem}/Geom
 
       Type:
@@ -359,7 +359,7 @@ PhaseConcen:
         handlers:
           PhaseConcenContaminantGeomItemUpdater:
             type: ChildrenHandler
-            className: PhaseConcenContaminantGeomItem
+            class_name: PhaseConcenContaminantGeomItem
             location: /PhaseConcen/{PhaseConcenPhaseNameItem}/{PhaseConcenContaminantItem}/Geom
 
       Geom:
@@ -390,7 +390,7 @@ PhaseConcen:
           a “ParFlow Binary” file.
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
               - PFBFile
 
@@ -427,7 +427,7 @@ PhaseSources:
         sources over different regions.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Constant
             - PredefinedFunction
 
@@ -440,7 +440,7 @@ PhaseSources:
       handlers:
         PhaseSourceGeomUpdater:
           type: ChildrenHandler
-          className: PhaseSourcePhaseGeomItem
+          class_name: PhaseSourcePhaseGeomItem
           location: ./Geom
 
     PredefinedFunction:
@@ -449,7 +449,7 @@ PhaseSources:
         X, XPlusYPlusZ, X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - X
             - XPlusYPlusZ
             - X3Y2PlusSinXYPlus1
@@ -508,19 +508,19 @@ Contaminants:
     handlers:
       ContaminantNameUpdater:
         type: ChildrenHandler
-        className: ContNameItem
+        class_name: ContNameItem
         location: .
       ContaminantGeomNameUpdater:
         type: ChildrenHandler
-        className: GeomContItem
+        class_name: GeomContItem
         location: /Geom/{GeomItem}/
       InjectionConcentrationPhaseContaminantUpdater:
         type: ChildrenHandler
-        className: InjectionConcentrationPhaseContaminantItem
+        class_name: InjectionConcentrationPhaseContaminantItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration/{InjectionConcentrationPhaseItem}
       PhaseConcenContNameItemUpdater:
         type: ChildrenHandler
-        className: PhaseConcenContaminantItem
+        class_name: PhaseConcenContaminantItem
         location: /PhaseConcen/{PhaseConcenPhaseNameItem}/
 
   .{contaminant_name}:

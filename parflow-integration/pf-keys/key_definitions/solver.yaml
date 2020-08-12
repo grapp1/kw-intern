@@ -27,7 +27,7 @@ Solver:
     domains:
       MandatoryValue:
       EnumDomain:
-        enumList:
+        enum_list:
           - Impes
           - Richards
 
@@ -37,7 +37,7 @@ Solver:
     default: 1e-9
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   AdvectOrder:
     help: >
@@ -46,8 +46,8 @@ Solver:
     default: 2
     domains:
       IntValue:
-        minValue: 1
-        maxValue: 2
+        min_value: 1
+        max_value: 2
 
   # missing from manual
   BetaFluid:
@@ -114,7 +114,7 @@ Solver:
       default: 1
       domains:
         IntValue:
-          minValue: 1
+          min_value: 1
         RequiresModule: 'CLM'
 
     CLMFileDir:
@@ -145,7 +145,7 @@ Solver:
       default: Linear
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - None
             - Linear
             - Cosine
@@ -159,8 +159,8 @@ Solver:
       default: 1.0
       domains:
         DoubleValue:
-          minValue: 0.0
-          maxValue: 1.0
+          min_value: 0.0
+          max_value: 1.0
         RequiresModule: 'CLM'
 
     ForceVegetation:
@@ -200,7 +200,7 @@ Solver:
       default: Constant
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Constant
             - Deficit
         RequiresModule: 'CLM'
@@ -210,7 +210,7 @@ Solver:
         [Type: double] This key specifies the rate of the irrigation in CLM in [mm/s].
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
         RequiresModule: 'CLM'
 
     IrrigationStartTime:
@@ -218,8 +218,8 @@ Solver:
         [Type: double] This key specifies the start time of the irrigation in CLM GMT.
       domains:
         DoubleValue:
-          minValue: 0.0
-          maxValue: 2400.0
+          min_value: 0.0
+          max_value: 2400.0
         RequiresModule: 'CLM'
 
     IrrigationStopTime:
@@ -227,8 +227,8 @@ Solver:
         [Type: double] This key specifies the stop time of the irrigation in CLM GMT.
       domains:
         DoubleValue:
-          minValue: 0.0
-          maxValue: 2400.0
+          min_value: 0.0
+          max_value: 2400.0
         RequiresModule: 'CLM'
 
     IrrigationThreshold:
@@ -237,7 +237,7 @@ Solver:
       default: 0.5
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
         RequiresModule: 'CLM'
 
     # missing from manual
@@ -254,7 +254,7 @@ Solver:
       default: none
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - none
             - Spray
             - Drip
@@ -331,7 +331,7 @@ Solver:
         Note that CLM must be compiled and linked at runtime for this option to be active.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - 1D
             - 2D
             - 3D
@@ -354,7 +354,7 @@ Solver:
       default: 0.1
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
         RequiresModule: 'CLM'
 
     ReuseCount:
@@ -367,7 +367,7 @@ Solver:
       default: 1
       domains:
         IntValue:
-          minValue: 0
+          min_value: 0
         RequiresModule: 'CLM'
 
     RootZoneNZ:
@@ -378,7 +378,7 @@ Solver:
       default: 10
       domains:
         IntValue:
-          minValue: 1 # can we set the max value to whatever the user sets to NZ?
+          min_value: 1 # can we set the max value to whatever the user sets to NZ?
         RequiresModule: 'CLM'
 
     # Not in grep or manual, but in a script somewhere (per LT)
@@ -408,7 +408,7 @@ Solver:
       default: 7
       domains:
         IntValue:
-          minValue: 1
+          min_value: 1
         RequiresModule: 'CLM'
 
     VegWaterStress:
@@ -418,7 +418,7 @@ Solver:
       default: Saturation
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - None
             - Saturation
             - Pressure
@@ -432,7 +432,7 @@ Solver:
       default: 0.1
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
         RequiresModule: 'CLM'
 
     WriteLastRST:
@@ -495,7 +495,7 @@ Solver:
     default: 1e-8
     domains:
       DoubleValue:
-        minValue: 0
+        min_value: 0
 
   # missing from manual
   DropTol:
@@ -557,7 +557,7 @@ Solver:
     domains:
       MandatoryValue:
       EnumDomain:
-        enumList:
+        enum_list:
           - none
           - CLM
 
@@ -573,7 +573,7 @@ Solver:
     default: 3
     domains:
       IntValue:
-        minValue: 1
+        min_value: 1
 
   MaxIter:
     help: >
@@ -621,7 +621,7 @@ Solver:
       default: 0.00001
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
   OverlandKinematic:
     __doc__: >
@@ -633,7 +633,7 @@ Solver:
       default: 0.00001
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
   # missing from manual
   PolyDegree:
@@ -829,8 +829,8 @@ Solver:
     default: 2
     domains:
       IntValue:
-        minValue: 1
-        maxValue: 2
+        min_value: 1
+        max_value: 2
 
   # missing from manual
   Smoother:
@@ -882,7 +882,7 @@ Solver:
       default: Original
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Original
             - Upwind
             - UpwindSine
@@ -925,7 +925,7 @@ Solver:
       default: 'PCG'
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - MGSemi
             - PPCG
             - PCG
@@ -940,7 +940,7 @@ Solver:
       domains:
         MandatoryValue:
         IntValue:
-          minValue: 1 # check
+          min_value: 1 # check
 
     MaxRestarts:
       help: >
@@ -949,7 +949,7 @@ Solver:
       default: 0
       domains:
         IntValue:
-          minValue: 0
+          min_value: 0
 
     # missing from manual, but assigned in water_balance_x.tcl example
     MaxRestart:
@@ -959,7 +959,7 @@ Solver:
       default: 0
       domains:
         IntValue:
-          minValue: 0
+          min_value: 0
 
     Preconditioner:
       __doc__: >
@@ -978,7 +978,7 @@ Solver:
         default: MGSemi
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - NoPC
               - MGSemi
               - PFMG
@@ -987,7 +987,7 @@ Solver:
         handlers:
           LPreMethodUpdater:
             type: ChildrenHandler
-            className: PrecondMethodItem
+            class_name: PrecondMethodItem
             location: ./Preconditioner
 
       SymmetricMat:
@@ -999,7 +999,7 @@ Solver:
         default: Symmetric
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Symmetric
               - Nonsymmetric
 
@@ -1009,7 +1009,7 @@ Solver:
           [Type: string]
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - FullJacobian
 
       # defining key for Solver.Linear.Preconditioner.{precond_method}... keys
@@ -1025,7 +1025,7 @@ Solver:
           default: 1
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
 
         # not in the manual - check to make sure that it is not the same as the Solver.MaxLevels listed above
         MaxLevels:
@@ -1033,7 +1033,7 @@ Solver:
             [Type: int] Max Levels
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
 
         # missing from manual if applicable to preconditioners other than SMG
         NumPreRelax:
@@ -1043,7 +1043,7 @@ Solver:
           default: 1
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
 
         # missing from manual if applicable to preconditioners other than SMG
         NumPostRelax:
@@ -1053,7 +1053,7 @@ Solver:
           default: 1
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
 
         # missing from manual
         Smoother:
@@ -1069,7 +1069,7 @@ Solver:
           default: NonGalerkin
           domains:
             EnumDomain:
-              enumList:
+              enum_list:
                 - Galerkin
                 - NonGalerkin
 
@@ -1125,7 +1125,7 @@ Solver:
       default: 1e-7
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     StepTol:
       help: >
@@ -1134,7 +1134,7 @@ Solver:
       default: 1e-7
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     MaxIter:
       help: >
@@ -1143,7 +1143,7 @@ Solver:
       default: 15
       domains:
         IntValue:
-          minValue: 1
+          min_value: 1
 
     PrintFlag:
       help: >
@@ -1156,7 +1156,7 @@ Solver:
       default: HighVerbosity
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - NoVerbosity
             - LowVerbosity
             - NormalVerbosity
@@ -1172,7 +1172,7 @@ Solver:
       default: Walker2
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - EtaConstant
             - Walker1
             - Walker2
@@ -1183,7 +1183,7 @@ Solver:
       default: 1e-4
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     EtaAlpha:
       help: >
@@ -1191,7 +1191,7 @@ Solver:
       default: 2.0
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     EtaGamma:
       help: >
@@ -1199,7 +1199,7 @@ Solver:
       default: 0.9
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     UseJacobian:
       help: >
@@ -1217,7 +1217,7 @@ Solver:
       default: 1e-7
       domains:
         DoubleValue:
-          minValue: 0.0
+          min_value: 0.0
 
     Globalization:
       help: >
@@ -1228,7 +1228,7 @@ Solver:
       default: LineSearch
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - LineSearch
             - InexactNewton
 
@@ -1518,7 +1518,7 @@ SILO: # typo in documentation
     default: 'PDB'
     domains:
       enumDomain:
-        enumList:
+        enum_list:
           - PDB
           - HDF5
       RequiresModule: 'SILO'
@@ -1558,7 +1558,7 @@ KnownSolution:
     domains:
       MandatoryValue:
       EnumDomain:
-        enumList:
+        enum_list:
           - NoKnownSolution
           - Constant
           - X

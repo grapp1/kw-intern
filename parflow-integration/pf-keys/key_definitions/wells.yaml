@@ -18,7 +18,7 @@ Wells:
     handlers:
       WellUpdater:
         type: ChildrenHandler
-        className: WellItem
+        class_name: WellItem
 
   .{well_name}:
     __class__: WellItem
@@ -66,8 +66,8 @@ Wells:
             [Type: double] This key specifies the saturation value of a vertical well.
           domains:
             DoubleValue:
-              minValue: 0.0
-              maxValue: 1.0
+              min_value: 0.0
+              max_value: 1.0
 
       # Setting key Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
       Flux:
@@ -223,8 +223,8 @@ Wells:
                   [Type: double] This key specifies the fraction of the extracted contaminant which gets resupplied to the injection well.
                 domains:
                   DoubleValue:
-                    minValue: 0.0
-                    maxValue: 1.0
+                    min_value: 0.0
+                    max_value: 1.0
 
     InputType:
       help: >
@@ -238,7 +238,7 @@ Wells:
         values to the injection well.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Vertical
             - Recirc
 
@@ -248,7 +248,7 @@ Wells:
         Injection indicates that this is an injection well. A value of Extraction indicates that this is an extraction well.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Injection
             - Extraction
 
@@ -263,7 +263,7 @@ Wells:
         the computational cells which define the well.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Pressure
             - Flux
 
@@ -277,7 +277,7 @@ Wells:
         condition in the computational cells which define the well.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Pressure
             - Flux
 
@@ -291,7 +291,7 @@ Wells:
         condition in the computational cells which define the well.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Pressure
             - Flux
 
@@ -359,7 +359,7 @@ Wells:
         implemented.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Standard
             - Weighted
             - Patterned
@@ -374,7 +374,7 @@ Wells:
         implemented.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Standard
             - Weighted
             - Patterned
@@ -389,7 +389,7 @@ Wells:
         implemented.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - Standard
             - Weighted
             - Patterned

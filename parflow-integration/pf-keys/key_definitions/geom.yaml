@@ -42,7 +42,7 @@ ICSaturation:
       within geometries for the phase.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
 
   GeomNames:
@@ -80,7 +80,7 @@ ICPressure:
       taken as a spatially varying function given by data in a ParFlow binary (.pfb) file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
           - PFBFile
           - HydroStaticPatch
@@ -107,11 +107,11 @@ GeomInput:
     handlers:
       GeomInputUpdater:
         type: ChildrenHandler
-        className: GeomInputItem
+        class_name: GeomInputItem
         location: .
       GeomUpdater:
         type: ChildrenHandler
-        className: GeomItem
+        class_name: GeomItem
         location: /Geom
 
   # user-defined entries in GeomInput.Names are passed to .
@@ -129,7 +129,7 @@ GeomInput:
         or Box.
       domains:
         EnumDomain:
-          enumList:
+          enum_list:
             - SolidFile
             - IndicatorField
             - Box
@@ -146,11 +146,11 @@ GeomInput:
       handlers:
         GeomInputUpdater:
           type: ChildrenHandler
-          className: GeomInputItem
+          class_name: GeomInputItem
           location: ..
         GeomUpdater:
           type: ChildrenHandler
-          className: GeomItem
+          class_name: GeomItem
           location: /Geom
 
     GeomNames:
@@ -167,11 +167,11 @@ GeomInput:
       handlers:
         GeomInputUpdater:
           type: ChildrenHandler
-          className: GeomInputItem
+          class_name: GeomInputItem
           location: ..
         GeomUpdater:
           type: ChildrenHandler
-          className: GeomItem
+          class_name: GeomItem
           location: /Geom
 
     # FileName is for solid files and indicator fields only
@@ -209,7 +209,7 @@ Perm:
       files. The choices for this key are TensorByGeom and TensorByFile.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - TensorByGeom
           - TensorByFile
 
@@ -247,7 +247,7 @@ SpecificStorage:
       geometry.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
 
 # -----------------------------------------------------------------------------
@@ -284,12 +284,12 @@ dzScale:
     # Need to enforce a check to make sure that this is equal to ComputationalGrid.NZ
     domains:
       IntValue:
-        minValue: 1
-        intoList: True
+        min_value: 1
+        into_list: True
     handlers:
       nzListNumUpdater:
         type: ChildrenHandler
-        className: CellnzItem
+        class_name: CellnzItem
         location: ../Cell
 
 Cell:
@@ -316,7 +316,7 @@ Cell:
           does not change with variable dz. The layer thickness is calculated by ComputationalGrid.DZ *dZScale.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
 # -----------------------------------------------------------------------------
 # Geom.*
@@ -377,7 +377,7 @@ Geom:
       handlers:
         ContRetNameUpdater:
           type: ChildrenHandler
-          className: GeomItem
+          class_name: GeomItem
           location: ..
 
   # GeomItems: for keys in the form Geom.geom_name.[]
@@ -465,7 +465,7 @@ Geom:
       handlers:
         GeomPatchNameUpdater:
           type: ChildrenHandler
-          className: GeomItem
+          class_name: GeomItem
           location: ..
 
     # Permeability
@@ -480,7 +480,7 @@ Geom:
           geometry_name. It must be either Constant, TurnBands, ParGauss, or PFBFile.
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
               - TurnBands
               - ParGauss
@@ -524,7 +524,7 @@ Geom:
           Turning Bands or Parallel Gaussian Simulator are chosen.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       Sigma:
         help: >
@@ -533,7 +533,7 @@ Geom:
           Turning Bands or Parallel Gaussian Simulator are chosen.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       Seed:
         help: >
@@ -544,7 +544,7 @@ Geom:
         default: 1
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1
 
       NumLines:
         help: >
@@ -553,7 +553,7 @@ Geom:
         default: 100
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1
 
       RZeta:
         help: >
@@ -563,7 +563,7 @@ Geom:
         default: 5.0
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       KMax:
         help: >
@@ -572,7 +572,7 @@ Geom:
         default: 100.0
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       DelK:
         help: >
@@ -581,7 +581,7 @@ Geom:
         default: 0.2
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       MaxNPts:
         help: >
@@ -589,7 +589,7 @@ Geom:
           Parallel Gaussian Simulator for the named geometry, geometry_name.
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1
 
       MaxCpts:
         help: >
@@ -597,7 +597,7 @@ Geom:
           used in the Parallel Gaussian Simulator for the named geometry, geometry_name.
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1
 
       LogNormal:
         help: >
@@ -608,7 +608,7 @@ Geom:
         domains:
           EnumDomain:
           # typo: LogTruncated is misspelled in the manual
-            enumList:
+            enum_list:
               - Normal
               - Log
               - NormalTruncated
@@ -622,7 +622,7 @@ Geom:
         default: Bottom
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Horizontal
               - Bottom
               - Top
@@ -633,7 +633,7 @@ Geom:
           geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       HighCutoff:
         help: >
@@ -641,7 +641,7 @@ Geom:
           geometry, geometry_name, when either the NormalTruncated or LogTruncated values are chosen.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       # MaxSearchRad is missing from the manual. Need to come back to this.
       MaxSearchRad:
@@ -649,7 +649,7 @@ Geom:
           [Type: int] A key to improve correlation structure of RF in testing.
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1
 
       FileName:
         help: >
@@ -684,21 +684,21 @@ Geom:
           [Type: double] This key specifies the value of kx for the geometry given by geometry_name.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       TensorValY:
         help: >
           [Type: double] This key specifies the value of ky for the geometry given by geometry_name.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       TensorValZ:
         help: >
           [Type: double] This key specifies the value of kz for the geometry given by geometry_name.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       TensorFileX:
         help: >
@@ -739,7 +739,7 @@ Geom:
           assigned to all grid cells within a geometry.
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - Constant
 
       Value:
@@ -780,7 +780,7 @@ Geom:
           [Type: double] This key specifies the constant relative permeability value on the specified geometry.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       Alpha:
         __doc__: ''
@@ -791,7 +791,7 @@ Geom:
             [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Corner case with Alpha as class and field
         FileName:
@@ -810,7 +810,7 @@ Geom:
             [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Corner case with N as class and field
         FileName:
@@ -828,7 +828,7 @@ Geom:
         default: 0
         domains:
           IntValue:
-            minValue: 0
+            min_value: 0
 
       MinPressureHead:
         help: >
@@ -906,8 +906,8 @@ Geom:
           [Type: double] This key specifies the constant saturation value on the specified geometry.
         domains:
           DoubleValue:
-            minValue: 0.0
-            maxValue: 1.0
+            min_value: 0.0
+            max_value: 1.0
 
       Alpha:
         __doc__: ''
@@ -918,7 +918,7 @@ Geom:
             [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Corner case with Alpha as class and field
         FileName:
@@ -937,7 +937,7 @@ Geom:
             [Type: double] This key specifies the alpha parameter for the Van Genuchten function specified on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Corner case with N as class and field
         FileName:
@@ -956,8 +956,8 @@ Geom:
             [Type: double] This key specifies the residual saturation on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
-              maxValue: 1.0
+              min_value: 0.0
+              max_value: 1.0
 
         # Corner case with SRes as class and field
         Filename:
@@ -976,8 +976,8 @@ Geom:
             [Type: double] This key specifies the saturation at saturated conditions on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
-              maxValue: 1.0
+              min_value: 0.0
+              max_value: 1.0
 
         # Corner case with SSat as class and field
         FileName:
@@ -1037,7 +1037,7 @@ Geom:
           to constant.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
       FileName:
         help: >
@@ -1056,7 +1056,7 @@ Geom:
           [Type: double] This key specifies the thermal conductivity value on the specified geometry.
         domains:
           DoubleValue:
-            minValue: 0.0 # not sure appropriate range
+            min_value: 0.0 # not sure appropriate range
 
       KDry:
         __doc__: ''
@@ -1067,7 +1067,7 @@ Geom:
             [Type: double] This key specifies the thermal conductivity under dry conditions on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0 # not sure appropriate range
+              min_value: 0.0 # not sure appropriate range
 
         # Corner case with KDry as class and field
         FileName:
@@ -1086,7 +1086,7 @@ Geom:
             [Type: double] This key specifies the thermal conductivity under saturated conditions on geom_name.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Corner case with KWet as class and field
         FileName:
@@ -1135,7 +1135,7 @@ Geom:
           [Type: double] This key specifies the heat capacity of the given geometry. Units are J*g^-1*C^-1.
         domains:
           DoubleValue:
-            minValue: 0.0
+            min_value: 0.0
 
     # Setting keys for Geom.geom_name.ICPressure.{}
     ICPressure:
@@ -1218,7 +1218,7 @@ Geom:
             that a simple linear retardation function is to be used to compute the retardation.
           domains:
             EnumDomain:
-              enumList:
+              enum_list:
                 - Linear
 
         # Value is in the manual, but not in the grep of PF keys
@@ -1229,7 +1229,7 @@ Geom:
             the density of the material in the geometry.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
         # Rate is missing from the manual. Is this equivalent to value?
         Rate:
@@ -1239,7 +1239,7 @@ Geom:
             the density of the material in the geometry.
           domains:
             DoubleValue:
-              minValue: 0.0
+              min_value: 0.0
 
 # -----------------------------------------------------------------------------
 # TopoSlopes
@@ -1272,7 +1272,7 @@ TopoSlopesX:
     handlers:
       TopoSlopesXUpdater:
         type: ChildrenHandler
-        className: TopoSlopesXItem
+        class_name: TopoSlopesXItem
         location: ./Geom
 
   # in manual, need to consolidate duplicates (manual also includes NetCDF file capability, which is included here)
@@ -1284,7 +1284,7 @@ TopoSlopesX:
       specified, which will read in slopes from a NetCDF file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
           - PFBFile
           - NCFile
@@ -1326,7 +1326,7 @@ TopoSlopesY:
     handlers:
       TopoSlopesYUpdater:
         type: ChildrenHandler
-        className: TopoSlopesYItem
+        class_name: TopoSlopesYItem
         location: ./Geom
 
   # in manual, need to consolidate duplicates (manual also includes NetCDF file capability, which is included here)
@@ -1338,7 +1338,7 @@ TopoSlopesY:
       specified, which will read in slopes from a NetCDF file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
           - PFBFile
           - NCFile
@@ -1387,7 +1387,7 @@ CapPressurePhaseItem:
     default: Constant
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
 
   GeomNames:
@@ -1416,7 +1416,7 @@ Mannings:
     handlers:
       ManningsGeomUpdater:
         type: ChildrenHandler
-        className: ManningsGeomItem
+        class_name: ManningsGeomItem
         location: ./Geom
 
   Type:
@@ -1426,7 +1426,7 @@ Mannings:
       which indicates that all values are read in from a distributed, grid-based ParFlow binary file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
           - PFBFile
 
@@ -1469,7 +1469,7 @@ FBx:
       PFBFile which reads in values from a distributed pfb file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - PFBFile
 
 FBy:
@@ -1484,7 +1484,7 @@ FBy:
       PFBFile which reads in values from a distributed pfb file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - PFBFile
 
 FBz:
@@ -1499,5 +1499,5 @@ FBz:
       PFBFile which reads in values from a distributed pfb file.
     domains:
       EnumDomain:
-        enumList:
+        enum_list:
           - PFBFile

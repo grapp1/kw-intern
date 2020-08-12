@@ -64,7 +64,7 @@ BaseRun:
     domains:
       MandatoryValue:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   # -----------------------------------------------------------------------------
   # UseClustering
@@ -97,8 +97,8 @@ BaseRun:
     default: 0
     domains:
       IntValue:
-        minValue: 0
-        maxValue: 1
+        min_value: 0
+        max_value: 1
 
   ## equation is the same between P1 and P2 - need to check whether these should be different
   OverlandFlowSpinUpDampP1:
@@ -108,7 +108,7 @@ BaseRun:
     default: 0.0
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   OverlandFlowSpinUpDampP2:
     help: >
@@ -117,4 +117,4 @@ BaseRun:
     default: 0.0
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0

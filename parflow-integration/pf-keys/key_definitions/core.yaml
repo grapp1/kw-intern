@@ -27,7 +27,7 @@ Process:
       domains:
         MandatoryValue:
         IntValue:
-          minValue: 1
+          min_value: 1
 
     Q:
       help: >
@@ -36,7 +36,7 @@ Process:
       domains:
         MandatoryValue:
         IntValue:
-          minValue: 1
+          min_value: 1
 
     R:
       help: >
@@ -47,7 +47,7 @@ Process:
       domains:
         MandatoryValue:
         IntValue:
-          minValue: 1
+          min_value: 1
 
 # -----------------------------------------------------------------------------
 # ComputationalGrid
@@ -99,7 +99,7 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       IntValue:
-        minValue: 1
+        min_value: 1
 
   NY:
     help: >
@@ -108,7 +108,7 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       IntValue:
-        minValue: 1
+        min_value: 1
 
   NZ:
     help: >
@@ -117,7 +117,7 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       IntValue:
-        minValue: 1
+        min_value: 1
 
   DX:
     help: >
@@ -127,7 +127,7 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   DY:
     help: >
@@ -137,7 +137,7 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   DZ:
     help: >
@@ -147,4 +147,4 @@ ComputationalGrid:
     domains:
       MandatoryValue:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0

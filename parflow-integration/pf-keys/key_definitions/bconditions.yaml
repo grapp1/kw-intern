@@ -20,7 +20,7 @@ InternalBC:
     handlers:
       IntBCUpdater:
         type: ChildrenHandler
-        className: InternalBCItem
+        class_name: InternalBCItem
 
   .{internal_bc_name}:
     __class__: InternalBCItem
@@ -73,7 +73,7 @@ BCPressure:
     handlers:
       BCItemUpdater:
         type: ChildrenHandler
-        className: BCItem
+        class_name: BCItem
         location: ../Patch
 
 # -----------------------------------------------------------------------------
@@ -97,7 +97,7 @@ BCSaturation:
     handlers:
       BCItemUpdater:
         type: ChildrenHandler
-        className: BCItem
+        class_name: BCItem
         location: ../Patch
 
 # -----------------------------------------------------------------------------
@@ -169,7 +169,7 @@ Patch:
             boundary conditions.
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
 
         FileName:
           help: >
@@ -187,7 +187,7 @@ Patch:
             X3Y2PlusSinXYPlus1, X3Y4PlusX2PlusSinXYCosYPlus1, XYZTPlus1 and XYZTPlus1PermTensor.
           domains:
             EnumDomain:
-              enumList:
+              enum_list:
                 - X
                 - XPlusYPlusZ
                 - X3Y2PlusSinXYPlus1
@@ -222,8 +222,8 @@ Patch:
               corresponds to the upper end.
             domains:
               DoubleValue:
-                minValue: 0.0
-                maxValue: 1.0
+                min_value: 0.0
+                max_value: 1.0
 
           Value:
             help: >
@@ -266,7 +266,7 @@ Patch:
           equation cases only!
         domains:
           EnumDomain:
-            enumList:
+            enum_list:
               - DirEquilRefPatch
               - DirEquilPLinear
               - FluxConst
@@ -326,7 +326,7 @@ Patch:
             where phase 0 is the water phase.
           domains:
             EnumDomain:
-              enumList:
+              enum_list:
                 - DirConstant
                 - ConstantWTHeight
                 - PLinearWTHeight
@@ -373,11 +373,11 @@ Patch:
             boundary conditions.
           domains:
             IntValue:
-              minValue: 1
+              min_value: 1
           handlers:
             BCSatPhasePointItemUpdater:
               type: ChildrenHandler
-              className: BCSatPhasePointItem
+              class_name: BCSatPhasePointItem
 
         .{point_number}:
           __class__: BCSatPhasePointItem
@@ -392,8 +392,8 @@ Patch:
               end of the line, and 1 corresponds to the upper end.
             domains:
               DoubleValue:
-                minValue: 0.0
-                maxValue: 1.0
+                min_value: 0.0
+                max_value: 1.0
 
           Value:
             help: >

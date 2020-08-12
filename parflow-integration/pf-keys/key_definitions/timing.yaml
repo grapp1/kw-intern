@@ -24,7 +24,7 @@ TimingInfo:
       divisor which produces an integral result for every “real time” cycle interval length needed.
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   StartCount:
     help: >
@@ -34,8 +34,8 @@ TimingInfo:
       previous “checkpoint” time-step, but this has not yet been implemented.
     domains:
       IntValue:
-        minValue: -1
-        maxValue: 0
+        min_value: -1
+        max_value: 0
 
   StartTime:
     help: >
@@ -59,7 +59,7 @@ TimingInfo:
     domains:
       MandatoryValue:
       DoubleValue:
-        negInt: True
+        neg_int: True
 
   DumpIntervalExecutionTimeLimit:
     help: >
@@ -84,7 +84,7 @@ TimeStep:
     domains:
       MandatoryValue:
       EnumDomain:
-        enumList:
+        enum_list:
           - Constant
           - Growth
 
@@ -116,14 +116,14 @@ TimeStep:
       [Type: double] This key specifies the maximum time step allowed, dtmax, when the Growth type time step is selected.
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
   MinStep:
     help: >
       [Type: double] This key specifies the minimum time step allowed, dtmin, when the Growth type time step is selected.
     domains:
       DoubleValue:
-        minValue: 0.0
+        min_value: 0.0
 
 # -----------------------------------------------------------------------------
 # Cycles
@@ -144,7 +144,7 @@ Cycle:
     handlers:
       CycleUpdater:
         type: ChildrenHandler
-        className: CycleItem
+        class_name: CycleItem
         location: .
 
   .{cycle_name}:
@@ -163,11 +163,11 @@ Cycle:
       handlers:
         CycleUpdater:
           type: ChildrenHandler
-          className: CycleIntItem
+          class_name: CycleIntItem
           location: .
         WellIntervalItemUpdater:
           type: ChildrenHandler
-          className: WellIntervalItem
+          class_name: WellIntervalItem
           location: /Wells/{WellItem}
 
     Repeat:
@@ -177,7 +177,7 @@ Cycle:
       domains:
         MandatoryValue:
         IntValue:
-          minValue: -1
+          min_value: -1
 
     .{interval_name}:
       __class__: CycleIntItem
@@ -192,4 +192,4 @@ Cycle:
           multiplied by the base unit.
         domains:
           IntValue:
-            minValue: 1
+            min_value: 1

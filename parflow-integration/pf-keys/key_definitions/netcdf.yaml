@@ -124,7 +124,7 @@ NetCDF:
       [Type: int] This key sets chunking size in x-direction.
     domains:
       IntValue:
-        minValue: 1
+        min_value: 1
       RequiresModule: 'NETCDF'
 
   ChunkY:
@@ -132,7 +132,7 @@ NetCDF:
       [Type: int] This key sets chunking size in y-direction.
     domains:
       IntValue:
-        minValue: 1
+        min_value: 1
       RequiresModule: 'NETCDF'
 
   ChunkZ:
@@ -140,7 +140,7 @@ NetCDF:
       [Type: int] This key sets chunking size in z-direction.
     domains:
       IntValue:
-        minValue: 1
+        min_value: 1
       RequiresModule: 'NETCDF'
 
   ROMIOhints:
@@ -182,7 +182,7 @@ NetCDF:
       [Type: int] This key sets number of time steps to be written to a single NetCDF file.
     domains:
       IntValue:
-        minValue: 1
+        min_value: 1
       RequiresModule:
         - NETCDF
         - CLM

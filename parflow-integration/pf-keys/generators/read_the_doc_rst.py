@@ -4,10 +4,7 @@ database structure as documentation files for Read The Docs.
 '''
 
 import os
-import sys
 import yaml
-import json
-from datetime import datetime
 
 # -----------------------------------------------------------------------------
 YAML_MODULES_TO_PROCESS = [
@@ -35,48 +32,52 @@ LEVELS = [
 
 
 def handle_domain(name, definition):
-    indentStr = ' '*4
+    indent_str = ' '*4
     lines = []
-    listCount = 0
+    list_count = 0
 
     if name == 'MandatoryValue':
-        lines.append(f'{indentStr}The value is required')
+        lines.append(f'{indent_str}The value is required')
 
     if name == 'IntValue':
-        lines.append(f'{indentStr}The value must be an Integer')
-        if definition and 'minValue' in definition:
-            listCount += 1
+        lines.append(f'{indent_str}The value must be an Integer')
+        if definition and 'min_value' in definition:
+            list_count += 1
             lines.append(
-                f'{indentStr}  - with a value greater than or equal to {definition["minValue"]}')
-        if definition and 'maxValue' in definition:
-            listCount += 1
+                f'{indent_str}  - with a value greater than or equal to {definition["min_value"]}')
+        if definition and 'max_value' in definition:
+            list_count += 1
             lines.append(
-                f'{indentStr}  - with a value less than or equal to {definition["maxValue"]}')
+                f'{indent_str}  - with a value less than or equal to {definition["max_value"]}')
 
     if name == 'DoubleValue':
-        lines.append(f'{indentStr}The value must be an Integer')
-        if definition and 'minValue' in definition:
-            listCount += 1
+        lines.append(f'{indent_str}The value must be a Double')
+        if definition and 'min_value' in definition:
+            list_count += 1
             lines.append(
-                f'{indentStr}  - with a value greater than or equal to {definition["minValue"]}')
-        if definition and 'maxValue' in definition:
-            listCount += 1
+                f'{indent_str}  - with a value greater than or equal to {definition["min_value"]}')
+        if definition and 'max_value' in definition:
+            list_count += 1
             lines.append(
-                f'{indentStr}  - with a value less than or equal to {definition["maxValue"]}')
+                f'{indent_str}  - with a value less than or equal to {definition["max_value"]}')
+        if definition and 'neg_int' in definition:
+            list_count += 1
+            lines.append(
+                f'{indent_str}  - must be an integer if less than 0')
 
     if name == 'EnumDomain':
         lines.append(
-            f'{indentStr}The value must be one of the following options: {(", ".join(definition["enumList"]))}')
+            f'{indent_str}The value must be one of the following options: {(", ".join(definition["enum_list"]))}')
 
     if name == 'AnyString':
-        lines.append(f'{indentStr}The value must be a string')
+        lines.append(f'{indent_str}The value must be a string')
 
     if name == 'BoolDomain':
-        lines.append(f'{indentStr}The value must be True or False')
+        lines.append(f'{indent_str}The value must be True or False')
 
     if name == 'RequiresModule':
         lines.append(
-            f'{indentStr}This key requires the availability of the following module(s) in ParFlow: {definition}')
+            f'{indent_str}This key requires the availability of the following module(s) in ParFlow: {definition}')
 
     if name == 'Deprecated':
         lines.append('')
@@ -88,7 +89,7 @@ def handle_domain(name, definition):
         lines.append('.. warning::')
         lines.append(f'    This key will be removed in v{definition}')
 
-    if listCount:
+    if list_count:
         lines.append('')
 
     return '\n'.join(lines)
@@ -105,7 +106,7 @@ class RST_module:
     def add_line(self, content=''):
         self.content.append(content)
 
-    def add_section(self, level, prefix, key, subSection):
+    def add_section(self, level, prefix, key, sub_section):
         if prefix and prefix != 'BaseRun':
             title = f'{prefix}.{key}'
         else:
@@ -115,16 +116,16 @@ class RST_module:
             title = prefix
 
         warning = ''
-        if '__rst__' in subSection:
-            if 'name' in subSection['__rst__']:
-                title = subSection['__rst__']['name']
-            if 'warning' in subSection['__rst__']:
-                warning = subSection['__rst__']['warning']
-            if 'skip' in subSection['__rst__']:
-                for subKey in subSection:
-                    if subKey[0] != '_' or subKey == '__value__':
-                        self.add_section(level, title, subKey,
-                                        subSection[subKey])
+        if '__rst__' in sub_section:
+            if 'name' in sub_section['__rst__']:
+                title = sub_section['__rst__']['name']
+            if 'warning' in sub_section['__rst__']:
+                warning = sub_section['__rst__']['warning']
+            if 'skip' in sub_section['__rst__']:
+                for sub_key in sub_section:
+                    if sub_key[0] != '_' or sub_key == '__value__':
+                        self.add_section(level, title, sub_key,
+                                         sub_section[sub_key])
                 return
 
         self.add_line()
@@ -138,45 +139,45 @@ class RST_module:
         leaf = False
         description = ''
 
-        if 'help' in subSection:
+        if 'help' in sub_section:
             leaf = True
-            description = subSection['help']
+            description = sub_section['help']
 
-        if '__doc__' in subSection:
-            description = subSection['__doc__']
+        if '__doc__' in sub_section:
+            description = sub_section['__doc__']
 
         self.add_line(description)
         self.add_line()
 
         if leaf:
             # Need to process domains and more...
-            if 'default' in subSection:
-                self.add_line(f':default: {subSection["default"]}')
+            if 'default' in sub_section:
+                self.add_line(f':default: {sub_section["default"]}')
 
-            if 'domains' in subSection:
+            if 'domains' in sub_section:
                 self.add_line('.. note::')
-                for domain in subSection['domains']:
+                for domain in sub_section['domains']:
                     self.add_line(handle_domain(
-                        domain, subSection['domains'][domain]))
+                        domain, sub_section['domains'][domain]))
                 self.add_line()
 
         else:
             # Keep adding sections
-            for subKey in subSection:
-                if subKey[0] != '_' or subKey == '__value__':
-                    self.add_section(level + 1, title, subKey,
-                                    subSection[subKey])
+            for sub_key in sub_section:
+                if sub_key[0] != '_' or sub_key == '__value__':
+                    self.add_section(level + 1, title, sub_key,
+                                     sub_section[sub_key])
 
-    def get_content(self,  lineSeparator='\n'):
+    def get_content(self,  line_separator='\n'):
         # Ensure new line at the end
         if len(self.content[-1]):
             self.content.append('')
 
-        return lineSeparator.join(self.content)
+        return line_separator.join(self.content)
 
-    def write(self, filePath, lineSeparator='\n'):
-        with open(filePath, 'w') as output:
-            output.write(self.get_content(lineSeparator))
+    def write(self, file_path, line_separator='\n'):
+        with open(file_path, 'w') as output:
+            output.write(self.get_content(line_separator))
 
 # -----------------------------------------------------------------------------
 # Expected API to use
@@ -184,32 +185,32 @@ class RST_module:
 
 
 def generate_module_from_definitions(definitions):
-    generatedRST = RST_module('ParFlow Key Documentation')
+    generated_RST = RST_module('ParFlow Key Documentation')
 
     for yaml_file in definitions:
         with open(yaml_file) as file:
-            yamlStruct = yaml.load(file, Loader=yaml.FullLoader)
+            yaml_struct = yaml.load(file, Loader=yaml.FullLoader)
 
-            for rootKey in yamlStruct.keys():
-                generatedRST.add_section(0, '', rootKey, yamlStruct[rootKey])
+            for root_key in yaml_struct.keys():
+                generated_RST.add_section(0, '', root_key, yaml_struct[root_key])
 
-    return generatedRST
+    return generated_RST
 
 # -----------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
-    coreDefinitions = YAML_MODULES_TO_PROCESS
-    basePath = os.path.dirname(os.path.abspath(__file__))
-    print(basePath)
-    defPath = os.path.join(basePath, '../key_definitions')
-    definitionFiles = [os.path.join(
-        defPath, f'{module}.yaml') for module in coreDefinitions]
-    outputFilePath = os.path.join(basePath, '../../doc/parflow_keys.rst')
+    core_definitions = YAML_MODULES_TO_PROCESS
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    print(base_path)
+    defPath = os.path.join(base_path, '../key_definitions')
+    definition_files = [os.path.join(
+        defPath, f'{module}.yaml') for module in core_definitions]
+    output_file_path = os.path.join(base_path, '../../doc/parflow_keys.rst')
 
     print('-'*80)
-    print('Generate Parflow database documentation')
+    print('Generate ParFlow database documentation')
     print('-'*80)
-    generatedModule = generate_module_from_definitions(definitionFiles)
+    generated_module = generate_module_from_definitions(definition_files)
     print('-'*80)
-    generatedModule.write(outputFilePath)
+    generated_module.write(output_file_path)

@@ -4,116 +4,126 @@ from .database.generated import PFDBObj
 
 # -----------------------------------------------------------------------------
 
-def convertValueForStringDict(value):
-  if isinstance(value, str):
+
+def convert_value_for_string_dict(value):
+    if isinstance(value, str):
+        return value
+
+    if hasattr(value, '__iter__'):
+        return ' '.join([str(v) for v in value])
+
     return value
 
-  if hasattr(value, '__iter__'):
-    return ' '.join([str(v) for v in value])
-
-  return value
-
 # -----------------------------------------------------------------------------
 
-def extractKeysFromObject(dictToFill, instance, parentNamespace=''):
-  for key in instance.getKeyNames(skipDefault=True):
 
-    value = instance.__dict__[key]
-    if value == None:
-      continue
+def extract_keys_from_object(dict_to_fill, instance, parent_namespace=''):
+    for key in instance.get_key_names(skip_default=True):
 
-    fullQualifiedKey = instance.getParFlowKey(parentNamespace, key)
-    if isinstance(value, PFDBObj):
-      if hasattr(value, '_value'):
-        dictToFill[fullQualifiedKey] = convertValueForStringDict(value._value)
-      extractKeysFromObject(dictToFill, value, fullQualifiedKey)
-    else:
-      dictToFill[fullQualifiedKey] = convertValueForStringDict(value)
+        value = instance.__dict__[key]
+        if value is None:
+            continue
 
-# -----------------------------------------------------------------------------
-
-def externalFileToDict(fileName, fileFormat):
-  externalFileDict = {}
-  externalFileDict['GeomInput.Names.domain_input.InputType'] = 'Box'
-  print(externalFileDict)
-  return externalFileDict
-
-# -----------------------------------------------------------------------------
-
-def writeDictAsPfidb(dictObj, fileName):
-  with open(fileName, 'w') as out:
-    out.write(f'{len(dictObj)}\n')
-    for key in dictObj:
-      out.write(f'{len(key)}\n')
-      out.write(f'{key}\n')
-      value = dictObj[key]
-      out.write(f'{len(str(value))}\n')
-      out.write(f'{str(value)}\n')
-
-# -----------------------------------------------------------------------------
-
-def writeDictAsYaml(dictObj, fileName):
-  with open(fileName, 'w') as out:
-    for key in dictObj:
-      value = dictObj[key]
-      out.write(f'{key}: {value}\n')
-
-# -----------------------------------------------------------------------------
-
-def writeDictAsJson(dictObj, fileName):
-  with open(fileName, 'w') as out:
-    out.write(json.dumps(dictObj, indent=2))
-
-# -----------------------------------------------------------------------------
-
-def writeDict(dictObj, fileName):
-  ext = fileName.split('.').pop().lower()
-  if ext in ['yaml', 'yml']:
-    writeDictAsYaml(dictObj, fileName)
-  elif ext == 'pfidb':
-    writeDictAsPfidb(dictObj, fileName)
-  elif ext == 'json':
-    writeDictAsJson(dictObj, fileName)
-  else:
-    print(f'Could not find writer for {fileName}')
-
-# -----------------------------------------------------------------------------
-
-def loadPfidb(filePath):
-  resultDict = {}
-  action = 'nbLines'  # nbLines, size, string
-  size = 0
-  key = ''
-  value = ''
-  stringTypeCount = 0
-
-  with open(filePath, 'r') as inputFile:
-    for line in inputFile:
-      if action == 'string':
-        if stringTypeCount % 2 == 0:
-          key = line[:size]
+        full_qualified_key = instance.get_parflow_key(parent_namespace, key)
+        if isinstance(value, PFDBObj):
+            if hasattr(value, '_value'):
+                dict_to_fill[full_qualified_key] = convert_value_for_string_dict(
+                    value._value)
+            extract_keys_from_object(dict_to_fill, value, full_qualified_key)
         else:
-          value = line[:size]
-          resultDict[key] = value
-        stringTypeCount += 1
-        action = 'size'
-
-      elif action == 'size':
-        size = int(line)
-        action = 'string'
-
-      elif action == 'nbLines':
-        action = 'size'
-
-  return resultDict
+            dict_to_fill[full_qualified_key] = convert_value_for_string_dict(value)
 
 # -----------------------------------------------------------------------------
 
-def sortDict(input):
-  output = {}
-  keys = list(input.keys())
-  keys.sort()
-  for key in keys:
-    output[key] = input[key];
+# TODO: add feature to read external files
+# def external_file_to_dict(file_name, fileFormat):
+#     externalFileDict = {}
+#     externalFileDict['GeomInput.Names.domain_input.InputType'] = 'Box'
+#     print(externalFileDict)
+#     return externalFileDict
 
-  return output
+# -----------------------------------------------------------------------------
+
+
+def write_dict_as_pfidb(dict_obj, file_name):
+    with open(file_name, 'w') as out:
+        out.write(f'{len(dict_obj)}\n')
+        for key in dict_obj:
+            out.write(f'{len(key)}\n')
+            out.write(f'{key}\n')
+            value = dict_obj[key]
+            out.write(f'{len(str(value))}\n')
+            out.write(f'{str(value)}\n')
+
+# -----------------------------------------------------------------------------
+
+
+def write_dict_as_yaml(dict_obj, file_name):
+    with open(file_name, 'w') as out:
+        for key in dict_obj:
+            value = dict_obj[key]
+            out.write(f'{key}: {value}\n')
+
+# -----------------------------------------------------------------------------
+
+
+def write_dict_as_json(dict_obj, file_name):
+    with open(file_name, 'w') as out:
+        out.write(json.dumps(dict_obj, indent=2))
+
+# -----------------------------------------------------------------------------
+
+
+def write_dict(dict_obj, file_name):
+    ext = file_name.split('.').pop().lower()
+    if ext in ['yaml', 'yml']:
+        write_dict_as_yaml(dict_obj, file_name)
+    elif ext == 'pfidb':
+        write_dict_as_pfidb(dict_obj, file_name)
+    elif ext == 'json':
+        write_dict_as_json(dict_obj, file_name)
+    else:
+        print(f'Could not find writer for {file_name}')
+
+# -----------------------------------------------------------------------------
+
+
+def load_pfidb(file_path):
+    result_dict = {}
+    action = 'nb_lines'  # nbLines, size, string
+    size = 0
+    key = ''
+    value = ''
+    string_type_count = 0
+
+    with open(file_path, 'r') as input_file:
+        for line in input_file:
+            if action == 'string':
+                if string_type_count % 2 == 0:
+                    key = line[:size]
+                else:
+                    value = line[:size]
+                    result_dict[key] = value
+                string_type_count += 1
+                action = 'size'
+
+            elif action == 'size':
+                size = int(line)
+                action = 'string'
+
+            elif action == 'nb_lines':
+                action = 'size'
+
+    return result_dict
+
+# -----------------------------------------------------------------------------
+
+
+def sort_dict(input):
+    output = {}
+    keys = list(input.keys())
+    keys.sort()
+    for key in keys:
+        output[key] = input[key]
+
+    return output
