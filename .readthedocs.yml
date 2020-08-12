@@ -1,7 +1,7 @@
 version: 2
 
 sphinx:
-  configuration: ./parflow/docs/conf.py
+  configuration: ./parflow-integration/doc/conf.py
 
 python:
   version: 3.7
