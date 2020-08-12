@@ -205,7 +205,7 @@ if __name__ == "__main__":
     defPath = os.path.join(basePath, '../key_definitions')
     definitionFiles = [os.path.join(
         defPath, f'{module}.yaml') for module in coreDefinitions]
-    outputFilePath = os.path.join(basePath, '../../parflow/docs/parflow_keys.rst')
+    outputFilePath = os.path.join(basePath, '../../doc/parflow_keys.rst')
 
     print('-'*80)
     print('Generate Parflow database documentation')

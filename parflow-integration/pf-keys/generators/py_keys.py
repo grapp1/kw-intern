@@ -327,7 +327,7 @@ if __name__ == "__main__":
     defPath = os.path.join(basePath, '../key_definitions')
     definitionFiles = [os.path.join(
         defPath, f'{module}.yaml') for module in coreDefinitions]
-    outputFilePath = os.path.join(basePath, '../pftools/python/parflow/tools/database/generated.py')
+    outputFilePath = os.path.join(basePath, '../../pf-python/parflow/tools/database/generated.py')
 
     print('-'*80)
     print('Generate Parflow database module')
