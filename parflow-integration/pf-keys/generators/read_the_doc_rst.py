@@ -214,10 +214,10 @@ if __name__ == "__main__":
     core_definitions = YAML_MODULES_TO_PROCESS
     base_path = os.path.dirname(os.path.abspath(__file__))
     print(base_path)
-    defPath = os.path.join(base_path, '../key_definitions')
+    defPath = os.path.join(base_path, '../definitions')
     definition_files = [os.path.join(
         defPath, f'{module}.yaml') for module in core_definitions]
-    output_file_path = os.path.join(base_path, '../../doc/parflow_keys.rst')
+    output_file_path = os.path.join(base_path, '../documentation/parflow_keys.rst')
 
     print('-'*80)
     print('Generate ParFlow database documentation')
