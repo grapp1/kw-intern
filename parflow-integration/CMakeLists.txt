@@ -61,44 +61,18 @@ if (PARFLOW_USE_PYTHON)
   set(PYTHON_VERSION_MAJOR "${Python3_VERSION_MAJOR}")
   set(PYTHON_VERSION_MINOR "${Python3_VERSION_MINOR}")
   include(FindPythonModules)
-  add_subdirectory(pf-python/generators/)
-  set(PYTHON_GEN_DIR "pf-python/generators/")
+
+  add_subdirectory(pf-keys/generators/)
+  set(PYTHON_GEN_DIR "pf-keys/generators/")
+
+  # adding python test files
+  if (${PARFLOW_PYTHON_TESTS})
+    set(PYTHON_TEST_DIR "test/python/")
+  endif ()
+
 endif()
 
-# generating python library
-if (${PARFLOW_PYTHON_GEN_LIB})
-  add_subdirectory(test/python/)
-  set(PYTHON_TEST_DIR "test/python/")
-  COMMAND $<TARGET_FILE:python>
-          "${PYTHON_GEN_DIR}/pf-python.py"
-endif ()
-
-# generating documentation of python library
-if (${PARFLOW_PYTHON_GEN_DOC})
-  COMMAND $<TARGET_FILE:python>
-          "${PYTHON_GEN_DIR}/read_the_doc_rst.py"
-endif ()
-
-# adding python test files
-if (${PARFLOW_PYTHON_TESTS})
-  add_subdirectory(test/python/)
-  set(PYTHON_TEST_DIR "test/python/")
-endif ()
-
-# maybe necessary for adding Python modules?
-adding_python_dependencies(
-    MODULES         ${python_modules}
-    INSTALL_EXPORT  ParaViewPython
-    INSTALL_HEADERS "${PARAVIEW_INSTALL_DEVELOPMENT_FILES}"
-    PYTHON_PACKAGE  "paraview.modules"
-    MODULE_DESTINATION  "${PARAVIEW_PYTHON_SITE_PACKAGES_SUFFIX}"
-    CMAKE_DESTINATION   "${paraview_cmake_destination}"
-    LIBRARY_DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    WRAPPED_MODULES paraview_python_wrapped_modules
-    TARGET          ParaView::pvpythonmodules
-    DEPENDS         VTK::vtkpythonmodules)
-
-# CMake command for building
+# CMake command for building (to be moved)
 add_test( NAME BuildPFPython
     COMMAND ${CMAKE_COMMAND}
     -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
