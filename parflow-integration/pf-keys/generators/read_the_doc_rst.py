@@ -7,6 +7,7 @@ import os
 import yaml
 
 # -----------------------------------------------------------------------------
+
 YAML_MODULES_TO_PROCESS = [
     'core',
     'geom',
@@ -18,6 +19,7 @@ YAML_MODULES_TO_PROCESS = [
     'bconditions',
     'run'
 ]
+
 # -----------------------------------------------------------------------------
 
 LEVELS = [
@@ -30,8 +32,13 @@ LEVELS = [
     '"',
 ]
 
+# -----------------------------------------------------------------------------
 
 def handle_domain(name, definition):
+    '''
+    This method will extract information from a domain and present it
+    for the documentation.
+    '''
     indent_str = ' '*4
     lines = []
     list_count = 0
@@ -94,8 +101,12 @@ def handle_domain(name, definition):
 
     return '\n'.join(lines)
 
+# -----------------------------------------------------------------------------
 
 class RST_module:
+    '''
+    Helper class that can be used to create a RST file for ReadTheDoc
+    '''
     def __init__(self, title):
         self.content = [
             '*'*80,
@@ -183,7 +194,6 @@ class RST_module:
 # Expected API to use
 # -----------------------------------------------------------------------------
 
-
 def generate_module_from_definitions(definitions):
     generated_RST = RST_module('ParFlow Key Documentation')
 
@@ -197,7 +207,8 @@ def generate_module_from_definitions(definitions):
     return generated_RST
 
 # -----------------------------------------------------------------------------
-
+# CLI Main execution
+# -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
     core_definitions = YAML_MODULES_TO_PROCESS

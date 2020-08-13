@@ -12,6 +12,7 @@ import json
 from datetime import datetime
 
 # -----------------------------------------------------------------------------
+
 YAML_MODULES_TO_PROCESS = [
     'core',
     'geom',
@@ -23,8 +24,8 @@ YAML_MODULES_TO_PROCESS = [
     'netcdf',
     'run'
 ]
-# -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
 
 def is_field(key, definition):
     if key[0] == '_':
@@ -44,7 +45,6 @@ def is_field(key, definition):
     return False
 
 # -----------------------------------------------------------------------------
-
 
 def is_class(key, definition):
     if key[0] == '_':
@@ -68,7 +68,6 @@ def is_class(key, definition):
 
 # -----------------------------------------------------------------------------
 
-
 def has_value(key, definition):
     if key[0] == '_':
         return False
@@ -76,7 +75,6 @@ def has_value(key, definition):
     return '__value__' in definition
 
 # -----------------------------------------------------------------------------
-
 
 def is_class_item(key, definition):
     if key[0] == '.':
@@ -86,12 +84,10 @@ def is_class_item(key, definition):
 
 # -----------------------------------------------------------------------------
 
-
 def json_to_python(txt):
     return txt.replace(' true,', ' True,').replace(' false,', ' False,').replace(' null', ' None').replace(': true', ': True')
 
 # -----------------------------------------------------------------------------
-
 
 def yaml_value(yval):
     if isinstance(yval, str):
@@ -103,7 +99,6 @@ def yaml_value(yval):
     return yval
 
 # -----------------------------------------------------------------------------
-
 
 class ValidationSummary:
     def __init__(self):
@@ -151,7 +146,6 @@ class ValidationSummary:
         print(self.get_summary())
 
 # -----------------------------------------------------------------------------
-
 
 class PythonModule:
     def __init__(self, indent=4):
@@ -305,26 +299,26 @@ class PythonModule:
 # Expected API to use
 # -----------------------------------------------------------------------------
 
-
 def generate_module_from_definitions(definitions):
     generated_module = PythonModule()
 
     for yaml_file in definitions:
         with open(yaml_file) as file:
-            yaml_struct = yaml.load(file, Loader=yaml.FullLoader)
+            yaml_dict = yaml.load(file, Loader=yaml.FullLoader)
 
-            for root_key in yaml_struct.keys():
-                generated_module.add_class(root_key, yaml_struct[root_key])
+            for root_key in yaml_dict.keys():
+                generated_module.add_class(root_key, yaml_dict[root_key])
 
     return generated_module
 
 # -----------------------------------------------------------------------------
-
+# CLI Main execution
+# -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
     core_definitions = YAML_MODULES_TO_PROCESS
     base_path = os.path.dirname(os.path.abspath(__file__))
-    def_path = os.path.join(base_path, '../key_definitions')
+    def_path = os.path.join(base_path, '../definitions')
     definition_files = [os.path.join(
         def_path, f'{module}.yaml') for module in core_definitions]
     output_file_path = os.path.join(base_path, '../../pf-python/parflow/tools/database/generated.py')
