@@ -1,4 +1,5 @@
 import os
+import sys
 
 from .database.generated import BaseRun, PFDBObj
 from .utils import extract_keys_from_object, write_dict
@@ -53,11 +54,13 @@ class Run(BaseRun):
     def check_parflow_execution(self, run_name):
         print(f'# {"="*78}')
         out_file = f'{run_name}.out.txt'
+        execute_success = False
         if os.path.exists(out_file):
             with open(out_file, "rt") as f:
                 contents = f.read()
                 if 'Problem solved' in contents:
                     print(f'# ParFlow ran successfully {termSymbol.splash*3}')
+                    execute_success = True
                 else:
                     print(
                         f'# ParFlow run failed. {termSymbol.x} {termSymbol.x} {termSymbol.x} Contents of error output file:')
@@ -67,6 +70,7 @@ class Run(BaseRun):
         else:
             print(f'# Cannot find {out_file} in {os.getcwd()}')
         print(f'# {"=" * 78}')
+        return execute_success
 
     def run(self, working_directory=None, skip_validation=False):
         if working_directory:
@@ -89,8 +93,9 @@ class Run(BaseRun):
         print(f'# {"="*78}')
         print()
 
+        error_count = 0
         if not skip_validation:
-            self.validate()
+            error_count += self.validate()
             print()
 
         p = self.Process.Topology.P
@@ -101,5 +106,7 @@ class Run(BaseRun):
         os.chdir(PFDBObj.working_directory)
         os.system('sh $PARFLOW_DIR/bin/run ' + run_file + ' ' + str(num_procs))
 
-        self.check_parflow_execution(run_file)
+        success = self.check_parflow_execution(run_file)
         print()
+        if not success or error_count > 0:
+            sys.exit(1)
