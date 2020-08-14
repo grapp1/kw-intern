@@ -30,7 +30,7 @@ add_custom_command(
 add_custom_target(
   GenerateKeysRST
   DEPENDS
-    ${PYTHON_DEPENDS}
+    ${PARFLOW_PYTHON_DEPENDS}
     "${CMAKE_CURRENT_SOURCE_DIR}/parflow_keys.rst"
 )
 

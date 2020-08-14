@@ -43,6 +43,6 @@ add_custom_command(
 add_custom_target(
   GeneratePythonKeys
   DEPENDS
-    ${PYTHON_DEPENDS}
+    ${PARFLOW_PYTHON_DEPENDS}
     "${CMAKE_CURRENT_SOURCE_DIR}/../pftools/python/parflow/tools/database/generated.py"
 )

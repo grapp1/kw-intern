@@ -35,14 +35,13 @@ enable_testing ()
 #-----------------------------------------------------------------------------
 
 option(PARFLOW_USE_PYTHON "Build python module for running ParFlow" "FALSE")
-option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
 if (PARFLOW_USE_PYTHON)
   find_package(Python3 3.3 QUIET REQUIRED COMPONENTS Interpreter)
   set(PARFLOW_PYTHON ${Python3_EXECUTABLE})
-  set(PYTHON_DEPENDS)
+  set(PARFLOW_PYTHON_DEPENDS)
 
-  option(USE_PYTHON_VENV "Use local virtual environment" "FALSE")
-  if (USE_PYTHON_VENV)
+  option(USE_VIRTUAL_ENV "Use local Python virtual environment" "FALSE")
+  if (USE_VIRTUAL_ENV)
     set(PARFLOW_PYTHON "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/python")
     add_custom_command(
       OUTPUT
@@ -64,16 +63,15 @@ if (PARFLOW_USE_PYTHON)
       DEPENDS
         "${PARFLOW_PYTHON}"
     )
-    set(PYTHON_DEPENDS BuildVirtualEnv)
+    set(PARFLOW_PYTHON_DEPENDS BuildVirtualEnv)
   endif()
 
   add_subdirectory(pf-keys)
   add_subdirectory(pftools/python)
-  # add_subdirectory(test/python)
 
+  # Only enable Key Documentation if we enable Python
+  option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
   if (PARFLOW_KEY_DOCUMENTATION)
     add_subdirectory(docs/pf-keys)
   endif()
-
 endif()
-
