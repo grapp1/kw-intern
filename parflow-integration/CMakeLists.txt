@@ -31,10 +31,11 @@ version_create_variables (PARFLOW)
 enable_testing ()
 
 #-----------------------------------------------------------------------------
-# Building Python key library and documentation
+# Building Python key library and documentation if required
 #-----------------------------------------------------------------------------
 
 option(PARFLOW_USE_PYTHON "Build python module for running ParFlow" "FALSE")
+option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
 if (PARFLOW_USE_PYTHON)
   find_package(Python3 3.3 QUIET REQUIRED COMPONENTS Interpreter)
   set(PARFLOW_PYTHON ${Python3_EXECUTABLE})
@@ -69,13 +70,10 @@ if (PARFLOW_USE_PYTHON)
   add_subdirectory(pf-keys)
   add_subdirectory(pftools/python)
   # add_subdirectory(test/python)
+
+  if (PARFLOW_KEY_DOCUMENTATION)
+    add_subdirectory(docs/pf-keys)
+  endif()
+
 endif()
 
-# -----------------------------------------------------------------------------
-# Build Documentation if required
-# -----------------------------------------------------------------------------
-
-option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
-if (PARFLOW_KEY_DOCUMENTATION)
-  add_subdirectory(docs/pf-keys)
-endif()
