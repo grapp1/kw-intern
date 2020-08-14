@@ -44,16 +44,16 @@ if (PARFLOW_USE_PYTHON)
   if (USE_VIRTUAL_ENV)
     set(PARFLOW_PYTHON "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/python")
     add_custom_command(
+      WORKING_DIRECTORY
+        "${CMAKE_CURRENT_BINARY_DIR}"
       OUTPUT
         "${PARFLOW_PYTHON}"
       COMMAND
-        ${Python3_EXECUTABLE} -m venv "${CMAKE_CURRENT_BINARY_DIR}/py-env"
+        ${Python3_EXECUTABLE} -m venv py-env
       COMMAND
-        source "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/activate"
+        "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/pip3" install -r "${CMAKE_CURRENT_SOURCE_DIR}/pftools/python/requirements.txt"
       COMMAND
-        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/pftools/python/requirements.txt"
-      COMMAND
-        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/docs/pf-keys/requirements.txt"
+        "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/pip3" install -r "${CMAKE_CURRENT_SOURCE_DIR}/docs/pf-keys/requirements.txt"
       COMMENT
         "Generate virtual environment for building Python components"
       VERBATIM
