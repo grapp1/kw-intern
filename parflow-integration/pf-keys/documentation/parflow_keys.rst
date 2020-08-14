@@ -84,7 +84,7 @@ ComputationalGrid.Lower.X
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 ComputationalGrid.Lower.Y
@@ -95,7 +95,7 @@ ComputationalGrid.Lower.Y
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 ComputationalGrid.Lower.Z
@@ -106,7 +106,7 @@ ComputationalGrid.Lower.Z
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 ComputationalGrid.NX
@@ -156,7 +156,7 @@ ComputationalGrid.DX
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -169,7 +169,7 @@ ComputationalGrid.DY
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -182,7 +182,7 @@ ComputationalGrid.DZ
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -451,7 +451,7 @@ Cell.{nzListNumber}.dzScale.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -563,7 +563,7 @@ Geom..{geom_name}.Lower.X
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Lower.Y
@@ -573,7 +573,7 @@ Geom..{geom_name}.Lower.Y
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Lower.Z
@@ -583,7 +583,7 @@ Geom..{geom_name}.Lower.Z
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Upper
@@ -600,7 +600,7 @@ Geom..{geom_name}.Upper.X
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Upper.Y
@@ -610,7 +610,7 @@ Geom..{geom_name}.Upper.Y
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Upper.Z
@@ -620,7 +620,7 @@ Geom..{geom_name}.Upper.Z
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Patches
@@ -657,7 +657,7 @@ Geom..{geom_name}.Perm.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Perm.LambdaX
@@ -667,7 +667,7 @@ Geom..{geom_name}.Perm.LambdaX
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Perm.LambdaY
@@ -677,7 +677,7 @@ Geom..{geom_name}.Perm.LambdaY
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Perm.LambdaZ
@@ -687,7 +687,7 @@ Geom..{geom_name}.Perm.LambdaZ
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Perm.GeomMean
@@ -697,7 +697,7 @@ Geom..{geom_name}.Perm.GeomMean
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -709,7 +709,7 @@ Geom..{geom_name}.Perm.Sigma
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -748,7 +748,7 @@ Geom..{geom_name}.Perm.RZeta
 
 :default: 5.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -761,7 +761,7 @@ Geom..{geom_name}.Perm.KMax
 
 :default: 100.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -774,7 +774,7 @@ Geom..{geom_name}.Perm.DelK
 
 :default: 0.2
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -832,7 +832,7 @@ Geom..{geom_name}.Perm.LowCutoff
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -844,7 +844,7 @@ Geom..{geom_name}.Perm.HighCutoff
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -878,7 +878,7 @@ Geom..{geom_name}.Perm.TensorValX
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -890,7 +890,7 @@ Geom..{geom_name}.Perm.TensorValY
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -902,7 +902,7 @@ Geom..{geom_name}.Perm.TensorValZ
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -961,7 +961,7 @@ Geom..{geom_name}.Porosity.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Porosity.FileName
@@ -988,7 +988,7 @@ Geom..{geom_name}.SpecificStorage.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.RelPerm
@@ -1005,7 +1005,7 @@ Geom..{geom_name}.RelPerm.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1017,7 +1017,7 @@ Geom..{geom_name}.RelPerm.Alpha
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1039,7 +1039,7 @@ Geom..{geom_name}.RelPerm.N
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1084,7 +1084,7 @@ Geom..{geom_name}.RelPerm.A
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.RelPerm.Gamma
@@ -1094,7 +1094,7 @@ Geom..{geom_name}.RelPerm.Gamma
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.RelPerm.Degree
@@ -1121,7 +1121,7 @@ Geom.{geom_name}.RelPerm.Coeff.{coeff_number}
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.RelPerm.InterpolationMethod
@@ -1149,7 +1149,7 @@ Geom.{geom_name}.CapPressure.{phase_name}.Value
 
 :default: 0.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Saturation
@@ -1166,7 +1166,7 @@ Geom..{geom_name}.Saturation.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -1179,7 +1179,7 @@ Geom..{geom_name}.Saturation.Alpha
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1201,7 +1201,7 @@ Geom..{geom_name}.Saturation.N
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1223,7 +1223,7 @@ Geom..{geom_name}.Saturation.SRes
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -1246,7 +1246,7 @@ Geom..{geom_name}.Saturation.SSat
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -1269,7 +1269,7 @@ Geom..{geom_name}.Saturation.A
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Saturation.Gamma
@@ -1279,7 +1279,7 @@ Geom..{geom_name}.Saturation.Gamma
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Saturation.Degree
@@ -1306,7 +1306,7 @@ Geom.{geom_name}.Saturation.Coeff.{coeff_number}
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom..{geom_name}.Saturation.FileName
@@ -1333,7 +1333,7 @@ Geom..{geom_name}.dzScale.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1362,7 +1362,7 @@ Geom..{geom_name}.ThermalConductivity.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1374,7 +1374,7 @@ Geom..{geom_name}.ThermalConductivity.KDry
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1396,7 +1396,7 @@ Geom..{geom_name}.ThermalConductivity.KWet
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1476,7 +1476,7 @@ Geom..{geom_name}.HeatCapacity.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1505,7 +1505,7 @@ Geom.{geom_name}.ICPressure.RefElevation
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom.{geom_name}.ICPressure.RefGeom
@@ -1535,7 +1535,7 @@ Geom.{geom_name}.ICPressure.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom.{geom_name}.ICSaturation.{phase_name}
@@ -1551,7 +1551,7 @@ Geom.{geom_name}.ICSaturation.{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Geom.{geom_name}.{contaminant}
@@ -1578,7 +1578,7 @@ Geom.{geom_name}.{contaminant}.Retardation.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1590,7 +1590,7 @@ Geom.{geom_name}.{contaminant}.Retardation.Rate
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1670,7 +1670,7 @@ TopoSlopesX.Geom.{geom_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 TopoSlopesY
@@ -1724,7 +1724,7 @@ TopoSlopesY.Geom.{geom_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 CapPressure
@@ -1806,7 +1806,7 @@ Mannings.Geom..{geom_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 FBx.Type
@@ -1859,7 +1859,7 @@ Solver.AbsTol
 
 :default: 1e-9
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -1885,7 +1885,7 @@ Solver.BetaFluid
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.BetaFracture
@@ -1895,7 +1895,7 @@ Solver.BetaFracture
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.BetaPerm
@@ -1905,7 +1905,7 @@ Solver.BetaPerm
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.BetaPore
@@ -1915,7 +1915,7 @@ Solver.BetaPore
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.BoxSizePowerOf2
@@ -1925,7 +1925,7 @@ Solver.BoxSizePowerOf2
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.CFL
@@ -1936,7 +1936,7 @@ Solver.CFL
 
 :default: 0.7
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.CLM
@@ -2015,7 +2015,7 @@ Solver.CLM.FieldCapacity
 
 :default: 1.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -2041,7 +2041,7 @@ Solver.CLM.FstepStart
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
     This key requires the availability of the following module(s) in ParFlow: CLM
 
 
@@ -2064,7 +2064,7 @@ Solver.CLM.IrrigationRate
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
     This key requires the availability of the following module(s) in ParFlow: CLM
@@ -2077,7 +2077,7 @@ Solver.CLM.IrrigationStartTime
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 2400.0
 
@@ -2091,7 +2091,7 @@ Solver.CLM.IrrigationStopTime
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 2400.0
 
@@ -2106,7 +2106,7 @@ Solver.CLM.IrrigationThreshold
 
 :default: 0.5
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
     This key requires the availability of the following module(s) in ParFlow: CLM
@@ -2119,7 +2119,7 @@ Solver.CLM.IrrigationThresholdType
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
     This key requires the availability of the following module(s) in ParFlow: CLM
 
 
@@ -2187,7 +2187,7 @@ Solver.CLM.MetFileSubdir
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
     This key requires the availability of the following module(s) in ParFlow: CLM
 
 
@@ -2222,7 +2222,7 @@ Solver.CLM.ResSat
 
 :default: 0.1
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
     This key requires the availability of the following module(s) in ParFlow: CLM
@@ -2312,7 +2312,7 @@ Solver.CLM.WiltingPoint
 
 :default: 0.1
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
     This key requires the availability of the following module(s) in ParFlow: CLM
@@ -2349,7 +2349,7 @@ Solver.CoarseSolve
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.CompCompress
@@ -2359,7 +2359,7 @@ Solver.CompCompress
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.DiagScale
@@ -2369,7 +2369,7 @@ Solver.DiagScale
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.DiagSolver
@@ -2379,7 +2379,7 @@ Solver.DiagSolver
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.Drop
@@ -2390,7 +2390,7 @@ Solver.Drop
 
 :default: 1e-8
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0
 
 
@@ -2402,7 +2402,7 @@ Solver.DropTol
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.EvapTrans
@@ -2461,7 +2461,7 @@ Solver.Jacobian
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.LSM
@@ -2507,7 +2507,7 @@ Solver.MaxLevels
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.MaxMinNX
@@ -2517,7 +2517,7 @@ Solver.MaxMinNX
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.MaxMinNY
@@ -2527,7 +2527,7 @@ Solver.MaxMinNY
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.MaxMinNZ
@@ -2537,7 +2537,7 @@ Solver.MaxMinNZ
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.OverlandDiffusive
@@ -2555,7 +2555,7 @@ Solver.OverlandDiffusive.Epsilon
 
 :default: 1e-05
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -2575,7 +2575,7 @@ Solver.OverlandKinematic.Epsilon
 
 :default: 1e-05
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -2587,7 +2587,7 @@ Solver.PolyDegree
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.PolyPC
@@ -2597,7 +2597,7 @@ Solver.PolyPC
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.PrintCLM
@@ -2630,7 +2630,7 @@ Solver.PrintDZMultiplier
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.PrintEvapTrans
@@ -2640,7 +2640,7 @@ Solver.PrintEvapTrans
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.PrintEvapTransSum
@@ -2650,7 +2650,7 @@ Solver.PrintEvapTransSum
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.PrintLSMSink
@@ -2814,7 +2814,7 @@ Solver.RAPType
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.RelTol
@@ -2825,7 +2825,7 @@ Solver.RelTol
 
 :default: 1.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.SadvectOrder
@@ -2849,7 +2849,7 @@ Solver.Smoother
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.Spinup
@@ -2869,7 +2869,7 @@ Solver.Symmetric
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.TerrainFollowingGrid
@@ -2908,7 +2908,7 @@ Solver.TwoNorm
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.Weight
@@ -2918,7 +2918,7 @@ Solver.Weight
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.WriteCLMBinary
@@ -3108,7 +3108,7 @@ Solver.NonlinearSolver
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Solver.Nonlinear
@@ -3170,7 +3170,7 @@ Solver.Nonlinear.ResidualTol
 
 :default: 1e-7
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3183,7 +3183,7 @@ Solver.Nonlinear.StepTol
 
 :default: 1e-7
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3231,7 +3231,7 @@ Solver.Nonlinear.EtaValue
 
 :default: 1e-4
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3244,7 +3244,7 @@ Solver.Nonlinear.EtaAlpha
 
 :default: 2.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3257,7 +3257,7 @@ Solver.Nonlinear.EtaGamma
 
 :default: 0.9
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3281,7 +3281,7 @@ Solver.Nonlinear.DerivativeEpsilon
 
 :default: 1e-7
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -3717,7 +3717,7 @@ KnownSolution.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells
@@ -3751,7 +3751,7 @@ Wells.{well_name}.{interval_name}.Pressure.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
@@ -3761,7 +3761,7 @@ Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -3774,7 +3774,7 @@ Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}..{interval_name}.Concentration
@@ -3791,7 +3791,7 @@ Wells.{well_name}..{interval_name}.Concentration..{phase_name}..{contaminant_nam
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.{interval_name}.Extraction.Pressure.Value
@@ -3801,7 +3801,7 @@ Wells.{well_name}.{interval_name}.Extraction.Pressure.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
@@ -3811,7 +3811,7 @@ Wells.{well_name}.{interval_name}.Extraction.Flux.{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.{interval_name}.Injection.Pressure.Value
@@ -3821,7 +3821,7 @@ Wells.{well_name}.{interval_name}.Injection.Pressure.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.{interval_name}.Injection.Flux.{phase_name}.Value
@@ -3831,7 +3831,7 @@ Wells.{well_name}.{interval_name}.Injection.Flux.{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}..{interval_name}.Injection.Concentration..{phase_name}..{contaminant_name}.Fraction
@@ -3841,7 +3841,7 @@ Wells.{well_name}..{interval_name}.Injection.Concentration..{phase_name}..{conta
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -3904,7 +3904,7 @@ Wells.{well_name}.X
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.Y
@@ -3914,7 +3914,7 @@ Wells.{well_name}.Y
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.ZUpper
@@ -3924,7 +3924,7 @@ Wells.{well_name}.ZUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.ExtractionZUpper
@@ -3934,7 +3934,7 @@ Wells.{well_name}.ExtractionZUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.InjectionZUpper
@@ -3944,7 +3944,7 @@ Wells.{well_name}.InjectionZUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.ZLower
@@ -3954,7 +3954,7 @@ Wells.{well_name}.ZLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.ExtractionZLower
@@ -3964,7 +3964,7 @@ Wells.{well_name}.ExtractionZLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.InjectionZLower
@@ -3974,7 +3974,7 @@ Wells.{well_name}.InjectionZLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Wells.{well_name}.Method
@@ -4148,7 +4148,7 @@ Phase..{phase_name}.Density.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Density.ReferenceDensity
@@ -4158,7 +4158,7 @@ Phase..{phase_name}.Density.ReferenceDensity
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Density.CompressibilityConstant
@@ -4168,7 +4168,7 @@ Phase..{phase_name}.Density.CompressibilityConstant
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Viscosity.Type
@@ -4191,7 +4191,7 @@ Phase..{phase_name}.Viscosity.Value
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Mobility.Type
@@ -4212,7 +4212,7 @@ Phase..{phase_name}.Mobility.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Mobility.Exponent
@@ -4223,7 +4223,7 @@ Phase..{phase_name}.Mobility.Exponent
 
 :default: 2.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 2.0
       - with a value less than or equal to 2.0
 
@@ -4237,7 +4237,7 @@ Phase..{phase_name}.Mobility.IrreducibleSaturation
 
 :default: 0.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 0.0
 
@@ -4280,7 +4280,7 @@ Phase..{phase_name}.InternalEnergy.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Phase..{phase_name}.Geom..{geom_name}.HeatCapacity.Value
@@ -4290,7 +4290,7 @@ Phase..{phase_name}.Geom..{geom_name}.HeatCapacity.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 PhaseConcen
@@ -4317,7 +4317,7 @@ PhaseConcen..{phase_name}..{contaminant_name}.Geom..{geom_input_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 PhaseConcen..{phase_name}..{contaminant_name}.Type
@@ -4384,7 +4384,7 @@ PhaseSources..{phase_name}.Geom..{geom_input_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 PhaseSources.Geom..{geom_input_name}.Value
@@ -4394,7 +4394,7 @@ PhaseSources.Geom..{geom_input_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Contaminants
@@ -4420,7 +4420,7 @@ Contaminants..{contaminant_name}.Degradation.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 TimingInfo
@@ -4437,7 +4437,7 @@ TimingInfo.BaseUnit
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -4463,7 +4463,7 @@ TimingInfo.StartTime
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 TimingInfo.StopTime
@@ -4474,7 +4474,7 @@ TimingInfo.StopTime
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
 
 
 TimingInfo.DumpInterval
@@ -4485,7 +4485,9 @@ TimingInfo.DumpInterval
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
+      - must be an integer if less than 0
+
 
 
 TimingInfo.DumpIntervalExecutionTimeLimit
@@ -4524,7 +4526,7 @@ TimeStep.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 TimeStep.InitialStep
@@ -4534,7 +4536,7 @@ TimeStep.InitialStep
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 TimeStep.GrowthFactor
@@ -4544,7 +4546,7 @@ TimeStep.GrowthFactor
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 TimeStep.MaxStep
@@ -4554,7 +4556,7 @@ TimeStep.MaxStep
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -4566,7 +4568,7 @@ TimeStep.MinStep
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -4929,7 +4931,7 @@ InternalBC..{internal_bc_name}.X
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 InternalBC..{internal_bc_name}.Y
@@ -4939,7 +4941,7 @@ InternalBC..{internal_bc_name}.Y
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 InternalBC..{internal_bc_name}.Z
@@ -4949,7 +4951,7 @@ InternalBC..{internal_bc_name}.Z
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 InternalBC..{internal_bc_name}.Value
@@ -4959,7 +4961,7 @@ InternalBC..{internal_bc_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 BCPressure
@@ -5009,7 +5011,7 @@ Patch..{patch_name}.BCPressure..{interval_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}.XLower
@@ -5019,7 +5021,7 @@ Patch..{patch_name}.BCPressure..{interval_name}.XLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}.YLower
@@ -5029,7 +5031,7 @@ Patch..{patch_name}.BCPressure..{interval_name}.YLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}.XUpper
@@ -5039,7 +5041,7 @@ Patch..{patch_name}.BCPressure..{interval_name}.XUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}.YUpper
@@ -5049,7 +5051,7 @@ Patch..{patch_name}.BCPressure..{interval_name}.YUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}.NumPoints
@@ -5091,7 +5093,7 @@ Patch..{patch_name}.BCPressure..{interval_name}..{phase_name}.IntValue
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure..{interval_name}..{point_number}.Location
@@ -5101,7 +5103,7 @@ Patch..{patch_name}.BCPressure..{interval_name}..{point_number}.Location
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -5114,7 +5116,7 @@ Patch..{patch_name}.BCPressure..{interval_name}..{point_number}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCPressure.Type
@@ -5174,7 +5176,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCSaturation..{phase_name}.XLower
@@ -5184,7 +5186,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}.XLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCSaturation..{phase_name}.YLower
@@ -5194,7 +5196,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}.YLower
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCSaturation..{phase_name}.XUpper
@@ -5204,7 +5206,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}.XUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCSaturation..{phase_name}.YUpper
@@ -5214,7 +5216,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}.YUpper
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 Patch..{patch_name}.BCSaturation..{phase_name}.NumPoints
@@ -5236,7 +5238,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}..{point_number}.Location
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
       - with a value less than or equal to 1.0
 
@@ -5249,7 +5251,7 @@ Patch..{patch_name}.BCSaturation..{phase_name}..{point_number}.Value
 
 
 .. note::
-    The value must be an Integer
+    The value must be a Double
 
 
 FileVersion
@@ -5272,7 +5274,7 @@ Gravity
 
 .. note::
     The value is required
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -5310,7 +5312,7 @@ This key sets P1 and provides exponential dampening to the pressure relationship
 
 :default: 0.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 
 
@@ -5323,6 +5325,6 @@ This key sets P2 and provides exponential dampening to the pressure relationship
 
 :default: 0.0
 .. note::
-    The value must be an Integer
+    The value must be a Double
       - with a value greater than or equal to 0.0
 

@@ -1,21 +1,43 @@
-cmake_minimum_required (VERSION 3.14)
+# -----------------------------------------------------------------------------
+# Build Documentation if required
+# -----------------------------------------------------------------------------
 
-# project (PARFLOW LANGUAGES C Fortran CXX)
+option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
+if (PARFLOW_KEY_DOCUMENTATION)
+  add_subdirectory(documentation)
+endif()
 
-set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+# -----------------------------------------------------------------------------
+# Build generated python file for key definitions
+# -----------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------
-# Building Python key library and documentation
-#-----------------------------------------------------------------------------
+add_custom_command(
+  OUTPUT
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
+  COMMAND
+    ${Python3_EXECUTABLE} pf-python.py
+  DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/generators/pf-python.py"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/wells.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/timing.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/bconditions.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/core.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/geom.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/netcdf.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/phase.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/run.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/definitions/solver.yaml"
+  WORKING_DIRECTORY
+    "${CMAKE_CURRENT_SOURCE_DIR}/generators/"
+  COMMENT
+    "Generate ParFlow keys for Python"
+  VERBATIM
+)
 
-# generating python library
-if (${PARFLOW_PYTHON_GEN_LIB})
-  COMMAND ${PYTHON_EXECUTABLE}
-          "${PYTHON_GEN_DIR}/pf-python.py"
-endif ()
+# -----------------------------------------------------------------------------
 
-# generating documentation of python library
-if (${PARFLOW_PYTHON_GEN_DOC})
-  COMMAND ${PYTHON_EXECUTABLE}
-          "${PYTHON_GEN_DIR}/read_the_doc_rst.py"
-endif ()
+add_custom_target(
+  GeneratePythonKeys
+  DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
+)

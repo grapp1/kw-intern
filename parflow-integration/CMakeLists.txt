@@ -36,11 +36,7 @@ enable_testing ()
 
 option(PARFLOW_USE_PYTHON "Build python module for running ParFlow" "FALSE")
 if (PARFLOW_USE_PYTHON)
-  # testing needs Python interpreter i.e. `PYTHON_EXECUTABLE` without which
-  # our `find_python_module` checks to determine which tests to add or exclude
-  # will fail. We find it here.
   find_package(Python3 3.3 QUIET REQUIRED COMPONENTS Interpreter)
-  include(FindPythonModules)
-  # add_subdirectory(pf-keys/generators/) # not working yet
+  add_subdirectory(pf-keys)
   add_subdirectory(pf-python)
 endif()
