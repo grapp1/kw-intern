@@ -1,4 +1,2 @@
-# ParFlow-integration/pf-python/
-
-This directory includes the Python library and supporting scripts
-for building and running ParFlow simulations with Python
+This directory includes the Python library and supporting scripts for
+building and running ParFlow simulations with Python.
