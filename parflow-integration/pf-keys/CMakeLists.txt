@@ -7,6 +7,18 @@ if (PARFLOW_KEY_DOCUMENTATION)
   add_subdirectory(documentation)
 endif()
 
+
+# -----------------------------------------------------------------------------
+# Make sure our Python has the module that we need
+# -----------------------------------------------------------------------------
+
+find_python_module("yaml" yaml_found)
+if (NOT yaml_found AND NOT USE_PYTHON_VENV)
+  message(STATUS
+    "Please install yaml to generate ParFlow keys for Python module or use the VirtualEnv option.")
+  return()
+endif()
+
 # -----------------------------------------------------------------------------
 # Build generated python file for key definitions
 # -----------------------------------------------------------------------------
