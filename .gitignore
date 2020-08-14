@@ -5,6 +5,7 @@
 *.Rhistory
 slimin_1.txt
 /parflow/working/*
+/build/*
 
 # Editor directories and files
 .idea

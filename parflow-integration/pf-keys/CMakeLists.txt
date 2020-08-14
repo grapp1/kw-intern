@@ -1,12 +1,3 @@
-# -----------------------------------------------------------------------------
-# Build Documentation if required
-# -----------------------------------------------------------------------------
-
-option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
-if (PARFLOW_KEY_DOCUMENTATION)
-  add_subdirectory(documentation)
-endif()
-
 
 # -----------------------------------------------------------------------------
 # Make sure our Python has the module that we need
@@ -28,7 +19,7 @@ add_custom_command(
   COMMAND
     ${PARFLOW_PYTHON} pf-python.py
   OUTPUT
-    "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pftools/python/parflow/tools/database/generated.py"
   DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/generators/pf-python.py"
     "${CMAKE_CURRENT_SOURCE_DIR}/definitions/wells.yaml"
@@ -53,5 +44,5 @@ add_custom_target(
   GeneratePythonKeys
   DEPENDS
     ${PYTHON_DEPENDS}
-    "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pftools/python/parflow/tools/database/generated.py"
 )

@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.14)
 
-project (PARFLOW LANGUAGES C Fortran CXX)
+project (PARFLOW)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
@@ -51,9 +51,9 @@ if (PARFLOW_USE_PYTHON)
       COMMAND
         source "${CMAKE_CURRENT_BINARY_DIR}/py-env/bin/activate"
       COMMAND
-        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/pf-python/requirements.txt"
+        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/pftools/python/requirements.txt"
       COMMAND
-        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/pf-keys/documentation/requirements.txt"
+        pip install -r "${CMAKE_CURRENT_SOURCE_DIR}/docs/pf-keys/requirements.txt"
       COMMENT
         "Generate virtual environment for building Python components"
       VERBATIM
@@ -67,5 +67,15 @@ if (PARFLOW_USE_PYTHON)
   endif()
 
   add_subdirectory(pf-keys)
-  add_subdirectory(pf-python)
+  add_subdirectory(pftools/python)
+  # add_subdirectory(test/python)
+endif()
+
+# -----------------------------------------------------------------------------
+# Build Documentation if required
+# -----------------------------------------------------------------------------
+
+option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")
+if (PARFLOW_KEY_DOCUMENTATION)
+  add_subdirectory(docs/pf-keys)
 endif()
