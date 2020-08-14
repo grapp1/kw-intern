@@ -15,7 +15,7 @@ add_custom_command(
   OUTPUT
     "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
   COMMAND
-    ${Python3_EXECUTABLE} pf-python.py
+    ${PARFLOW_PYTHON} pf-python.py
   DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/generators/pf-python.py"
     "${CMAKE_CURRENT_SOURCE_DIR}/definitions/wells.yaml"
@@ -39,5 +39,6 @@ add_custom_command(
 add_custom_target(
   GeneratePythonKeys
   DEPENDS
+    ${PYTHON_DEPENDS}
     "${CMAKE_CURRENT_SOURCE_DIR}/../pf-python/parflow/tools/database/generated.py"
 )

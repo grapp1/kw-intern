@@ -8,7 +8,7 @@ add_custom_command(
   OUTPUT
     "${CMAKE_CURRENT_SOURCE_DIR}/parflow_keys.rst"
   COMMAND
-    ${Python3_EXECUTABLE} read_the_doc_rst.py
+    ${PARFLOW_PYTHON} read_the_doc_rst.py
   DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/../generators/read_the_doc_rst.py"
     "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/wells.yaml"
@@ -32,6 +32,7 @@ add_custom_command(
 add_custom_target(
   GenerateKeysRST
   DEPENDS
+    ${PYTHON_DEPENDS}
     "${CMAKE_CURRENT_SOURCE_DIR}/parflow_keys.rst"
 )
 
@@ -40,7 +41,7 @@ add_custom_target(
 # -----------------------------------------------------------------------------
 
 find_python_module("sphinx" sphinx_found)
-if (NOT sphinx_found)
+if (NOT sphinx_found AND NOT USE_PYTHON_VENV)
   message(STATUS
     "Please install Sphinx to generate documentation for ParFlow keys.")
   return()
@@ -53,7 +54,7 @@ add_custom_target(
   DEPENDS
     GenerateKeysRST
   COMMAND
-    ${Python3_EXECUTABLE}
+    ${PARFLOW_PYTHON}
     -m sphinx
     -b html "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}/build-site"
   SOURCES
