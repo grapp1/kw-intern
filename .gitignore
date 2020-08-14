@@ -5,7 +5,10 @@
 *.Rhistory
 slimin_1.txt
 /parflow/working/*
+/parflow-integration/build/*
 /build/*
+/parflow-integration/dist/*
+*.egg-info*
 
 # Editor directories and files
 .idea
