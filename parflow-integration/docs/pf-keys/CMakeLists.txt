@@ -8,18 +8,18 @@ add_custom_command(
   COMMAND
     ${PARFLOW_PYTHON} read_the_doc_rst.py
   DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/../generators/read_the_doc_rst.py"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/wells.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/timing.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/bconditions.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/core.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/geom.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/netcdf.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/phase.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/run.yaml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../definitions/solver.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/generators/read_the_doc_rst.py"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/wells.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/timing.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/bconditions.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/core.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/geom.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/netcdf.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/phase.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/run.yaml"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/definitions/solver.yaml"
   WORKING_DIRECTORY
-    "${CMAKE_CURRENT_SOURCE_DIR}/../generators/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../pf-keys/generators/"
   COMMENT
     "Generate ParFlow keys documentation"
   VERBATIM

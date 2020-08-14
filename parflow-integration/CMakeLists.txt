@@ -68,6 +68,7 @@ if (PARFLOW_USE_PYTHON)
 
   add_subdirectory(pf-keys)
   add_subdirectory(pftools/python)
+  add_subdirectory(test/python)
 
   # Only enable Key Documentation if we enable Python
   option(PARFLOW_KEY_DOCUMENTATION "Build key documentation for ParFlow" "FALSE")

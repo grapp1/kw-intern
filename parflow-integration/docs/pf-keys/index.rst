@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to the documentation of ParFlow Keys!
-==================================
+=======================================================
 
 .. toctree::
    :maxdepth: 3
