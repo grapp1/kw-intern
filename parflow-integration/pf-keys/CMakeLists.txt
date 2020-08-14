@@ -12,6 +12,7 @@ endif()
 # Make sure our Python has the module that we need
 # -----------------------------------------------------------------------------
 
+include(FindPythonModules)
 find_python_module("yaml" yaml_found)
 if (NOT yaml_found AND NOT USE_PYTHON_VENV)
   message(STATUS

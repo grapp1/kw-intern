@@ -1,5 +1,3 @@
-include(FindPythonModules)
-
 # -----------------------------------------------------------------------------
 # Build rst files from key definitions
 # -----------------------------------------------------------------------------
@@ -40,6 +38,7 @@ add_custom_target(
 # Generate documentation locally
 # -----------------------------------------------------------------------------
 
+include(FindPythonModules)
 find_python_module("sphinx" sphinx_found)
 if (NOT sphinx_found AND NOT USE_PYTHON_VENV)
   message(STATUS
