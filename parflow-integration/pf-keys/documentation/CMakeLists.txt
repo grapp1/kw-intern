@@ -46,6 +46,13 @@ if (NOT sphinx_found AND NOT USE_PYTHON_VENV)
   return()
 endif()
 
+find_python_module("sphinx-rtd-theme" sphinx_theme_found)
+if (NOT sphinx_theme_found AND NOT USE_PYTHON_VENV)
+  message(STATUS
+    "Please install sphinx-rtd-theme to generate documentation for ParFlow keys or use the VirtualEnv option.")
+  return()
+endif()
+
 # -----------------------------------------------------------------------------
 
 add_custom_target(
