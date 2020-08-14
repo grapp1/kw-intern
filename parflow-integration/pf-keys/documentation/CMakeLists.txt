@@ -46,6 +46,8 @@ if (NOT sphinx_found)
   return()
 endif()
 
+# -----------------------------------------------------------------------------
+
 add_custom_target(
   ParFlowKeyDoc
   DEPENDS
@@ -53,7 +55,7 @@ add_custom_target(
   COMMAND
     ${Python3_EXECUTABLE}
     -m sphinx
-    -b html "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/build-site"
+    -b html "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}/build-site"
   SOURCES
     conf.py
     index.rst
