@@ -5,13 +5,8 @@ def tclToPython(tclfile, pyfile, runname):
   tclfile = os.path.abspath(tclfile)
 
   pyfilePath = pyfile.split('/')
-  for path in pyfilePath[:-1]:
-    try:
-      os.chdir(path)
-    except OSError:
-      print(f'Directory {path} does not exist within {os.getcwd()}. Creating directory.')
-      os.mkdir(path)
-      os.chdir(path)
+  pyfileDir = '/'.join(pyfilePath[:-1])
+  os.chdir(f'/{pyfileDir}')
 
   pyfile = pyfilePath[-1]
 
@@ -67,5 +62,11 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-tclToPython('./examples/forsyth2/forsyth2.tcl', './examples/forsyth2/forsyth2.py', 'forsyth2')
+directory = '/Users/grapp/kw-intern/parflow/tcl_original'
+
+for file_name in os.listdir(directory):
+    if file_name.endswith(".tcl"):
+        full_name = os.path.join(directory, file_name)
+        tclToPython(full_name, f'Users/grapp/kw-intern/parflow/python/test/raw_converted/{file_name[:-4]}.py', f'{file_name[:-4]}')
+
 

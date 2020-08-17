@@ -17,8 +17,7 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
-    keywords='',
+    keywords=['ParFlow','groundwater model','surface water model'],
     packages=['parflow','parflow.tools','parflow.tools.database'],
-    package_dir={'':'.'},
     install_requires=['pyyaml']
 )
