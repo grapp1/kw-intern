@@ -1,4 +1,13 @@
+# -*- coding: utf-8 -*-
+"""Terminal helper
+
+This module provide colors and symbols for proving nice terminal output.
+
+"""
+
 class Colors:
+    """Terminal color helper
+    """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -13,6 +22,8 @@ class Colors:
 
 
 class Symbols:
+    """Terminal emoji helper
+    """
     ok = u'\u2714'
     ko = u'\u2718'
     errorItem = u'\u2605'

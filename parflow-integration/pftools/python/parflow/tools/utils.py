@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""Utility module
+
+This module provide generic and multi-purpose methods
+
+"""
 import json
 
 from .database.generated import PFDBObj
@@ -6,6 +12,8 @@ from .database.generated import PFDBObj
 
 
 def convert_value_for_string_dict(value):
+    """Ensure that the output value is a valid string
+    """
     if isinstance(value, str):
         return value
 
@@ -18,6 +26,9 @@ def convert_value_for_string_dict(value):
 
 
 def extract_keys_from_object(dict_to_fill, instance, parent_namespace=''):
+    """Method that walk PFDBObj object and record their key and value
+    inside a Python dict.
+    """
     for key in instance.get_key_names(skip_default=True):
 
         value = instance.__dict__[key]
@@ -46,6 +57,8 @@ def extract_keys_from_object(dict_to_fill, instance, parent_namespace=''):
 
 
 def write_dict_as_pfidb(dict_obj, file_name):
+    """Write a Python dict in a pfidb format inside the provided file_name
+    """
     with open(file_name, 'w') as out:
         out.write(f'{len(dict_obj)}\n')
         for key in dict_obj:
@@ -59,6 +72,8 @@ def write_dict_as_pfidb(dict_obj, file_name):
 
 
 def write_dict_as_yaml(dict_obj, file_name):
+    """Write a Python dict in a pfidb format inside the provided file_name
+    """
     with open(file_name, 'w') as out:
         for key in dict_obj:
             value = dict_obj[key]
@@ -68,6 +83,8 @@ def write_dict_as_yaml(dict_obj, file_name):
 
 
 def write_dict_as_json(dict_obj, file_name):
+    """Write a Python dict in a json format inside the provided file_name
+    """
     with open(file_name, 'w') as out:
         out.write(json.dumps(dict_obj, indent=2))
 
@@ -75,6 +92,9 @@ def write_dict_as_json(dict_obj, file_name):
 
 
 def write_dict(dict_obj, file_name):
+    """Write a Python dict into a file_name using the extension to
+    determine its format.
+    """
     ext = file_name.split('.').pop().lower()
     if ext in ['yaml', 'yml']:
         write_dict_as_yaml(dict_obj, file_name)
@@ -89,6 +109,8 @@ def write_dict(dict_obj, file_name):
 
 
 def load_pfidb(file_path):
+    """Load pfidb file into a Python dict
+    """
     result_dict = {}
     action = 'nb_lines'  # nbLines, size, string
     size = 0
@@ -120,6 +142,8 @@ def load_pfidb(file_path):
 
 
 def sort_dict(input):
+    """Create a key sorted dict
+    """
     output = {}
     keys = list(input.keys())
     keys.sort()
