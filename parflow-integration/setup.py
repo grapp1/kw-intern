@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='parflow',
-    version="1.0.0",
+    version="1.0.1",
     description='A package to run ParFlow via a Python interface.',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -18,8 +18,8 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='',
-    packages=find_packages(),
-    # package_dir={'':'pftools/python'},
+    packages=['parflow','parflow.tools','parflow.tools.database'],
+    package_dir={'':'pftools/python'},
     install_requires=[
         'pyyaml',
         'sphinx_rtd_theme'
