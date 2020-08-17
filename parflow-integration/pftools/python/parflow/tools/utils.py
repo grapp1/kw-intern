@@ -5,6 +5,7 @@ This module provide generic and multi-purpose methods
 
 """
 import json
+import yaml
 
 from .database.generated import PFDBObj
 
@@ -74,10 +75,22 @@ def write_dict_as_pfidb(dict_obj, file_name):
 def write_dict_as_yaml(dict_obj, file_name):
     """Write a Python dict in a pfidb format inside the provided file_name
     """
+    yamlObj = {}
+    overriden_keys = {}
+    for key, value in dict_obj.items():
+        keys_path = key.split('.')
+        get_or_create_dict(
+            yamlObj, keys_path[:-1], overriden_keys)[keys_path[-1]] = value
+
+    # Push value back to yaml
+    for key, value in overriden_keys.items():
+      keys_path = key.split('.')
+      valueObj = get_or_create_dict(yamlObj, keys_path, {})
+      valueObj['$_'] = value
+
     with open(file_name, 'w') as out:
-        for key in dict_obj:
-            value = dict_obj[key]
-            out.write(f'{key}: {value}\n')
+        # out.write(yaml.dump(sort_dict(overriden_keys)))
+        out.write(yaml.dump(sort_dict(yamlObj)))
 
 # -----------------------------------------------------------------------------
 
@@ -140,7 +153,6 @@ def load_pfidb(file_path):
 
 # -----------------------------------------------------------------------------
 
-
 def sort_dict(input):
     """Create a key sorted dict
     """
@@ -151,3 +163,17 @@ def sort_dict(input):
         output[key] = input[key]
 
     return output
+
+# -----------------------------------------------------------------------------
+
+def get_or_create_dict(root, keyPath, overriden_keys):
+  currentContainer = root
+  for i in range(len(keyPath)):
+    if keyPath[i] not in currentContainer:
+      currentContainer[keyPath[i]] = {}
+    elif not isinstance(currentContainer[keyPath[i]], dict):
+      overriden_keys['.'.join(keyPath[:i+1])] = currentContainer[keyPath[i]]
+      currentContainer[keyPath[i]] = {}
+    currentContainer = currentContainer[keyPath[i]]
+
+  return currentContainer
