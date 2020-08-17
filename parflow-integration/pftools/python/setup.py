@@ -7,21 +7,18 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='parflow',
-    version="1.0.1",
+    version="0.1.0",
     description='A package to run ParFlow via a Python interface.',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/grapp1/kw-intern/tree/master/parflow-integration',
+    url='https://github.com/grapp1/kw-intern/tree/master/parflow-integration/pftools/python',
     author='Kitware, Inc.',
-    license='###',
+    license='BSD',
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
     keywords='',
     packages=['parflow','parflow.tools','parflow.tools.database'],
-    package_dir={'':'pftools/python'},
-    install_requires=[
-        'pyyaml',
-        'sphinx_rtd_theme'
-    ]
+    package_dir={'':'.'},
+    install_requires=['pyyaml']
 )
