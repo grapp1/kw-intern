@@ -267,18 +267,30 @@ Patch:
         domains:
           EnumDomain:
             enum_list:
-              - DirEquilRefPatch
-              - DirEquilPLinear
-              - FluxConst
-              - FluxVolumetric
-              - PressureFile
-              - FluxFile
-              - OverlandFlow
-              - OverlandFlowPFB
-              - SeepageFace
-              - OverlandKinematic
-              - OverlandDiffusive
-              - ExactSolution
+              v0.0.0:
+                - DirEquilRefPatch
+                - DirEquilPLinear
+                - FluxConst
+                - FluxVolumetric
+                - PressureFile
+                - FluxFile
+                - OverlandFlow
+                - OverlandFlowPFB
+                - SeepageFace
+                - ExactSolution
+              v3.6.0:
+                - DirEquilRefPatch
+                - DirEquilPLinear
+                - FluxConst
+                - FluxVolumetric
+                - PressureFile
+                - FluxFile
+                - OverlandFlow
+                - OverlandFlowPFB
+                - SeepageFace
+                - OverlandKinematic
+                - OverlandDiffusive
+                - ExactSolution
 
       Cycle:
         help: >

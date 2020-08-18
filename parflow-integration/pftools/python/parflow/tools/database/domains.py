@@ -14,7 +14,6 @@ from ..terminal import Symbols as term_symbol
 # Validation helper functions
 # -----------------------------------------------------------------------------
 
-
 def filter_errors_by_type(msg_type, errors):
     filter_list = []
     for error in errors:
@@ -22,7 +21,6 @@ def filter_errors_by_type(msg_type, errors):
             filter_list.append(error['message'])
 
     return filter_list
-
 
 # -----------------------------------------------------------------------------
 
@@ -34,14 +32,13 @@ def error(message):
 
 # -----------------------------------------------------------------------------
 
-
 def warning(message):
     return {
         'type': 'WARNING',
         'message': message
     }
-# -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
 
 def duplicate_search(history):
     if len(history) > 1:
@@ -52,17 +49,16 @@ def duplicate_search(history):
 
 # -----------------------------------------------------------------------------
 
-
 def get_comparable_version(version):
     c_version = 0
-    version_tokens = version.split('.')
+    validVersionNumber = version[1:] if version[0] == 'v' else version
+    version_tokens = validVersionNumber.split('.')
     for version_token in version_tokens:
         c_version *= 1000
         c_version += int(version_token)
     return c_version
 
 # -----------------------------------------------------------------------------
-
 
 def get_installed_parflow_module(module):
     module_file = f'{os.getenv("PARFLOW_DIR")}/config/Makefile.config'
@@ -177,7 +173,8 @@ class EnumDomain:
 
     The expected keyword argument is a list of the accepted values.
     '''
-    def validate(self, value, enum_list=[], **kwargs):
+
+    def validate(self, value, enum_list=[], pf_version=None, **kwargs):
         errors = []
 
         if value is None:
@@ -186,8 +183,24 @@ class EnumDomain:
         if isinstance(value, list) and len(value) == 1:
             value = value[0]
 
-        if value not in enum_list:
-            str_list = ', '.join(enum_list)
+        lookupList = []
+        if isinstance(enum_list, list):
+          lookupList = enum_list
+
+        if isinstance(enum_list, dict):
+          # We need to find the matching version
+          sortedVersions = [(get_comparable_version(v), v) for v in enum_list.keys()]
+          sortedVersions.sort(key=lambda t: t[0])
+          versionToUse = sortedVersions[0]
+          currentVersion = get_comparable_version(pf_version)
+          for version in sortedVersions:
+            if currentVersion >= version[0]:
+              versionToUse = version
+
+          lookupList = enum_list[versionToUse[1]]
+
+        if value not in lookupList:
+            str_list = ', '.join(lookupList)
             errors.append(error(f'{value} must be one of [{str_list}]'))
 
         return errors
