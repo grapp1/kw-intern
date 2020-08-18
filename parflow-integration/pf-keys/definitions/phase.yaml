@@ -26,6 +26,10 @@ Phase:
         type: ChildrenHandler
         class_name: PhaseConcenPhaseNameItem
         location: /PhaseConcen
+      WellIntervalFluxPhaseItemUpdater:
+        type: ChildrenHandler
+        class_name: WellIntervalFluxPhaseItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Flux
       ExtractionFluxPhaseUpdater:
         type: ChildrenHandler
         class_name: ExtractionFluxPhaseItem
@@ -38,6 +42,10 @@ Phase:
         type: ChildrenHandler
         class_name: InjectionConcentrationPhaseItem
         location: /Wells/{WellItem}/{WellIntervalItem}/Injection/Concentration
+      WellIntervalSaturationPhaseItemUpdater:
+        type: ChildrenHandler
+        class_name: WellIntervalSaturationPhaseItem
+        location: /Wells/{WellItem}/{WellIntervalItem}/Saturation
       ICSaturationPhaseUpdater:
         type: ChildrenHandler
         class_name: GeomICSaturationPhaseItem

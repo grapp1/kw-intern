@@ -20,9 +20,9 @@ default_richards_wells = Run("default_richards_wells", __file__)
 
 default_richards_wells.FileVersion = 4
 
-default_richards_wells.Process.Topology.P = [lindex $argv 0]
-default_richards_wells.Process.Topology.Q = [lindex $argv 1]
-default_richards_wells.Process.Topology.R = [lindex $argv 2]
+default_richards_wells.Process.Topology.P = 1
+default_richards_wells.Process.Topology.Q = 1
+default_richards_wells.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -42,8 +42,7 @@ default_richards_wells.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-default_richards_wells.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+default_richards_wells.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -217,6 +216,14 @@ default_richards_wells.Geom.domain.Saturation.SRes = 0.2
 default_richards_wells.Geom.domain.Saturation.SSat = 0.99
 
 #-----------------------------------------------------------------------------
+# Time Cycles
+#-----------------------------------------------------------------------------
+default_richards_wells.Cycle.Names = 'constant'
+default_richards_wells.Cycle.constant.Names = 'alltime'
+default_richards_wells.Cycle.constant.alltime.Length = 1
+default_richards_wells.Cycle.constant.Repeat = -1
+
+#-----------------------------------------------------------------------------
 # Wells
 #-----------------------------------------------------------------------------
 
@@ -232,14 +239,6 @@ default_richards_wells.Wells.pumping_well.Method = 'Standard'
 default_richards_wells.Wells.pumping_well.Cycle = 'constant'
 default_richards_wells.Wells.pumping_well.alltime.Pressure.Value = 0.5
 default_richards_wells.Wells.pumping_well.alltime.Saturation.water.Value = 1.0
-
-#-----------------------------------------------------------------------------
-# Time Cycles
-#-----------------------------------------------------------------------------
-default_richards_wells.Cycle.Names = 'constant'
-default_richards_wells.Cycle.constant.Names = 'alltime'
-default_richards_wells.Cycle.constant.alltime.Length = 1
-default_richards_wells.Cycle.constant.Repeat = -1
 
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
@@ -279,7 +278,7 @@ default_richards_wells.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_wells.TopoSlopesX.Type = 'Constant'
-default_richards_wells.TopoSlopesX.GeomNames = ''
+default_richards_wells.TopoSlopesX.GeomNames = 'domain'
 
 default_richards_wells.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -288,7 +287,7 @@ default_richards_wells.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_wells.TopoSlopesY.Type = 'Constant'
-default_richards_wells.TopoSlopesY.GeomNames = ''
+default_richards_wells.TopoSlopesY.GeomNames = 'domain'
 
 default_richards_wells.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -297,7 +296,7 @@ default_richards_wells.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_wells.Mannings.Type = 'Constant'
-default_richards_wells.Mannings.GeomNames = ''
+default_richards_wells.Mannings.GeomNames = 'domain'
 default_richards_wells.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -342,8 +341,8 @@ default_richards_wells.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 default_richards_wells.Solver.Linear.KrylovDimension = 10
 
 default_richards_wells.Solver.Linear.Preconditioner = 'MGSemi'
-default_richards_wells.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
-default_richards_wells.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+# default_richards_wells.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
+# default_richards_wells.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
 
 #pfset Solver.WriteSiloSubsurfData True
@@ -354,38 +353,6 @@ default_richards_wells.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile $runname.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
 
 default_richards_wells.run()

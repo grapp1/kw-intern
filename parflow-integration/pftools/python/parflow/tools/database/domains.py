@@ -92,6 +92,12 @@ class ValidationException(Exception):
 
 
 class MandatoryValue:
+    '''
+    MandatoryValue makes sure that the key is set
+
+    If the value is not defined in the script and has a default value,
+    the default value will be written out in the validation message and database file.
+    '''
     def validate(self, value, **kwargs):
         errors = []
 
@@ -104,7 +110,7 @@ class MandatoryValue:
 
 class IntValue:
     '''
-    IntRange domain allow to constrain value to be an integer
+    IntRange domain constrains value to be an integer
     while also ensure optionally if its value needs to be
     above or below another one.
 
@@ -136,7 +142,7 @@ class IntValue:
 
 class DoubleValue:
     '''
-    DoubleValue domain allow to constrain value to be a double
+    DoubleValue domain constrains value to be a double (or int)
     while also ensure optionally if its value needs to be
     above or below another one.
 
@@ -145,17 +151,13 @@ class DoubleValue:
       - max_value: If available the value must be strictly below it
     '''
 
-    def validate(self, value, min_value=None, max_value=None, neg_int=None, **kwargs):
+    def validate(self, value, min_value=None, max_value=None, **kwargs):
         errors = []
 
         if value is None:
             return errors
 
-        # added for verification of DumpInterval (double if positive, int if negative)
-        if neg_int and isinstance(value, int) and value < 0:
-            return errors
-
-        elif not isinstance(value, float):
+        if not (isinstance(value, float) or isinstance(value, int)):
             errors.append(error('Needs to be a double'))
 
         if min_value is not None and value < min_value:
@@ -169,6 +171,12 @@ class DoubleValue:
 
 
 class EnumDomain:
+    '''
+    EnumDomain domain constrains value to be a particular string
+    that is part of a list defined in the enum_list.
+
+    The expected keyword argument is a list of the accepted values.
+    '''
     def validate(self, value, enum_list=[], **kwargs):
         errors = []
 
@@ -188,6 +196,9 @@ class EnumDomain:
 
 
 class AnyString:
+    '''
+    AnyString domain constrains the value to be a string or list of strings.
+    '''
     def validate(self, value, **kwargs):
         errors = []
 
@@ -204,6 +215,9 @@ class AnyString:
 
 
 class BoolDomain:
+    '''
+    BoolDomain domain constrains the value to be a boolean.
+    '''
     def validate(self, value, **kwargs):
         errors = []
 
@@ -220,6 +234,9 @@ class BoolDomain:
 
 
 class ValidFile:
+    '''
+    ValidFile domain checks the working directory to find the specified file.
+    '''
     def validate(self, value, working_directory=None, **kwargs):
         errors = []
 
@@ -241,6 +258,11 @@ class ValidFile:
 
 
 class Deprecated:
+    '''
+    Deprecated domain deals with keys that have been or will be deprecated. It
+    will check your version of ParFlow with the deprecated version and print
+    an error or warning depending on whether the key has been deprecated.
+    '''
     def validate(self, value, arg, pf_version=None, **kwargs):
         errors = []
 
@@ -262,6 +284,12 @@ class Deprecated:
 
 
 class Removed:
+    '''
+    Removed domain deals with keys that have been or will be removed from the
+    ParFlow code. It will check your version of ParFlow with the removed version
+    and print an error or warning depending on whether the key has been or will
+    be removed.
+    '''
     def validate(self, value, arg, pf_version=None, **kwargs):
         errors = []
 
@@ -283,6 +311,12 @@ class Removed:
 
 
 class RequiresModule:
+    '''
+    RequiresModule domain deals with keys that require specific modules associated
+    with ParFlow (e.g. CLM, SILO, NetCDF, etc.). It will check to see whether the
+    required modules are installed with ParFlow and will print an error message
+    if the required module is missing.
+    '''
     def validate(self, value, arg, **kwargs):
         errors = []
 
@@ -332,6 +366,8 @@ def validate_value_with_errors(value, domain_definitions=None, domain_add_on_kwa
       },
       NoNoneValueDomain:
     }
+    This method validates the value set to a key using the domains provided in the key
+    definition files.
     '''
     errors = []
     if not domain_definitions:
@@ -384,48 +420,7 @@ def validate_value_with_exception(value, domain_definition=None, domain_add_on_k
         if exit_on_error:
             sys.exit(1)
 
-
 # -----------------------------------------------------------------------------
-
-def validate_value_with_print(name, value, domain_definition=None, domain_add_on_kwargs=None, history=None, indent=1):
-    indent_str = '  ' * (indent - 1)
-    all_messages = validate_value_with_errors(
-        value, domain_definition, domain_add_on_kwargs)
-    errors = filter_errors_by_type('ERROR', all_messages)
-    warnings = filter_errors_by_type('WARNING', all_messages)
-
-    if len(errors):
-        print(f'{indent_str}  {term.FAIL}{term_symbol.ko}{term.ENDC} {name}: {value}')
-        for error in errors:
-            print(
-                f'{indent_str}    {term.WARNING}{term_symbol.errorItem}{term.ENDC} {error}')
-    elif value is not None:
-        # checking for duplicates and changing print statement
-        if history is not None:
-            dup_count = duplicate_search(history)
-            if dup_count is not None and dup_count >= 1:
-                # offset = 1 if 'default' in name else 1
-                dup_str = '('
-                for val in range(dup_count-1):
-                    dup_str += str(history[val]) + ' => '
-                dup_str += str(history[dup_count-1]) + ')'
-                print(
-                    f'{indent_str}  {term.MAGENTA}{term_symbol.warning}{term.ENDC} {name}: {value}  {term.MAGENTA}{dup_str}{term.ENDC}')
-            # elif 'default' in name
-            else:
-                print(
-                    f'{indent_str} {name}: {value} {term.OKGREEN}{term_symbol.ok}{term.ENDC}')
-        else:
-            print(
-                f'{indent_str}  {name}: {value} {term.OKGREEN}{term_symbol.ok}{term.ENDC}')
-
-    if len(warnings):
-        for warning in warnings:
-            print(
-                f'{indent_str}    {term.CYAN}{term_symbol.warning}{term.ENDC} {warning}')
-
-    return len(errors)
-
 
 def validate_value_to_string(name, value, domain_definition=None, domain_add_on_kwargs=None, history=None, indent=1):
     indent_str = '  ' * (indent - 1)

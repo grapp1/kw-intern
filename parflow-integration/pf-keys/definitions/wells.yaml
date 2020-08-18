@@ -56,36 +56,50 @@ Wells:
       Saturation:
         __rst__:
           skip:
-        __doc__: >
-          Setting saturation for a named well within a specified cycle for a specific phase.
+        __doc__: ''
+        _dynamic:
+          WellIntervalSaturationPhaseItem: /Phase/Names
 
-        Value:
+        .{phase_name}:
+          __class__: WellIntervalSaturationPhaseItem
           __rst__:
-            name: Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
-          help: >
-            [Type: double] This key specifies the saturation value of a vertical well.
-          domains:
-            DoubleValue:
-              min_value: 0.0
-              max_value: 1.0
+            skip:
+          __doc__: ''
+
+          Value:
+            __rst__:
+              name: Wells.{well_name}.{interval_name}.Saturation.{phase_name}.Value
+            help: >
+              [Type: double] This key specifies the saturation value of a vertical well.
+            domains:
+              DoubleValue:
+                min_value: 0.0
+                max_value: 1.0
 
       # Setting key Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
       Flux:
         __rst__:
           skip:
-        __doc__: >
-          Setting flux for a named well within a specified cycle for a specific phase.
+        __doc__: ''
+        _dynamic:
+          WellIntervalFluxPhaseItem: /Phase/Names
 
-        # typos in the description - vertical, assign
-        Value:
+        .{phase_name}:
+          __class__: WellIntervalFluxPhaseItem
           __rst__:
-            name: Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
-          help: >
-            [Type: double] This key specifies the volumetric flux for a vertical well if the type key is set to Flux.
-            Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action
-            for the well.
-          domains:
-            DoubleValue:
+            skip:
+          __doc__: ''
+
+          # typos in the description - vertical, assign
+          Value:
+            __rst__:
+              name: Wells.{well_name}.{interval_name}.Flux.{phase_name}.Value
+            help: >
+              [Type: double] This key specifies the volumetric flux for a vertical well if the type key is set to Flux.
+              Note only a positive number should be entered, ParFlow assigns the correct sign based on the chosen action
+              for the well.
+            domains:
+              DoubleValue:
 
       Concentration:
         __doc__: >
@@ -97,11 +111,13 @@ Wells:
           __rst__:
             skip:
           __doc__: ''
+
           .{contaminant_name}:
             __class__: ConcentrationPhaseContItem
             __rst__:
               skip:
             __doc__: ''
+
             Value:
               help: >
                 [Type: double] This key specifies the contaminant value of a vertical well.

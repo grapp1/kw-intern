@@ -59,7 +59,6 @@ TimingInfo:
     domains:
       MandatoryValue:
       DoubleValue:
-        neg_int: True
 
   DumpIntervalExecutionTimeLimit:
     help: >
@@ -82,7 +81,6 @@ TimeStep:
       Growth defines a time step that starts as dt0 and is defined for other steps as dtnew = gamma*dtold such that
       dtnew is less than or equal to dtmax and dtnew is greater than or equal to dtmin.
     domains:
-      MandatoryValue:
       EnumDomain:
         enum_list:
           - Constant

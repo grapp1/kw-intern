@@ -9,16 +9,16 @@ tests that additional to the standard ParFlow test suite.
 
 ### base
 
-- default_richards_wells.tcl TODO
+- default_richards_wells.tcl
 - forsyth2.tcl
 - harvey_flow.tcl
 - harvey_flow_pgs.tcl TODO
 - crater2D.tcl
-- crater2D_vangtable_spline.tcl TODO
-- crater2D_vangtable_linear.tcl TODO
+- crater2D_vangtable_spline.tcl
+- crater2D_vangtable_linear.tcl
 - small_domain.tcl TODO
 - richards_hydrostatic_equalibrium.tcl TODO
-- default_richards_nocluster.tcl TODO
+- default_richards_nocluster.tcl
 - octree-simple.tcl TODO
 - octree-large-domain.tcl TODO
 - terrain_following_grid_overland.tcl  TODO

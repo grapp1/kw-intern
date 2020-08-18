@@ -293,6 +293,9 @@ class PFDBObj:
     # ---------------------------------------------------------------------------
 
     def get_full_key_name(self):
+        '''
+        Helper method returning the full name of a given ParFlow key.
+        '''
         full_path = []
         current_location = self
         count = 0
@@ -317,7 +320,6 @@ class PFDBObj:
         Helper method returning the key to use for Parflow on a given field key.
         This allow to handle differences between what can be defined in Python vs Parflow key.
         '''
-
         if parent_namespace:
             # replace - dealing with changing key names for variable DZ
             return f'{parent_namespace.replace("Cell.l", "Cell.")}.{key}'
@@ -414,6 +416,9 @@ class PFDBObj:
     # ---------------------------------------------------------------------------
 
     def process_dynamic(self):
+        '''
+        Processing the dynamically defined (user-defined) key names
+        '''
         from . import generated
         for (class_name, selection) in self._dynamic.items():
             klass = getattr(generated, class_name)

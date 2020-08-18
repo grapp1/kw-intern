@@ -12,9 +12,9 @@ default_richards_nocluster.FileVersion = 4
 
 default_richards_nocluster.UseClustering = False
 
-default_richards_nocluster.Process.Topology.P = [lindex $argv 0]
-default_richards_nocluster.Process.Topology.Q = [lindex $argv 1]
-default_richards_nocluster.Process.Topology.R = [lindex $argv 2]
+default_richards_nocluster.Process.Topology.P = 1
+default_richards_nocluster.Process.Topology.Q = 1
+default_richards_nocluster.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -34,8 +34,7 @@ default_richards_nocluster.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-default_richards_nocluster.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+default_richards_nocluster.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -259,7 +258,7 @@ default_richards_nocluster.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_nocluster.TopoSlopesX.Type = 'Constant'
-default_richards_nocluster.TopoSlopesX.GeomNames = ''
+default_richards_nocluster.TopoSlopesX.GeomNames = 'domain'
 
 default_richards_nocluster.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -268,7 +267,7 @@ default_richards_nocluster.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_nocluster.TopoSlopesY.Type = 'Constant'
-default_richards_nocluster.TopoSlopesY.GeomNames = ''
+default_richards_nocluster.TopoSlopesY.GeomNames = 'domain'
 
 default_richards_nocluster.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -277,7 +276,7 @@ default_richards_nocluster.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 default_richards_nocluster.Mannings.Type = 'Constant'
-default_richards_nocluster.Mannings.GeomNames = ''
+default_richards_nocluster.Mannings.GeomNames = 'domain'
 default_richards_nocluster.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -322,45 +321,11 @@ default_richards_nocluster.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 default_richards_nocluster.Solver.Linear.KrylovDimension = 10
 
 default_richards_nocluster.Solver.Linear.Preconditioner = 'PFMG'
-default_richards_nocluster.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
-default_richards_nocluster.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+# default_richards_nocluster.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
+# default_richards_nocluster.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun default_richards
-# pfundist default_richards
 
-
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile default_richards.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile default_richards.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile default_richards.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile default_richards.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile default_richards.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "default_richards : PASSED"
-# } {
-#     puts "default_richards : FAILED"
-# }
 default_richards_nocluster.run()
