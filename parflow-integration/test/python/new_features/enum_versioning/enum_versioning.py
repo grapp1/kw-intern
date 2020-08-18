@@ -348,12 +348,12 @@ print('='*80)
 
 found_error = False
 
-if nb_error_v1 != 2:
-  print(f'Expected to have 2 errors with v1 but got {nb_error_v1}')
+if nb_error_v1 != 1:
+  print(f'Expected to have 1 error with v1 but got {nb_error_v1}')
   found_error = True
 
-if nb_error_v3 != 1:
-  print(f'Expected to have 1 error with v3.6.0 but got {nb_error_v3}')
+if nb_error_v3 != 0:
+  print(f'Expected no errors with v3.6.0 but got {nb_error_v3}')
   found_error = True
 
 if found_error:
