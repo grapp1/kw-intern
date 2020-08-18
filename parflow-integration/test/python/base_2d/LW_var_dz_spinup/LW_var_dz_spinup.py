@@ -13,9 +13,9 @@ LW_var_dz_spinup = Run("LW_var_dz_spinup", __file__)
 
 LW_var_dz_spinup.FileVersion = 4
 
-LW_var_dz_spinup.Process.Topology.P = [lindex $argv 0]
-LW_var_dz_spinup.Process.Topology.Q = [lindex $argv 1]
-LW_var_dz_spinup.Process.Topology.R = [lindex $argv 2]
+LW_var_dz_spinup.Process.Topology.P = 1
+LW_var_dz_spinup.Process.Topology.Q = 1
+LW_var_dz_spinup.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -67,12 +67,12 @@ LW_var_dz_spinup.dzScale.nzListNumber = 6
 
 #pfset dzScale.Type            nzList
 #pfset dzScale.nzListNumber       3
-LW_var_dz_spinup.Cell.0.dzScale.Value = 1.0
-LW_var_dz_spinup.Cell.1.dzScale.Value = 1.00
-LW_var_dz_spinup.Cell.2.dzScale.Value = 1.000
-LW_var_dz_spinup.Cell.3.dzScale.Value = 1.000
-LW_var_dz_spinup.Cell.4.dzScale.Value = 1.000
-LW_var_dz_spinup.Cell.5.dzScale.Value = 0.05
+LW_var_dz_spinup.Cell.l0.dzScale.Value = 1.0
+LW_var_dz_spinup.Cell.l1.dzScale.Value = 1.00
+LW_var_dz_spinup.Cell.l2.dzScale.Value = 1.000
+LW_var_dz_spinup.Cell.l3.dzScale.Value = 1.000
+LW_var_dz_spinup.Cell.l4.dzScale.Value = 1.000
+LW_var_dz_spinup.Cell.l5.dzScale.Value = 0.05
 
 #-----------------------------------------------------------------------------
 # Perm
@@ -109,9 +109,9 @@ LW_var_dz_spinup.Perm.TensorType = 'TensorByGeom'
 
 LW_var_dz_spinup.Geom.Perm.TensorByGeom.Names = 'domain'
 
-LW_var_dz_spinup.Geom.domain.Perm.TensorValX = 1.0d0
-LW_var_dz_spinup.Geom.domain.Perm.TensorValY = 1.0d0
-LW_var_dz_spinup.Geom.domain.Perm.TensorValZ = 1.0d0
+LW_var_dz_spinup.Geom.domain.Perm.TensorValX = 1.0
+LW_var_dz_spinup.Geom.domain.Perm.TensorValY = 1.0
+LW_var_dz_spinup.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
@@ -231,7 +231,7 @@ LW_var_dz_spinup.Cycle.rainrec.Repeat = 14
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-LW_var_dz_spinup.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+LW_var_dz_spinup.BCPressure.PatchNames = LW_var_dz_spinup.Geom.domain.Patches
 
 LW_var_dz_spinup.Patch.x_lower.BCPressure.Type = 'FluxConst'
 LW_var_dz_spinup.Patch.x_lower.BCPressure.Cycle = 'constant'
@@ -338,7 +338,7 @@ LW_var_dz_spinup.Solver.Nonlinear.EtaValue = 0.001
 
 
 LW_var_dz_spinup.Solver.PrintSubsurf = False
-LW_var_dz_spinup. = 'Solver.Drop 1E_20'
+LW_var_dz_spinup.Solver.Drop = 1E-20
 LW_var_dz_spinup.Solver.AbsTol = 1E-10
 
 
@@ -379,42 +379,6 @@ LW_var_dz_spinup.OverlandSpinupDampP2 = 0.00001
 #-----------------------------------------------------------------------------
 # Run and do tests
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
-# pfundist lw.1km.slope_x.10x.pfb
-# pfundist lw.1km.slope_y.10x.pfb
-
-#puts "[exec tail $runname.out.kinsol.log]"
-#puts "[exec tail $runname.out.log]"
-
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile $runname.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005 00006 00007" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile  $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-# if $passed {
-#     puts "LW_var_dz_spinup : PASSED"
-# } {
-#     puts "LW_var_dz_spinup : FAILED"
-# }
-
 
 
 LW_var_dz_spinup.run()

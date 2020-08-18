@@ -48,8 +48,7 @@ terrain_following_grid_overland.Geom.domain.Upper.X = 100.0
 terrain_following_grid_overland.Geom.domain.Upper.Y = 1.0
 terrain_following_grid_overland.Geom.domain.Upper.Z = 1.5
 
-terrain_following_grid_overland.Geom.domain.Patches = 'x_lower x_upper y_lower \'
-#                                      y-upper z-lower z-upper"
+terrain_following_grid_overland.Geom.domain.Patches = 'x_lower x_upper y_lower y_upper z_lower z_upper'
 
 #-----------------------------------------------------------------------------
 # Perm
@@ -66,9 +65,9 @@ terrain_following_grid_overland.Perm.TensorType = 'TensorByGeom'
 
 terrain_following_grid_overland.Geom.Perm.TensorByGeom.Names = 'domain'
 
-terrain_following_grid_overland.Geom.domain.Perm.TensorValX = 1.0d0
-terrain_following_grid_overland.Geom.domain.Perm.TensorValY = 1.0d0
-terrain_following_grid_overland.Geom.domain.Perm.TensorValZ = 1.0d0
+terrain_following_grid_overland.Geom.domain.Perm.TensorValX = 1.0
+terrain_following_grid_overland.Geom.domain.Perm.TensorValY = 1.0
+terrain_following_grid_overland.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
@@ -186,7 +185,7 @@ terrain_following_grid_overland.Cycle.rainrec.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-terrain_following_grid_overland.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+terrain_following_grid_overland.BCPressure.PatchNames = terrain_following_grid_overland.Geom.domain.Patches
 
 terrain_following_grid_overland.Patch.x_lower.BCPressure.Type = 'FluxConst'
 terrain_following_grid_overland.Patch.x_lower.BCPressure.Cycle = 'constant'
@@ -282,7 +281,7 @@ terrain_following_grid_overland.Solver.Linear.Preconditioner.SymmetricMat = 'Sym
 terrain_following_grid_overland.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
 terrain_following_grid_overland.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 10
 terrain_following_grid_overland.Solver.PrintSubsurf = False
-terrain_following_grid_overland. = 'Solver.Drop 1E_20'
+terrain_following_grid_overland.Solver.Drop = 1E-20
 terrain_following_grid_overland.Solver.AbsTol = 1E-12
 
 # turn on to write SILO output
@@ -315,31 +314,4 @@ terrain_following_grid_overland.Geom.domain.ICPressure.RefPatch = 'z_lower'
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-
-# pfrun stormflow.terrain.dz5.5pc
-# pfundist stormflow.terrain.dz5.5pc
-
-
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-
-# foreach i "00000 00001 00002 00003 00004 00005 00006 00007 00008 00009 00010 00011 00012 00013 00014 00015 00016 00017 00018 00019 00020 " {
-#     if ![pftestFile stormflow.terrain.dz5.5pc.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile stormflow.terrain.dz5.5pc.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "terrain_following_grid : PASSED"
-# } {
-#     puts "terrain_following_grid : FAILED"
-# }
 terrain_following_grid_overland.run()

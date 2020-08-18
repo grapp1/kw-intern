@@ -16,21 +16,20 @@ tests that additional to the standard ParFlow test suite.
 - crater2D.tcl
 - crater2D_vangtable_spline.tcl
 - crater2D_vangtable_linear.tcl
-- small_domain.tcl TODO
-- richards_hydrostatic_equalibrium.tcl TODO
+- small_domain.tcl
+- richards_hydrostatic_equalibrium.tcl
 - default_richards_nocluster.tcl
 - octree-simple.tcl
 - octree-large-domain.tcl
-- terrain_following_grid_overland.tcl  TODO
-- var_dz_1D.tcl TODO
+- terrain_following_grid_overland.tcl
+- var_dz_1D.tcl
 - pfmg.tcl
 - pfmg_galerkin.tcl
-- smg.tcl TODO
+- smg.tcl
 - pfmg_octree.tcl
-- van-genuchten-file.tcl TODO
-- overland_slopingslab_KWE.tcl NEEDUPDATE
+- van-genuchten-file.tcl NEEDDIST
 - overland_tiltedV_KWE.tcl NEEDUPDATE
-- overland_slopingslab_DWE.tcl NEEDUPDATE
+- overland_slopingslab_DWE.tcl
 - overland_tiltedV_DWE.tcl NEEDUPDATE
 - overland_FlatICP.tcl NEEDUPDATE
 - richards_FBx.tcl
@@ -40,12 +39,12 @@ tests that additional to the standard ParFlow test suite.
 ### base_2d
 
 - default_overland.tcl
-- default_overland.pfmg.jac.tcl TODO
-- default_overland.pfmg_octree.jac.tcl TODO
-- default_overland.pfmg_octree.fulljac.tcl TODO
-- LW_var_dz.tcl NEEDSDIST
-- LW_var_dz_spinup.tcl TODO
-- overland_slopingslab_KWE.tcl TODO
+- default_overland.pfmg.jac.tcl
+- default_overland.pfmg_octree.jac.tcl
+- default_overland.pfmg_octree.fulljac.tcl
+- LW_var_dz.tcl NEEDDIST
+- LW_var_dz_spinup.tcl NEEDDIST
+- overland_slopingslab_KWE.tcl NEEDUPDATE
 - richards_box_proctest_vardz.tcl NEEDUPDATE
 
 ### base_3d
@@ -72,7 +71,7 @@ TBD
 
 ### silo
 
-- indicator_field NEEDSDIST
+- indicator_field NEEDDIST
 - water_balance_y
 - water_balance_x
 - water_balance_x.hardflow.nojac

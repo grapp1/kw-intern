@@ -6,13 +6,13 @@
 # Import the ParFlow TCL package
 #
 from parflow import Run
-van-genuchten-file = Run("van-genuchten-file", __file__)
+van_genuchten_file = Run("van_genuchten_file", __file__)
 
 van_genuchten_file.FileVersion = 4
 
-van_genuchten_file.Process.Topology.P = [lindex $argv 0]
-van_genuchten_file.Process.Topology.Q = [lindex $argv 1]
-van_genuchten_file.Process.Topology.R = [lindex $argv 2]
+van_genuchten_file.Process.Topology.P = 1
+van_genuchten_file.Process.Topology.Q = 1
+van_genuchten_file.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -32,8 +32,7 @@ van_genuchten_file.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-van_genuchten_file.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+van_genuchten_file.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -212,7 +211,7 @@ van_genuchten_file.Geom.domain.Saturation.N = 2.0
 van_genuchten_file.Geom.domain.Saturation.SRes = 0.2
 van_genuchten_file.Geom.domain.Saturation.SSat = 0.99
 
-van_genuchten_file.Geom.domain.Saturation.VanGenuchten.File = 1
+van_genuchten_file.Phase.Saturation.VanGenuchten.File = 1
 van_genuchten_file.Geom.domain.Saturation.Alpha.Filename = 'van_genuchten_alpha.pfb'
 van_genuchten_file.Geom.domain.Saturation.N.Filename = 'van_genuchten_n.pfb'
 van_genuchten_file.Geom.domain.Saturation.SRes.Filename = 'van_genuchten_sr.pfb'
@@ -270,7 +269,7 @@ van_genuchten_file.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 van_genuchten_file.TopoSlopesX.Type = 'Constant'
-van_genuchten_file.TopoSlopesX.GeomNames = ''
+van_genuchten_file.TopoSlopesX.GeomNames = 'domain'
 
 van_genuchten_file.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -279,7 +278,7 @@ van_genuchten_file.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 van_genuchten_file.TopoSlopesY.Type = 'Constant'
-van_genuchten_file.TopoSlopesY.GeomNames = ''
+van_genuchten_file.TopoSlopesY.GeomNames = 'domain'
 
 van_genuchten_file.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -288,7 +287,7 @@ van_genuchten_file.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 van_genuchten_file.Mannings.Type = 'Constant'
-van_genuchten_file.Mannings.GeomNames = ''
+van_genuchten_file.Mannings.GeomNames = 'domain'
 van_genuchten_file.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -333,50 +332,12 @@ van_genuchten_file.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 van_genuchten_file.Solver.Linear.KrylovDimension = 10
 
 van_genuchten_file.Solver.Linear.Preconditioner = 'PFMG'
-van_genuchten_file.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
-van_genuchten_file.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+# van_genuchten_file.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
+# van_genuchten_file.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-# foreach i {van-genuchten-alpha van-genuchten-n van-genuchten-sr van-genuchten-ssat } {
-#     file copy -force input/$i.pfb $i.pfb
-#     pfdist $i.pfb
-# }
 
-# pfrun default_richards
-# pfundist default_richards
-
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile default_richards.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile default_richards.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile default_richards.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile default_richards.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile default_richards.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "default_richards : PASSED"
-# } {
-#     puts "default_richards : FAILED"
-# }
-van-genuchten-file.run()
+van_genuchten_file.run()

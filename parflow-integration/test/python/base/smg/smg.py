@@ -32,8 +32,7 @@ smg.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-smg.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+smg.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -257,7 +256,7 @@ smg.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 smg.TopoSlopesX.Type = 'Constant'
-smg.TopoSlopesX.GeomNames = ''
+smg.TopoSlopesX.GeomNames = 'domain'
 
 smg.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -266,7 +265,7 @@ smg.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 smg.TopoSlopesY.Type = 'Constant'
-smg.TopoSlopesY.GeomNames = ''
+smg.TopoSlopesY.GeomNames = 'domain'
 
 smg.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -275,7 +274,7 @@ smg.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 smg.Mannings.Type = 'Constant'
-smg.Mannings.GeomNames = ''
+smg.Mannings.GeomNames = 'domain'
 smg.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -324,38 +323,5 @@ smg.Solver.Linear.Preconditioner = 'SMG'
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun smg
-# pfundist smg
 
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile smg.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile smg.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile smg.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile smg.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile smg.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "smg : PASSED"
-# } {
-#     puts "smg : FAILED"
-# }
 smg.run()

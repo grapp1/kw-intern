@@ -55,7 +55,7 @@ small_domain.GeomInput.Names = 'solidinput background'
 
 small_domain.GeomInput.solidinput.InputType = 'SolidFile'
 small_domain.GeomInput.solidinput.GeomNames = 'domain'
-small_domain.GeomInput.solidinput.FileName = 'crater2D.pfsol'
+small_domain.GeomInput.solidinput.FileName = 'small_domain.pfsol'
 
 
 small_domain.GeomInput.background.InputType = 'Box'

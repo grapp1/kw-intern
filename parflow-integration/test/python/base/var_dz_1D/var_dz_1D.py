@@ -84,20 +84,20 @@ var_dz_1D.Solver.Nonlinear.VariableDz = True
 var_dz_1D.dzScale.GeomNames = 'domain'
 var_dz_1D.dzScale.Type = 'nzList'
 var_dz_1D.dzScale.nzListNumber = 14
-var_dz_1D.Cell.0.dzScale.Value = 1.2
-var_dz_1D.Cell.1.dzScale.Value = 1.0
-var_dz_1D.Cell.2.dzScale.Value = 1.0
-var_dz_1D.Cell.3.dzScale.Value = 1.0
-var_dz_1D.Cell.4.dzScale.Value = 1.0
-var_dz_1D.Cell.5.dzScale.Value = 1.0
-var_dz_1D.Cell.6.dzScale.Value = 1.0
-var_dz_1D.Cell.7.dzScale.Value = 1.0
-var_dz_1D.Cell.8.dzScale.Value = 1.0
-var_dz_1D.Cell.9.dzScale.Value = 1.0
-var_dz_1D.Cell.10.dzScale.Value = 0.15
-var_dz_1D.Cell.11.dzScale.Value = 0.1
-var_dz_1D.Cell.12.dzScale.Value = 0.1
-var_dz_1D.Cell.13.dzScale.Value = 0.05
+var_dz_1D.Cell.l0.dzScale.Value = 1.2
+var_dz_1D.Cell.l1.dzScale.Value = 1.0
+var_dz_1D.Cell.l2.dzScale.Value = 1.0
+var_dz_1D.Cell.l3.dzScale.Value = 1.0
+var_dz_1D.Cell.l4.dzScale.Value = 1.0
+var_dz_1D.Cell.l5.dzScale.Value = 1.0
+var_dz_1D.Cell.l6.dzScale.Value = 1.0
+var_dz_1D.Cell.l7.dzScale.Value = 1.0
+var_dz_1D.Cell.l8.dzScale.Value = 1.0
+var_dz_1D.Cell.l9.dzScale.Value = 1.0
+var_dz_1D.Cell.l10.dzScale.Value = 0.15
+var_dz_1D.Cell.l11.dzScale.Value = 0.1
+var_dz_1D.Cell.l12.dzScale.Value = 0.1
+var_dz_1D.Cell.l13.dzScale.Value = 0.05
 
 #-----------------------------------------------------------------------------
 # Perm
@@ -262,7 +262,7 @@ var_dz_1D.Patch.top.BCPressure.alltime.Value = -0.0001
 #---------------------------------------------------------
 
 var_dz_1D.TopoSlopesX.Type = 'Constant'
-var_dz_1D.TopoSlopesX.GeomNames = ''
+var_dz_1D.TopoSlopesX.GeomNames = 'domain'
 
 var_dz_1D.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -271,7 +271,7 @@ var_dz_1D.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 var_dz_1D.TopoSlopesY.Type = 'Constant'
-var_dz_1D.TopoSlopesY.GeomNames = ''
+var_dz_1D.TopoSlopesY.GeomNames = 'domain'
 
 var_dz_1D.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -280,7 +280,7 @@ var_dz_1D.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 var_dz_1D.Mannings.Type = 'Constant'
-var_dz_1D.Mannings.GeomNames = ''
+var_dz_1D.Mannings.GeomNames = 'domain'
 var_dz_1D.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -332,48 +332,5 @@ var_dz_1D.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 10
 #-----------------------------------------------------------------------------
 # Run and do tests
 #-----------------------------------------------------------------------------
-# set runname var.dz.1d
-# pfrun $runname
-# pfundist $runname
 
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile $runname.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00005 00010 00015 00020 00025" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile  $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-# if $passed {
-#     puts "1d_var_dz : PASSED"
-# } {
-#     puts "1d_var_dz : FAILED"
-# }
-
-#set k1 [pfload -pfb var.dz.1d.out.perm_x.pfb]
-#set press1 [pfload -pfb var.dz.1d.out.press.00001.pfb]
-#set press2 [pfload -pfb var.dz.1d.out.press.00010.pfb]
-#set press3 [pfload -pfb var.dz.1d.out.press.00024.pfb]
-
-#for {set k 13} {$k >= 0} {incr k -1} {
-#	set outp1 [pfgetelt $press1 0 0 $k]
-#	set outp2 [pfgetelt $press2 0 0 $k]
-#	set outp3 [pfgetelt $press3 0 0 $k]
-#		set outk1 [pfgetelt $k1 0 0 $k]
-#	puts stdout "$k $outp1 $outp2 $outp3 $outk1"
-#}
 var_dz_1D.run()
