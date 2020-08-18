@@ -6,9 +6,8 @@
 # Import the ParFlow TCL package
 #
 from parflow import Run
-octree-large-domain = Run("octree-large-domain", __file__)
+octree_large_domain = Run("octree_large_domain", __file__)
 
-# set runname "octree-large-domain"
 
 octree_large_domain.FileVersion = 4
 
@@ -38,8 +37,7 @@ octree_large_domain.ComputationalGrid.NZ = 10
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-octree_large_domain.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+octree_large_domain.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -263,7 +261,7 @@ octree_large_domain.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 octree_large_domain.TopoSlopesX.Type = 'Constant'
-octree_large_domain.TopoSlopesX.GeomNames = ''
+octree_large_domain.TopoSlopesX.GeomNames = 'domain'
 
 octree_large_domain.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -272,7 +270,7 @@ octree_large_domain.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 octree_large_domain.TopoSlopesY.Type = 'Constant'
-octree_large_domain.TopoSlopesY.GeomNames = ''
+octree_large_domain.TopoSlopesY.GeomNames = 'domain'
 
 octree_large_domain.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -281,7 +279,7 @@ octree_large_domain.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 octree_large_domain.Mannings.Type = 'Constant'
-octree_large_domain.Mannings.GeomNames = ''
+octree_large_domain.Mannings.GeomNames = 'domain'
 octree_large_domain.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -326,44 +324,12 @@ octree_large_domain.Solver.Nonlinear.DerivativeEpsilon = 1e-2
 octree_large_domain.Solver.Linear.KrylovDimension = 10
 
 octree_large_domain.Solver.Linear.Preconditioner = 'PFMG'
-octree_large_domain.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
-octree_large_domain.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+# octree_large_domain.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
+# octree_large_domain.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests 
-#
-# source pftest.tcl
 
-sig_digits = 4
-
-passed = 1
-
-# if ![pftestFile $runname.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in press timestep $i" $sig_digits] {
-#     set passed 0
-#     }
-# }
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
-
-octree-large-domain.run()
+octree_large_domain.run()

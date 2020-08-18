@@ -11,9 +11,9 @@ richards_box_proctest = Run("richards_box_proctest", __file__)
 
 richards_box_proctest.FileVersion = 4
 
-richards_box_proctest.Process.Topology.P = [lindex $argv 0]
-richards_box_proctest.Process.Topology.Q = [lindex $argv 1]
-richards_box_proctest.Process.Topology.R = [lindex $argv 2]
+richards_box_proctest.Process.Topology.P = 1
+richards_box_proctest.Process.Topology.Q = 1
+richards_box_proctest.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -215,7 +215,7 @@ richards_box_proctest.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 richards_box_proctest.TopoSlopesX.Type = 'Constant'
-richards_box_proctest.TopoSlopesX.GeomNames = ''
+richards_box_proctest.TopoSlopesX.GeomNames = 'domain'
 
 richards_box_proctest.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -224,7 +224,7 @@ richards_box_proctest.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_box_proctest.TopoSlopesY.Type = 'Constant'
-richards_box_proctest.TopoSlopesY.GeomNames = ''
+richards_box_proctest.TopoSlopesY.GeomNames = 'domain'
 
 richards_box_proctest.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -233,7 +233,7 @@ richards_box_proctest.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_box_proctest.Mannings.Type = 'Constant'
-richards_box_proctest.Mannings.GeomNames = ''
+richards_box_proctest.Mannings.GeomNames = 'domain'
 richards_box_proctest.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -284,29 +284,5 @@ richards_box_proctest.Solver.Linear.Preconditioner = 'PFMG'
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests
-#
-# source pftest.tcl
-passed = 1
-
-
-# foreach i "00000 00001 00002 00003 00004 00005 00006 00007 00008 00009 00010" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
 richards_box_proctest.run()

@@ -13,9 +13,9 @@ overland_slopingslab_KWE = Run("overland_slopingslab_KWE", __file__)
 overland_slopingslab_KWE.FileVersion = 4
 
 
-overland_slopingslab_KWE.Process.Topology.P = [lindex $argv 0]
-overland_slopingslab_KWE.Process.Topology.Q = [lindex $argv 1]
-overland_slopingslab_KWE.Process.Topology.R = [lindex $argv 2]
+overland_slopingslab_KWE.Process.Topology.P = 1
+overland_slopingslab_KWE.Process.Topology.Q = 1
+overland_slopingslab_KWE.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -64,9 +64,9 @@ overland_slopingslab_KWE.Perm.TensorType = 'TensorByGeom'
 
 overland_slopingslab_KWE.Geom.Perm.TensorByGeom.Names = 'domain'
 
-overland_slopingslab_KWE.Geom.domain.Perm.TensorValX = 1.0d0
-overland_slopingslab_KWE.Geom.domain.Perm.TensorValY = 1.0d0
-overland_slopingslab_KWE.Geom.domain.Perm.TensorValZ = 1.0d0
+overland_slopingslab_KWE.Geom.domain.Perm.TensorValX = 1.0
+overland_slopingslab_KWE.Geom.domain.Perm.TensorValY = 1.0
+overland_slopingslab_KWE.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
@@ -180,7 +180,7 @@ overland_slopingslab_KWE.Cycle.rainrec.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-overland_slopingslab_KWE.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+overland_slopingslab_KWE.BCPressure.PatchNames = overland_slopingslab_KWE.Geom.domain.Patches
 
 overland_slopingslab_KWE.Patch.x_lower.BCPressure.Type = 'FluxConst'
 overland_slopingslab_KWE.Patch.x_lower.BCPressure.Cycle = 'constant'
@@ -253,7 +253,7 @@ overland_slopingslab_KWE.Solver.Linear.MaxRestart = 2
 
 overland_slopingslab_KWE.Solver.Linear.Preconditioner = 'PFMG'
 overland_slopingslab_KWE.Solver.PrintSubsurf = False
-overland_slopingslab_KWE. = 'Solver.Drop 1E_20'
+overland_slopingslab_KWE.Solver.Drop = 1E-20
 overland_slopingslab_KWE.Solver.AbsTol = 1E-10
 
 overland_slopingslab_KWE.Solver.OverlandKinematic.Epsilon = 1E-5
@@ -283,8 +283,8 @@ overland_slopingslab_KWE.Geom.domain.ICPressure.RefPatch = 'z_upper'
 # Running all 8 direction combinations with the upwind formulation on and off (i.e. 16 total)
 #-----------------------------------------------------------------------------
 #set runcheck to 1 if you want to run the pass fail tests
-runcheck = 1
-first = 1
+# runcheck = 1
+# first = 1
 # source pftest.tcl
 
 ###############################
@@ -295,18 +295,18 @@ first = 1
 #set name negy
 
 #   #### Set the slopes
-#   pfset TopoSlopesX.Type "Constant"
-#   pfset TopoSlopesX.GeomNames "domain"
-#   pfset TopoSlopesX.Geom.domain.Value $xslope
+overland_slopingslab_KWE.TopoSlopesX.Type = "Constant"
+overland_slopingslab_KWE.TopoSlopesX.GeomNames = "domain"
+overland_slopingslab_KWE.TopoSlopesX.Geom.domain.Value = 0.01
 
-#   pfset TopoSlopesY.Type "Constant"
-#   pfset TopoSlopesY.GeomNames "domain"
-#   pfset TopoSlopesY.Geom.domain.Value $yslope
+overland_slopingslab_KWE.TopoSlopesY.Type = "Constant"
+overland_slopingslab_KWE.TopoSlopesY.GeomNames = "domain"
+overland_slopingslab_KWE.TopoSlopesY.Geom.domain.Value = 0.01
 
 #   #original approach from K&M AWR 2006
-#   pfset Patch.z-upper.BCPressure.Type		      OverlandFlow
-#   pfset Solver.Nonlinear.UseJacobian          False
-#   pfset Solver.Linear.Preconditioner.PCMatrixType PFSymmetric
+overland_slopingslab_KWE.Patch.z_upper.BCPressure.Type = 'OverlandFlow'
+overland_slopingslab_KWE.Solver.Nonlinear.UseJacobian = False
+overland_slopingslab_KWE.Solver.Linear.Preconditioner.PCMatrixType = 'PFSymmetric'
 
 
 #   set runname Slab.$name.OverlandModule

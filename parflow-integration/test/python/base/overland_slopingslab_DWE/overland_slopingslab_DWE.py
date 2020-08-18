@@ -13,9 +13,9 @@ overland_slopingslab_DWE = Run("overland_slopingslab_DWE", __file__)
 overland_slopingslab_DWE.FileVersion = 4
 
 
-overland_slopingslab_DWE.Process.Topology.P = [lindex $argv 0]
-overland_slopingslab_DWE.Process.Topology.Q = [lindex $argv 1]
-overland_slopingslab_DWE.Process.Topology.R = [lindex $argv 2]
+overland_slopingslab_DWE.Process.Topology.P = 1
+overland_slopingslab_DWE.Process.Topology.Q = 1
+overland_slopingslab_DWE.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -64,9 +64,9 @@ overland_slopingslab_DWE.Perm.TensorType = 'TensorByGeom'
 
 overland_slopingslab_DWE.Geom.Perm.TensorByGeom.Names = 'domain'
 
-overland_slopingslab_DWE.Geom.domain.Perm.TensorValX = 1.0d0
-overland_slopingslab_DWE.Geom.domain.Perm.TensorValY = 1.0d0
-overland_slopingslab_DWE.Geom.domain.Perm.TensorValZ = 1.0d0
+overland_slopingslab_DWE.Geom.domain.Perm.TensorValX = 1.0
+overland_slopingslab_DWE.Geom.domain.Perm.TensorValY = 1.0
+overland_slopingslab_DWE.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
@@ -180,7 +180,7 @@ overland_slopingslab_DWE.Cycle.rainrec.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-overland_slopingslab_DWE.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+overland_slopingslab_DWE.BCPressure.PatchNames = overland_slopingslab_DWE.Geom.domain.Patches
 
 overland_slopingslab_DWE.Patch.x_lower.BCPressure.Type = 'FluxConst'
 overland_slopingslab_DWE.Patch.x_lower.BCPressure.Cycle = 'constant'
@@ -254,7 +254,7 @@ overland_slopingslab_DWE.Solver.Linear.MaxRestart = 2
 
 overland_slopingslab_DWE.Solver.Linear.Preconditioner = 'PFMG'
 overland_slopingslab_DWE.Solver.PrintSubsurf = False
-overland_slopingslab_DWE. = 'Solver.Drop 1E_20'
+overland_slopingslab_DWE.Solver.Drop = 1E-20
 overland_slopingslab_DWE.Solver.AbsTol = 1E-10
 
 overland_slopingslab_DWE.Solver.OverlandDiffusive.Epsilon = 1E-5
@@ -286,9 +286,9 @@ overland_slopingslab_DWE.Geom.domain.ICPressure.RefPatch = 'z_upper'
 #-----------------------------------------------------------------------------
 
 #set runcheck to 1 if you want to run the pass fail tests
-runcheck = 1
+# runcheck = 1
 # source pftest.tcl
-first = 1
+# first = 1
 
 ###############################
 # Looping over slab configurations
@@ -339,7 +339,7 @@ first = 1
 # }
 
 #set to 1 if you want to run the pass fail tests
-runcheck = 1
+# runcheck = 1
 # source pftest.tcl
 
 ###############################
@@ -349,18 +349,18 @@ runcheck = 1
 #   puts "$xslope $yslope $name"
 
 #   #### Set the slopes
-#   pfset TopoSlopesX.Type "Constant"
-#   pfset TopoSlopesX.GeomNames "domain"
-#   pfset TopoSlopesX.Geom.domain.Value $xslope
+overland_slopingslab_DWE.TopoSlopesX.Type = "Constant"
+overland_slopingslab_DWE.TopoSlopesX.GeomNames = "domain"
+overland_slopingslab_DWE.TopoSlopesX.Geom.domain.Value = 0.01
 
-#   pfset TopoSlopesY.Type "Constant"
-#   pfset TopoSlopesY.GeomNames "domain"
-#   pfset TopoSlopesY.Geom.domain.Value $yslope
+overland_slopingslab_DWE.TopoSlopesY.Type = "Constant"
+overland_slopingslab_DWE.TopoSlopesY.GeomNames = "domain"
+overland_slopingslab_DWE.TopoSlopesY.Geom.domain.Value = 0.01
 
-#    #new BC
-#    pfset Patch.z-upper.BCPressure.Type		      OverlandDiffusive
-#    pfset Solver.Nonlinear.UseJacobian                       True
-#    #pfset Solver.Linear.Preconditioner.PCMatrixType         FullJacobian
+#   #original approach from K&M AWR 2006
+overland_slopingslab_DWE.Patch.z_upper.BCPressure.Type = 'OverlandFlow'
+overland_slopingslab_DWE.Solver.Nonlinear.UseJacobian = False
+overland_slopingslab_DWE.Solver.Linear.Preconditioner.PCMatrixType = 'PFSymmetric'
 
 #    set runname Slab.$name.OverlandDif
 #    puts "Running $runname OverlandDiffusive Jacobian True"
@@ -387,7 +387,7 @@ runcheck = 1
 # }
 
 #set to 1 if you want to run the pass fail tests
-runcheck = 1
+# runcheck = 1
 # source pftest.tcl
 
 ###############################

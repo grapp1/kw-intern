@@ -10,9 +10,9 @@ overland_tiltedV_KWE = Run("overland_tiltedV_KWE", __file__)
 overland_tiltedV_KWE.FileVersion = 4
 
 
-overland_tiltedV_KWE.Process.Topology.P = [lindex $argv 0]
-overland_tiltedV_KWE.Process.Topology.Q = [lindex $argv 1]
-overland_tiltedV_KWE.Process.Topology.R = [lindex $argv 2]
+overland_tiltedV_KWE.Process.Topology.P = 1
+overland_tiltedV_KWE.Process.Topology.Q = 1
+overland_tiltedV_KWE.Process.Topology.R = 1
 
 
 #---------------------------------------------------------
@@ -102,9 +102,9 @@ overland_tiltedV_KWE.Perm.TensorType = 'TensorByGeom'
 
 overland_tiltedV_KWE.Geom.Perm.TensorByGeom.Names = 'domain'
 
-overland_tiltedV_KWE.Geom.domain.Perm.TensorValX = 1.0d0
-overland_tiltedV_KWE.Geom.domain.Perm.TensorValY = 1.0d0
-overland_tiltedV_KWE.Geom.domain.Perm.TensorValZ = 1.0d0
+overland_tiltedV_KWE.Geom.domain.Perm.TensorValX = 1.0
+overland_tiltedV_KWE.Geom.domain.Perm.TensorValY = 1.0
+overland_tiltedV_KWE.Geom.domain.Perm.TensorValZ = 1.0
 
 #-----------------------------------------------------------------------------
 # Specific Storage
@@ -215,7 +215,7 @@ overland_tiltedV_KWE.Cycle.rainrec.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-overland_tiltedV_KWE.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+overland_tiltedV_KWE.BCPressure.PatchNames = overland_tiltedV_KWE.Geom.domain.Patches
 
 overland_tiltedV_KWE.Patch.x_lower.BCPressure.Type = 'FluxConst'
 overland_tiltedV_KWE.Patch.x_lower.BCPressure.Cycle = 'constant'
@@ -287,7 +287,7 @@ overland_tiltedV_KWE.Solver.OverlandKinematic.Epsilon = 1E-5
 
 overland_tiltedV_KWE.Solver.Linear.Preconditioner = 'PFMG'
 overland_tiltedV_KWE.Solver.PrintSubsurf = False
-overland_tiltedV_KWE. = 'Solver.Drop 1E_20'
+overland_tiltedV_KWE.Solver.Drop = 1E-20
 overland_tiltedV_KWE.Solver.AbsTol = 1E-10
 
 overland_tiltedV_KWE.Solver.WriteSiloSubsurfData = False

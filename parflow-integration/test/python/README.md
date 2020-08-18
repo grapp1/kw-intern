@@ -12,15 +12,15 @@ tests that additional to the standard ParFlow test suite.
 - default_richards_wells.tcl
 - forsyth2.tcl
 - harvey_flow.tcl
-- harvey_flow_pgs.tcl TODO
+- harvey_flow_pgs.tcl
 - crater2D.tcl
 - crater2D_vangtable_spline.tcl
 - crater2D_vangtable_linear.tcl
 - small_domain.tcl TODO
 - richards_hydrostatic_equalibrium.tcl TODO
 - default_richards_nocluster.tcl
-- octree-simple.tcl TODO
-- octree-large-domain.tcl TODO
+- octree-simple.tcl
+- octree-large-domain.tcl
 - terrain_following_grid_overland.tcl  TODO
 - var_dz_1D.tcl TODO
 - pfmg.tcl TODO
@@ -28,11 +28,11 @@ tests that additional to the standard ParFlow test suite.
 - smg.tcl TODO
 - pfmg_octree.tcl TODO
 - van-genuchten-file.tcl TODO
-- overland_slopingslab_KWE.tcl TODO
-- overland_tiltedV_KWE.tcl TODO
-- overland_slopingslab_DWE.tcl TODO
-- overland_tiltedV_DWE.tcl TODO
-- overland_FlatICP.tcl TODO
+- overland_slopingslab_KWE.tcl NEEDUPDATE
+- overland_tiltedV_KWE.tcl NEEDUPDATE
+- overland_slopingslab_DWE.tcl NEEDUPDATE
+- overland_tiltedV_DWE.tcl NEEDUPDATE
+- overland_FlatICP.tcl NEEDUPDATE
 - richards_FBx.tcl TODO
 - richards_FBy.tcl TODO
 - richards_box_proctest.tcl TODO

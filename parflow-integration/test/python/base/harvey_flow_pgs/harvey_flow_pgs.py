@@ -103,18 +103,19 @@ harvey_flow_pgs.Geom.lower_aquifer.Upper.Z = 1.5
 harvey_flow_pgs.Geom.Perm.Names = 'upper_aquifer lower_aquifer'
 # we open a file, in this case from PEST to set upper and lower kg and sigma
 #
-fileId = [open stats4.txt r 0600]
-kgu = [gets $fileId]
-varu = [gets $fileId]
-kgl = [gets $fileId]
-varl = [gets $fileId]
+# fileId = [open stats4.txt r 0600]
+kgu = 83
+varu = 0.31
+kgl = 87.3
+varl = 0.22
 # close $fileId
 
 
 ## we use the parallel turning bands formulation in ParFlow to simulate
 ## GRF for upper and lower aquifer
 ##
-
+harvey_flow_pgs.Geom.upper_aquifer.Perm.Seed = 33335
+harvey_flow_pgs.Geom.lower_aquifer.Perm.Seed = 31315
 
 harvey_flow_pgs.Geom.upper_aquifer.Perm.LambdaX = 3.60
 harvey_flow_pgs.Geom.upper_aquifer.Perm.LambdaY = 3.60
@@ -149,21 +150,21 @@ harvey_flow_pgs.Geom.lower_aquifer.Perm.LogNormal = 'Log'
 harvey_flow_pgs.Geom.lower_aquifer.Perm.StratType = 'Bottom'
 
 harvey_flow_pgs.Geom.upper_aquifer.Perm.Seed = 1
-harvey_flow_pgs.Geom.upper_aquifer.Perm.MaxNPts = 70.0
+harvey_flow_pgs.Geom.upper_aquifer.Perm.MaxNPts = 70
 harvey_flow_pgs.Geom.upper_aquifer.Perm.MaxCpts = 20
 
 harvey_flow_pgs.Geom.lower_aquifer.Perm.Seed = 1
-harvey_flow_pgs.Geom.lower_aquifer.Perm.MaxNPts = 70.0
+harvey_flow_pgs.Geom.lower_aquifer.Perm.MaxNPts = 70
 harvey_flow_pgs.Geom.lower_aquifer.Perm.MaxCpts = 20
 
-#pfset Geom.lower_aquifer.Perm.Type "TurnBands"
-#pfset Geom.upper_aquifer.Perm.Type "TurnBands"
+harvey_flow_pgs.Geom.lower_aquifer.Perm.Type = "TurnBands"
+harvey_flow_pgs.Geom.upper_aquifer.Perm.Type = "TurnBands"
 
 # uncomment the lines below to run parallel gaussian instead
 # of parallel turning bands
 
-harvey_flow_pgs.Geom.lower_aquifer.Perm.Type = 'ParGauss'
-harvey_flow_pgs.Geom.upper_aquifer.Perm.Type = 'ParGauss'
+# harvey_flow_pgs.Geom.lower_aquifer.Perm.Type = 'ParGauss'
+# harvey_flow_pgs.Geom.upper_aquifer.Perm.Type = 'ParGauss'
 
 #pfset lower aqu and upper aq stats to pest/read in values
 
@@ -301,7 +302,7 @@ harvey_flow_pgs.Patch.top.BCPressure.alltime.Value = 0.0
 # need keys for them
 
 harvey_flow_pgs.TopoSlopesX.Type = 'Constant'
-harvey_flow_pgs.TopoSlopesX.GeomNames = ''
+harvey_flow_pgs.TopoSlopesX.GeomNames = 'domain'
 
 harvey_flow_pgs.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -310,7 +311,7 @@ harvey_flow_pgs.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 harvey_flow_pgs.TopoSlopesY.Type = 'Constant'
-harvey_flow_pgs.TopoSlopesY.GeomNames = ''
+harvey_flow_pgs.TopoSlopesY.GeomNames = 'domain'
 
 harvey_flow_pgs.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -321,7 +322,7 @@ harvey_flow_pgs.TopoSlopesY.Geom.domain.Value = 0.0
 # need a key for them
 
 harvey_flow_pgs.Mannings.Type = 'Constant'
-harvey_flow_pgs.Mannings.GeomNames = ''
+harvey_flow_pgs.Mannings.GeomNames = 'domain'
 harvey_flow_pgs.Mannings.Geom.domain.Value = 0.
 
 #-----------------------------------------------------------------------------
@@ -343,68 +344,4 @@ harvey_flow_pgs.Solver.Drop = 1E-15
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
 
-# this script is setup to run 100 realizations, for testing we just run one
-###set n_runs 100
-n_runs = 1
-
-#
-#  Loop through runs
-#
-# for {set k 1} {$k <= $n_runs} {incr k 1} {
-#
-# set the random seed to be different for every run
-#
-harvey_flow_pgs.Geom.upper_aquifer.Perm.Seed = [ expr 33333+2*$k ]
-harvey_flow_pgs.Geom.lower_aquifer.Perm.Seed = [ expr 31313+2*$k ]
-
-
-
-# pfrun harvey_flow_pgs.$k
-# pfundist harvey_flow_pgs.$k
-
-# we use pf tools to convert from pressure to head
-# we could do a number of other things here like copy files to different format
-press = [pfload harvey_flow_pgs.$k.out.press.pfb]
-head = [pfhhead $press]
-# pfsave $head -pfb harvey_flow_pgs.$k.head.pfb
-# }
-
-# this could run other tcl scripts now an example is below
-#puts stdout "running SLIM"
-#source bromide_trans.sm.tcl
-
-#
-# Tests 
-#
-# source pftest.tcl
-
-passed = 1
-
-# if ![pftestFile harvey_flow_pgs.1.out.press.pfb "Max difference in Pressure" $sig_digits] {
-#     set passed 0
-# }
-
-# if ![pftestFile harvey_flow_pgs.1.out.porosity.pfb "Max difference in Porosity" $sig_digits] {
-#     set passed 0
-# }
-
-# if ![pftestFile harvey_flow_pgs.1.head.pfb "Max difference in Head" $sig_digits] {
-#     set passed 0
-# }
-
-# if ![pftestFile harvey_flow_pgs.1.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile harvey_flow_pgs.1.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile harvey_flow_pgs.1.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# if $passed {
-#     puts "harvey_flow_pgs.1 : PASSED"
-# } {
-#     puts "harvey_flow_pgs.1 : FAILED"
-# }
 harvey_flow_pgs.run()

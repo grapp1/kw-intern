@@ -254,12 +254,41 @@ class ValidFile:
             f'Could not locate file {os.path.abspath(os.path.join(working_directory, value))}'))
         return errors
 
+
 # -----------------------------------------------------------------------------
 
 
-class Deprecated:
+class AddedInVersion:
     '''
-    Deprecated domain deals with keys that have been or will be deprecated. It
+    AddedInVersion domain deals with keys that were added to the ParFlow code in
+    recent versions. It will check your version of ParFlow with the added version
+    and print an error if your ParFlow version does not have the given key.
+    '''
+    def validate(self, value, arg, pf_version=None, **kwargs):
+        errors = []
+
+        if value is None:
+            return errors
+
+        version = get_comparable_version(arg)
+        current_version = get_comparable_version(pf_version)
+
+        if version <= current_version:
+            errors.append(error(f'Removed in v{arg}'))
+
+        if version > current_version:
+            errors.append(warning(f'Will be removed in v{arg}'))
+
+        return errors
+
+
+
+# -----------------------------------------------------------------------------
+
+
+class DeprecatedInVersion:
+    '''
+    DeprecatedInVersion domain deals with keys that have been or will be deprecated. It
     will check your version of ParFlow with the deprecated version and print
     an error or warning depending on whether the key has been deprecated.
     '''
@@ -283,9 +312,9 @@ class Deprecated:
 # -----------------------------------------------------------------------------
 
 
-class Removed:
+class RemovedInVersion:
     '''
-    Removed domain deals with keys that have been or will be removed from the
+    RemovedInVersion domain deals with keys that have been or will be removed from the
     ParFlow code. It will check your version of ParFlow with the removed version
     and print an error or warning depending on whether the key has been or will
     be removed.

@@ -11,9 +11,9 @@ richards_FBx = Run("richards_FBx", __file__)
 
 richards_FBx.FileVersion = 4
 
-richards_FBx.Process.Topology.P = [lindex $argv 0]
-richards_FBx.Process.Topology.Q = [lindex $argv 1]
-richards_FBx.Process.Topology.R = [lindex $argv 2]
+richards_FBx.Process.Topology.P = 1
+richards_FBx.Process.Topology.Q = 1
+richards_FBx.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -164,24 +164,24 @@ richards_FBx.FBx.Type = 'PFBFile'
 richards_FBx.Geom.domain.FBx.FileName = 'Flow_Barrier_X.pfb'
 
 ## write flow boundary file
-fileId = [open Flow_Barrier_X.sa w]
-# puts $fileId "20 20 20"
-# for { set kk 0 } { $kk < 20 } { incr kk } {
-# for { set jj 0 } { $jj < 20 } { incr jj } {
-# for { set ii 0 } { $ii < 20 } { incr ii } {
-
-# 	if {$ii == 9} {
-# 		# from cell 10 (index 9) to cell 11
-# 		# reduction of 1E-3
-# 		puts $fileId "0.001"
-# 	} else {
-# 		puts $fileId "1.0"  }
-# }
-# }
-# }
-# close $fileId
-
-FBx = [pfload -sa Flow_Barrier_X.sa]
+# fileId = [open Flow_Barrier_X.sa w]
+# # puts $fileId "20 20 20"
+# # for { set kk 0 } { $kk < 20 } { incr kk } {
+# # for { set jj 0 } { $jj < 20 } { incr jj } {
+# # for { set ii 0 } { $ii < 20 } { incr ii } {
+#
+# # 	if {$ii == 9} {
+# # 		# from cell 10 (index 9) to cell 11
+# # 		# reduction of 1E-3
+# # 		puts $fileId "0.001"
+# # 	} else {
+# # 		puts $fileId "1.0"  }
+# # }
+# # }
+# # }
+# # close $fileId
+#
+# FBx = [pfload -sa Flow_Barrier_X.sa]
 # pfsetgrid {20 20 20} {0.0 0.0 0.0} {1.0 1.0 1.0} $FBx
 # pfsave $FBx -pfb Flow_Barrier_X.pfb
 
@@ -240,7 +240,7 @@ richards_FBx.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBx.TopoSlopesX.Type = 'Constant'
-richards_FBx.TopoSlopesX.GeomNames = ''
+richards_FBx.TopoSlopesX.GeomNames = 'domain'
 
 richards_FBx.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -249,7 +249,7 @@ richards_FBx.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBx.TopoSlopesY.Type = 'Constant'
-richards_FBx.TopoSlopesY.GeomNames = ''
+richards_FBx.TopoSlopesY.GeomNames = 'domain'
 
 richards_FBx.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -258,7 +258,7 @@ richards_FBx.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBx.Mannings.Type = 'Constant'
-richards_FBx.Mannings.GeomNames = ''
+richards_FBx.Mannings.GeomNames = 'domain'
 richards_FBx.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -309,29 +309,5 @@ richards_FBx.Solver.Linear.Preconditioner = 'PFMG'
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests
-#
-# source pftest.tcl
-passed = 1
-
-
-# foreach i "00000 00001 00002 00003 00004 00005 00006 00007 00008 00009 00010" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
 richards_FBx.run()

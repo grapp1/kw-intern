@@ -90,8 +90,9 @@ richards_hydrostatic_equalibrium.Geom.background.Perm.TensorValZ = 1.0
 
 # kf-Zone
 
-richards_hydrostatic_equalibrium.Geom.kfzone.Perm.Type = 'Constant'
-richards_hydrostatic_equalibrium.Geom.kfzone.Perm.Value = 40
+# is the kfzone defined or used?
+# richards_hydrostatic_equalibrium.Geom.kfzone.Perm.Type = 'Constant'
+# richards_hydrostatic_equalibrium.Geom.kfzone.Perm.Value = 40
 
 
 #-----------------------------------------------------------------------------
@@ -230,7 +231,7 @@ richards_hydrostatic_equalibrium.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 richards_hydrostatic_equalibrium.TopoSlopesX.Type = 'Constant'
-richards_hydrostatic_equalibrium.TopoSlopesX.GeomNames = ''
+richards_hydrostatic_equalibrium.TopoSlopesX.GeomNames = 'domain'
 
 richards_hydrostatic_equalibrium.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -239,7 +240,7 @@ richards_hydrostatic_equalibrium.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_hydrostatic_equalibrium.TopoSlopesY.Type = 'Constant'
-richards_hydrostatic_equalibrium.TopoSlopesY.GeomNames = ''
+richards_hydrostatic_equalibrium.TopoSlopesY.GeomNames = 'domain'
 
 richards_hydrostatic_equalibrium.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -248,7 +249,7 @@ richards_hydrostatic_equalibrium.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_hydrostatic_equalibrium.Mannings.Type = 'Constant'
-richards_hydrostatic_equalibrium.Mannings.GeomNames = ''
+richards_hydrostatic_equalibrium.Mannings.GeomNames = 'domain'
 richards_hydrostatic_equalibrium.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -304,38 +305,5 @@ richards_hydrostatic_equalibrium.Solver.WriteSiloConcentration = True
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile $runname.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile $runname.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
 richards_hydrostatic_equalibrium.run()

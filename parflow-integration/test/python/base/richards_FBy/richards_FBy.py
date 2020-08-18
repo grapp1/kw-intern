@@ -11,9 +11,9 @@ richards_FBy = Run("richards_FBy", __file__)
 
 richards_FBy.FileVersion = 4
 
-richards_FBy.Process.Topology.P = [lindex $argv 0]
-richards_FBy.Process.Topology.Q = [lindex $argv 1]
-richards_FBy.Process.Topology.R = [lindex $argv 2]
+richards_FBy.Process.Topology.P = 1
+richards_FBy.Process.Topology.Q = 1
+richards_FBy.Process.Topology.R = 1
 
 #---------------------------------------------------------
 # Computational Grid
@@ -164,7 +164,7 @@ richards_FBy.FBy.Type = 'PFBFile'
 richards_FBy.Geom.domain.FBy.FileName = 'Flow_Barrier_Y.pfb'
 
 ## write flow barrier file
-fileId = [open Flow_Barrier_Y.sa w]
+# fileId = [open Flow_Barrier_Y.sa w]
 # puts $fileId "20 20 20"
 # for { set kk 0 } { $kk < 20 } { incr kk } {
 # for { set jj 0 } { $jj < 20 } { incr jj } {
@@ -181,7 +181,7 @@ fileId = [open Flow_Barrier_Y.sa w]
 # }
 # close $fileId
 
-FBy = [pfload -sa Flow_Barrier_Y.sa]
+# FBy = [pfload -sa Flow_Barrier_Y.sa]
 # pfsetgrid {20 20 20} {0.0 0.0 0.0} {1.0 1.0 1.0} $FBy
 # pfsave $FBy -pfb Flow_Barrier_Y.pfb
 
@@ -240,7 +240,7 @@ richards_FBy.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBy.TopoSlopesX.Type = 'Constant'
-richards_FBy.TopoSlopesX.GeomNames = ''
+richards_FBy.TopoSlopesX.GeomNames = 'domain'
 
 richards_FBy.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -249,7 +249,7 @@ richards_FBy.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBy.TopoSlopesY.Type = 'Constant'
-richards_FBy.TopoSlopesY.GeomNames = ''
+richards_FBy.TopoSlopesY.GeomNames = 'domain'
 
 richards_FBy.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -258,7 +258,7 @@ richards_FBy.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 richards_FBy.Mannings.Type = 'Constant'
-richards_FBy.Mannings.GeomNames = ''
+richards_FBy.Mannings.GeomNames = 'domain'
 richards_FBy.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -309,29 +309,5 @@ richards_FBy.Solver.Linear.Preconditioner = 'PFMG'
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $runname
-# pfundist $runname
 
-#
-# Tests
-#
-# source pftest.tcl
-passed = 1
-
-
-# foreach i "00000 00001 00002 00003 00004 00005 00006 00007 00008 00009 00010" {
-#     if ![pftestFile $runname.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile $runname.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "$runname : PASSED"
-# } {
-#     puts "$runname : FAILED"
-# }
 richards_FBy.run()

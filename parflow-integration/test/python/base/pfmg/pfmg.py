@@ -32,8 +32,7 @@ pfmg.ComputationalGrid.NZ = 8
 #---------------------------------------------------------
 # The Names of the GeomInputs
 #---------------------------------------------------------
-pfmg.GeomInput.Names = 'domain_input background_input source_region_input \'
-# 		       concen_region_input"
+pfmg.GeomInput.Names = 'domain_input background_input source_region_input concen_region_input'
 
 
 #---------------------------------------------------------
@@ -257,7 +256,7 @@ pfmg.Patch.top.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 pfmg.TopoSlopesX.Type = 'Constant'
-pfmg.TopoSlopesX.GeomNames = ''
+pfmg.TopoSlopesX.GeomNames = 'domain'
 
 pfmg.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -266,7 +265,7 @@ pfmg.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 pfmg.TopoSlopesY.Type = 'Constant'
-pfmg.TopoSlopesY.GeomNames = ''
+pfmg.TopoSlopesY.GeomNames = 'domain'
 
 pfmg.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -275,7 +274,7 @@ pfmg.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 pfmg.Mannings.Type = 'Constant'
-pfmg.Mannings.GeomNames = ''
+pfmg.Mannings.GeomNames = 'domain'
 pfmg.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -330,38 +329,5 @@ pfmg.Solver.Linear.Preconditioner.PFMG.Smoother = 'WJacobi'
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun pfmg
-# pfundist pfmg
 
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile pfmg.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile pfmg.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile pfmg.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004 00005" {
-#     if ![pftestFile pfmg.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-#     if ![pftestFile pfmg.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-#     set passed 0
-# }
-# }
-
-
-# if $passed {
-#     puts "pfmg : PASSED"
-# } {
-#     puts "pfmg : FAILED"
-# }
 pfmg.run()

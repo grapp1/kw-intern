@@ -1011,6 +1011,7 @@ Solver:
           EnumDomain:
             enum_list:
               - FullJacobian
+              - PFSymmetric
 
       # defining key for Solver.Linear.Preconditioner.{precond_method}... keys
       .{precond_method}:

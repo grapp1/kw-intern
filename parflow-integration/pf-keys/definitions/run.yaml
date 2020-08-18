@@ -51,8 +51,8 @@ BaseRun:
     domains:
       MandatoryValue:
       IntValue:
-#      Deprecated: '3.6.0'
-#      Removed: '5.1.0'
+#      DeprecatedInVersion: '3.6.0'
+#      RemovedInVersion: '5.1.0'
 
   # -----------------------------------------------------------------------------
   # Gravity
