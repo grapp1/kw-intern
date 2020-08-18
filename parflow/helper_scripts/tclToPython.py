@@ -62,11 +62,12 @@ def tclToPython(tclfile, pyfile, runname):
 
   return
 
-directory = '/Users/grapp/kw-intern/parflow/tcl_original'
+# directory = '/Users/grapp/kw-intern/parflow/tcl_original'
+#
+# for file_name in os.listdir(directory):
+#     if file_name.endswith(".tcl"):
+#         full_name = os.path.join(directory, file_name)
+#         tclToPython(full_name, f'Users/grapp/kw-intern/parflow/python/test/raw_converted/{file_name[:-4]}.py', f'{file_name[:-4]}')
 
-for file_name in os.listdir(directory):
-    if file_name.endswith(".tcl"):
-        full_name = os.path.join(directory, file_name)
-        tclToPython(full_name, f'Users/grapp/kw-intern/parflow/python/test/raw_converted/{file_name[:-4]}.py', f'{file_name[:-4]}')
 
-
+# tclToPython('/Users/grapp/kw-intern/parflow/tcl_original/richards_box_proctest_vardz.tcl', f'Users/grapp/kw-intern/parflow/python/test/raw_converted/richards_box_proctest_vardz.py', 'richards_box_proctest_vardz')

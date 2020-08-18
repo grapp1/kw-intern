@@ -23,20 +23,19 @@ tests that additional to the standard ParFlow test suite.
 - octree-large-domain.tcl
 - terrain_following_grid_overland.tcl  TODO
 - var_dz_1D.tcl TODO
-- pfmg.tcl TODO
-- pfmg_galerkin.tcl TODO
+- pfmg.tcl
+- pfmg_galerkin.tcl
 - smg.tcl TODO
-- pfmg_octree.tcl TODO
+- pfmg_octree.tcl
 - van-genuchten-file.tcl TODO
 - overland_slopingslab_KWE.tcl NEEDUPDATE
 - overland_tiltedV_KWE.tcl NEEDUPDATE
 - overland_slopingslab_DWE.tcl NEEDUPDATE
 - overland_tiltedV_DWE.tcl NEEDUPDATE
 - overland_FlatICP.tcl NEEDUPDATE
-- richards_FBx.tcl TODO
-- richards_FBy.tcl TODO
-- richards_box_proctest.tcl TODO
-- richards_box_proctest.vardz.tcl TODO
+- richards_FBx.tcl
+- richards_FBy.tcl
+- richards_box_proctest.tcl
 
 ### base_2d
 
@@ -47,7 +46,7 @@ tests that additional to the standard ParFlow test suite.
 - LW_var_dz.tcl NEEDSDIST
 - LW_var_dz_spinup.tcl TODO
 - overland_slopingslab_KWE.tcl TODO
-- richards_box_proctest.vardz.tcl TODO
+- richards_box_proctest_vardz.tcl NEEDUPDATE
 
 ### base_3d
 
