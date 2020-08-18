@@ -1,5 +1,5 @@
-size = 1
-name = "small_domain"
+
+
 #  This is a 2D sloped problem w/ time varying input and topography
 #  it is used as a test of active/inactive efficiency
 #
@@ -11,6 +11,8 @@ name = "small_domain"
 #
 from parflow import Run
 small_domain = Run("small_domain", __file__)
+
+size = 1
 
 small_domain.FileVersion = 4
 
@@ -25,25 +27,25 @@ small_domain.ComputationalGrid.Lower.X = 0.0
 small_domain.ComputationalGrid.Lower.Y = 0.0
 small_domain.ComputationalGrid.Lower.Z = 0.0
 
-small_domain.ComputationalGrid.NX = [expr 100*$size]
+small_domain.ComputationalGrid.NX = 100*size
 small_domain.ComputationalGrid.NY = 1
-small_domain.ComputationalGrid.NZ = [expr 100*$size]
+small_domain.ComputationalGrid.NZ = 100*size
 
-UpperX = [expr 400*$size]
+UpperX = 400*size
 UpperY = 1.0
-UpperZ = [expr 200*$size]
+UpperZ = 200*size
 
-LowerX = [pfget ComputationalGrid.Lower.X]
-LowerY = [pfget ComputationalGrid.Lower.Y]
-LowerZ = [pfget ComputationalGrid.Lower.Z]
+LowerX = small_domain.ComputationalGrid.Lower.X
+LowerY = small_domain.ComputationalGrid.Lower.Y
+LowerZ = small_domain.ComputationalGrid.Lower.Z
 
-NX = [pfget ComputationalGrid.NX]
-NY = [pfget ComputationalGrid.NY]
-NZ = [pfget ComputationalGrid.NZ]
+NX = small_domain.ComputationalGrid.NX
+NY = small_domain.ComputationalGrid.NY
+NZ = small_domain.ComputationalGrid.NZ
 
-small_domain.ComputationalGrid.DX = [expr ($UpperX - $LowerX) / $NX]
-small_domain.ComputationalGrid.DY = [expr ($UpperY - $LowerY) / $NY]
-small_domain.ComputationalGrid.DZ = [expr ($UpperZ - $LowerZ) / $NZ]
+small_domain.ComputationalGrid.DX = (UpperX - LowerX) / NX
+small_domain.ComputationalGrid.DY = (UpperY - LowerY) / NY
+small_domain.ComputationalGrid.DZ = (UpperZ - LowerZ) / NZ
 
 #---------------------------------------------------------
 # The Names of the GeomInputs
@@ -66,8 +68,7 @@ small_domain.Geom.background.Upper.X = 99999999.0
 small_domain.Geom.background.Upper.Y = 99999999.0
 small_domain.Geom.background.Upper.Z = 99999999.0
 
-small_domain.Geom.domain.Patches = 'infiltration z_upper x_lower y_lower \'
-#                                       x-upper y-upper z-lower"
+small_domain.Geom.domain.Patches = 'infiltration z_upper x_lower y_lower x_upper y_upper z_lower'
 
 
 #-----------------------------------------------------------------------------
@@ -135,7 +136,7 @@ small_domain.Gravity = 1.0
 small_domain.TimingInfo.BaseUnit = 1.0
 small_domain.TimingInfo.StartCount = 0
 small_domain.TimingInfo.StartTime = 0.0
-small_domain.TimingInfo.StopTime = [expr 30.0*1]
+small_domain.TimingInfo.StopTime = 30.0*1
 small_domain.TimingInfo.DumpInterval = 10
 small_domain.TimeStep.Type = 'Constant'
 small_domain.TimeStep.Value = 10.0
@@ -199,7 +200,7 @@ small_domain.Cycle.onoff.Repeat = -1
 #-----------------------------------------------------------------------------
 # Boundary Conditions: Pressure
 #-----------------------------------------------------------------------------
-small_domain.BCPressure.PatchNames = [pfget Geom.domain.Patches]
+small_domain.BCPressure.PatchNames = small_domain.Geom.domain.Patches
 
 small_domain.Patch.infiltration.BCPressure.Type = 'FluxConst'
 small_domain.Patch.infiltration.BCPressure.Cycle = 'constant'
@@ -235,7 +236,7 @@ small_domain.Patch.z_upper.BCPressure.alltime.Value = 0.0
 #---------------------------------------------------------
 
 small_domain.TopoSlopesX.Type = 'Constant'
-small_domain.TopoSlopesX.GeomNames = ''
+small_domain.TopoSlopesX.GeomNames = 'domain'
 
 small_domain.TopoSlopesX.Geom.domain.Value = 0.0
 
@@ -244,7 +245,7 @@ small_domain.TopoSlopesX.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 small_domain.TopoSlopesY.Type = 'Constant'
-small_domain.TopoSlopesY.GeomNames = ''
+small_domain.TopoSlopesY.GeomNames = 'domain'
 
 small_domain.TopoSlopesY.Geom.domain.Value = 0.0
 
@@ -253,7 +254,7 @@ small_domain.TopoSlopesY.Geom.domain.Value = 0.0
 #---------------------------------------------------------
 
 small_domain.Mannings.Type = 'Constant'
-small_domain.Mannings.GeomNames = ''
+small_domain.Mannings.GeomNames = 'domain'
 small_domain.Mannings.Geom.domain.Value = 0.
 
 #---------------------------------------------------------
@@ -309,41 +310,5 @@ small_domain.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
 #-----------------------------------------------------------------------------
 # Run and Unload the ParFlow output files
 #-----------------------------------------------------------------------------
-# pfrun $name
-# pfundist $name
 
-#
-# Tests 
-#
-# source pftest.tcl
-passed = 1
-
-# if ![pftestFile small_domain.out.perm_x.pfb "Max difference in perm_x" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile small_domain.out.perm_y.pfb "Max difference in perm_y" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile small_domain.out.perm_z.pfb "Max difference in perm_z" $sig_digits] {
-#     set passed 0
-# }
-# if ![pftestFile small_domain.out.porosity.pfb "Max difference in porosity" $sig_digits] {
-#     set passed 0
-# }
-
-# foreach i "00000 00001 00002 00003 00004" {
-#     if ![pftestFile small_domain.out.press.$i.pfb "Max difference in Pressure for timestep $i" $sig_digits] {
-# 	set passed 0
-#     }
-#     if ![pftestFile small_domain.out.satur.$i.pfb "Max difference in Saturation for timestep $i" $sig_digits] {
-# 	set passed 0
-#     }
-# }
-
-
-# if $passed {
-#     puts "small_domain : PASSED"
-# } {
-#     puts "small_domain : FAILED"
-# }
 small_domain.run()
