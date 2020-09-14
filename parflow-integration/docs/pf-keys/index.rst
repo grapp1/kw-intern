@@ -11,8 +11,8 @@ Welcome to the documentation of ParFlow Keys!
    :caption: Contents:
 
    parflow_keys.rst
-   pftools_tutorial/tutorial_pt01.rst
-   pftools_tutorial/tutorial_pt02.rst
+   ./pftools_tutorial/tutorial_pt01.rst
+   ./pftools_tutorial/tutorial_pt02.rst
 
 
 
