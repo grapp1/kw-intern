@@ -58,7 +58,24 @@ You can use our ``tcl2py`` tool to convert the TCL script to a Python script usi
 
    python3 -m parflow.cli.tcl2py -i default_richards.tcl
 
-The converter gets you most of the way there, but there are a few things you'll have to change by hand. Open and edit the new ``.py`` file that you have generated and change the lines that need to be changed. If you are following this example, you will need to edit the ``Process.Topology`` values, the ``GeomInput.Names`` values, and comment out the two ``Solver.Linear.Preconditioner.MGSemi`` keys. Once you have edited your Python script, you can run it like you would any other Python script:
+The converter gets you most of the way there, but there are a few things you'll have to change by hand. Open and edit the new ``.py`` file that you have generated and change the lines that need to be changed. If you are following this example, you will need to edit the ``Process.Topology`` values, the ``GeomInput.Names`` values, and comment out the two ``Solver.Linear.Preconditioner.MGSemi`` keys, as shown here:
+
+.. code-block:: python3
+
+   default_richards.Process.Topology.P = 1
+   default_richards.Process.Topology.Q = 1
+   default_richards.Process.Topology.R = 1
+   ...
+
+   default_richards.GeomInput.Names = 'domain_input background_input source_region_input \
+            concen_region_input'
+   ...
+
+   # default_richards.Solver.Linear.Preconditioner.MGSemi.MaxIter = 1
+   # default_richards.Solver.Linear.Preconditioner.MGSemi.MaxLevels = 100
+
+
+Once you have edited your Python script, you can run it like you would any other Python script:
 
 .. code-block:: language
 

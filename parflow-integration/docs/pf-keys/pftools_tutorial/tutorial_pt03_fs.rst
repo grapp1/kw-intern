@@ -32,7 +32,11 @@ of environment variables and relative paths within your run script:
 .. code-block:: python3
 
    from parflow import Run
-   from parflow.tools.fs import get_absolute_path, exists, mkdir, chdir, cp, rm, get_text_file_content
+   from parflow.tools.fs import get_absolute_path, exists, chdir
+   from parflow.tools.fs import mkdir, cp, rm
+   from parflow.tools.fs import get_text_file_content
+   # Initialize Run object and set working directory
+   test_run = Run("demo", __file__)
 
    # Initialize Run object
    test_run = Run("demo", __file__)
