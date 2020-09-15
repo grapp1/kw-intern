@@ -30,6 +30,40 @@ This means, that you should only use the ``fs`` methods after that initializatio
 The ``parflow.tools.fs`` module offer the following set of methods which all allow usage
 of environment variable and relative path to your run script:
 
+.. code-block:: python3
+
+   from parflow.tools.fs import get_absolute_path, exists, mkdir, chdir, cp, rm, get_text_file_content
+
+   # Create directory in your current run script directory
+   mkdir('input')
+   mkdir('tmp')
+
+   # Copy if file missing
+   if not exists('data.pfb'):
+       # Use environment variable to resolve location of PF_DATA
+       cp('$PF_DATA/data.pfb')
+
+   # Read data using Python tools
+   full_path = get_absolute_path('data.cvs')
+   with open(full_path) as file:
+       pass
+
+   # Or use python working directory
+   chdir('.')
+   with open('data.csv') as file:
+       pass
+
+   # Or use the text file content helper
+   txt = get_text_file_content('data.csv')
+
+   # Clean behind yourself
+   rm('tmp')
+
+
+================================================================================
+Full API
+================================================================================
+
 1. ``get_absolute_path(file_path)``: Returns the absolute file path of the relative file location argument ``file_path``.
 2. ``exists(file_path)``: Returns ``True`` or ``False`` as to whether the file at ``file_path`` exists.
 3. ``mkdir(dir_name)``: Makes a new directory ``dir_name``. This works recursively, so it will also create intermediate directories if they do not exist.
@@ -37,6 +71,10 @@ of environment variable and relative path to your run script:
 5. ``cp(source, target_path='.')``: Copies the file specified in the ``source`` argument to the location and/or file name specified in the ``target_path`` argument.
 6. ``rm(path)``: Removes the file or directory located at ``path``.
 7. ``get_text_file_content(file_path)``: Reads a text file located at ``file_path`` and returns its content.
+
+================================================================================
+Example
+================================================================================
 
 If you want more examples on how to leverage those helper functions,
 you can look at ``$PARFLOW_SOURCE/test/python/clm/clm/clm.py``
