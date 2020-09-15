@@ -11,7 +11,7 @@ Distributing files
 
 Let's say you have mastered the conversion of a TCL script to Python, and you have a few PFB files that you need to distribute to convert your workflow to Python. Here, you can use the ``dist()`` method on your ``Run`` object that you created, as mentioned in the first tutorial:
 
-.. code-block:: language
+.. code-block:: python3
 
     LWvdz.dist('lw.1km.slope_x.10x.pfb', 'P'=2, 'Q'=2)
 
@@ -39,7 +39,7 @@ This test is a use case where an internal flow boundary is defined as a numpy ar
 
 We have already covered the first two in prior tutorials. The third line imports the ``PFData`` class from the ``parflowio.pyParflowio`` module, and the fourth line imports the ``numpy`` module. We convert a numpy array to a PFB file by instantiating it as a ``PFData`` object. Head down to lines 172 through 184 to see how this is used:
 
-.. code-block:: language
+.. code-block:: python3
 
     ## write flow boundary file
     FBx_data = np.full((20, 20, 20), 1.0)
@@ -70,7 +70,7 @@ Now that we understand how to write a PFB file, how about reading one? This can 
 
 Let's say you want to visualize some of your output data from the model you just ran, ``richards_FBx.py``. In the script, add the following lines to the bottom:
 
-.. code-block:: language
+.. code-block:: python3
 
     FBx_press_out = PFData(get_absolute_path('richards_FBx.out.press.00010.pfb'))
     FBx_press_out.loadHeader()
