@@ -1,40 +1,20 @@
 ********************************************************************************
-Python PFTools Tutorial
+Tutorial 1: Converting TCL to Python
 ********************************************************************************
 
-Introduction
-================================================================================
-
-Welcome to the tutorial for the Python pftools. More documentation can be found here: https://pypi.org/project/pftools/
-
-You will need the following to fully follow this tutorial:
+Welcome to the tutorial for the Python pftools. You will need the following to
+fully follow this tutorial:
 
 - Python >= 3.6
 - ParFlow installed and running, with the correct $PARFLOW_DIR environment variable established
-  (You can check this by running echo $PARFLOW_DIR in your terminal)
+  (You can check this by running ``echo $PARFLOW_DIR`` in your terminal)
 
 The commands in the tutorial assume that you are running a bash shell in Linux or MacOS.
 
 ----
 
-Installation
 ================================================================================
-
-pftools can be installed with the following command:
-
-.. code-block:: language
-
-    pip install pftools
-
-Or, if you are a developer, you can clone the latest ParFlow repo, which has the source code in the directory *parflow/pftools/python/*:
-
-.. code-block:: language
-
-    git clone https://github.com/parflow/parflow.git
-
-----
-
-Tutorial 1: Converting a TCL File to run in Python
+Installing and testing Python PFTools in a virtual environment
 ================================================================================
 In this first tutorial, we will set up a virtual environment with pftools and its dependencies before importing a TCL file, converting it to Python, and running ParFlow.
 
@@ -60,6 +40,10 @@ Test your pftools installation:
 
 The run should execute successfully, printing the message ``ParFlow ran successfully``.
 
+================================================================================
+Importing and converting a TCL file
+================================================================================
+
 Great, now you have a working ParFlow interface! Next, create a new directory and import a TCL file (example here drawn from the ParFlow TCL tests):
 
 .. code-block:: language
@@ -80,4 +64,4 @@ The converter gets you most of the way there, but there are a few things you'll 
 
    python3 default_richards.py
 
-Voilà! You have now successfully converted your first ParFlow TCL script to Python. In the next tutorial, we'll get more advanced to leverage the many other features in the Python pftools. Onward!
+Voilà! You have now successfully converted your first ParFlow TCL script to Python. In the next tutorial, we'll get more advanced to leverage the many other features in the Python PFTools. Onward!

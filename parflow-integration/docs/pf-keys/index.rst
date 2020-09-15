@@ -11,8 +11,10 @@ Welcome to the documentation of ParFlow Keys!
    :caption: Contents:
 
    parflow_keys.rst
-   ./pftools_tutorial/tutorial_pt01.rst
-   ./pftools_tutorial/tutorial_pt02.rst
+   ./pftools_tutorial/tutorial_pt01_intro.rst
+   ./pftools_tutorial/tutorial_pt02_tcl2py.rst
+   ./pftools_tutorial/tutorial_pt03_run-script.rst
+   ./pftools_tutorial/tutorial_pt04_fs.rst
 
 
 
