@@ -24,10 +24,10 @@ keep editing your script.
 
 
 The working directory used to resolved your relative path get automatically set
-when you initialize your run instance by doing `myRun = Run("demo", __file__)`.
-This means, that you should only use the `fs` methods after that initialization line.
+when you initialize your run instance by doing ``myRun = Run("demo", __file__)``.
+This means, that you should only use the ``fs`` methods after that initialization line.
 
-The `parflow.tools.fs` module offer the following set of methods which all allow usage
+The ``parflow.tools.fs`` module offer the following set of methods which all allow usage
 of environment variable and relative path to your run script:
 
 1. ``get_absolute_path(file_path)``: Returns the absolute file path of the relative file location argument ``file_path``.
@@ -39,7 +39,7 @@ of environment variable and relative path to your run script:
 7. ``get_text_file_content(file_path)``: Reads a text file located at ``file_path`` and returns its content.
 
 If you want more examples on how to leverage those helper functions,
-you can look at `$PARFLOW_SOURCE/test/python/clm/clm/clm.py`
+you can look at ``$PARFLOW_SOURCE/test/python/clm/clm/clm.py``
 
 The syntax and usage is more compact than the ``os`` and ``shutil`` methods commonly used in Python.
 If you don't provide an absolute path to the file name, these functions will use ``get_absolute_path``
