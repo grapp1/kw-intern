@@ -15,6 +15,7 @@ Welcome to the documentation of ParFlow Keys!
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst
    ./pftools_tutorial/tutorial_pt02_run-script.rst
    ./pftools_tutorial/tutorial_pt03_fs.rst
+   ./pftools_tutorial/tutorial_pt04_pfb.rst
 
 
 
