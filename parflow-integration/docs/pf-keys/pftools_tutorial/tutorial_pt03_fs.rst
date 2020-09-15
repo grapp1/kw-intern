@@ -15,12 +15,12 @@ You can simply do the following to achieve exactly that while using environment
 variable interpolation to dynamically adapt your run script at runtime without
 keep editing your script.
 
-.. code-block::python3
+.. code-block:: python3
 
-    from parflow.tools.fs import mkdir, cp
+   from parflow.tools.fs import mkdir, cp
 
-    mkdir('input-data')
-    cp('$PF_SRC/test/input/*.pfb', './input-data/')
+   mkdir('input-data')
+   cp('$PF_SRC/test/input/*.pfb', './input-data/')
 
 
 The working directory used to resolved your relative path get automatically set
