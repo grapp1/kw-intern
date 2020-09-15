@@ -1,11 +1,34 @@
 ********************************************************************************
 Tutorial 3: Files!
 ********************************************************************************
-Files in ParFlow are like sand at the beach: everywhere. Fortunately, Python PFTools has some helpful functions to read, write, move, and reference files that take some of the headache out of working with the many input and output files necessary for a given run. You can import these functions into your Python environment with the command ``from parflow.tools.fs import [function1, function2, ...]``. The available functions in this module are below.
+Files in ParFlow are like sand at the beach: everywhere.
+Python native modules offers plenty of methods to handle files and directories
+but they are not necessarily convenient when dealing with a ParFlow runs.
+Fortunately, Python PFTools has some helpful functions to deal with the ParFlow
+run working directory.
 
-================================================================================
-Functions
-================================================================================
+For example, lets pretend you want to automatically create a sub-directory for
+your run while copying some data files into it at run time based on where your
+run script lives.
+
+You can simply do the following to achieve exactly that while using environment
+variable interpolation to dynamically adapt your run script at runtime without
+keep editing your script.
+
+.. code-block::python3
+
+    from parflow.tools.fs import mkdir, cp
+
+    mkdir('input-data')
+    cp('$PF_SRC/test/input/*.pfb', './input-data/')
+
+
+The working directory used to resolved your relative path get automatically set
+when you initialize your run instance by doing `myRun = Run("demo", __file__)`.
+This means, that you should only use the `fs` methods after that initialization line.
+
+The `parflow.tools.fs` module offer the following set of methods which all allow usage
+of environment variable and relative path to your run script:
 
 1. ``get_absolute_path(file_path)``: Returns the absolute file path of the relative file location argument ``file_path``.
 2. ``exists(file_path)``: Returns ``True`` or ``False`` as to whether the file at ``file_path`` exists.
@@ -15,19 +38,10 @@ Functions
 6. ``rm(path)``: Removes the file or directory located at ``path``.
 7. ``get_text_file_content(file_path)``: Reads a text file located at ``file_path`` and returns its content.
 
-================================================================================
-Example
-================================================================================
-Let's start from the ``pftools_tutorial`` directory that you made in the first tutorial, and copy in one of the Python script examples from the ParFlow repo:
+If you want more examples on how to leverage those helper functions,
+you can look at `$PARFLOW_SOURCE/test/python/clm/clm/clm.py`
 
-.. code-block:: language
-
-    mkdir -p ~/path/pftools_tutorial/fs
-    cd ~/path/pftools_tutorial/fs
-    cp $PARFLOW_SOURCE/test/python/clm/clm/clm.py .
-
-Now, open ``clm.py``. You'll see that it imports and uses the ``mkdir`` and ``cp`` functions from ``parflow.tools.fs``. The syntax and usage is more compact than the ``os`` and ``shutil`` methods commonly used in Python. If you don't provide an absolute path to the file name, these functions will use ``get_absolute_path`` to find the absolute path based on your working directory (which again defaults to the directory where your Python script lives).
-
-----
-
-Try to run this script (``python3 clm.py``). It should fail. Towards the top of the printout, you should see several messages stating ``Error occurred while copying file``. These error messages can be helpful for troubleshooting failing runs. Open up the script again and replace the ``$PF_SRC`` calls with the ``$PARFLOW_SOURCE`` environment variable you made in the first tutorial. Now, try running again. As long as you have CLM compiled, it should work! Add some of the other functions to this script to exercise more of the options in the ``parflow.tools.fs`` toolbox.
+The syntax and usage is more compact than the ``os`` and ``shutil`` methods commonly used in Python.
+If you don't provide an absolute path to the file name, these functions will use ``get_absolute_path``
+to find the absolute path based on your working directory which defaults to the directory where your
+Python script lives.
