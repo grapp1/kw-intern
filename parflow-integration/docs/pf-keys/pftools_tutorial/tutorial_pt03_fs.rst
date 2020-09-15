@@ -23,7 +23,7 @@ having to continuously edit your script:
 
 
 The working directory used to resolve your relative path gets automatically set
-when you initialize your run instance by doing ``my_run = Run("demo", __file__)``.
+when you initialize your run instance by doing ``test_run = Run("demo", __file__)``.
 This means that you should only use the ``fs`` methods after that initialization line.
 
 The ``parflow.tools.fs`` module offers the following set of methods which all allow usage
@@ -31,7 +31,11 @@ of environment variables and relative paths within your run script:
 
 .. code-block:: python3
 
+   from parflow import Run
    from parflow.tools.fs import get_absolute_path, exists, mkdir, chdir, cp, rm, get_text_file_content
+
+   # Initialize Run object
+   test_run = Run("demo", __file__)
 
    # Create directory in your current run script directory
    mkdir('input')
