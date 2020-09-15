@@ -6,17 +6,17 @@ Welcome to the tutorial for the Python pftools. You will need the following to
 fully follow this tutorial:
 
 - Python >= 3.6
-- ParFlow installed and running, with the correct $PARFLOW_DIR environment variable established
+- ParFlow installed and running, with the correct ``$PARFLOW_DIR`` environment variable established
   (You can check this by running ``echo $PARFLOW_DIR`` in your terminal)
 
 The commands in the tutorial assume that you are running a bash shell in Linux or MacOS.
-
-----
 
 ================================================================================
 Installing and testing Python PFTools in a virtual environment
 ================================================================================
 In this first tutorial, we will set up a virtual environment with pftools and its dependencies before importing a TCL file, converting it to Python, and running ParFlow.
+
+----
 
 First, let's set an environment variable for the newly cloned repo:
 
@@ -30,7 +30,7 @@ Now, set up a virtual environment and install pftools:
 
     python3 -m venv tutorial-env
     source tutorial-env/bin/activate
-    pip install pftools
+    pip install pftools[all]
 
 Test your pftools installation:
 
