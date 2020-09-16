@@ -1,8 +1,8 @@
 ********************************************************************************
-Documentation of YAML hierarchy and steps to add a new key to the library
+Steps to add a new key to the library
 ********************************************************************************
 
-YAML file architecture in definitions
+YAML definitions
 ===================================================
 
 The files in this directory are split up into groups to limit their length. Each ParFlow key comprises one or more
@@ -158,7 +158,7 @@ level as the `.{phase_name}` in `Phase.phase_name`. This can also be an absolute
 ---
 
 
-Steps to add a new key to a library
+Steps to add a new key
 ===================================================
 
 1. Select the yaml file that most closely matches the key that you want to add. If your key is a token nested within an
@@ -180,11 +180,3 @@ You should see a longer message indicating an update that lists the overlapping 
 fields were found`.
 
 5. Test your new key. If you have an input script with the new key, you can run that to check whether it's working.
-
-
-
-
-
-
-
-
