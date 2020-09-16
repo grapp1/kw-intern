@@ -1,5 +1,5 @@
 ********************************************************************************
-Tutorial 1: Converting TCL to Python
+From TCL to Python
 ********************************************************************************
 
 Welcome to the tutorial for the Python pftools. You will need the following to

@@ -1,5 +1,5 @@
 ********************************************************************************
-Python PFTools Introduction
+PFTools
 ********************************************************************************
 
 Welcome to Python PFTools. This is a Python package that creates a user-friendly

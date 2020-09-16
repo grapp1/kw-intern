@@ -20,7 +20,7 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'Python ParFlow Keys'
+project = 'ParFlow'
 copyright = '2020, Garrett Rapp'
 author = 'Garrett Rapp'
 
