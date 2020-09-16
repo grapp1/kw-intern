@@ -15,11 +15,13 @@ ParFlow documentation
 .. toctree::
    :maxdepth: 1
    :caption: Python:
+
    ./pftools_tutorial/pftools_intro_usage.rst
 
 .. toctree::
    :maxdepth: 1
    :caption: Python Tutorials:
+
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst
    ./pftools_tutorial/tutorial_pt02_run-script.rst
    ./pftools_tutorial/tutorial_pt03_fs.rst
