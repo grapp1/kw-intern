@@ -4,13 +4,14 @@
    contain the root `toctree` directive.
 
 ParFlow
-=======================================================
+=======
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: ParFlow
 
-   parflow_keys.rst
+   parflow/keys
+   parflow/keys_contribution
 
 
 .. toctree::
@@ -18,8 +19,8 @@ ParFlow
    :hidden:
    :caption: Python
 
-   ./pftools_tutorial/pftools_intro_usage.rst
-   ./pftools_tutorial/tutorial_pt02_run-script.rst
+   ./python/getting_started
+   ./python/run_script
 
 
 .. toctree::
@@ -27,7 +28,6 @@ ParFlow
    :hidden:
    :caption: Tutorials
 
-   ./pftools_tutorial/tutorial_pt01_tcl2py.rst
-   ./pftools_tutorial/tutorial_pt02_run-script.rst
-   ./pftools_tutorial/tutorial_pt03_fs.rst
-   ./pftools_tutorial/tutorial_pt04_pfb.rst
+   ./tutorials/tcl2py
+   ./tutorials/fs
+   ./tutorials/pfb
