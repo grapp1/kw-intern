@@ -11,7 +11,7 @@ ParFlow
    :caption: ParFlow
 
    parflow/keys
-   `Adding keys <parflow/keys_contribution>`
+   parflow/keys_contribution
 
 
 .. toctree::
