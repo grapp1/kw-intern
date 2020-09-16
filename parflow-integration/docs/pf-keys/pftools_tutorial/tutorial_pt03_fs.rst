@@ -1,6 +1,11 @@
 ********************************************************************************
 Filesystem
 ********************************************************************************
+
+================================================================================
+Introduction
+================================================================================
+
 Files in ParFlow are like sand at the beach: everywhere.
 Python's native modules offer plenty of methods to handle files and directories,
 but they can be inconvenient when dealing with a ParFlow runs.

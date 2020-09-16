@@ -1,9 +1,13 @@
 ********************************************************************************
 PFB
 ********************************************************************************
+
+
+================================================================================
+Introduction
+================================================================================
+
 ParFlow Binary (PFB) files are an integral part of ParFlow, and we need an easy way to handle them. Fortunately, we have a supporting Python package, ``parflowio``, that helps us with this. The ``parflowio`` package is included when you install ``pftools`` using either ``pip install pftools[all]`` or ``pip install pftools[pfb]``. ``parflowio`` allows the user to work with numpy arrays, which are easy to visualize and manipulate in Python. We'll walk through some examples working with PFB files in Python to see just how powerful this is.
-
-
 
 ================================================================================
 Distributing

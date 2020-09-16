@@ -19,18 +19,27 @@ ParFlow
 Python
 ------
 
+* **Getting started**:
+  :doc:`Getting started </pftools_tutorial/pftools_intro_usage>` |
+  :doc:`/pftools_tutorial/tutorial_pt02_run-script` |
+
+* **Tutorials**:
+  :doc:`/pftools_tutorial/tutorial_pt01_tcl2py.rst` |
+  :doc:`/pftools_tutorial/tutorial_pt02_run-script` |
+  :doc:`/pftools_tutorial/tutorial_pt03_fs.rst` |
+  :doc:`/pftools_tutorial/tutorial_pt04_pfb.rst` |
+
 .. toctree::
    :maxdepth: 1
+   :hidden:
    :caption: Python
 
    ./pftools_tutorial/pftools_intro_usage.rst
    ./pftools_tutorial/tutorial_pt02_run-script.rst
 
-Tutorials
----------
-
 .. toctree::
    :maxdepth: 1
+   :hidden:
    :caption: Tutorials
 
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst

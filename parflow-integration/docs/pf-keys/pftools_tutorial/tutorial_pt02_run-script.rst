@@ -3,7 +3,7 @@ Run script
 ********************************************************************************
 
 ================================================================================
-Anatomy
+Introduction
 ================================================================================
 
 Recall in the Python scripts we used to run ParFlow in the first tutorial. At the top of the script, there were the following lines:

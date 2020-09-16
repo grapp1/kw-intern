@@ -34,7 +34,7 @@ If you would like to set up a virtual environment to install ``pftools``, execut
 
 
 ================================================================================
-Usage
+Execution
 ================================================================================
 
 Command: ``python3 /path/to/script/run_script.py [args]``
