@@ -8,7 +8,7 @@ ParFlow
 
 .. toctree::
    :maxdepth: 3
-   :caption: ParFlow:
+   :caption: ParFlow
 
    parflow_keys.rst
 
