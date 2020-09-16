@@ -1,6 +1,9 @@
-# Documentation of YAML hierarchy and steps to add a new key to the library
+********************************************************************************
+Documentation of YAML hierarchy and steps to add a new key to the library
+********************************************************************************
 
-## YAML file architecture in definitions:
+YAML file architecture in definitions
+===================================================
 
 The files in this directory are split up into groups to limit their length. Each ParFlow key comprises one or more
 tokens, separated by periods. In the YAML files, tokens are set up in a tabbed heirarchical structure, where each
@@ -11,17 +14,20 @@ the value is stored (e.g. `R` in `Process.Topology.R`). All other tokens are ref
 Each token has one or more annotations associated with it, which fall into one of three categories, which are described
 below:
 
-### 1. **Generator annotations**:
+1. **Generator annotations**
+----------------------------------
 
 > The generator uses these annotations to generate the Python library and documentation
 
-####     `__class__`
+`__class__`
+^^^^^^^^^^^^^^^^^
 
 This is for adding dynamically defined tokens. The generator uses the `__class__` name to reference the
 location of a dynamically defined token. The `__class__` names usually end in `Item` to denote a dynamic token,
 e.g. `CycleItem` for the `.{cycle_name}` token in the key `Cycle.cycle_name.Names`.
 
-####     `__from__`
+`__from__`
+^^^^^^^^^^^^^^^^^
 
 This includes the source path of the dynamically defined token referenced in `__class__`. For example,
 
@@ -35,7 +41,8 @@ Here, `BCPressureIntervalItem` is the dynamically defined `.{interval_name}` tok
 `Cycle.cycle_name.Names` key generate these `.{interval_name}` tokens. The path to the `Cycle.cycle_name.Names`
 key is `/Cycle/{CycleItem}/Names`.
 
-####     `__rst__`
+`__rst__`
+^^^^^^^^^^^^^^^^^
 
 This contains details to support the documentation. Arguments for this include:
 
@@ -45,7 +52,8 @@ This contains details to support the documentation. Arguments for this include:
    - `warning:` {string}: This argument will add a special warning message to the documentation. This should be
        used for special cases, such as when a key must be set differently in Python as opposed to a TCL script.
 
-####     `__prefix__`
+`__prefix__`
+^^^^^^^^^^^^^^^^^
 
 This handles the tokens for key names with integers as tokens (e.g. `Cell.0.dzScale.Value`). Since Python does not
 recognize integers as a valid variable name, the user must specify a prefix to the integer. This can be any alphabetical
@@ -55,16 +63,19 @@ example, the prefix for `Cell.0.dzScale.Value` is an underscore, so you must def
 
 
 
-### 2. **Key annotations**
+2. **Key annotations**
+----------------------------------
 
 > These annotations apply to the key itself, assisting documentation
 
-####     `help`, `__doc__`
+`help`, `__doc__`
+^^^^^^^^^^^^^^^^^
 
 This contains the documentation for the key. `help` is used for leaf tokens, and `__doc__` is used for intermediate
 tokens.
 
-####     `__value__`
+`__value__`
+^^^^^^^^^^^^^^^^^
 
 This annotation applies to intermediate tokens that contain a value, but are not a leaf token (e.g. `Solver`). This will
 be treated as if it were a leaf token, including the value annotations that apply to the intermediate token.
@@ -72,11 +83,13 @@ be treated as if it were a leaf token, including the value annotations that appl
 
 
 
-### 3. **Value annotations**
+3. **Value annotations**
+----------------------------------
 
 > These annotations apply to the value set to the key.
 
-####     `domains`
+`domains`
+^^^^^^^^^^^^^^^^^
 
 This defines the domains that constrain the value of the key. The domains must include one or more of the following:
 
@@ -120,7 +133,8 @@ This defines the domains that constrain the value of the key. The domains must i
 
 
 
-####     `handlers`
+`handlers`
+^^^^^^^^^^^^^^^^^
 
 This will help generate dynamically defined tokens within other keys based on the provided value for the key. Each
 argument is an updater that specifies where and how the value is used to create other tokens. An example from phase.yaml
@@ -144,7 +158,8 @@ level as the `.{phase_name}` in `Phase.phase_name`. This can also be an absolute
 ---
 
 
-## Steps to add a new key to a library
+Steps to add a new key to a library
+===================================================
 
 1. Select the yaml file that most closely matches the key that you want to add. If your key is a token nested within an
 existing key, be sure to find which yaml file includes the parent token(s). For example, if you wanted to add the key
