@@ -19,8 +19,8 @@ ParFlow
    :hidden:
    :caption: Python
 
-   ./python/getting_started
-   ./python/run_script
+   python/getting_started
+   python/run_script
 
 
 .. toctree::
@@ -28,6 +28,6 @@ ParFlow
    :hidden:
    :caption: Tutorials
 
-   ./tutorials/tcl2py
-   ./tutorials/fs
-   ./tutorials/pfb
+   tutorials/tcl2py
+   tutorials/fs
+   tutorials/pfb
