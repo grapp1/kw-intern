@@ -3,7 +3,7 @@ Run script
 ********************************************************************************
 
 ================================================================================
-Calling methods on a ``Run`` object
+Anatomy
 ================================================================================
 
 Recall in the Python scripts we used to run ParFlow in the first tutorial. At the top of the script, there were the following lines:
@@ -59,6 +59,6 @@ Full API
 5. ``runobj.clone(name)`` - clones the object ``runobj`` to a new object ``name``. This makes it easy to develop ensembles of runs without having to reset all the keys and values.
 
 ================================================================================
-Try it out!
+Example
 ================================================================================
 With the ``default_richards.py`` script that you created in the first tutorial, try calling the various methods within the script or add the runtime arguments (see "Usage" in the PFTools introduction) to get familiar with them.

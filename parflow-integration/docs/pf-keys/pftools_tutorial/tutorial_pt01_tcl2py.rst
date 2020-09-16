@@ -12,7 +12,7 @@ fully follow this tutorial:
 The commands in the tutorial assume that you are running a bash shell in Linux or MacOS.
 
 ================================================================================
-Installing and testing Python PFTools in a virtual environment
+Virtual environment setup
 ================================================================================
 In this first tutorial, we will set up a virtual environment with pftools and its dependencies before importing a TCL file, converting it to Python, and running ParFlow.
 
@@ -41,7 +41,7 @@ Test your pftools installation:
 The run should execute successfully, printing the message ``ParFlow ran successfully``.
 
 ================================================================================
-Importing and converting a TCL file
+From TCL to Python file
 ================================================================================
 
 Great, now you have a working ParFlow interface! Next, create a new directory and import a TCL file (example here drawn from the ParFlow TCL tests):

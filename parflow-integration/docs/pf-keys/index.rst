@@ -3,16 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-ParFlow documentation
+ParFlow
 =======================================================
 
 
-ParFlow keys
--------------
+ParFlow
+-------
 
 .. toctree::
    :maxdepth: 3
-   :caption: Keys:
+   :caption: ParFlow:
 
    parflow_keys.rst
 
@@ -21,20 +21,18 @@ Python
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
    :caption: Python
 
    ./pftools_tutorial/pftools_intro_usage.rst
+   ./pftools_tutorial/tutorial_pt02_run-script.rst
 
 Tutorials
 ---------
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
    :caption: Tutorials
 
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst
-   ./pftools_tutorial/tutorial_pt02_run-script.rst
    ./pftools_tutorial/tutorial_pt03_fs.rst
    ./pftools_tutorial/tutorial_pt04_pfb.rst

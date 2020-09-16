@@ -195,7 +195,7 @@ class RST_module:
 # -----------------------------------------------------------------------------
 
 def generate_module_from_definitions(definitions):
-    generated_RST = RST_module('ParFlow Key Documentation')
+    generated_RST = RST_module('Configuration Keys')
 
     for yaml_file in definitions:
         with open(yaml_file) as file:

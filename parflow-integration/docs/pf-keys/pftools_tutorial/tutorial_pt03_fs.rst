@@ -1,5 +1,5 @@
 ********************************************************************************
-Filesystem handling
+Filesystem
 ********************************************************************************
 Files in ParFlow are like sand at the beach: everywhere.
 Python's native modules offer plenty of methods to handle files and directories,

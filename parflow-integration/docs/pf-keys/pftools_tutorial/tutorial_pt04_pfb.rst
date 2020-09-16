@@ -6,7 +6,7 @@ ParFlow Binary (PFB) files are an integral part of ParFlow, and we need an easy 
 
 
 ================================================================================
-Distributing files
+Distributing
 ================================================================================
 
 Let's say you have mastered the conversion of a TCL script to Python, and you have a few PFB files that you need to distribute to convert your workflow to Python. Here, you can use the ``dist()`` method on your ``Run`` object that you created, as mentioned in the first tutorial:
@@ -18,7 +18,7 @@ Let's say you have mastered the conversion of a TCL script to Python, and you ha
 This will distribute the PFB file with the distribution assigned to the ``Process.Topology`` keys on the ``Run`` object (``LWvdz`` in this example). However, this can be overwritten for a particular file, as shown above. Since ``dist()`` is a method on the ``Run`` object, you do not need to add any commands to your script to load the ``parflowio`` module if this is all you want to do. However, if you plan to work more with PFB files inside your script, you will need to load this module, as you'll see in the next example.
 
 ================================================================================
-Writing PFB files in Python
+Creating PFB from Python
 ================================================================================
 Let's copy another test Python script into our tutorial directory:
 
@@ -62,7 +62,7 @@ This creates a 3D numpy array that covers the entire domain and changes the valu
 Now, try running the file. It should execute successfully. Check out the files you now have in your directory - among the other output files is the *'Flow_Barrier_X.pfb'* that you created! If you have a PFB reader tool (such as ParaView), you can see what the file looks like: a 20 x 20 x 20 unit cube with a low-conductivity slice through the middle. Nice!
 
 ================================================================================
-Reading PFB files in Python
+Loading PFB from Python
 ================================================================================
 Now that we understand how to write a PFB file, how about reading one? This can be useful to do inside a Python script so you can visualize or manipulate existing data. Visualizing output data within the same script as a run can be very helpful!
 
