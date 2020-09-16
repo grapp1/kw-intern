@@ -6,28 +6,12 @@
 ParFlow
 =======================================================
 
-
-ParFlow
--------
-
 .. toctree::
    :maxdepth: 3
    :caption: ParFlow:
 
    parflow_keys.rst
 
-Python
-------
-
-* **Getting started**:
-  :doc:`Getting started </pftools_tutorial/pftools_intro_usage>` |
-  :doc:`/pftools_tutorial/tutorial_pt02_run-script` |
-
-* **Tutorials**:
-  :doc:`/pftools_tutorial/tutorial_pt01_tcl2py.rst` |
-  :doc:`/pftools_tutorial/tutorial_pt02_run-script` |
-  :doc:`/pftools_tutorial/tutorial_pt03_fs.rst` |
-  :doc:`/pftools_tutorial/tutorial_pt04_pfb.rst` |
 
 .. toctree::
    :maxdepth: 1
@@ -37,11 +21,13 @@ Python
    ./pftools_tutorial/pftools_intro_usage.rst
    ./pftools_tutorial/tutorial_pt02_run-script.rst
 
+
 .. toctree::
    :maxdepth: 1
    :hidden:
    :caption: Tutorials
 
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst
+   ./pftools_tutorial/tutorial_pt02_run-script.rst
    ./pftools_tutorial/tutorial_pt03_fs.rst
    ./pftools_tutorial/tutorial_pt04_pfb.rst
