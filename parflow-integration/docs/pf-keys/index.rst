@@ -6,21 +6,33 @@
 ParFlow documentation
 =======================================================
 
+
+ParFlow keys
+-------------
+
 .. toctree::
    :maxdepth: 3
    :caption: Keys:
 
    parflow_keys.rst
 
+Python
+------
+
 .. toctree::
    :maxdepth: 1
-   :caption: Python:
+   :hidden:
+   :caption: Python
 
    ./pftools_tutorial/pftools_intro_usage.rst
 
+Tutorials
+---------
+
 .. toctree::
    :maxdepth: 1
-   :caption: Python Tutorials:
+   :hidden:
+   :caption: Tutorials
 
    ./pftools_tutorial/tutorial_pt01_tcl2py.rst
    ./pftools_tutorial/tutorial_pt02_run-script.rst
