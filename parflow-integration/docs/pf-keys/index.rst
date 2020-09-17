@@ -21,6 +21,7 @@ ParFlow
 
    python/getting_started
    python/run_script
+   python/troubleshooting
 
 
 .. toctree::
