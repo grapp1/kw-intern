@@ -39,35 +39,30 @@ extra optional arguments, which are described in the full API below.
 
 ----
 
-Next, we'll expand upon the ``SolidFileBuilder`` class to demonstrate the arguments and methods that can be called on the object:
+Next, we'll show some examples of the ``SolidFileBuilder`` class to demonstrate the arguments and methods that can be called on the object:
 
 .. code-block:: python3
 
-    # Initializing the SolidFileBuilder object with default arguments
-    SolidFileBuilder(top=1, bottom=2, side=3)
+    # Example of using unique ids for each surface [top/bottom/side]
+    SolidFileBuilder(top=1, bottom=2, side=3) \ # Initializing the SolidFileBuilder
+        .mask(sabino_mask) \                      # Setting the 2D mask
+        .write('sabino_domain.pfsol', cellsize=90) \  # Write pfsol file
+        .for_key(sabino.GeomInput.domaininput)  # Setting keys to "sabino" Run object that relate to the solid file
 
-    # Passing in mask matrix
-    SolidFileBuilder.mask(sabino_mask)
+    # Example using an id mask for the top patches
+    SolidFileBuilder(bottom=2, side=3) \ # Initializing the SolidFileBuilder
+        .mask(sabino_mask) \               # Setting the 2D mask
+        .top_ids(id_array) \                  # Using a 2D numpy array to provide patch ids
+        .write('sabino_domain.pfsol', cellsize=90) # Write pfsol file
 
-    # Setting constant ID values to top, bottom, and sides
-    SolidFileBuilder.top(1):
-    SolidFileBuilder.bottom(2):
-    SolidFileBuilder.side(3):
 
-    # Setting multiple ID values to top, bottom, and sides
-    # Arguments must be numpy arrays
-    id_array = numpy.full((70, 91), 4)
-    SolidFileBuilder.top_ids(id_array):
-    SolidFileBuilder.bottom_ids(id_array):
-    SolidFileBuilder.side_ids(id_array):
-
-    # Writing to solid file, which also outputs to .vtk
-    SolidFileBuilder.write('sabino_domain.pfsol', xllcorner=0, yllcorner=0, cellsize=90, vtk=True)
-
-    # Will set the following keys:
-    # sabino.GeomInput.domaininput.InputType = 'SolidFile'
-    # sabino.GeomInput.domaininput.FileName = 'sabino_domain.pfsol'
-    SolidFileBuilder.for_key(sabino.GeomInput.domaininput)
+    # Example using the same matrix to write multiple solid files
+    SolidFileBuilder(top=1, bottom=2, side=3) \
+        .mask(sabino_mask) \                      # Setting the 2D mask
+        .write('sabino_domain.pfsol', cellsize=90) \  # Write first pfsol file
+        .mask(sabino_mask_2) \                      # Setting another 2D mask
+        .side_ids(id_array) \              # Using a 2D numpy array to provide new patch ids (possibly to change boundary conditions)
+        .write('sabino_domain_2.pfsol', cellsize=90)   # Write second pfsol file
 
 ================================================================================
 Full API: IO tools (from ``parflow.tools.io``)
@@ -114,4 +109,4 @@ More examples
 ================================================================================
 
 Other example scripts showing how to use the ``SolidFileBuilder`` can be found in *$PARFLOW_SOURCE/test/python/pfsol/*. If you have an idea for a new feature or
-improvement to the functionality, please let us know!
+improvement to the functionality, please let us know, or better yet, become a contributor!
