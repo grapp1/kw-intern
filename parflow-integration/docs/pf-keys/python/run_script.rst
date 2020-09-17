@@ -230,3 +230,40 @@ Or, if you have a yaml file, you can use the ``yamlFile`` argument to read in a 
    pfset_test.Geom.pfset(yamlFile='./GeomChildren.yaml')
 
 This can make your run scripts more compact and readable.
+
+===================================================
+Key validation
+===================================================
+
+An objective of the Python PFTools is to improve the error messages before and during a ParFlow run. The first step of this is validation.
+If you call the ``validate()`` method on your ``Run`` object with incorrect values set to a key, you will get a range of error messages like the following:
+
+.. image:: error_1.png
+   :width: 684
+
+.. image:: error_2.png
+   :width: 377
+
+You will also get a warning if you set a key multiple times, as shown:
+
+.. image:: duplicate.png
+   :width: 256
+
+Here, ``Process.Topology.P`` was set three times: first to 1, then to 4, and finally to 2. Note: if you use the ``pfset()`` method to define a new key name, it
+will not throw an error in the validation.
+
+===================================================
+Executing ParFlow
+===================================================
+
+When executing ParFlow via the Python script using ``run()``, you will get the following message if the ParFlow run succeeds:
+
+.. image:: PF_success.png
+   :width: 696
+
+Or if it fails:
+
+.. image:: PF_fail.png
+   :width: 809
+
+This will be followed by the contents of the *runname.out.txt* file.

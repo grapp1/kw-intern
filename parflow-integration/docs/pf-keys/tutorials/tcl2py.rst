@@ -82,3 +82,25 @@ Once you have edited your Python script, you can run it like you would any other
    python3 default_richards.py
 
 Voilà! You have now successfully converted your first ParFlow TCL script to Python. In the next tutorial, we'll get more advanced to leverage the many other features in the Python PFTools. Onward!
+
+=====================================================
+Troubleshooting when converting TCL script to Python
+=====================================================
+
+Although the tutorial above (hopefully) went without a hitch, you may not always be so lucky. For those instances, Python PFTools has a tool that allows you to sort two *.pfidb* files to determine any discrepancies between two files.
+This is especially useful when comparing an existing TCL script's generated file to its Python-generated equivalent. First, you must sort each of the
+*.pfidb* files, using the following command:
+
+.. code-block:: bash
+
+    python3 -m parflow.cli.pfdist_sort -i /path/to/file.pfidb -o /tmp/sorted.pfidb
+
+``/path/to/file.pfidb`` is the path to the existing (input, denoted by the ``-i``) *.pfidb* file, and ``/tmp/sorted.pfidb`` is the file path where you want the sorted output (denoted by the ``-o``) *.pfidb* file to be written.
+
+Once you have the newly sorted files, you can compare them using one of many methods of file comparison, such as ``diff``:
+
+.. code-block:: bash
+
+    diff /path/to/from_tcl_sorted.pfidb /path/to/from_py_sorted.pfidb
+
+You'll likely see some subtle format differences between the TCL- and Python-generated files (decimal printing, etc.). Most of these do not affect the execution of ParFlow.

@@ -21,8 +21,6 @@ ParFlow
 
    python/getting_started
    python/run_script
-   python/troubleshooting
-   python/solid_files
 
 
 .. toctree::
@@ -33,3 +31,4 @@ ParFlow
    tutorials/tcl2py
    tutorials/fs
    tutorials/pfb
+   tutorials/solid_files
