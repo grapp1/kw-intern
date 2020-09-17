@@ -10,15 +10,15 @@ An objective of the Python PFTools is to improve the error messages before and d
 If you call the ``validate()`` method on your ``Run`` object with incorrect values set to a key, you will get a range of error messages like the following:
 
 .. image:: error_1.png
-   :width: 600
+   :width: 684
 
 .. image:: error_2.png
-   :width: 600
+   :width: 377
 
 You will also get a warning if you set a key multiple times, as shown:
 
 .. image:: duplicate.png
-   :width: 600
+   :width: 256
 
 Here, ``Process.Topology.P`` was set three times: first to 1, then to 4, and finally to 2.
 
