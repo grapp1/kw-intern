@@ -3,7 +3,7 @@ Run script
 ********************************************************************************
 
 ================================================================================
-Introduction
+Calling methods on a ``Run`` object
 ================================================================================
 
 Recall in the Python scripts we used to run ParFlow in the first tutorial. At the top of the script, there were the following lines:
@@ -45,6 +45,7 @@ Full API
 ================================================================================
 
 1. ``runobj.validate()`` - validates the values set to each key. Validation checks for:
+
   - Data type (int, float, string)
   - Appropriate range of value (e.g. saturation can’t be less than zero!)
   - File availability
@@ -59,6 +60,170 @@ Full API
 5. ``runobj.clone(name)`` - clones the object ``runobj`` to a new object ``name``. This makes it easy to develop ensembles of runs without having to reset all the keys and values.
 
 ================================================================================
-Example
+Setting keys
 ================================================================================
-With the ``default_richards.py`` script that you created in the first tutorial, try calling the various methods within the script or add the runtime arguments (see "Usage" in the PFTools introduction) to get familiar with them.
+
+The basic way to set keys in a Python script is assigning a variable to the ``Run`` object that you initialize at the beginning of your model, like shown:
+
+.. code-block:: python3
+
+   from parflow import Run
+   test_run = Run("test_run", __file__)
+
+   # Now that the Run object is initialized, you can set keys:
+   test_run.Process.Topology.P = 1
+   test_run.Process.Topology.Q = 1
+   test_run.Process.Topology.R = 1
+
+Pretty simple! You can also create your user-defined keys, as shown below. Note that the following excerpts of code assume that you have already instantiated the ``Run`` object ``test_run``.
+
+.. code-block:: python3
+
+   test_run.GeomInput.Names = 'domain_input background_input'
+
+   # Defining the InputType and GeomName of the 'domain_input' that you already defined:
+   test_run.GeomInput.domain_input.InputType = 'Box'
+   test_run.GeomInput.domain_input.GeomName = 'domain'
+
+Python PFTools requires that you define the user-defined input names (e.g., ``GeomInput.Names``, ``Cycle.Names``, ``Phase.Names``) *before* you use them as part of a key name.
+
+================================================================================
+Valid key names
+================================================================================
+
+As a general rule, each "token" within a key name (e.g. ``GeomInput`` or ``domain_input`` in the prior example) must be a valid Python variable name. Information about valid Python variable names is `here
+<https://www.w3schools.com/python/python_variables.asp>`_. This means that you can't use hyphens in your user-defined variables or use integers as tokens. However, if you absolutely *must* use non-Pythonic key names, there is a way. You can specify the token in brackets without the preceding decimal, as in the following example:
+
+.. code-block:: python3
+
+   test_run.Patch['x-lower'].BCPressure.Type = 'FluxConst'
+
+Specifying integer tokens (e.g., setting ``Cell.0.dzScale.Value``) can be done in multiple ways. The preferred method is to use the token's "prefix", which is a character (alphanumeric or "_") that will always prefix that token. Right now, the prefixes for all the integer tokens is an underscore ("_").
+However, as shown in the following example, these integer tokens can be set in multiple ways:
+
+.. code-block:: python3
+
+   prefix.dzScale.nzListNumber = 6
+
+   # Here are four different ways to set integer values as part of a key name:
+   # 1) no bracket, no quotes, underscore
+   prefix.Cell._3.dzScale.Value = 1.000
+
+   # 2) bracket, quotes, underscore, no preceding decimal
+   prefix.Cell['_0'].dzScale.Value = 1.0
+
+   # 3) bracket, quotes, no underscore, no preceding decimal
+   prefix.Cell['1'].dzScale.Value = 1.00
+
+   # 4) bracket, no quotes, no underscore, no preceding decimal
+   prefix.Cell[2].dzScale.Value = 1.000
+
+These will all write the key in the ParFlow database file in the correct format.
+
+================================================================================
+Setting keys that aren't in the library with with ``pfset()``
+================================================================================
+
+If you want to set a key in the Python script that's not already in the library, you have two options: 1) add the key to the library (see the documentation on "Contributing keys") or 2) using the ``pfset(name, value)`` method.
+``pfset(name, value)`` allows the user to set a key (or token) ``name`` at any level with any ``value``. Here are some examples from the test file ``$PARFLOW_SOURCE/test/python/new_features/pfset_test/pfset_test.py``:
+
+.. code-block:: python3
+
+   # Sets A.New.Key.Test = 'SomeSuperContent'
+   pfset_test.pfset(key='A.New.Key.Test', value='SomeSuperContent')
+
+   # Sets Process.Topology.Random.Path = 5
+   pfset_test.pfset(key='Process.Topology.Random.Path', value=5)
+
+   # Sets Process.Topology.Random.PathFromTopology = 6
+   pfset_test.Process.Topology.pfset(key='Random.PathFromTopology', value=6)
+
+   # Sets Process.Topology.P = 2
+   pfset_test.pfset(key='Process.Topology.P', value=2)
+
+   # Sets Process.Topology.Q = 2
+   pfset_test.Process.pfset(key='Topology.Q', value=3)
+
+   # Sets Process.Topology.R = 2
+   pfset_test.Process.Topology.pfset(key='R', value=4)
+
+   # Sets Process.Topology.Seb = 2
+   pfset_test.Process.Topology.pfset(key='Seb', value=5)
+
+As you can see from the many examples here, you can use ``pfset(name, value)`` at any level of token within your key, and even set keys that already exist.
+
+================================================================================
+New ways to set keys and values with ``pfset()``
+================================================================================
+The ``pfset()`` method does more than just allow you to set an individual key. You can set groups of keys at a time using the ``hierarchical_map``, ``flat_map``, or ``yamlContent`` arguments in the ``pfset`` method, as shown in the test file ``$PARFLOW_SOURCE/test/python/new_features/pfset_test/pfset_test.py``:
+
+.. code-block:: python3
+
+   #-----------------------------------------------------------------------------
+   # pfset: hierarchical_map
+   #-----------------------------------------------------------------------------
+
+   pfset_test.pfset(hierarchical_map={
+    'SpecificStorage': {
+        'Type': 'Constant',
+        'GeomNames': 'domain',
+    }
+   })
+
+   constOne = {'Type': 'Constant', 'Value': 1.0}
+   pfset_test.Phase.water.Density.pfset(hierarchical_map=constOne)
+   pfset_test.Phase.water.Viscosity.pfset(flat_map=constOne)
+
+   #-----------------------------------------------------------------------------
+   # pfset: flat_map
+   #-----------------------------------------------------------------------------
+
+   pfset_test.pfset(flat_map={
+    'Phase.Saturation.Type': 'VanGenuchten',
+    'Phase.Saturation.GeomNames': 'domain',
+   })
+
+   pfset_test.Phase.pfset(flat_map={
+    'RelPerm.Type': 'VanGenuchten',
+    'RelPerm.GeomNames': 'domain',
+   })
+
+   #---------------------------------------------------------
+   # pfset: yamlContent
+   #---------------------------------------------------------
+
+   pfset_test.Geom.source_region.pfset(yamlContent='''
+   Lower:
+   X: 65.56
+   Y: 79.34
+   Z: 4.5
+   Upper:
+   X: 74.44
+   Y: 89.99
+   Z: 5.5
+   ''')
+
+   pfset_test.Geom.concen_region.pfset(yamlContent='''
+   Lower:
+   X: 60.0
+   Y: 80.0
+   Z: 4.0
+   Upper:
+   X: 80.0
+   Y: 100.0
+   Z: 6.0
+   ''')
+
+Or, if you have a yaml file, you can use the ``yamlFile`` argument to read in a yaml file to set the keys:
+
+.. code-block:: python3
+
+   #---------------------------------------------------------
+   # pfset: yamlFile
+   #---------------------------------------------------------
+
+   pfset_test.pfset(yamlFile='./BasicSettings.yaml')
+   pfset_test.pfset(yamlFile='./ComputationalGrid.yaml')
+   pfset_test.Geom.pfset(yamlFile='./GeomChildren.yaml')
+
+This can make your run scripts more compact and readable.
