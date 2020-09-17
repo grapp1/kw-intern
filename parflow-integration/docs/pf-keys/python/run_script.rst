@@ -166,13 +166,14 @@ The ``pfset()`` method does more than just allow you to set an individual key. Y
    #-----------------------------------------------------------------------------
 
    pfset_test.pfset(hierarchical_map={
-    'SpecificStorage': {
-        'Type': 'Constant',
-        'GeomNames': 'domain',
+       'SpecificStorage': {
+           'Type': 'Constant',
+           'GeomNames': 'domain',
     }
    })
 
    constOne = {'Type': 'Constant', 'Value': 1.0}
+
    pfset_test.Phase.water.Density.pfset(hierarchical_map=constOne)
    pfset_test.Phase.water.Viscosity.pfset(flat_map=constOne)
 
@@ -181,13 +182,13 @@ The ``pfset()`` method does more than just allow you to set an individual key. Y
    #-----------------------------------------------------------------------------
 
    pfset_test.pfset(flat_map={
-    'Phase.Saturation.Type': 'VanGenuchten',
-    'Phase.Saturation.GeomNames': 'domain',
+       'Phase.Saturation.Type': 'VanGenuchten',
+       'Phase.Saturation.GeomNames': 'domain',
    })
 
    pfset_test.Phase.pfset(flat_map={
-    'RelPerm.Type': 'VanGenuchten',
-    'RelPerm.GeomNames': 'domain',
+       'RelPerm.Type': 'VanGenuchten',
+       'RelPerm.GeomNames': 'domain',
    })
 
    #---------------------------------------------------------
@@ -196,24 +197,24 @@ The ``pfset()`` method does more than just allow you to set an individual key. Y
 
    pfset_test.Geom.source_region.pfset(yamlContent='''
    Lower:
-   X: 65.56
-   Y: 79.34
-   Z: 4.5
+       X: 65.56
+       Y: 79.34
+       Z: 4.5
    Upper:
-   X: 74.44
-   Y: 89.99
-   Z: 5.5
+       X: 74.44
+       Y: 89.99
+       Z: 5.5
    ''')
 
    pfset_test.Geom.concen_region.pfset(yamlContent='''
    Lower:
-   X: 60.0
-   Y: 80.0
-   Z: 4.0
+       X: 60.0
+       Y: 80.0
+       Z: 4.0
    Upper:
-   X: 80.0
-   Y: 100.0
-   Z: 6.0
+       X: 80.0
+       Y: 100.0
+       Z: 6.0
    ''')
 
 Or, if you have a yaml file, you can use the ``yamlFile`` argument to read in a yaml file to set the keys:
