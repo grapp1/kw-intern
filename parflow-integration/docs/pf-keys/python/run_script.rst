@@ -50,6 +50,8 @@ Full API
   - Appropriate range of value (e.g. saturation can’t be less than zero!)
   - File availability
   - Duplicate values
+  - Necessary module(s) installed
+  - Key exists in working version of ParFlow
 
 2. ``runobj.write(file_name=None, file_format='pfidb')`` - this will write the set of key/value pairs associated with the ``runobj`` in a specified format. The default ``file_name`` is the name of the ``Run`` object, and the default format is the ParFlow databse format. Other supported formats include *.yaml*, *.yml*, and *.json*.
 

@@ -111,7 +111,7 @@ This defines the domains that constrain the value of the key. The domains must i
 
 - ``DoubleValue``: This is for keys that must be a double. It takes up to two arguments: ``min_value`` for the minimum value, and ``max_value`` for the maximum value. Keys with a DoubleValue domain can also be integers.
 
-- ``EnumDomain``: This is for values that must be one of an enumerated list. This takes one argument, ``enum_list``, that includes the list of acceptable values for the key. To accommodate instances where new options are added in new versions of ParFlow, ``enum_list`` can take an argument of a ParFlow version, which would include the list of acceptable values beginning with the specified version. See the ``EnumDomain`` for the ``Patch.{patch_name}.BCPressure.Type`` (bconditions.yaml) for an example.
+- ``EnumDomain``: This is for values that must be one of an enumerated list. This takes one argument, ``enum_list``, that includes the list of acceptable values for the key. To accommodate instances where new options are added in new versions of ParFlow, ``enum_list`` can take an argument of a ParFlow version, which would include the list of acceptable values beginning with the specified version. See the ``EnumDomain`` for the ``Patch.{patch_name}.BCPressure.Type`` (*bconditions.yaml*) for an example.
 
 - ``IntValue``: This is for keys that must be an integer. It takes up to two arguments: ``min_value`` for the minimum value, and ``max_value`` for the maximum value.
 
@@ -121,10 +121,8 @@ This defines the domains that constrain the value of the key. The domains must i
 
 - ``RequiresModule``: This is for keys that must have a particular module installed or compiled to be a valid key (e.g., ``Solver.CLM....``). This takes an argument of the required module in all caps, e.g., ``RequiresModule: NETCDF``.
 
-- ``ValidFile``: This is for keys which reference file names to make sure that the file exists. It can take two arguments: ``working_directory``, for which you can specify the absolute path of the directory where your
-                file is stored, ``path_prefix_source``, for which you can specify the path to a key that defines the path
-                to the file (e.g. ``Solver.CLM.MetFile``). If no arguments are provided, it will check your current
-                working directory for the file name.
+- ``ValidFile``: This is for keys which reference file names to make sure that the file exists. It can take two arguments: ``working_directory``, for which you can specify the absolute path of the directory where your file is stored, ``path_prefix_source``, for which you can specify the path to a key that defines the path
+to the file (e.g. ``Solver.CLM.MetFile``). If no arguments are provided, it will check your current working directory for the file.
 
 
 ^^^^^^^^^^^^^^^^^
