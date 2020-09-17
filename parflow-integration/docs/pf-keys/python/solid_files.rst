@@ -55,7 +55,6 @@ Next, we'll show some examples of the ``SolidFileBuilder`` class to demonstrate 
         .top_ids(id_array) \                  # Using a 2D numpy array to provide patch ids
         .write('sabino_domain.pfsol', cellsize=90) # Write pfsol file
 
-
     # Example using the same matrix to write multiple solid files
     SolidFileBuilder(top=1, bottom=2, side=3) \
         .mask(sabino_mask) \                      # Setting the 2D mask

@@ -6,14 +6,14 @@ Run script
 Calling methods on a ``Run`` object
 ================================================================================
 
-Recall in the Python scripts we used to run ParFlow in the first tutorial. At the top of the script, there were the following lines:
+At the top of all the Python test scripts (located in $PARFLOW_SOURCE/test/python/) are something similar to the following lines:
 
 .. code-block:: python3
 
     from parflow import Run
-    default_richards = Run("default_richards", __file__)
+    test_run = Run("test_run", __file__)
 
-These lines import the ``Run`` class from the ``parflow`` module and create a new ``Run`` object called ``default_richards``. All the key/value pairs are set on this object. Finally, once all the key/value pairs are set, the ``run()`` method is called on the object using ``default_richards.run()``. This is one of the methods that can be called on a ``Run`` object. These methods are shown below:
+These lines import the ``Run`` class from the ``parflow`` module and create a new ``Run`` object called ``test_run`` (or whatever you want the run name to be). All the key/value pairs are set on this object. The methods that can be called on a ``Run`` object are shown below:
 
 .. code-block:: python3
 
