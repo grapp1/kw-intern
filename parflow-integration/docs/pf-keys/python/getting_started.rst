@@ -103,3 +103,20 @@ Parflow run arguments:
            Q allocates the number of processes to the grid-cells in y (overrides Process.Topology.Q)
       -r R
            R allocates the number of processes to the grid-cells in z (overrides Process.Topology.R)
+
+
+----
+
+Output:
+
+When executing ParFlow via the Python script using ``run()``, you will get the following message if the ParFlow run succeeds:
+
+.. image:: PF_success.png
+   :width: 696
+
+Or if it fails:
+
+.. image:: PF_fail.png
+   :width: 809
+
+This will be followed by the contents of the *runname.out.txt* file.
