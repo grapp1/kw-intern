@@ -124,8 +124,8 @@ These will all write the key in the ParFlow database file in the correct format.
 Setting keys that aren't in the library with with ``pfset()``
 ================================================================================
 
-If you want to set a key in the Python script that's not already in the library, you have two options: 1) add the key to the library (see the documentation on "Contributing keys") or 2) using the ``pfset(name, value)`` method.
-``pfset(name, value)`` allows the user to set a key (or token) ``name`` at any level with any ``value``. Here are some examples from the test file ``$PARFLOW_SOURCE/test/python/new_features/pfset_test/pfset_test.py``:
+If you want to set a key in the Python script that's not already in the library, you have two options: 1) add the key to the library (see the documentation on "Contributing keys") or 2) using the ``pfset(key, value)`` method.
+``pfset(key, value)`` allows the user to set a key (or token) ``name`` at any level with any ``value``. Here are some examples from the test file ``$PARFLOW_SOURCE/test/python/new_features/pfset_test/pfset_test.py``:
 
 .. code-block:: python3
 
@@ -150,10 +150,10 @@ If you want to set a key in the Python script that's not already in the library,
    # Sets Process.Topology.Seb = 2
    pfset_test.Process.Topology.pfset(key='Seb', value=5)
 
-As you can see from the many examples here, you can use ``pfset(name, value)`` at any level of token within your key, and even set keys that already exist.
+As you can see from the many examples here, you can use ``pfset(key, value)`` at any level of token within your key, and even set keys that already exist.
 
 ================================================================================
-New ways to set keys and values with ``pfset()``
+Setting keys and values with ``pfset()``
 ================================================================================
 The ``pfset()`` method does more than just allow you to set an individual key. You can set groups of keys at a time using the ``hierarchical_map``, ``flat_map``, or ``yamlContent`` arguments in the ``pfset`` method, as shown in the test file ``$PARFLOW_SOURCE/test/python/new_features/pfset_test/pfset_test.py``:
 
