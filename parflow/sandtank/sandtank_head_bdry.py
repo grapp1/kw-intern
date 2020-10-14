@@ -551,7 +551,7 @@ else:
   sandtank.dist(fname_ic)
 
 # -----------------------------------------------------------------------------
-# Run and Unload the n ParFlow output files
+# Generating random boundary conditions to run ensemble
 # -----------------------------------------------------------------------------
 
 sandtank.dist('SandTank_Indicator.pfb')
@@ -560,7 +560,8 @@ hleft_list = random.sample(range(0, 50), 10)
 hright_list = random.sample(range(0, 50), 10)
 
 for i in range(len(hleft_list)):
-    new_name = f's_l{"{:0>2}".format(hleft_list[i])}_r{"{:0>2}".format(hright_list[i])}'
+    new_name = f's_l{"{:0>2}".format(hleft_list[i])}_r' \
+               f'{"{:0>2}".format(hright_list[i])}'
     new_run = sandtank.clone(new_name)
     new_run.Patch.x_lower.BCPressure.alltime.Value = hleft_list[i]
     new_run.Patch.x_upper.BCPressure.alltime.Value = hright_list[i]
