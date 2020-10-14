@@ -5,6 +5,9 @@
 *.Rhistory
 slimin_1.txt
 /parflow/working/*
+/parflow/sandtank/*.pfb
+/parflow/sandtank/*.out.*
+/parflow/sandtank/*.pfidb
 build/
 dist/
 *.egg-info*
